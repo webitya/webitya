@@ -17,7 +17,7 @@ const About = () => {
   };
 
   const navLinks = [
-    { id: "intro", label: "Key Takeaways" },
+    { id: "about", label: "About webitya" },
     { id: "content", label: "Our Process" },
     { id: "steps", label: "Why Choose Us" },
     { id: "benefits", label: "Multi-Stage Convincing Process" },
@@ -63,7 +63,7 @@ const About = () => {
 
       {/* Main Content */}
       <main className="w-full lg:ml-40 p-6">
-        <section id="hero">
+        <section id="about">
           <AboutHeroSection />
         </section>
         <section id="hero1">
@@ -78,15 +78,7 @@ const About = () => {
         <section id="steps">
           <AboutUsCTA />
         </section>
-        <section id="benefits">
-          <h1>Aditya 1</h1>
-        </section>
-        <section id="positioning">
-          <h1>Aditya 1</h1>
-        </section>
-        <section id="premium-advantage">
-          <h1>Aditya 1</h1>
-        </section>
+       
       </main>
     </div>
   );
