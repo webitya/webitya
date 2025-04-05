@@ -87,6 +87,7 @@ export default function RootLayout({ children }) {
     sx={{
       backgroundColor: "black",
       color: "white",
+      borderRadius: 0, // sharp edges
       "&:hover": {
         backgroundColor: "grey.800",
       },
@@ -104,6 +105,7 @@ export default function RootLayout({ children }) {
     sx={{
       backgroundColor: "black",
       color: "white",
+      borderRadius: 0, // sharp edges
       "&:hover": {
         backgroundColor: "grey.800",
       },
@@ -115,6 +117,7 @@ export default function RootLayout({ children }) {
     <PhoneIcon fontSize="small" />
   </IconButton>
 </Box>
+
       </body>
     </html>
   );
