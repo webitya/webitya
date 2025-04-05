@@ -23,6 +23,7 @@ const menuLinks = [
   { name: "Services", path: "/services" },
   { name: "Portfolio", path: "/portfolio" },
   { name: "Courses", path: "/courses" },
+  { name: "Influencers", path: "/influencers" },
   { name: "Contact", path: "/contact-us" },
 ];
 
