@@ -8,10 +8,6 @@ import {
   IconButton,
   Button,
   Box,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
   useTheme,
   useMediaQuery,
   Typography,
@@ -19,7 +15,6 @@ import {
   useScrollTrigger,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import ConstructionIcon from "@mui/icons-material/Construction";
 import DrawerEl from "../DrawerEl";
 
 const menuLinks = [
@@ -57,41 +52,42 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Under Construction Banner (Optional) */}
-      {/* 
-      <Box sx={{ bgcolor: "black", color: "white", py: 1, textAlign: "center" }}>
-        <ConstructionIcon sx={{ mr: 1, verticalAlign: "middle" }} />
-        This Website is Under Construction – Stay tuned for updates!
-      </Box> 
-      */}
-
-      {/* Navbar with Slide animation */}
+      {/* Sticky navbar with slide effect */}
       <Slide appear={false} direction="down" in={!trigger || isSticky}>
         <AppBar
           position="fixed"
           elevation={isSticky ? 4 : 0}
           sx={{
-            bgcolor: "white",
+            bgcolor: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(6px)",
             color: "black",
             transition: "all 0.3s ease-in-out",
             boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.1)" : "none",
             zIndex: (theme) => theme.zIndex.modal + 1,
           }}
         >
-          <Toolbar sx={{ justifyContent: "space-between", px: 3 }}>
+          <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, sm: 3 } }}>
             {/* Logo */}
             <Link href="/" passHref>
               <Typography
                 variant="h6"
                 fontWeight="bold"
                 component="a"
-                sx={{ color: "black", textDecoration: "none" }}
+                sx={{
+                  color: "black",
+                  textDecoration: "none",
+                  letterSpacing: 1,
+                  "&:hover": {
+                    color: "primary.main",
+                    transition: "color 0.3s ease",
+                  },
+                }}
               >
                 WEBITYA
               </Typography>
             </Link>
 
-            {/* Desktop Menu */}
+            {/* Desktop Navigation */}
             {!isMobile && (
               <Box display="flex" alignItems="center" gap={3}>
                 {menuLinks.map((link) => (
@@ -100,6 +96,8 @@ const Navbar = () => {
                       component="a"
                       sx={{
                         color: "#007bff",
+                        fontWeight: 500,
+                        textTransform: "none",
                         "&:hover": { color: "black" },
                       }}
                     >
@@ -107,6 +105,8 @@ const Navbar = () => {
                     </Button>
                   </Link>
                 ))}
+
+                {/* CTA */}
                 <Link href="/demo" passHref>
                   <Button
                     component="a"
@@ -118,12 +118,14 @@ const Navbar = () => {
                       py: 1,
                       borderRadius: 2,
                       textTransform: "none",
+                      fontWeight: "bold",
+                      fontSize: "0.95rem",
                       "&:hover": {
                         bgcolor: "#1a1a1a",
                       },
                     }}
                   >
-                    Book Appointment
+                    +91 9693245941
                   </Button>
                 </Link>
               </Box>
@@ -131,16 +133,20 @@ const Navbar = () => {
 
             {/* Mobile Menu Icon */}
             {isMobile && (
-              <IconButton onClick={toggleDrawer(true)}>
-                <MenuIcon />
+              <IconButton
+                onClick={toggleDrawer(true)}
+                sx={{ color: "black" }}
+                aria-label="menu"
+              >
+                <MenuIcon fontSize="large" />
               </IconButton>
             )}
           </Toolbar>
-
-          {/* Drawer for mobile */}
-          <DrawerEl isOpen={drawerOpen} toggleMenu={() => setDrawerOpen(false)} />
         </AppBar>
       </Slide>
+
+      {/* Mobile Drawer (placed outside AppBar to avoid z-index issues) */}
+      <DrawerEl isOpen={drawerOpen} toggleMenu={() => setDrawerOpen(false)} />
     </>
   );
 };
