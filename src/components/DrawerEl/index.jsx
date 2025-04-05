@@ -89,6 +89,29 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
               />
             </ListItem>
           </Link>
+          <Divider sx={{ my: 1 }} />
+
+<Link href="tel:-9693245941" passHref>
+  <ListItem
+    button
+    component="a"
+    onClick={toggleMenu}
+    sx={{
+      bgcolor: "#f5f5f5",
+      borderRadius: 1,
+      mt: 1,
+      "&:hover": { bgcolor: "#e0e0e0" },
+    }}
+  >
+    <ListItemText
+      primary="+91 9693245941"
+      primaryTypographyProps={{
+        fontWeight: "bold",
+        textAlign: "center",
+      }}
+    />
+  </ListItem>
+</Link>
         </List>
       </Box>
     </motion.div>
