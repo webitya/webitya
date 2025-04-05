@@ -14,33 +14,33 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Footer from "@/components/FooterEl";
 
 const About = () => {
-  const [activeSection, setActiveSection] = useState("hero");
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
+  const [activeSection, setActiveSection] = useState("about");
 
   const navLinks = [
-    { id: "about", label: "About webitya" },
-    { id: "content", label: "Our Process" },
-    { id: "steps", label: "Why Choose Us" },
-    { id: "benefits", label: "Multi-Stage Convincing Process" },
-    { id: "positioning", label: "Our Delivery Models" },
-    { id: "premium-advantage", label: "Contact Us" },
+    { id: "about", label: "About Webitya" },
+    { id: "vision-mission", label: "Vision & Mission" },
+    { id: "team", label: "Meet the Team" },
+    { id: "interns", label: "Our Interns" },
+    { id: "cta", label: "Why Choose Us" },
   ];
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       navLinks.forEach(({ id }) => {
         const section = document.getElementById(id);
         if (section) {
-          const { top, bottom } = section.getBoundingClientRect();
-          if (top <= 150 && bottom >= 150) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
             setActiveSection(id);
           }
         }
@@ -56,19 +56,21 @@ const About = () => {
 
   return (
     <div className="flex">
-      {/* Sidebar using MUI Drawer - only shown on large screens */}
+      {/* Sidebar for large screens */}
       {isLargeScreen && (
         <Drawer
           variant="permanent"
           anchor="left"
           sx={{
-            width: 200,
+            width: 170,
             flexShrink: 0,
             [`& .MuiDrawer-paper`]: {
-              width: 200,
+              width: 170,
               top: 80,
+              height: "calc(100% - 80px)",
               boxSizing: "border-box",
-              borderRight: "1px solid #e5e7eb", // Tailwind's border-gray-200
+              borderRight: "1px solid #e5e7eb",
+              backgroundColor: "#ffffff",
             },
           }}
         >
@@ -81,39 +83,44 @@ const About = () => {
                 sx={{
                   borderRadius: 1,
                   marginY: 0.5,
+                  transition: "all 0.3s",
                   "&.Mui-selected": {
-                    backgroundColor: "#e0f2fe", // Tailwind's blue-50
-                    color: "#2563eb", // Tailwind's blue-600
+                    backgroundColor: "#e0f2fe",
+                    color: "#2563eb",
                   },
                   "&:hover": {
-                    backgroundColor: "#f9fafb", // Tailwind's gray-50
+                    backgroundColor: "#f1f5f9",
                   },
                 }}
               >
-                <ListItemText primary={label} primaryTypographyProps={{ fontSize: 14, fontWeight: 500 }} />
+                <ListItemText
+                  primary={label}
+                  primaryTypographyProps={{ fontSize: 14, fontWeight: 500 }}
+                />
               </ListItemButton>
             ))}
           </List>
         </Drawer>
       )}
 
-      {/* Main Content */}
-      <main className="w-full lg:ml-[200px] p-6">
+      {/* Main content */}
+      <main className="w-full space-y-8">
         <section id="about">
           <AboutHeroSection />
         </section>
-        <section id="hero1">
+        <section id="vision-mission">
           <AboutVisionMissionSection />
         </section>
-        <section id="intro">
+        <section id="team">
           <TeamSection />
         </section>
-        <section id="content">
+        <section id="interns">
           <AboutInternsSection />
         </section>
-        <section id="steps">
+        <section id="cta">
           <AboutUsCTA />
         </section>
+        <Footer/>
       </main>
     </div>
   );
