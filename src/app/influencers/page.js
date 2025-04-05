@@ -1,30 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import AboutHeroSection from "@/components/AboutUsPage/AboutUsHeroSection";
-import TeamSection from "@/components/AboutUsPage/AboutTeamSection";
-import AboutInternsSection from "@/components/AboutUsPage/AboutOurInterns";
-import AboutUsCTA from "@/components/AboutUsPage/AboutUsCTA";
-import AboutVisionMissionSection from "@/components/AboutUsPage/AboutVisionMission";
+import InfluencerHeroSection from "@/components/InfluencerPage/InfluencerHeroSection";
+import InfluencerVision from "@/components/InfluencerPage/InfluencerVisionMission";
+import InfluencerList from "@/components/InfluencerPage/InfluencerCollection";
+import InfluencerCTA from "@/components/InfluencerPage/InfluencerCTA";
+import Footer from "@/components/FooterEl";
 
-// MUI components
+// MUI
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Footer from "@/components/FooterEl";
 
-const About = () => {
-  const [activeSection, setActiveSection] = useState("about");
+const Influencers = () => {
+  const [activeSection, setActiveSection] = useState("hero");
 
   const navLinks = [
-    { id: "about", label: "About Webitya" },
-    { id: "vision-mission", label: "Vision & Mission" },
-    { id: "team", label: "Meet the Team" },
-    { id: "interns", label: "Our Interns" },
-    { id: "cta", label: "Why Choose Us" },
+    { id: "hero", label: "Discover" },
+    { id: "vision", label: "Why Influencers?" },
+    { id: "collection", label: "Top Influencers" },
+    { id: "cta", label: "Book Now" },
   ];
 
   const scrollToSection = (id) => {
@@ -56,21 +54,20 @@ const About = () => {
 
   return (
     <div className="flex">
-      {/* Sidebar for large screens */}
       {isLargeScreen && (
         <Drawer
           variant="permanent"
           anchor="left"
           sx={{
-            width: 170,
+            width: 180,
             flexShrink: 0,
             [`& .MuiDrawer-paper`]: {
-              width: 170,
+              width: 180,
               top: 80,
               height: "calc(100% - 80px)",
-              boxSizing: "border-box",
-              borderRight: "1px solid #e5e7eb",
-              backgroundColor: "#ffffff",
+              borderRight: "none",
+              background: "linear-gradient(to bottom, #fdf2f8, #f8fafc)",
+              boxShadow: "2px 0 10px rgba(0,0,0,0.05)",
             },
           }}
         >
@@ -81,21 +78,26 @@ const About = () => {
                 onClick={() => scrollToSection(id)}
                 selected={activeSection === id}
                 sx={{
-                  borderRadius: 1,
+                  borderRadius: 2,
                   marginY: 0.5,
-                  transition: "all 0.3s",
+                  mx: 1,
                   "&.Mui-selected": {
-                    backgroundColor: "#e0f2fe",
-                    color: "#2563eb",
+                    backgroundColor: "#f0abfc",
+                    color: "#581c87",
+                    fontWeight: "bold",
                   },
                   "&:hover": {
-                    backgroundColor: "#f1f5f9",
+                    backgroundColor: "#fae8ff",
                   },
                 }}
               >
                 <ListItemText
                   primary={label}
-                  primaryTypographyProps={{ fontSize: 14, fontWeight: 500 }}
+                  primaryTypographyProps={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: activeSection === id ? "#581c87" : "#334155",
+                  }}
                 />
               </ListItemButton>
             ))}
@@ -103,27 +105,23 @@ const About = () => {
         </Drawer>
       )}
 
-      {/* Main content */}
-      <main className="w-full space-y-0">
-        <section id="about">
-          <AboutHeroSection />
+      <main className="w-full bg-gradient-to-br from-[#fdf4ff] via-[#f0f9ff] to-[#eef2ff] space-y-0">
+        <section id="hero">
+          <InfluencerHeroSection />
         </section>
-        <section id="vision-mission">
-          <AboutVisionMissionSection />
+        <section id="vision">
+          <InfluencerVision />
         </section>
-        <section id="team">
-          <TeamSection />
-        </section>
-        <section id="interns">
-          <AboutInternsSection />
+        <section id="collection">
+          <InfluencerList />
         </section>
         <section id="cta">
-          <AboutUsCTA />
+          <InfluencerCTA />
         </section>
-        <Footer/>
+        <Footer />
       </main>
     </div>
   );
 };
 
-export default About;
+export default Influencers;
