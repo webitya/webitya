@@ -87,7 +87,7 @@ export default function RootLayout({ children }) {
     sx={{
       backgroundColor: "black",
       color: "white",
-      borderRadius: 0, // sharp edges
+      borderRadius: 1, // sharp edges
       "&:hover": {
         backgroundColor: "grey.800",
       },
@@ -105,7 +105,7 @@ export default function RootLayout({ children }) {
     sx={{
       backgroundColor: "black",
       color: "white",
-      borderRadius: 0, // sharp edges
+      borderRadius: 1, // sharp edges
       "&:hover": {
         backgroundColor: "grey.800",
       },

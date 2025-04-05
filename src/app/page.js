@@ -65,7 +65,6 @@ const WebityaHero = () => {
       <HomeBusinessSection />
       <HomeServicesSection />
       <HomeClientLogos />
-      <h1>Raj jaiswal</h1>
     </>
   );
 };
