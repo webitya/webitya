@@ -1,20 +1,21 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 const HomeAboutUs = () => {
   return (
-    <section className="py-10 px-6 md:px-12 lg:px-20  mx-auto text-center">
+    <section className="py-10 px-6 md:px-12 lg:px-20 mx-auto text-center">
       <div className="grid md:grid-cols-2 gap-12 items-center">
         {/* Left Side: Image */}
         <div className="relative w-full h-96">
-          <div className="absolute inset-0  opacity-40 rounded-lg"></div>
+          <div className="absolute inset-0 opacity-40 rounded-lg"></div>
           <Image 
             src="/Images/img1.jpeg" 
             alt="About Us" 
             layout="fill" 
             objectFit="cover" 
-            className="rounded-lg shadow-xl border-4 "
+            className="rounded-lg shadow-xl border-4"
           />
         </div>
 
@@ -41,9 +42,13 @@ const HomeAboutUs = () => {
               <p className="text-gray-700 dark:text-gray-400">Leads Generated</p>
             </div>
           </div>
-          <button className="mt-6 bg-black text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-800">
-            Learn More →
-          </button>
+
+          {/* Learn More Button with Link */}
+          <Link href="/about">
+            <button className="mt-6 bg-black text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-gray-800">
+              Learn More →
+            </button>
+          </Link>
         </div>
       </div>
     </section>

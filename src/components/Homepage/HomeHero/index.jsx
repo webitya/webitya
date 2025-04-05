@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import Link from 'next/link';
 import "./HomeHero.css";
 import {
   TextField,
@@ -220,21 +221,33 @@ const HomeHero = () => {
 
             {/* CTA */}
             <Box mt={3}>
-              <Button
-                variant="contained"
-                size="large"
-                sx={{
-                  mr: 2,
-                  backgroundColor: "#000",
-                  "&:hover": { backgroundColor: "#222" },
-                }}
-              >
-                Let’s Talk
-              </Button>
-              <Button variant="outlined" size="large">
-                Explore Services
-              </Button>
-            </Box>
+      {/* Let’s Talk button linking to /contact */}
+      <Link href="https://wa.me/919693245941?text=Hello%20Webitya" passHref>
+        <Button
+          component="a"
+          variant="contained"
+          size="large"
+          sx={{
+            mr: 2,
+            backgroundColor: "#000",
+            "&:hover": { backgroundColor: "#222" },
+          }}
+        >
+          Let’s Talk
+        </Button>
+      </Link>
+
+      {/* Explore Services button linking to /services */}
+      <Link href="/services" passHref>
+        <Button
+          component="a"
+          variant="outlined"
+          size="large"
+        >
+          Explore Services
+        </Button>
+      </Link>
+    </Box>
           </div>
 
           {/* Right: Form */}

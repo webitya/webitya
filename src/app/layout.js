@@ -82,7 +82,7 @@ export default function RootLayout({ children }) {
 >
   <IconButton
     component="a"
-    href="https://wa.me/919693245941"
+    href="https://wa.me/919693245941?text=Hello%20Webitya"
     target="_blank"
     rel="noopener noreferrer"
     sx={{
