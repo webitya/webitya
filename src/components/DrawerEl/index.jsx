@@ -28,7 +28,7 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
       transition={{ type: "spring", stiffness: 260, damping: 25 }}
-      className="fixed top-0 right-0 w-2/3 md:w-1/3 h-full bg-gray-900 shadow-xl z-50 p-6 flex flex-col space-y-6"
+      className="fixed top-0 right-0 w-2/3 md:w-1/3 h-full bg-gray-900 shadow-xl z-[9999] p-6 flex flex-col space-y-6"
     >
       {/* Close Button */}
       <button
