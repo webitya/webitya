@@ -15,6 +15,8 @@ import {
   DialogActions,
   Slide,
 } from "@mui/material";
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const logos = [
   { src: "/logos/logo1.svg", alt: "Logo 1" },
@@ -156,9 +158,13 @@ const HomeHero = () => {
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-4 md:px-10 py-10 min-h-screen">
           {/* Left: Text */}
           <div className="md:w-2/3 text-center md:text-left space-y-4">
-            <Typography variant="h3" fontWeight="bold" gutterBottom>
-              Webitya Web Services 🚀
-            </Typography>
+          <Box display="flex" alignItems="center" gap={1}>
+ 
+  <Typography variant="h3" fontWeight="bold" gutterBottom>
+    Webitya Web Services  <RocketLaunchIcon color="primary" fontSize="large" />
+  </Typography>
+</Box>
+
 
             <Typography
               variant="subtitle2"
@@ -234,9 +240,12 @@ const HomeHero = () => {
           {/* Right: Form */}
           <div className="w-full md:w-1/3 mt-10 md:mt-0">
             <Paper elevation={4} sx={{ p: 3, borderRadius: 3 }}>
-              <Typography variant="h6" fontWeight="bold" gutterBottom>
-                Drop Your Query ✉️
-              </Typography>
+            <Box display="flex" alignItems="center" gap={1} mb={0}>
+  
+  <Typography variant="h6" fontWeight="bold" gutterBottom>
+    Drop Your Query <MailOutlineIcon color="primary" />
+  </Typography>
+</Box>
               <form onSubmit={handleSubmit}>
                 <TextField
                   name="name"
