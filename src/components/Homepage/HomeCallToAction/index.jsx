@@ -35,20 +35,25 @@ const HomeCallToAction = () => {
             us today and unlock your online potential!
           </Typography>
           <Box>
-            <Button
-              variant="contained"
-              size="large"
-              sx={{
-                backgroundColor: "#fff",
-                color: "#000",
-                px: 5,
-                fontWeight: "bold",
-                "&:hover": { backgroundColor: "#f4f4f4" },
-              }}
-              href="#contact"
-            >
-              Get in Touch
-            </Button>
+          <Button
+  variant="contained"
+  size="large"
+  sx={{
+    backgroundColor: "#fff",
+    color: "#000",
+    px: 5,
+    fontWeight: "bold",
+    boxShadow: 2,
+    "&:hover": { backgroundColor: "#f4f4f4" },
+  }}
+  href="https://wa.me/919693245941?text=Hello%20Webitya"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Message Us on WhatsApp
+</Button>
+
+
           </Box>
         </motion.div>
       </Container>
