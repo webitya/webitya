@@ -37,7 +37,7 @@ const HomeBusinessSection = () => {
         </div>
       </div>
       
-      <div className="mt-10">
+      <div className="md:mt-10 mt-20">
         <Link href="#" className="bg-black text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800">
           Get Started with WEBITYA →
         </Link>

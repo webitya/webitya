@@ -3,6 +3,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import FooterEl from "@/components/FooterEl";
 // import { WhatsAppOutlined, PhoneOutlined } from "@ant-design/icons";
+import { IconButton, Box } from "@mui/material";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import PhoneIcon from "@mui/icons-material/Phone";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script"; // Import Next.js Script component
 
@@ -52,26 +55,66 @@ export default function RootLayout({ children }) {
         ></amp-auto-ads>
 
         <Navbar />
-        {children}
+        <Box
+  component="main"
+  sx={{
+    mt: { xs: 7, sm: 0 }, // Adjust margin top for different screen sizes
+    mb: { xs: 4, sm: 0 }, // Optional: Add bottom margin if needed
+    px: { xs: 0, sm: 0 }, // Optional: padding for horizontal spacing
+  }}
+>
+  {children}
+</Box>
         <FooterEl />
 
         {/* Floating Icons */}
-        {/* <div className="fixed bottom-4 right-4 flex flex-col gap-2">
-          <a
-            href="https://wa.me/919693245941"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-black p-2 rounded text-white shadow-lg hover:bg-gray-800 w-10 h-10 flex items-center justify-center"
-          >
-            <WhatsAppOutlined style={{ fontSize: "20px" }} />
-          </a>
-          <a
-            href="tel:9693245941"
-            className="bg-black p-2 rounded text-white shadow-lg hover:bg-gray-800 w-10 h-10 flex items-center justify-center"
-          >
-            <PhoneOutlined style={{ fontSize: "20px" }} />
-          </a>
-        </div> */}
+        <Box
+  sx={{
+    position: "fixed",
+    bottom: 16,
+    right: 16,
+    display: "flex",
+    flexDirection: "column",
+    gap: 1,
+    zIndex: 999,
+  }}
+>
+  <IconButton
+    component="a"
+    href="https://wa.me/919693245941"
+    target="_blank"
+    rel="noopener noreferrer"
+    sx={{
+      backgroundColor: "black",
+      color: "white",
+      "&:hover": {
+        backgroundColor: "grey.800",
+      },
+      width: 40,
+      height: 40,
+      boxShadow: 3,
+    }}
+  >
+    <WhatsAppIcon fontSize="small" />
+  </IconButton>
+
+  <IconButton
+    component="a"
+    href="tel:9693245941"
+    sx={{
+      backgroundColor: "black",
+      color: "white",
+      "&:hover": {
+        backgroundColor: "grey.800",
+      },
+      width: 40,
+      height: 40,
+      boxShadow: 3,
+    }}
+  >
+    <PhoneIcon fontSize="small" />
+  </IconButton>
+</Box>
       </body>
     </html>
   );
