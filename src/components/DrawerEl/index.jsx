@@ -50,9 +50,10 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         <List>
           {[
             { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
             { name: "Services", path: "/services" },
             { name: "Portfolio", path: "/portfolio" },
-            { name: "About", path: "/about" },
+            { name: "Influencers", path: "/influencers" },
             { name: "Contact", path: "/contact" },
           ].map((link) => (
             <Link key={link.name} href={link.path} passHref>

@@ -6,6 +6,10 @@ import HomeHero from "@/components/Homepage/HomeHero";
 import HomeBusinessSection from "@/components/Homepage/BusinessSection";
 import HomeAboutUs from "@/components/Homepage/HomeAboutUs";
 import Head from "next/head";
+import Footer from "@/components/FooterEl";
+import HomeFaqs from "@/components/Homepage/HomeFaqs";
+import HomeTestimonials from "@/components/Homepage/HomeTestimonials";
+import HomeCallToAction from "@/components/Homepage/HomeCallToAction";
 
 const WebityaHero = () => {
   return (
@@ -65,6 +69,10 @@ const WebityaHero = () => {
       <HomeBusinessSection />
       <HomeServicesSection />
       <HomeClientLogos />
+      <HomeTestimonials/>
+      <HomeFaqs/>
+      <HomeCallToAction/>
+      <Footer/>
     </>
   );
 };

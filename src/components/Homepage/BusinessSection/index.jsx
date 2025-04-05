@@ -32,12 +32,12 @@ const HomeBusinessSection = () => {
         <div className="absolute top-10 left-20 w-64 h-40 md:w-80 md:h-52 transform rotate-[5deg] border-3 border-white rounded-lg overflow-hidden">
           <Image src="/Images/img2.jpeg" alt="Marketing Strategies" layout="fill" objectFit="cover" />
         </div>
-        <div className="absolute top-20 right-10 w-64 h-40 md:w-80 md:h-52 transform rotate-[-2deg] border-3 border-white rounded-lg overflow-hidden">
+        <div className="absolute top-5 right-20 w-64 h-40 md:w-80 md:h-52 transform rotate-[-15deg] border-3 border-white rounded-lg overflow-hidden">
           <Image src="/Images/img3.jpeg" alt="SEO Optimization" layout="fill" objectFit="cover" />
         </div>
       </div>
       
-      <div className="md:mt-10 mt-28">
+      <div className="md:mt-14 mt-24">
         <Link href="#" className="bg-black text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold hover:bg-gray-800">
           Get Started with WEBITYA →
         </Link>
