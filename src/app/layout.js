@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
 >
   {children}
 </Box>
-        <FooterEl />
+        {/* <FooterEl /> */}
 
         {/* Floating Icons */}
         <Box

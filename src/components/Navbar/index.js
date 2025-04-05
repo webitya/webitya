@@ -63,7 +63,7 @@ const Navbar = () => {
             backdropFilter: "blur(6px)",
             color: "black",
             transition: "all 0.3s ease-in-out",
-            boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.1)" : "none",
+            boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.1)" : "0 2px 10px rgba(0,0,0,0.1)",
             zIndex: (theme) => theme.zIndex.modal + 1,
           }}
         >

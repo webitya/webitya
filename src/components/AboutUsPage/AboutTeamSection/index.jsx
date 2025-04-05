@@ -17,33 +17,63 @@ import { motion } from "framer-motion";
 const teamMembers = [
   {
     name: "Aditya Kumar",
-    role: "Founder & CEO",
+    role: "Founder",
     description:
-      "Leading Webitya with a vision to revolutionize website development and digital marketing.",
+      "Visionary leader and founder of Webitya, passionate about driving innovation in digital marketing and web solutions.",
     image: "/team.webp",
     linkedin: "https://www.linkedin.com/in/aditya-kumar",
     facebook: "https://www.facebook.com/aditya.kumar",
     instagram: "https://www.instagram.com/aditya.kumar",
   },
   {
-    name: "Ananya Sharma",
-    role: "Marketing Head",
+    name: "Raj Jaiswal",
+    role: "CEO",
     description:
-      "Specialized in brand growth and customer engagement through innovative marketing strategies.",
+      "Leads company strategy and business growth with sharp market insight and leadership excellence.",
     image: "/team.webp",
-    linkedin: "https://www.linkedin.com/in/ananya-sharma",
-    facebook: "https://www.facebook.com/ananya.sharma",
-    instagram: "https://www.instagram.com/ananya.sharma",
+    linkedin: "#",
+    facebook: "#",
+    instagram: "#",
   },
   {
-    name: "Sahil Verma",
-    role: "CTO",
+    name: "Ananya Kumari",
+    role: "Brand Ambassador",
     description:
-      "Expert in front-end development and ensuring top-notch user experiences with modern technologies.",
+      "Drives brand engagement, promotions and represents Webitya across marketing campaigns with charm and creativity.",
     image: "/team.webp",
-    linkedin: "https://www.linkedin.com/in/sahil-verma",
-    facebook: "https://www.facebook.com/sahil.verma",
-    instagram: "https://www.instagram.com/sahil.verma",
+    linkedin: "#",
+    facebook: "#",
+    instagram: "#",
+  },
+  {
+    name: "Deepak Gupta",
+    role: "Co-Founder, Sr. Graphic & Video Editor, Founder of San Innovation",
+    description:
+      "Creative powerhouse leading multimedia content, visual storytelling and strategic branding.",
+    image: "/team.webp",
+    linkedin: "#",
+    facebook: "#",
+    instagram: "#",
+  },
+  {
+    name: "Sachin & Surendra Kumar",
+    role: "Web Developers & Social Media Marketing Experts",
+    description:
+      "Tech experts building optimized websites and delivering impactful social media strategies for clients.",
+    image: "/team.webp",
+    linkedin: "#",
+    facebook: "#",
+    instagram: "#",
+  },
+  {
+    name: "Siya Sharma",
+    role: "Graphic Designer",
+    description:
+      "Passionate designer crafting visual assets that enhance user experience and brand identity.",
+    image: "/team.webp",
+    linkedin: "#",
+    facebook: "#",
+    instagram: "#",
   },
 ];
 
@@ -55,8 +85,8 @@ const TeamSection = () => {
       component="section"
       py={10}
       px={{ xs: 3, md: 10 }}
-      bgcolor="linear-gradient(to bottom, #f3f4f6, #e5e7eb)"
       textAlign="center"
+      bgcolor="#f9fafb"
     >
       <Typography variant="h4" fontWeight="bold" color="text.primary">
         Meet Our Team
@@ -68,16 +98,23 @@ const TeamSection = () => {
         maxWidth="600px"
         mx="auto"
       >
-        The brilliant minds behind Webitya Web Services, committed to digital
-        excellence.
+        The powerhouse team of Webitya Web Services — innovators, creatives, and
+        digital experts driving transformation.
       </Typography>
 
       <Grid container spacing={4} mt={6}>
         {teamMembers.map((member, index) => (
-          <Grid item xs={12} md={4} key={index}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            md={4}
+            key={index}
+            sx={{ display: "flex" }}
+          >
             <MotionCard
               elevation={4}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               transition={{ type: "spring", stiffness: 300 }}
               sx={{
                 borderRadius: 4,
@@ -85,7 +122,10 @@ const TeamSection = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "space-between",
                 bgcolor: "#fff",
+                flex: 1,
+                textAlign: "center",
               }}
             >
               <Avatar
@@ -99,48 +139,53 @@ const TeamSection = () => {
                   boxShadow: 2,
                 }}
               />
-              <CardContent>
+              <CardContent sx={{ maxWidth: 300 }}>
                 <Typography variant="h6" fontWeight={600}>
                   {member.name}
                 </Typography>
-                <Typography variant="body1" color="primary" fontWeight={500}>
+                <Typography
+                  variant="body1"
+                  color="primary"
+                  fontWeight={500}
+                  gutterBottom
+                >
                   {member.role}
                 </Typography>
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  mt={1}
-                  sx={{ fontSize: 14 }}
+                  sx={{ fontSize: 14, wordBreak: "break-word", whiteSpace: "normal" }}
                 >
                   {member.description}
                 </Typography>
-                <Box mt={2} display="flex" justifyContent="center" gap={2}>
-                  <IconButton
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: "#0077B5", "&:hover": { color: "#005582" } }}
-                  >
-                    <LinkedInIcon fontSize="medium" />
-                  </IconButton>
-                  <IconButton
-                    href={member.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: "#1877F2", "&:hover": { color: "#125ecf" } }}
-                  >
-                    <FacebookIcon fontSize="medium" />
-                  </IconButton>
-                  <IconButton
-                    href={member.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: "#E4405F", "&:hover": { color: "#C13584" } }}
-                  >
-                    <InstagramIcon fontSize="medium" />
-                  </IconButton>
-                </Box>
               </CardContent>
+
+              <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                <IconButton
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ color: "#0077B5", "&:hover": { color: "#005582" } }}
+                >
+                  <LinkedInIcon fontSize="medium" />
+                </IconButton>
+                <IconButton
+                  href={member.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ color: "#1877F2", "&:hover": { color: "#125ecf" } }}
+                >
+                  <FacebookIcon fontSize="medium" />
+                </IconButton>
+                <IconButton
+                  href={member.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ color: "#E4405F", "&:hover": { color: "#C13584" } }}
+                >
+                  <InstagramIcon fontSize="medium" />
+                </IconButton>
+              </Box>
             </MotionCard>
           </Grid>
         ))}
