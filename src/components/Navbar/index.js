@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ConstructionIcon from "@mui/icons-material/Construction";
+import DrawerEl from "../DrawerEl";
 
 const menuLinks = [
   { name: "Home", path: "/" },
@@ -137,36 +138,7 @@ const Navbar = () => {
           </Toolbar>
 
           {/* Drawer for mobile */}
-          <Drawer
-            anchor="right"
-            open={drawerOpen}
-            onClose={toggleDrawer(false)}
-          >
-            <Box width={250} p={2} role="presentation">
-              <List>
-                {menuLinks.map((link) => (
-                  <Link key={link.name} href={link.path} passHref>
-                    <ListItem
-                      button
-                      component="a"
-                      onClick={toggleDrawer(false)}
-                    >
-                      <ListItemText primary={link.name} />
-                    </ListItem>
-                  </Link>
-                ))}
-                <Link href="/demo" passHref>
-                  <ListItem
-                    button
-                    component="a"
-                    onClick={toggleDrawer(false)}
-                  >
-                    <ListItemText primary="Book Appointment" />
-                  </ListItem>
-                </Link>
-              </List>
-            </Box>
-          </Drawer>
+          <DrawerEl isOpen={drawerOpen} toggleMenu={() => setDrawerOpen(false)} />
         </AppBar>
       </Slide>
     </>
