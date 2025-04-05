@@ -1,108 +1,174 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { GithubOutlined, TwitterOutlined, LinkedinOutlined, YoutubeOutlined, InstagramOutlined } from '@ant-design/icons';
-import emailjs from 'emailjs-com';
+import React, { useState } from "react";
+import Link from "next/link";
+import {
+  Box,
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  IconButton,
+  Divider,
+} from "@mui/material";
+import {
+  GitHub,
+  Twitter,
+  LinkedIn,
+  YouTube,
+  Instagram,
+} from "@mui/icons-material";
+import emailjs from "emailjs-com";
 
 const footerData = [
   {
-    title: 'Resources',
+    title: "Resources",
     links: [
-      { name: 'Docs', href: '#' },
-      { name: 'Learn', href: '#' },
-      { name: 'Case Studies', href: '#' },
-      { name: 'Blog', href: '#' },
-      { name: 'FAQS', href: '/faqs' },
-      { name: 'Team', href: '#' },
-      { name: 'SEO Analytics', href: '#' },
-      { name: 'Events', href: '#' },
+      { name: "Docs", href: "#" },
+      { name: "Learn", href: "#" },
+      { name: "Case Studies", href: "#" },
+      { name: "Blog", href: "#" },
+      { name: "FAQS", href: "/faqs" },
+      { name: "Team", href: "#" },
+      { name: "SEO Analytics", href: "#" },
+      { name: "Events", href: "#" },
     ],
   },
   {
-    title: 'Services',
+    title: "Services",
     links: [
-      { name: 'SEO', href: '#' },
-      { name: 'Social Media Marketing', href: '#' },
-      { name: 'PPC Advertising', href: '#' },
-      { name: 'Email Marketing', href: '#' },
-      { name: 'Content Marketing', href: '#' },
-      { name: 'Web Design', href: '#' },
+      { name: "SEO", href: "#" },
+      { name: "Social Media Marketing", href: "#" },
+      { name: "PPC Advertising", href: "#" },
+      { name: "Email Marketing", href: "#" },
+      { name: "Content Marketing", href: "#" },
+      { name: "Web Design", href: "#" },
     ],
   },
   {
-    title: 'About us',
+    title: "About us",
     links: [
-      { name: 'Privacy', href: '/legal/privacy-policy' },
-      { name: 'Terms of service', href: '/legal/terms' },
-      { name: 'Disclaimer', href: '/legal/disclaimer' },
-      { name: 'Contact', href: '/contact-us' },
+      { name: "Privacy", href: "/legal/privacy-policy" },
+      { name: "Terms of service", href: "/legal/terms" },
+      { name: "Disclaimer", href: "/legal/disclaimer" },
+      { name: "Contact", href: "/contact-us" },
     ],
   },
 ];
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { email }, 'YOUR_PUBLIC_KEY')
+    emailjs
+      .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", { email }, "YOUR_PUBLIC_KEY")
       .then(() => {
-        alert('Subscription successful!');
-        setEmail('');
+        alert("Subscription successful!");
+        setEmail("");
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between gap-8">
-        <div className="w-full md:w-1/3">
-          <img src="/logo.png" alt="WEBITYA Logo" className="w-32 mb-4" />
-          <p className="text-sm">WEBITYA is your trusted digital marketing agency specializing in SEO, Social Media, and Content Marketing.</p>
-        </div>
-        <div className="w-full md:w-1/3 grid grid-cols-2 md:grid-cols-3 gap-8">
-          {footerData.map((section, index) => (
-            <div key={index}>
-              <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
-              <ul className="space-y-2">
+    <Box component="footer" bgcolor="#111827" color="#D1D5DB" py={8} px={4}>
+      <Grid container spacing={6} maxWidth="lg" mx="auto">
+        {/* Logo & About */}
+        <Grid item xs={12} md={4}>
+          <Box mb={2}>
+            <img src="/logo.png" alt="WEBITYA Logo" style={{ width: "130px" }} />
+          </Box>
+          <Typography variant="body2">
+            WEBITYA is your trusted digital marketing agency specializing in SEO,
+            Social Media, and Content Marketing.
+          </Typography>
+        </Grid>
+
+        {/* Links */}
+        <Grid item xs={12} md={4}>
+          <Grid container spacing={4}>
+            {footerData.map((section, idx) => (
+              <Grid item xs={6} sm={4} key={idx}>
+                <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                  {section.title}
+                </Typography>
                 {section.links.map((link, i) => (
-                  <li key={i}>
-                    <Link href={link.href} className="hover:text-white transition">
-                      {link.name}
+                  <Box key={i} mb={1}>
+                    <Link href={link.href} passHref>
+                      <Typography
+                        component="a"
+                        color="inherit"
+                        sx={{
+                          "&:hover": { color: "#ffffff" },
+                          fontSize: "14px",
+                          textDecoration: "none",
+                        }}
+                      >
+                        {link.name}
+                      </Typography>
                     </Link>
-                  </li>
+                  </Box>
                 ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="w-full md:w-1/3">
-          <h3 className="text-lg font-semibold mb-4">Subscribe to our Newsletter</h3>
-          <form onSubmit={handleSubscribe} className="space-y-2">
-            <input 
-              type="email" 
-              placeholder="you@domain.com" 
-              className="w-full px-4 py-2 bg-gray-800 text-white rounded-md"
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+
+        {/* Newsletter */}
+        <Grid item xs={12} md={4}>
+          <Typography variant="h6" fontWeight="bold" gutterBottom>
+            Subscribe to our Newsletter
+          </Typography>
+          <Box component="form" onSubmit={handleSubscribe} mt={2}>
+            <TextField
+              variant="filled"
+              fullWidth
+              placeholder="you@domain.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
+              InputProps={{
+                style: {
+                  backgroundColor: "#1F2937",
+                  borderRadius: "6px",
+                  color: "white",
+                },
+              }}
+              inputProps={{ style: { color: "white" } }}
             />
-            <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md">Subscribe Now</button>
-          </form>
-        </div>
-      </div>
-      <div className="mt-10 text-center border-t border-gray-700 pt-6">
-        <p className="text-sm">&copy; {new Date().getFullYear()} WEBITYA Digital Marketing Agency. All rights reserved.</p>
-        <div className="flex justify-center gap-4 mt-4 text-lg">
-          <Link href="#"><GithubOutlined /></Link>
-          <Link href="#"><TwitterOutlined /></Link>
-          <Link href="#"><LinkedinOutlined /></Link>
-          <Link href="#"><YoutubeOutlined /></Link>
-          <Link href="#"><InstagramOutlined /></Link>
-        </div>
-      </div>
-    </footer>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                mt: 2,
+                backgroundColor: "#3B82F6",
+                "&:hover": { backgroundColor: "#2563EB" },
+              }}
+            >
+              Subscribe Now
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+
+      {/* Divider */}
+      <Divider sx={{ my: 5, borderColor: "#374151" }} />
+
+      {/* Social + Bottom Text */}
+      <Box textAlign="center">
+        <Typography variant="body2">
+          &copy; {new Date().getFullYear()} WEBITYA Digital Marketing Agency. All
+          rights reserved.
+        </Typography>
+        <Box mt={2} display="flex" justifyContent="center" gap={2}>
+          <IconButton component="a" href="#" sx={{ color: "#9CA3AF" }}><GitHub /></IconButton>
+          <IconButton component="a" href="#" sx={{ color: "#9CA3AF" }}><Twitter /></IconButton>
+          <IconButton component="a" href="#" sx={{ color: "#9CA3AF" }}><LinkedIn /></IconButton>
+          <IconButton component="a" href="#" sx={{ color: "#9CA3AF" }}><YouTube /></IconButton>
+          <IconButton component="a" href="#" sx={{ color: "#9CA3AF" }}><Instagram /></IconButton>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

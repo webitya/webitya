@@ -1,4 +1,15 @@
-import { LinkedinOutlined } from "@ant-design/icons";
+"use client";
+
+import {
+  Box,
+  Grid,
+  Typography,
+  Avatar,
+  Card,
+  CardContent,
+  IconButton,
+} from "@mui/material";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const interns = [
   {
@@ -29,37 +40,60 @@ const interns = [
 
 const AboutInternsSection = () => {
   return (
-    <section className="py-16 px-6 md:px-16 bg-white text-center">
-      <h2 className="text-4xl font-bold text-gray-900">Our Interns</h2>
-      <p className="text-gray-600 mt-4 text-lg">
+    <Box component="section" py={8} px={{ xs: 3, md: 10 }} bgcolor="#fff" textAlign="center">
+      <Typography variant="h4" fontWeight="bold" color="text.primary" gutterBottom>
+        Our Interns
+      </Typography>
+      <Typography variant="subtitle1" color="text.secondary" mb={4}>
         Meet the talented interns contributing to Webitya’s growth and innovation.
-      </p>
+      </Typography>
 
-      {/* Updated Grid for Better Responsiveness */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8 mt-8">
+      <Grid container spacing={4}>
         {interns.map((intern, index) => (
-          <div key={index} className="flex flex-col items-center p-4 shadow-lg rounded-lg bg-gray-50">
-            <img
-              src={intern.image}
-              alt={intern.name}
-              className="w-24 h-24 rounded-full mb-4 border-2 border-gray-300 shadow-md"
-            />
-            <h3 className="text-lg font-semibold text-gray-900">{intern.name}</h3>
-            <p className="text-gray-600">{intern.role}</p>
-            
-            {/* LinkedIn Icon with Smooth Hover Effect */}
-            <a
-              href={intern.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 text-blue-600 text-2xl transition duration-300 hover:text-blue-800 hover:scale-110"
-            >
-              <LinkedinOutlined />
-            </a>
-          </div>
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Card elevation={3} sx={{ p: 2, borderRadius: 3, textAlign: "center", backgroundColor: "#f9fafb" }}>
+              <Avatar
+                alt={intern.name}
+                src={intern.image}
+                sx={{
+                  width: 80,
+                  height: 80,
+                  margin: "0 auto",
+                  mb: 2,
+                  border: "2px solid #ccc",
+                  boxShadow: 2,
+                }}
+              />
+              <CardContent>
+                <Typography variant="subtitle1" fontWeight={600} color="text.primary">
+                  {intern.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {intern.role}
+                </Typography>
+                <Box mt={2}>
+                  <IconButton
+                    href={intern.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{
+                      color: "#0077b5",
+                      transition: "transform 0.2s ease-in-out",
+                      "&:hover": {
+                        color: "#005582",
+                        transform: "scale(1.1)",
+                      },
+                    }}
+                  >
+                    <LinkedInIcon fontSize="medium" />
+                  </IconButton>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </div>
-    </section>
+      </Grid>
+    </Box>
   );
 };
 

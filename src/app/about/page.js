@@ -1,10 +1,19 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import AboutHeroSection from "@/components/AboutUsPage/AboutUsHeroSection";
 import TeamSection from "@/components/AboutUsPage/AboutTeamSection";
 import AboutInternsSection from "@/components/AboutUsPage/AboutOurInterns";
 import AboutUsCTA from "@/components/AboutUsPage/AboutUsCTA";
 import AboutVisionMissionSection from "@/components/AboutUsPage/AboutVisionMission";
+
+// MUI components
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const About = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -40,29 +49,56 @@ const About = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [navLinks]);
+  }, []);
+
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <div className="flex">
-      {/* Sidebar - Visible only on large screens */}
-      <aside className="hidden lg:block fixed top-20 left-0 h-full w-40 bg-white border-r border-gray-200">
-        <ul className="space-y-3 py-6 px-4">
-          {navLinks.map(({ id, label }) => (
-            <li
-              key={id}
-              className={`cursor-pointer text-sm font-medium p-2 rounded-md transition-all ${
-                activeSection === id ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50"
-              }`}
-              onClick={() => scrollToSection(id)}
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
-      </aside>
+      {/* Sidebar using MUI Drawer - only shown on large screens */}
+      {isLargeScreen && (
+        <Drawer
+          variant="permanent"
+          anchor="left"
+          sx={{
+            width: 200,
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: 200,
+              top: 80,
+              boxSizing: "border-box",
+              borderRight: "1px solid #e5e7eb", // Tailwind's border-gray-200
+            },
+          }}
+        >
+          <List sx={{ paddingY: 2 }}>
+            {navLinks.map(({ id, label }) => (
+              <ListItemButton
+                key={id}
+                onClick={() => scrollToSection(id)}
+                selected={activeSection === id}
+                sx={{
+                  borderRadius: 1,
+                  marginY: 0.5,
+                  "&.Mui-selected": {
+                    backgroundColor: "#e0f2fe", // Tailwind's blue-50
+                    color: "#2563eb", // Tailwind's blue-600
+                  },
+                  "&:hover": {
+                    backgroundColor: "#f9fafb", // Tailwind's gray-50
+                  },
+                }}
+              >
+                <ListItemText primary={label} primaryTypographyProps={{ fontSize: 14, fontWeight: 500 }} />
+              </ListItemButton>
+            ))}
+          </List>
+        </Drawer>
+      )}
 
       {/* Main Content */}
-      <main className="w-full lg:ml-40 p-6">
+      <main className="w-full lg:ml-[200px] p-6">
         <section id="about">
           <AboutHeroSection />
         </section>
@@ -78,7 +114,6 @@ const About = () => {
         <section id="steps">
           <AboutUsCTA />
         </section>
-       
       </main>
     </div>
   );

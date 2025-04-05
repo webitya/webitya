@@ -1,9 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu } from "lucide-react";
-import Drawer from "@/components/DrawerEl";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useTheme,
+  useMediaQuery,
+  Typography,
+  Slide,
+  useScrollTrigger,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import ConstructionIcon from "@mui/icons-material/Construction";
 
 const menuLinks = [
   { name: "Home", path: "/" },
@@ -14,61 +30,146 @@ const menuLinks = [
 ];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+
+  const toggleDrawer = (open) => () => {
+    setDrawerOpen(open);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      if (isOpen) {
-        setIsOpen(false); // Close drawer on scroll
-      }
+      setIsSticky(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOpen]); // Re-run effect if `isOpen` changes
+  }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full bg-white py-3 px-6 flex items-center justify-between transition-all duration-300 z-[1000] ${
-        isScrolled ? "shadow-lg backdrop-blur-lg" : "shadow-md"
-      }`}
-    >
-      {/* Logo */}
-      <div className="text-2xl font-bold text-gray-800">WEBITYA</div>
+    <>
+      {/* Under Construction Banner (Optional) */}
+      {/* 
+      <Box sx={{ bgcolor: "black", color: "white", py: 1, textAlign: "center" }}>
+        <ConstructionIcon sx={{ mr: 1, verticalAlign: "middle" }} />
+        This Website is Under Construction – Stay tuned for updates!
+      </Box> 
+      */}
 
-      {/* Desktop Menu */}
-      <div className="hidden md:flex justify-center items-center space-x-6">
-        {menuLinks.map((link) => (
-          <Link
-            key={link.name}
-            href={link.path}
-            className="text-gray-600 hover:text-gray-900 transition"
-          >
-            {link.name}
-          </Link>
-        ))}
-        <Link
-          href="/demo"
-          className="text-white bg-black hover:bg-gray-900 px-4 py-2 rounded-lg transition"
+      {/* Navbar with Slide animation */}
+      <Slide appear={false} direction="down" in={!trigger || isSticky}>
+        <AppBar
+          position="fixed"
+          elevation={isSticky ? 4 : 0}
+          sx={{
+            bgcolor: "white",
+            color: "black",
+            transition: "all 0.3s ease-in-out",
+            boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.1)" : "none",
+            zIndex: (theme) => theme.zIndex.modal + 1,
+          }}
         >
-          Book Appointment
-        </Link>
-      </div>
+          <Toolbar sx={{ justifyContent: "space-between", px: 3 }}>
+            {/* Logo */}
+            <Link href="/" passHref>
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                component="a"
+                sx={{ color: "black", textDecoration: "none" }}
+              >
+                WEBITYA
+              </Typography>
+            </Link>
 
-      {/* Mobile Menu Button */}
-      <button className="md:hidden" onClick={toggleMenu}>
-        <Menu size={28} />
-      </button>
+            {/* Desktop Menu */}
+            {!isMobile && (
+              <Box display="flex" alignItems="center" gap={3}>
+                {menuLinks.map((link) => (
+                  <Link key={link.name} href={link.path} passHref>
+                    <Button
+                      component="a"
+                      sx={{
+                        color: "#007bff",
+                        "&:hover": { color: "black" },
+                      }}
+                    >
+                      {link.name}
+                    </Button>
+                  </Link>
+                ))}
+                <Link href="/demo" passHref>
+                  <Button
+                    component="a"
+                    variant="contained"
+                    sx={{
+                      bgcolor: "black",
+                      color: "white",
+                      px: 3,
+                      py: 1,
+                      borderRadius: 2,
+                      textTransform: "none",
+                      "&:hover": {
+                        bgcolor: "#1a1a1a",
+                      },
+                    }}
+                  >
+                    Book Appointment
+                  </Button>
+                </Link>
+              </Box>
+            )}
 
-      {/* Mobile Drawer Component */}
-      <Drawer isOpen={isOpen} toggleMenu={toggleMenu} />
-    </nav>
+            {/* Mobile Menu Icon */}
+            {isMobile && (
+              <IconButton onClick={toggleDrawer(true)}>
+                <MenuIcon />
+              </IconButton>
+            )}
+          </Toolbar>
+
+          {/* Drawer for mobile */}
+          <Drawer
+            anchor="right"
+            open={drawerOpen}
+            onClose={toggleDrawer(false)}
+          >
+            <Box width={250} p={2} role="presentation">
+              <List>
+                {menuLinks.map((link) => (
+                  <Link key={link.name} href={link.path} passHref>
+                    <ListItem
+                      button
+                      component="a"
+                      onClick={toggleDrawer(false)}
+                    >
+                      <ListItemText primary={link.name} />
+                    </ListItem>
+                  </Link>
+                ))}
+                <Link href="/demo" passHref>
+                  <ListItem
+                    button
+                    component="a"
+                    onClick={toggleDrawer(false)}
+                  >
+                    <ListItemText primary="Book Appointment" />
+                  </ListItem>
+                </Link>
+              </List>
+            </Box>
+          </Drawer>
+        </AppBar>
+      </Slide>
+    </>
   );
 };
 
