@@ -19,9 +19,10 @@ import DrawerEl from "../DrawerEl";
 
 const menuLinks = [
   { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
   { name: "Services", path: "/services" },
   { name: "Portfolio", path: "/portfolio" },
-  { name: "About", path: "/about" },
+  { name: "Courses", path: "/courses" },
   { name: "Contact", path: "/contact-us" },
 ];
 
