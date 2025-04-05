@@ -58,10 +58,11 @@ export default function RootLayout({ children }) {
         <Box
   component="main"
   sx={{
-    mt: { xs: 7, sm: 0 }, // Adjust margin top for different screen sizes
-    mb: { xs: 4, sm: 0 }, // Optional: Add bottom margin if needed
-    px: { xs: 0, sm: 0 }, // Optional: padding for horizontal spacing
+    mt: { xs: 7, sm: 5, md: 3, lg: 7, xl: 16 }, // Example: decreasing top margin as screen gets bigger
+    mb: { xs: 4, sm: 3, md: 2, lg: 1, xl: 7 }, // Example: optional bottom margin
+    px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Example: increasing padding horizontally
   }}
+  
 >
   {children}
 </Box>
