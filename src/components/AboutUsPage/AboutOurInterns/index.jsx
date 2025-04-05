@@ -48,10 +48,27 @@ const AboutInternsSection = () => {
         Meet the talented interns contributing to Webitya’s growth and innovation.
       </Typography>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={4} justifyContent="center">
         {interns.map((intern, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card elevation={3} sx={{ p: 2, borderRadius: 3, textAlign: "center", backgroundColor: "#f9fafb" }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={3}
+            key={index}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
+            <Card
+              elevation={3}
+              sx={{
+                p: 2,
+                borderRadius: 3,
+                textAlign: "center",
+                backgroundColor: "#f9fafb",
+                width: "100%",
+                maxWidth: 280,
+              }}
+            >
               <Avatar
                 alt={intern.name}
                 src={intern.image}

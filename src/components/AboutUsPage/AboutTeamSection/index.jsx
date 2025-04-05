@@ -20,7 +20,7 @@ const teamMembers = [
     role: "Founder",
     description:
       "Visionary leader and founder of Webitya, passionate about driving innovation in digital marketing and web solutions.",
-    image: "/team.webp",
+    image: "/teams/aditya1.jpg",
     linkedin: "https://www.linkedin.com/in/aditya-kumar",
     facebook: "https://www.facebook.com/aditya.kumar",
     instagram: "https://www.instagram.com/aditya.kumar",
@@ -36,11 +36,11 @@ const teamMembers = [
     instagram: "#",
   },
   {
-    name: "Ananya Kumari",
+    name: "Ananya Mall",
     role: "Brand Ambassador",
     description:
       "Drives brand engagement, promotions and represents Webitya across marketing campaigns with charm and creativity.",
-    image: "/team.webp",
+    image: "/teams/ananya.jpg",
     linkedin: "#",
     facebook: "#",
     instagram: "#",
@@ -95,22 +95,26 @@ const TeamSection = () => {
         variant="subtitle1"
         color="text.secondary"
         mt={2}
-        maxWidth="600px"
         mx="auto"
       >
         The powerhouse team of Webitya Web Services — innovators, creatives, and
         digital experts driving transformation.
       </Typography>
 
-      <Grid container spacing={4} mt={6}>
+      <Grid
+        container
+        spacing={4}
+        mt={6}
+        justifyContent="center" // center the row
+      >
         {teamMembers.map((member, index) => (
           <Grid
             item
             xs={12}
-            sm={4}
+            sm={6}
             md={4}
             key={index}
-            sx={{ display: "flex" }}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
             <MotionCard
               elevation={4}
@@ -124,8 +128,8 @@ const TeamSection = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 bgcolor: "#fff",
-                flex: 1,
                 textAlign: "center",
+                height: "100%",
               }}
             >
               <Avatar
@@ -139,7 +143,7 @@ const TeamSection = () => {
                   boxShadow: 2,
                 }}
               />
-              <CardContent sx={{ maxWidth: 300 }}>
+              <CardContent sx={{ maxWidth: 250 }}>
                 <Typography variant="h6" fontWeight={600}>
                   {member.name}
                 </Typography>
@@ -154,7 +158,11 @@ const TeamSection = () => {
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  sx={{ fontSize: 14, wordBreak: "break-word", whiteSpace: "normal" }}
+                  sx={{
+                    fontSize: 14,
+                    wordBreak: "break-word",
+                    whiteSpace: "normal",
+                  }}
                 >
                   {member.description}
                 </Typography>
