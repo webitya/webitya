@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import "./HomeHero.css";
 import {
   TextField,
   Button,
@@ -12,13 +13,15 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Slide,
 } from "@mui/material";
 
 const logos = [
-  { src: "/next.svg", alt: "Logo 1" },
-  { src: "/next.svg", alt: "Logo 2" },
-  { src: "/next.svg", alt: "Logo 3" },
-  { src: "/next.svg", alt: "Logo 4" },
+  { src: "/logos/logo1.svg", alt: "Logo 1" },
+  { src: "/logos/logo2.svg", alt: "Logo 2" },
+  { src: "/logos/logo3.svg", alt: "Logo 3" },
+  { src: "/logos/logo4.svg", alt: "Logo 4" },
+  { src: "/logos/logo5.svg", alt: "Logo 5" },
 ];
 
 const HomeHero = () => {
@@ -39,7 +42,6 @@ const HomeHero = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await emailjs.send(
         "service_webitya",
@@ -50,161 +52,258 @@ const HomeHero = () => {
       setFormData({ name: "", email: "", description: "" });
       setOpenModal(true);
     } catch (error) {
-      // alert("Something went wrong. Please try again.");
-      setOpenModal(true)
+      console.error("Failed to send:", error);
+      setOpenModal(true);
     }
   };
 
   return (
     <>
-      {/* Hero Section */}
-      <div className="md:min-h-screen flex flex-col md:flex-row items-center justify-between md:px-6 px-4 md:py-6 py-4 bg-gradient-to-r from-gray-200 to-gray-300 text-black">
-        {/* Left Side */}
-        <div className="text-center md:text-left md:w-2/3 md:pr-12">
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Webitya Web Services
-          </Typography>
+      {/* Animated Background */}
+      <div className="relative min-h-screen overflow-hidden bg-gradient-to-r from-white via-neutral-100 to-white
+ text-black">
+        <div className="bubble-wrapper pointer-events-none">
+  {/* Bubbles */}
+  {[...Array(20)].map((_, i) => (
+    <div
+      key={`bubble-${i}`}
+      className="bubble"
+      style={{
+        left: `${Math.random() * 100}%`,
+        animationDuration: `${5 + Math.random() * 5}s`,
+        animationDelay: `${Math.random() * 5}s`,
+        bottom: `-${Math.random() * 100}px`,
+      }}
+    />
+  ))}
 
-          <Typography
-            variant="subtitle2"
-            sx={{
-              color: "primary.main",
-              fontWeight: "medium",
-              textTransform: "uppercase",
-              letterSpacing: 1,
-              mb: 1,
-            }}
-          >
-            Digital Marketing Trainer & Consultant
-          </Typography>
+  {/* Squares */}
+  {[...Array(25)].map((_, i) => (
+    <div
+      key={`square-${i}`}
+      className="square"
+      style={{
+        left: `${Math.random() * 100}%`,
+        animationDuration: `${6 + Math.random() * 6}s`,
+        animationDelay: `${Math.random() * 5}s`,
+        bottom: `-${Math.random() * 100}px`,
+      }}
+    />
+  ))}
 
-          <Typography variant="body1" color="textSecondary" paragraph>
-            Elevate your brand with{" "}
-            <strong className="text-black">
-              cutting-edge digital marketing solutions
-            </strong>
-            . From SEO to web development, we help businesses thrive online.
-          </Typography>
+  {/* Triangles */}
+  {[...Array(15)].map((_, i) => (
+    <div
+      key={`triangle-${i}`}
+      className="triangle"
+      style={{
+        left: `${Math.random() * 100}%`,
+        animationDuration: `${5 + Math.random() * 4}s`,
+        animationDelay: `${Math.random() * 4}s`,
+        bottom: `-${Math.random() * 100}px`,
+        transform: `rotate(${Math.random() * 360}deg)`,
+      }}
+    />
+  ))}
+  {/* Hexagons */}
+{[...Array(30)].map((_, i) => (
+  <div
+    key={`hexagon-${i}`}
+    className="hexagon"
+    style={{
+      left: `${Math.random() * 100}%`,
+      animationDuration: `${6 + Math.random() * 5}s`,
+      animationDelay: `${Math.random() * 4}s`,
+      bottom: `-${Math.random() * 100}px`,
+      transform: `rotate(${Math.random() * 360}deg)`,
+    }}
+  />
+))}
+{/* Stars */}
+{[...Array(20)].map((_, i) => (
+  <div
+    key={`star-${i}`}
+    className="star"
+    style={{
+      left: `${Math.random() * 100}%`,
+      animationDuration: `${5 + Math.random() * 4}s`,
+      animationDelay: `${Math.random() * 5}s`,
+      bottom: `-${Math.random() * 100}px`,
+      transform: `rotate(${Math.random() * 360}deg)`,
+    }}
+  />
+))}
 
-          {/* Logos Section */}
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: {
-                xs: "center",
-                md: "start",
-              },
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: 4,
-              py: 2,
-            }}
+{/* Diamonds */}
+{[...Array(22)].map((_, i) => (
+  <div
+    key={`diamond-${i}`}
+    className="diamond"
+    style={{
+      left: `${Math.random() * 100}%`,
+      animationDuration: `${6 + Math.random() * 5}s`,
+      animationDelay: `${Math.random() * 5}s`,
+      bottom: `-${Math.random() * 100}px`,
+      transform: `rotate(${Math.random() * 45}deg)`,
+    }}
+  />
+))}
 
-            
-          >
-            {logos.map((logo, index) => (
-              <Box
-                key={index}
-                component="img"
-                src={logo.src}
-                alt={logo.alt}
-                sx={{
-                  height: 10,
-                  objectFit: "contain",
-                  filter: "grayscale(100%)",
-                  transition: "all 0.3s ease-in-out",
-                  "&:hover": {
-                    filter: "grayscale(0%)",
-                    transform: "scale(1.05)",
-                  },
-                }}
-              />
-            ))}
-          </Box>
+</div>
 
-          {/* Call to Action Buttons */}
-          <Box mt={3}>
-            <Button
-              variant="contained"
-              color="primary"
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-4 md:px-10 py-10 min-h-screen">
+          {/* Left: Text */}
+          <div className="md:w-2/3 text-center md:text-left space-y-4">
+            <Typography variant="h3" fontWeight="bold" gutterBottom>
+              Webitya Web Services 🚀
+            </Typography>
+
+            <Typography
+              variant="subtitle2"
               sx={{
-                mr: 2,
-                backgroundColor: "#000",
-                "&:hover": { backgroundColor: "#333" },
+                color: "primary.main",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: 1,
               }}
             >
-              Get Started
-            </Button>
-            <Button variant="outlined">Our Services</Button>
-          </Box>
-        </div>
-
-        {/* Right Side: Form */}
-        <div className="w-full md:w-1/3 mt-8 md:mt-0">
-          <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
-            <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              Get in Touch
+              Digital Marketing Trainer & Consultant
             </Typography>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                name="name"
-                label="Name"
-                fullWidth
-                size="small"
-                margin="dense"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-              <TextField
-                name="email"
-                label="Email"
-                type="email"
-                fullWidth
-                size="small"
-                margin="dense"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <TextField
-                name="description"
-                label="Requirement"
-                fullWidth
-                multiline
-                rows={3}
-                size="small"
-                margin="dense"
-                value={formData.description}
-                onChange={handleChange}
-                required
-              />
+
+            <Typography variant="body1" color="textSecondary">
+              Boost your digital presence with{" "}
+              <strong className="text-black">
+                result-driven marketing strategies
+              </strong>{" "}
+              and bespoke web development. We help startups and businesses
+              thrive online.
+            </Typography>
+
+            {/* Logos */}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: { xs: "center", md: "start" },
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: 4,
+                py: 2,
+              }}
+            >
+              {logos.map((logo, index) => (
+                <Box
+                  key={index}
+                  component="img"
+                  src={logo.src}
+                  alt={logo.alt}
+                  sx={{
+                    height: 40,
+                    objectFit: "contain",
+                    filter: "grayscale(100%)",
+                    transition: "all 0.3s ease-in-out",
+                    "&:hover": {
+                      filter: "grayscale(0%)",
+                      transform: "scale(1.08)",
+                    },
+                  }}
+                />
+              ))}
+            </Box>
+
+            {/* CTA */}
+            <Box mt={3}>
               <Button
-                type="submit"
                 variant="contained"
-                fullWidth
-                size="medium"
+                size="large"
                 sx={{
-                  mt: 2,
+                  mr: 2,
                   backgroundColor: "#000",
-                  "&:hover": { backgroundColor: "#333" },
+                  "&:hover": { backgroundColor: "#222" },
                 }}
               >
-                Submit Now
+                Let’s Talk
               </Button>
-            </form>
-          </Paper>
+              <Button variant="outlined" size="large">
+                Explore Services
+              </Button>
+            </Box>
+          </div>
+
+          {/* Right: Form */}
+          <div className="w-full md:w-1/3 mt-10 md:mt-0">
+            <Paper elevation={4} sx={{ p: 3, borderRadius: 3 }}>
+              <Typography variant="h6" fontWeight="bold" gutterBottom>
+                Drop Your Query ✉️
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  name="name"
+                  label="Full Name"
+                  fullWidth
+                  size="small"
+                  margin="dense"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                <TextField
+                  name="email"
+                  label="Email Address"
+                  type="email"
+                  fullWidth
+                  size="small"
+                  margin="dense"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <TextField
+                  name="description"
+                  label="How can we help?"
+                  fullWidth
+                  multiline
+                  rows={3}
+                  size="small"
+                  margin="dense"
+                  value={formData.description}
+                  onChange={handleChange}
+                  required
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  sx={{
+                    mt: 2,
+                    backgroundColor: "#000",
+                    "&:hover": { backgroundColor: "#222" },
+                  }}
+                >
+                  Submit Now
+                </Button>
+              </form>
+            </Paper>
+          </div>
         </div>
       </div>
 
-      {/* Success Modal */}
-      <Dialog open={openModal} onClose={() => setOpenModal(false)}>
-        <DialogTitle>Thank You!</DialogTitle>
+      {/* Modal */}
+      <Dialog
+        open={openModal}
+        TransitionComponent={Slide}
+        TransitionProps={{ direction: "up" }}
+        onClose={() => setOpenModal(false)}
+      >
+        <DialogTitle>🎉 Thank You!</DialogTitle>
         <DialogContent>
-          <Typography>We’ll contact you soon. 😊</Typography>
+          <Typography>Your message has been sent. We'll reach out shortly.</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenModal(false)}>Close</Button>
+          <Button onClick={() => setOpenModal(false)} autoFocus>
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
     </>
