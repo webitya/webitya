@@ -1,32 +1,87 @@
-import { BulbOutlined, RocketOutlined } from "@ant-design/icons";
+"use client";
+
+import { Box, Grid, Typography } from "@mui/material";
+import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import { motion } from "framer-motion";
+
+const MotionBox = motion(Box);
 
 const VisionMissionSection = () => {
   return (
-    <section className="py-16 px-6 md:px-16 bg-white text-center">
-      <h2 className="text-4xl font-extrabold text-gray-900">Our Vision & Mission</h2>
+    <Box
+      component="section"
+      py={10}
+      px={{ xs: 3, md: 10 }}
+      bgcolor="#fff"
+      textAlign="center"
+    >
+      <Typography variant="h4" fontWeight="bold" color="text.primary">
+        Our Vision & Mission
+      </Typography>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
-        {/* Vision Card */}
-        <div className="flex flex-col items-center text-center">
-          <BulbOutlined className="text-blue-600 text-6xl mb-4" />
-          <h3 className="text-2xl font-semibold text-gray-900">Our Vision</h3>
-          <p className="text-gray-600 mt-4 text-lg leading-relaxed max-w-lg">
-            Empowering businesses with <strong>cutting-edge digital solutions</strong> 
-            to establish a strong online presence and drive <strong>innovation</strong>.
-          </p>
-        </div>
+      <Grid container spacing={6} mt={5} justifyContent="center">
+        {/* Vision */}
+        <Grid item xs={12} md={6}>
+          <MotionBox
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            textAlign="center"
+          >
+            <EmojiObjectsIcon
+              sx={{ fontSize: 60, color: "#2563eb", mb: 2 }}
+            />
+            <Typography variant="h5" fontWeight={600} color="text.primary">
+              Our Vision
+            </Typography>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              mt={2}
+              maxWidth="500px"
+              fontSize="1.1rem"
+            >
+              Empowering businesses with{" "}
+              <strong>cutting-edge digital solutions</strong> to establish a
+              strong online presence and drive <strong>innovation</strong>.
+            </Typography>
+          </MotionBox>
+        </Grid>
 
-        {/* Mission Card */}
-        <div className="flex flex-col items-center text-center">
-          <RocketOutlined className="text-green-600 text-6xl mb-4" />
-          <h3 className="text-2xl font-semibold text-gray-900">Our Mission</h3>
-          <p className="text-gray-600 mt-4 text-lg leading-relaxed max-w-lg">
-            Helping brands achieve <strong>growth and visibility</strong> through 
-            strategic <strong>digital marketing, SEO, and modern web solutions</strong>.
-          </p>
-        </div>
-      </div>
-    </section>
+        {/* Mission */}
+        <Grid item xs={12} md={6}>
+          <MotionBox
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            textAlign="center"
+          >
+            <RocketLaunchIcon
+              sx={{ fontSize: 60, color: "#16a34a", mb: 2 }}
+            />
+            <Typography variant="h5" fontWeight={600} color="text.primary">
+              Our Mission
+            </Typography>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              mt={2}
+              maxWidth="500px"
+              fontSize="1.1rem"
+            >
+              Helping brands achieve <strong>growth and visibility</strong>{" "}
+              through strategic{" "}
+              <strong>digital marketing, SEO, and modern web solutions</strong>.
+            </Typography>
+          </MotionBox>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

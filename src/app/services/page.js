@@ -1,10 +1,23 @@
 "use client";
+
 import { useState, useEffect } from "react";
+import {
+  Box,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Typography,
+  Toolbar,
+} from "@mui/material";
+
 import AboutHeroSection from "@/components/AboutUsPage/AboutUsHeroSection";
 import TeamSection from "@/components/AboutUsPage/AboutTeamSection";
 import AboutInternsSection from "@/components/AboutUsPage/AboutOurInterns";
 import AboutUsCTA from "@/components/AboutUsPage/AboutUsCTA";
 import AboutVisionMissionSection from "@/components/AboutUsPage/AboutVisionMission";
+
+const drawerWidth = 200;
 
 const About = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -43,26 +56,47 @@ const About = () => {
   }, [navLinks]);
 
   return (
-    <div className="flex">
-      {/* Sidebar - Visible only on large screens */}
-      <aside className="hidden lg:block fixed top-20 left-0 h-full w-40 bg-white border-r border-gray-200">
-        <ul className="space-y-3 py-6 px-4">
+    <Box sx={{ display: "flex" }}>
+      {/* Sidebar Drawer (only visible on large screens) */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", lg: "block" },
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+            top: 80,
+            borderRight: "1px solid #e0e0e0",
+          },
+        }}
+      >
+        <Toolbar />
+        <List sx={{ pt: 2 }}>
           {navLinks.map(({ id, label }) => (
-            <li
+            <ListItemButton
               key={id}
-              className={`cursor-pointer text-sm font-medium p-2 rounded-md transition-all ${
-                activeSection === id ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50"
-              }`}
               onClick={() => scrollToSection(id)}
+              selected={activeSection === id}
+              sx={{
+                borderRadius: 1,
+                mx: 1,
+                my: 0.5,
+                "&.Mui-selected": {
+                  backgroundColor: "#e3f2fd",
+                  color: "#1976d2",
+                },
+              }}
             >
-              {label}
-            </li>
+              <ListItemText primary={label} primaryTypographyProps={{ fontSize: 14 }} />
+            </ListItemButton>
           ))}
-        </ul>
-      </aside>
+        </List>
+      </Drawer>
 
       {/* Main Content */}
-      <main className="w-full lg:ml-40 p-6">
+      <Box component="main" sx={{ flexGrow: 1, px: 3, py: 4, ml: { lg: `${drawerWidth}px` } }}>
         <section id="hero">
           <AboutHeroSection />
         </section>
@@ -79,16 +113,22 @@ const About = () => {
           <AboutUsCTA />
         </section>
         <section id="benefits">
-          <h1>Aditya 1</h1>
+          <Typography variant="h5" gutterBottom>
+            Aditya 1
+          </Typography>
         </section>
         <section id="positioning">
-          <h1>Aditya 1</h1>
+          <Typography variant="h5" gutterBottom>
+            Aditya 1
+          </Typography>
         </section>
         <section id="premium-advantage">
-          <h1>Aditya 1</h1>
+          <Typography variant="h5" gutterBottom>
+            Aditya 1
+          </Typography>
         </section>
-      </main>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

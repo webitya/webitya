@@ -1,10 +1,15 @@
 "use client";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import emailjs from "emailjs-com";
-import { Button, Input } from "antd";
 
-const { TextArea } = Input;
+import { useState } from "react";
+import emailjs from "emailjs-com";
+import {
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Paper,
+  Alert,
+} from "@mui/material";
 
 const HomeHero = () => {
   const [formData, setFormData] = useState({
@@ -13,100 +18,115 @@ const HomeHero = () => {
     description: "",
   });
 
+  const [feedback, setFeedback] = useState({ type: "", message: "" });
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     emailjs
       .send("service_webitya", "template_y9g4vob", formData, "Iw_1wMHg3mqNItEUH")
-      .then(() => alert("Message sent successfully!"))
-      .catch(() => alert("Failed to send message."));
+      .then(() => {
+        setFeedback({ type: "success", message: "Message sent successfully!" });
+        setFormData({ name: "", email: "", description: "" });
+      })
+      .catch(() => {
+        setFeedback({ type: "error", message: "Failed to send message." });
+      });
   };
 
   return (
     <>
-     <div>
-     <div
-  className="bg-black text-white py-2 text-center !mt-16 overflow-hidden"
->
-  This Website is Under Construction 🚧 Stay tuned for updates!
-</div>
-     </div>
+      {/* Top Banner */}
+    
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.2 }}
-        className="md:!min-h-screen !flex !flex-col md:!flex-row !items-center !justify-between !px-8 !py-10 !bg-gradient-to-r !from-gray-200 !to-gray-300 !text-black"
-      >
-        {/* Left - Hero Text */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.2, delay: 0.1 }}
-          className="!text-center md:!text-left md:!w-2/3 md:!pr-12 !mt-8 md:!mt-0"
-        >
-          <h1 className="!text-5xl !font-extrabold !text-gray-900">
+      {/* Hero Section */}
+      <div className="md:min-h-screen flex flex-col md:flex-row items-center justify-between px-8 py-10 bg-gradient-to-r from-gray-200 to-gray-300 text-black">
+        {/* Left Side: Hero Text */}
+        <div className="text-center md:text-left md:w-2/3 md:pr-12 mt-8 md:mt-0">
+          <Typography variant="h2" fontWeight="bold" gutterBottom>
             Webitya Web Services
-          </h1>
-          <p className="!text-gray-600 !mt-4 !text-lg">
-            Elevate your brand with <strong className="!text-black">cutting-edge digital marketing solutions</strong>.  
-            From SEO to web development, we help businesses thrive online.
-          </p>
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Elevate your brand with{" "}
+            <strong className="text-black">
+              cutting-edge digital marketing solutions
+            </strong>
+            . From SEO to web development, we help businesses thrive online.
+          </Typography>
 
-          <div className="!mt-6">
-            <Button className="!mr-4 !bg-black !border-black !hover:bg-gray-800 !text-white">
+          <Box mt={4}>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ mr: 2, backgroundColor: "#000", "&:hover": { backgroundColor: "#333" } }}
+            >
               Get Started
             </Button>
-            <Button className="!border-gray-400 !hover:border-gray-600">
-              Our Services
-            </Button>
-          </div>
-        </motion.div>
+            <Button variant="outlined">Our Services</Button>
+          </Box>
+        </div>
 
-        {/* Right - Form Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.2, delay: 0.1 }}
-          className="!bg-white !p-6 !rounded-2xl !shadow-lg !w-full md:!w-1/3 !mt-8 md:!mt-0"
-        >
-          <h2 className="!text-xl !font-bold !mb-4 !text-black">Get in Touch</h2>
-          <form onSubmit={handleSubmit}>
-            <Input
-              name="name"
-              placeholder="Your Name"
-              onChange={handleChange}
-              required
-              className="!mb-2 !border-gray-300"
-            />
-            <Input
-              name="email"
-              type="email"
-              placeholder="Your Email"
-              onChange={handleChange}
-              required
-              className="!mb-2 !border-gray-300"
-            />
-            <TextArea
-              name="description"
-              placeholder="Describe your requirement"
-              onChange={handleChange}
-              required
-              className="!mb-2 !border-gray-300"
-            />
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="!w-full !mt-4 !bg-black !border-black !hover:bg-gray-800 !text-white"
-            >
-              Submit Now
-            </Button>
-          </form>
-        </motion.div>
-      </motion.div>
+        {/* Right Side: Contact Form */}
+        <div className="w-full md:w-1/3 mt-8 md:mt-0">
+          <Paper elevation={3} sx={{ p: 4, borderRadius: 4 }}>
+            <Typography variant="h6" fontWeight="bold" mb={2}>
+              Get in Touch
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                name="name"
+                label="Your Name"
+                fullWidth
+                margin="normal"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                name="email"
+                label="Your Email"
+                type="email"
+                fullWidth
+                margin="normal"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                name="description"
+                label="Describe your requirement"
+                fullWidth
+                multiline
+                rows={4}
+                margin="normal"
+                value={formData.description}
+                onChange={handleChange}
+                required
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ mt: 2, backgroundColor: "#000", "&:hover": { backgroundColor: "#333" } }}
+              >
+                Submit Now
+              </Button>
+            </form>
+
+            {feedback.message && (
+              <Alert severity={feedback.type} sx={{ mt: 2 }}>
+                {feedback.message}
+              </Alert>
+            )}
+          </Paper>
+        </div>
+      </div>
     </>
   );
 };

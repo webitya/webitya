@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css"; 
 import Navbar from "@/components/Navbar";
 import FooterEl from "@/components/FooterEl";
-import { WhatsAppOutlined, PhoneOutlined } from "@ant-design/icons";
+// import { WhatsAppOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script"; // Import Next.js Script component
 
@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
         <FooterEl />
 
         {/* Floating Icons */}
-        <div className="fixed bottom-4 right-4 flex flex-col gap-2">
+        {/* <div className="fixed bottom-4 right-4 flex flex-col gap-2">
           <a
             href="https://wa.me/919693245941"
             target="_blank"
@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
           >
             <PhoneOutlined style={{ fontSize: "20px" }} />
           </a>
-        </div>
+        </div> */}
       </body>
     </html>
   );

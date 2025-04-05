@@ -1,10 +1,24 @@
 "use client";
+
 import { useState, useEffect } from "react";
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Box,
+  Typography,
+  useTheme,
+} from "@mui/material";
+
 import AboutHeroSection from "@/components/AboutUsPage/AboutUsHeroSection";
 import TeamSection from "@/components/AboutUsPage/AboutTeamSection";
 import AboutInternsSection from "@/components/AboutUsPage/AboutOurInterns";
 import AboutUsCTA from "@/components/AboutUsPage/AboutUsCTA";
 import AboutVisionMissionSection from "@/components/AboutUsPage/AboutVisionMission";
+
+const drawerWidth = 240;
 
 const About = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -43,26 +57,40 @@ const About = () => {
   }, [navLinks]);
 
   return (
-    <div className="flex">
-      {/* Sidebar - Visible only on large screens */}
-      <aside className="hidden lg:block fixed top-20 left-0 h-full w-40 bg-white border-r border-gray-200">
-        <ul className="space-y-3 py-6 px-4">
-          {navLinks.map(({ id, label }) => (
-            <li
-              key={id}
-              className={`cursor-pointer text-sm font-medium p-2 rounded-md transition-all ${
-                activeSection === id ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50"
-              }`}
-              onClick={() => scrollToSection(id)}
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
-      </aside>
+    <Box sx={{ display: "flex" }}>
+      {/* Sidebar */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", lg: "block" },
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+            top: 80,
+            borderRight: "1px solid #e0e0e0",
+          },
+        }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: "auto" }}>
+          <List>
+            {navLinks.map(({ id, label }) => (
+              <ListItemButton
+                key={id}
+                onClick={() => scrollToSection(id)}
+                selected={activeSection === id}
+              >
+                <ListItemText primary={label} />
+              </ListItemButton>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
 
       {/* Main Content */}
-      <main className="w-full lg:ml-40 p-6">
+      <Box component="main" sx={{ flexGrow: 1, p: 3, ml: { lg: `${drawerWidth}px` } }}>
         <section id="hero">
           <AboutHeroSection />
         </section>
@@ -79,16 +107,16 @@ const About = () => {
           <AboutUsCTA />
         </section>
         <section id="benefits">
-          <h1>Aditya 1</h1>
+          <Typography variant="h5">Aditya 1</Typography>
         </section>
         <section id="positioning">
-          <h1>Aditya 1</h1>
+          <Typography variant="h5">Aditya 1</Typography>
         </section>
         <section id="premium-advantage">
-          <h1>Aditya 1</h1>
+          <Typography variant="h5">Aditya 1</Typography>
         </section>
-      </main>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
