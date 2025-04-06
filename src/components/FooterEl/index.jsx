@@ -37,12 +37,12 @@ const footerData = [
   {
     title: 'Services',
     links: [
-      { name: 'SEO', href: '#' },
-      { name: 'Social Media Marketing', href: '#' },
-      { name: 'PPC Advertising', href: '#' },
-      { name: 'Email Marketing', href: '#' },
-      { name: 'Content Marketing', href: '#' },
-      { name: 'Web Design', href: '#' },
+      { name: 'SEO', href: '/services' },
+      { name: 'Social Media Marketing', href: '/services' },
+      { name: 'PPC Advertising', href: '/services' },
+      { name: 'Email Marketing', href: '/services' },
+      { name: 'Content Marketing', href: '/services' },
+      { name: 'Web Design', href: '/services' },
     ],
   },
   {
