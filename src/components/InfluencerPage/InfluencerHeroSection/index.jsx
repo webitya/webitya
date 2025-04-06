@@ -52,7 +52,7 @@ const InfluencerHeroSection = () => {
       >
         <div className="relative w-[280px] h-[320px] md:w-[320px] md:h-[380px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
           <Image
-            src="/founder.jpg" // ⬅️ Replace with actual image path (e.g. public/founder.jpg)
+            src="/teams/rajnish-kumar.png" // ⬅️ Replace with actual image path (e.g. public/founder.jpg)
             alt="Founder of Webitya"
             layout="fill"
             objectFit="cover"
@@ -60,7 +60,7 @@ const InfluencerHeroSection = () => {
           />
         </div>
         <p className="text-center mt-4 text-lg font-semibold text-slate-800">
-          Aditya Kumar <br />
+           Rajnish Kumar <br />
           <span className="text-sm text-slate-600">Founder & Visionary</span>
         </p>
       </motion.div>
