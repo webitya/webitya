@@ -95,7 +95,7 @@ export default function Disclaimer() {
               If you have any questions regarding this disclaimer, feel free to contact us:
             </Typography>
             <ul className="list-none ml-0 mt-2 text-gray-900">
-              <li><strong>Email:</strong> contact@webitya.in</li>
+              <li><strong>Email:</strong> webitya@gmail.com</li>
               <li><strong>Phone:</strong> +91-9693245941</li>
               <li><strong>Address:</strong> Webitya Web Services, Ganga Nagar Harmu Ranchi, Jharkhand 834002</li>
             </ul>
