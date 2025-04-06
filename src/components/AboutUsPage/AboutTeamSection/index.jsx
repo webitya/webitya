@@ -47,7 +47,7 @@ const teamMembers = [
   },
   {
     name: "Deepak Gupta",
-    role: "Co-Founder, Sr. Graphic & Video Editor, Founder of San Innovation",
+    role: "Founder of San Innovation, Sr. Graphic & Video Editor",
     description:
       "Creative powerhouse leading multimedia content, visual storytelling and strategic branding.",
     image: "/team.webp",
@@ -56,7 +56,17 @@ const teamMembers = [
     instagram: "#",
   },
   {
-    name: "Sachin & Surendra Kumar",
+    name: "Sachin",
+    role: "Web Developer & Social Media Marketing Expert",
+    description:
+      "Blending the power of clean, high-performance web development with creative social media strategies to elevate brands and drive growth.",
+    image: "/team.webp",
+    linkedin: "#",
+    facebook: "#",
+    instagram: "#",
+  },  
+  {
+    name: "Surendra Kumar",
     role: "Web Developers & Social Media Marketing Experts",
     description:
       "Tech experts building optimized websites and delivering impactful social media strategies for clients.",
@@ -75,6 +85,26 @@ const teamMembers = [
     facebook: "#",
     instagram: "#",
   },
+  {
+    name: "Rajnish Kumar",
+    role: "Influencer Campaign Strategist",
+    description:
+      "Expert in aligning influencer partnerships with brand objectives, ensuring smooth campaign execution and impactful results for clients.",
+    image: "/teams/rajnish-kumar.png",
+    linkedin: "https://linkedin.com/in/rajnish-kumar",
+    facebook: "https://facebook.com/rajnish.kumar",
+    instagram: "https://instagram.com/rajnishkumar",
+  },  
+  {
+    name: "Pratyush Kumar",
+    role: "Web Developer & Manager",
+    description:
+      "Efficiently managing web development projects and ensuring seamless execution from code to client satisfaction.",
+    image: "/pratyush.webp", // Replace with actual image path
+    linkedin: "https://linkedin.com/in/pratyush-kumar", // Replace with actual link
+    facebook: "https://facebook.com/pratyush.kumar",     // Replace with actual link
+    instagram: "https://instagram.com/pratyushkumar",    // Replace with actual link
+  }
 ];
 
 const MotionCard = motion(Card);
