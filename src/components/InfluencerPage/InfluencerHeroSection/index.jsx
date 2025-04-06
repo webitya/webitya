@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import PersonIcon from "@mui/icons-material/Person";
 
 const InfluencerHeroSection = () => {
   return (
@@ -59,10 +61,21 @@ const InfluencerHeroSection = () => {
             className="rounded-3xl"
           />
         </div>
-        <p className="text-center mt-4 text-lg font-semibold text-slate-800">
-           Rajnish Kumar <br />
-          <span className="text-sm text-slate-600">Founder & Visionary</span>
-        </p>
+        <div className="text-center mt-1 text-slate-800">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-transparent bg-clip-text">
+  Rajnish Kumar
+</h2>
+
+
+      <p className="mt-1 text-base text-slate-600 font-medium">
+        Founder & Visionary
+      </p>
+
+      <p className="mt-2 text-sm text-gray-600 flex justify-center items-center gap-1">
+        <PhoneIphoneIcon fontSize="small" className="text-gray-500" />
+        +91 73238 39108
+      </p>
+    </div>
       </motion.div>
     </section>
   );

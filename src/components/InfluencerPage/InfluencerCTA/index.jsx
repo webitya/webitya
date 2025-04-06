@@ -35,7 +35,7 @@ const InfluencerCTA = () => {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <Link href="/contact" passHref>
+          <Link href="https://wa.me/917323839108?text=I%20want%20to%20book%20Influencer%20" passHref>
             <button className="px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white text-lg font-semibold rounded-2xl shadow-2xl transition duration-300 hover:scale-105">
               Book an Influencer
             </button>
