@@ -7,6 +7,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import GavelIcon from '@mui/icons-material/Gavel';
 import PublicIcon from '@mui/icons-material/Public';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import Footer from "@/components/FooterEl";
 
 export default function PrivacyPolicy() {
   return (
@@ -48,11 +49,11 @@ export default function PrivacyPolicy() {
         ` }} />
       </Head>
 
-      <main className="bg-gray-50 min-h-screen">
+      <main className="bg-gray-50 py-4 min-h-screen">
         <Container>
           <div className="flex items-center gap-2 mb-6">
-            <PrivacyTipIcon className="text-blue-600" />
-            <Typography variant="h1" className="font-bold md:text-3xl text-xl">Privacy Policy</Typography>
+            <PrivacyTipIcon className="text-blue-600" fontSize="large" />
+            <Typography variant="h1" className="font-bold !text-3xl">Privacy Policy</Typography>
           </div>
 
           <Typography variant="subtitle1" className="mb-4">Effective Date: April 5, 2025</Typography>
@@ -64,7 +65,7 @@ export default function PrivacyPolicy() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <InfoIcon className="text-green-600" />
+              <InfoIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">1. Information We Collect</Typography>
             </div>
             <ul className="list-disc ml-6 mt-2 text-gray-700">
@@ -78,7 +79,7 @@ export default function PrivacyPolicy() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <DataUsageIcon className="text-purple-600" />
+              <DataUsageIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">2. How We Use Your Information</Typography>
             </div>
             <ul className="list-disc ml-6 mt-2 text-gray-700">
@@ -93,7 +94,7 @@ export default function PrivacyPolicy() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <GavelIcon className="text-yellow-600" />
+              <GavelIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">3. Legal Grounds (GDPR)</Typography>
             </div>
             <ul className="list-disc ml-6 text-gray-700">
@@ -106,7 +107,7 @@ export default function PrivacyPolicy() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <PublicIcon className="text-pink-600" />
+              <PublicIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">4. Third-Party Sharing</Typography>
             </div>
             <Typography>
@@ -123,7 +124,7 @@ export default function PrivacyPolicy() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <SecurityIcon className="text-red-600" />
+              <SecurityIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">5. Data Security</Typography>
             </div>
             <Typography>
@@ -172,7 +173,7 @@ export default function PrivacyPolicy() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <ContactSupportIcon className="text-blue-600" />
+              <ContactSupportIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">10. Contact Us</Typography>
             </div>
             <ul className="list-none ml-0 mt-2 text-gray-700">
@@ -182,6 +183,7 @@ export default function PrivacyPolicy() {
             </ul>
           </section>
         </Container>
+        <Footer/>
       </main>
     </>
   );
