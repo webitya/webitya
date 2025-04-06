@@ -4,6 +4,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
 import GavelIcon from '@mui/icons-material/Gavel';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import Footer from "@/components/FooterEl";
 
 export default function Disclaimer() {
   return (
@@ -28,7 +29,7 @@ export default function Disclaimer() {
         <Container>
           <div className="flex items-center gap-2 mb-6">
             <InfoOutlinedIcon className="text-blue-600" />
-            <Typography variant="h1" className="font-bold text-3xl">Disclaimer</Typography>
+            <Typography variant="h1" className="font-bold !text-4xl">Disclaimer</Typography>
           </div>
 
           <Typography variant="subtitle1" className="mb-6">Last updated: April 5, 2025</Typography>
@@ -44,7 +45,7 @@ export default function Disclaimer() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <LinkOffIcon className="text-red-500" />
+              <LinkOffIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">External Links Disclaimer</Typography>
             </div>
             <Typography>
@@ -54,7 +55,7 @@ export default function Disclaimer() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <GavelIcon className="text-yellow-700" />
+              <GavelIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">Professional Disclaimer</Typography>
             </div>
             <Typography>
@@ -87,19 +88,20 @@ export default function Disclaimer() {
 
           <section className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <ContactSupportIcon className="text-blue-600" />
+              <ContactSupportIcon className="text-gray-900" />
               <Typography variant="h6" className="font-semibold">Contact Us</Typography>
             </div>
             <Typography>
               If you have any questions regarding this disclaimer, feel free to contact us:
             </Typography>
-            <ul className="list-none ml-0 mt-2 text-gray-700">
+            <ul className="list-none ml-0 mt-2 text-gray-900">
               <li><strong>Email:</strong> contact@webitya.in</li>
               <li><strong>Phone:</strong> +91-9693245941</li>
               <li><strong>Address:</strong> Webitya Web Services, Ganga Nagar Harmu Ranchi, Jharkhand 834002</li>
             </ul>
           </section>
         </Container>
+        <Footer/>
       </main>
     </>
   );
