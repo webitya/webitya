@@ -6,7 +6,7 @@ const Portfolio=()=>{
   return(
     <>
     <PortfolioHeroSection/>
-    <div className="min-h-screen">|||||</div>
+    <div className="min-h-screen bg-green-200">|||||</div>
     <Footer/>
     </>
   )
