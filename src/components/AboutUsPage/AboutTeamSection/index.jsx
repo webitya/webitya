@@ -90,7 +90,7 @@ const teamMembers = [
     role: "Influencer Campaign Strategist",
     description:
       "Expert in aligning influencer partnerships with brand objectives, ensuring smooth campaign execution and impactful results for clients.",
-    image: "/teams/rajnish-kumar.png",
+    image: "/teams/rajnish-kumar.jpg",
     linkedin: "https://linkedin.com/in/rajnish-kumar",
     facebook: "https://facebook.com/rajnish.kumar",
     instagram: "https://instagram.com/rajnishkumar",
