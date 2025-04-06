@@ -182,19 +182,22 @@ const Footer = () => {
           rights reserved.
         </Typography>
         <Box mt={2} display="flex" justifyContent="center" gap={2}>
-          <IconButton component="a" href="#" sx={{ color: '#9CA3AF' }}>
+          <IconButton component="a" href="https://github.com/webitya" sx={{ color: '#9CA3AF' }}>
             <GitHub />
           </IconButton>
-          <IconButton component="a" href="#" sx={{ color: '#9CA3AF' }}>
+          <IconButton component="a" href="https://x.com/webitya" sx={{ color: '#9CA3AF' }}>
             <Twitter />
           </IconButton>
-          <IconButton component="a" href="#" sx={{ color: '#9CA3AF' }}>
+          <IconButton component="a" href="https://www.linkedin.com/in/aditya-kumar-webitya/" sx={{ color: '#9CA3AF' }}>
             <LinkedIn />
           </IconButton>
-          <IconButton component="a" href="#" sx={{ color: '#9CA3AF' }}>
+          <IconButton component="a" href="https://www.linkedin.com/in/webitya/" sx={{ color: '#9CA3AF' }}>
+            <LinkedIn />
+          </IconButton>
+          <IconButton component="a" href="https://www.youtube.com/@webitya" sx={{ color: '#9CA3AF' }}>
             <YouTube />
           </IconButton>
-          <IconButton component="a" href="#" sx={{ color: '#9CA3AF' }}>
+          <IconButton component="a" href="https://www.instagram.com/webitya.in/" sx={{ color: '#9CA3AF' }}>
             <Instagram />
           </IconButton>
         </Box>
