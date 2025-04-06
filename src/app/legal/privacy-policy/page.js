@@ -177,7 +177,7 @@ export default function PrivacyPolicy() {
               <Typography variant="h6" className="font-semibold">10. Contact Us</Typography>
             </div>
             <ul className="list-none ml-0 mt-2 text-gray-700">
-              <li><strong>Email:</strong> contact@webitya.in</li>
+              <li><strong>Email:</strong> webitya@gmail.com</li>
               <li><strong>Phone:</strong> +91-9693245941</li>
               <li><strong>Address:</strong> Webitya Web Services, Ganga Nagar Harmu Ranchi, Jharkhand 834002</li>
             </ul>

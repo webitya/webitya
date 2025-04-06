@@ -113,7 +113,7 @@ export default function Terms() {
               <h2 className="text-xl font-semibold flex items-center gap-2"><ContactMail fontSize="small" /> 12. Contact Us</h2>
               <p>
                 For questions or concerns regarding these Terms & Conditions, you may contact us at
-                <a href="mailto:contact@webitya.in" className="text-blue-600 hover:underline ml-1">contact@webitya.in</a>.
+                <a href="mailto:webitya@gmail.com" className="text-blue-600 hover:underline ml-1">webitya@gmail.com</a>.
               </p>
             </div>
           </section>
