@@ -135,7 +135,7 @@ const InfluencerList = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05, duration: 0.4 }}
-            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col"
           >
             <div className="relative w-full h-64">
               <Image
@@ -146,25 +146,36 @@ const InfluencerList = () => {
                 className="hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="p-6 text-left">
-              <h3 className="text-xl font-bold text-gray-800">
-                {influencer.name}
-              </h3>
-              <p className="text-sm text-gray-500 mt-1">
-                {influencer.category}
-              </p>
-              <p className="text-sm text-gray-400 mt-1">
-                Followers: {influencer.followers}
-              </p>
+            <div className="p-6 text-left flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="text-xl font-bold text-gray-800">{influencer.name}</h3>
+                <p className="text-sm text-gray-500 mt-1">{influencer.category}</p>
+                <p className="text-sm text-gray-400 mt-1">
+                  Followers: {influencer.followers}
+                </p>
+              </div>
 
-              <a
-                href={influencer.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block bg-gradient-to-r from-pink-500 to-red-500 text-white px-5 py-2 rounded-full text-sm font-medium hover:shadow-md transition duration-300"
-              >
-                Book Now
-              </a>
+              <div className="mt-4">
+                <a
+                  href={influencer.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-gradient-to-r from-pink-500 to-red-500 text-white px-5 py-2 rounded-full text-sm font-medium hover:shadow-md transition duration-300"
+                >
+                  Book Now
+                </a>
+              </div>
+
+              <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
+                <span>Powered by</span>
+                <Image
+                  src="/brand/logo1.png"
+                  alt="Webitya Logo"
+                  width={70}
+                  height={20}
+                  className="object-contain"
+                />
+              </div>
             </div>
           </motion.div>
         ))}

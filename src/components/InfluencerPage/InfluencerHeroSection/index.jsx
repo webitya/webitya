@@ -3,11 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import PersonIcon from "@mui/icons-material/Person";
 
 const InfluencerHeroSection = () => {
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col-reverse md:flex-row items-center justify-between bg-gradient-to-br from-purple-100 via-rose-100 to-indigo-100 overflow-hidden px-6 md:px-20 py-20">
+    <section className="relative w-full min-h-[90vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-purple-100 via-rose-100 to-indigo-100 overflow-hidden px-6 md:px-20 md:py-20 py-8">
       {/* Blurry background blobs */}
       <motion.div className="absolute w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 top-[-80px] left-[-100px] animate-blob" />
       <motion.div className="absolute w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 bottom-[-100px] right-[-100px] animate-blob animation-delay-2000" />
@@ -39,7 +38,7 @@ const InfluencerHeroSection = () => {
           href="#collection"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-block mt-10 px-8 py-3 text-white font-semibold rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 shadow-lg hover:shadow-xl transition-all duration-300"
+          className="inline-block md:mt-10 mt-5 md:mb-0 mb-5 px-8 py-3 text-white font-semibold rounded-xl bg-gradient-to-r from-purple-600 to-pink-500 shadow-lg hover:shadow-xl transition-all duration-300"
         >
           Browse Influencers
         </motion.a>
@@ -54,7 +53,7 @@ const InfluencerHeroSection = () => {
       >
         <div className="relative w-[280px] h-[320px] md:w-[320px] md:h-[380px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
           <Image
-            src="/teams/rajnish-kumar.jpg" // ⬅️ Replace with actual image path (e.g. public/founder.jpg)
+            src="/teams/rajnish-kumar.jpg"
             alt="Influencer Campaign Strategist"
             layout="fill"
             objectFit="cover"
@@ -62,21 +61,30 @@ const InfluencerHeroSection = () => {
           />
         </div>
         <div className="text-center mt-1 text-slate-800">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-transparent bg-clip-text">
-  Rajnish Kumar
-</h2>
-
-
-      <p className="mt-1 text-base text-slate-600 font-medium">
-      Influencer Campaign Strategist
-      </p>
-
-      <p className="mt-2 text-sm text-gray-600 flex justify-center items-center gap-1">
-        <PhoneIphoneIcon fontSize="small" className="text-gray-500" />
-        +91 73238 39108
-      </p>
-    </div>
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-transparent bg-clip-text">
+            Rajnish Kumar
+          </h2>
+          <p className="mt-1 text-base text-slate-600 font-medium">
+            Influencer Campaign Strategist
+          </p>
+          <p className="mt-2 text-sm text-gray-600 flex justify-center items-center gap-1">
+            <PhoneIphoneIcon fontSize="small" className="text-gray-500" />
+            +91 73238 39108
+          </p>
+        </div>
       </motion.div>
+
+      {/* 🔽 Powered by Webitya */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10 text-sm text-slate-600">
+        <span>Powered by</span>
+        <Image
+          src="/brand/logo1.png" // 🔁 Replace with the actual logo path
+          alt="Webitya Logo"
+          width={90}
+          height={30}
+          className="object-contain"
+        />
+      </div>
     </section>
   );
 };
