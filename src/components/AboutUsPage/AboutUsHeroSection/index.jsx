@@ -18,7 +18,7 @@ const AboutHeroSection = () => {
         {/* Call to Action Button */}
         <div className="mt-8">
   <a
-    href="/contact"
+    href="/contact-us"
     className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-200 ease-in-out ring-1 ring-transparent hover:ring-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
   >
     Contact Us
