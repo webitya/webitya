@@ -68,7 +68,7 @@ const influencers = [
     name: "Sofia Hoda",
     category: "Actor | Comedian | Artist",
     image: "/influencers/sofiahoda.png",
-    followers: "174KK",
+    followers: "174K",
     link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sofia%20Hoda",
   },
   
