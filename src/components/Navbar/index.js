@@ -71,7 +71,7 @@ const Navbar = () => {
           <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, sm: 3 } }}>
             {/* Logo */}
             <Link href="/" passHref>
-              <Typography
+              {/* <Typography
                 variant="h6"
                 fontWeight="bold"
                 component="a"
@@ -86,7 +86,8 @@ const Navbar = () => {
                 }}
               >
                 WEBITYA
-              </Typography>
+              </Typography> */}
+              <img src="/brand/logo1.png" alt="WEBITYA Logo" style={{ width: '160px' }} />
             </Link>
 
             {/* Desktop Navigation */}

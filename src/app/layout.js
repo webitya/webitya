@@ -28,6 +28,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <head>
+        <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+      </head>
         {/* Google AdSense Meta Tag */}
         <meta name="google-adsense-account" content="ca-pub-6282388187810840" />
 
