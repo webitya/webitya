@@ -6,7 +6,7 @@ import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 
 const InfluencerHeroSection = () => {
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-purple-100 via-rose-100 to-indigo-100 overflow-hidden px-6 md:px-20 md:py-20 py-4">
+    <section className="relative w-full min-h-[90vh] flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-purple-100 via-rose-100 to-indigo-100 overflow-hidden px-6 md:px-20 md:py-20 py-10">
       {/* Blurry background blobs */}
       <motion.div className="absolute w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 top-[-80px] left-[-100px] animate-blob" />
       <motion.div className="absolute w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 bottom-[-100px] right-[-100px] animate-blob animation-delay-2000" />
