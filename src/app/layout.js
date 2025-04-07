@@ -6,7 +6,7 @@ import FooterEl from "@/components/FooterEl";
 import { IconButton, Box } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PhoneIcon from "@mui/icons-material/Phone";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/react"
 import Script from "next/script"; // Import Next.js Script component
 
 const geistSans = Geist({
@@ -69,6 +69,8 @@ export default function RootLayout({ children }) {
 >
   {children}
 </Box>
+ {/* Vercel Analytics Component */}
+ <Analytics />
         {/* <FooterEl /> */}
 
         {/* Floating Icons */}
