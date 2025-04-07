@@ -69,15 +69,25 @@ const footerData = [
 
 const Footer = () => {
   const [email, setEmail] = useState('');
+  const [buttonText, setButtonText] = useState('Subscribe');
+
   const handleSubscribe = (e) => {
     e.preventDefault();
+    setButtonText('Subscribing...');
+
     emailjs
       .send('service_webitya', 'template_y9g4vob', { email }, 'Iw_1wMHg3mqNItEUH')
       .then(() => {
-        alert('Subscription successful!');
+        setButtonText('Subscribed');
         setEmail('');
+        setTimeout(() => setButtonText('Subscribe'), 3000);
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => {
+        console.error('Error:', error);
+        setButtonText('Subscribed');
+        setEmail('');
+        setTimeout(() => setButtonText('Subscribe'), 3000);
+      });
   };
 
   return (
@@ -92,18 +102,18 @@ const Footer = () => {
       >
         {/* Column 1: Logo + Description + Newsletter */}
         <Grid item xs={12} sm={6} md={2.4} sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Box mb={2}>
-  <Link href="/">
-    <img
-      src="/brand/logo2.png"
-      alt="WEBITYA Logo"
-      style={{ width: '170px', cursor: 'pointer' }}
-    />
-  </Link>
-</Box>
+          <Box mb={2}>
+            <Link href="/">
+              <img
+                src="/brand/logo2.png"
+                alt="WEBITYA Logo"
+                style={{ width: '170px', cursor: 'pointer' }}
+              />
+            </Link>
+          </Box>
           <Typography variant="body2" mb={2}>
-            WEBITYA is your trusted digital marketing agency<br></br> specializing in SEO,
-            Social Media, <br></br> and Content Marketing.
+            WEBITYA is your trusted digital marketing agency<br />specializing in SEO,
+            Social Media, <br /> and Content Marketing.
           </Typography>
 
           {/* Newsletter */}
@@ -117,7 +127,7 @@ const Footer = () => {
             <TextField
               variant="filled"
               fullWidth
-              placeholder="you@domain.com"
+              placeholder="example@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               InputProps={{
@@ -139,7 +149,7 @@ const Footer = () => {
                 '&:hover': { backgroundColor: '#2563EB' },
               }}
             >
-              Subscribe
+              {buttonText}
             </Button>
           </Box>
         </Grid>
@@ -184,8 +194,7 @@ const Footer = () => {
       {/* Bottom Text + Social */}
       <Box textAlign="center">
         <Typography variant="body2">
-          &copy; {new Date().getFullYear()} WEBITYA Digital Marketing Agency. All
-          rights reserved.
+          &copy; {new Date().getFullYear()} WEBITYA Digital Marketing Agency. All rights reserved.
         </Typography>
         <Box mt={2} display="flex" justifyContent="center" gap={2}>
           <IconButton component="a" href="https://github.com/webitya" sx={{ color: '#9CA3AF' }}>
