@@ -4,7 +4,7 @@ import Footer from "@/components/FooterEl"
 const { default: ContactHero } = require("@/components/ContactUs/ContactHero")
 
 
-const About=()=>{
+const ContactUs=()=>{
   return (
     <>
     <ContactHero/>
@@ -14,4 +14,4 @@ const About=()=>{
     </>
   )
 }
-export default About
+export default ContactUs
