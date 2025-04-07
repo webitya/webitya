@@ -3,92 +3,76 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const influencers = [
   {
-    name: "Ananya Sharma",
-    category: "Fashion & Lifestyle",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "120K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Ananya",
+    name: "Pravin Brother",
+    category: "Actor | Content Creator",
+    image: "/influencers/pravinbrother.png",
+    followers: "326K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Pravin%20Brother",
   },
   {
-    name: "Ravi Mehta",
-    category: "Fitness & Wellness",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "95K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Ravi",
+    name: "Anjali Mahto",
+    category: "Creator | Influencer",
+    image: "/influencers/anjalimahto.png",
+    followers: "709K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Anjali%20Mahto",
   },
   {
-    name: "Simran Kaur",
-    category: "Beauty & Makeup",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "80K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Simran",
+    name: "Amit Creators",
+    category: "FLATTS, HOUSE, ROOM , HOSTEL, PG",
+    image: "/influencers/amitcreators.png",
+    followers: "49.3K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Amit%20Creators",
   },
   {
-    name: "Arjun Das",
-    category: "Tech & Gadgets",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "110K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Arjun",
+    name: "Yog Sah",
+    category: "Graphic Designer & Video Editor ",
+    image: "/influencers/yogshah.png",
+    followers: "83.1K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Yog%20Sah",
+  },
+
+ 
+  {
+    name: "Rohit Kumar",
+    category: "Creator | Influencer",
+    image: "/influencers/rohitkumarboi.png",
+    followers: "20.7K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Rohit%20Kumar",
   },
   {
-    name: "Megha Jain",
-    category: "Food & Travel",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "150K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Megha",
+    name: "Arun Kumar",
+    category: "Creator | Influencer",
+    image: "/influencers/arunkumar.png",
+    followers: "56.6K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Arun%20Kumar",
   },
   {
-    name: "Nikhil Kapoor",
-    category: "Comedy & Entertainment",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "90K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Nikhil",
+    name: "Kriti",
+    category: "Model | Creator",
+    image: "/influencers/kriti.png",
+    followers: "27K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Kriti%20",
   },
   {
-    name: "Priya Verma",
-    category: "Fitness & Nutrition",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "85K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Priya",
+    name: "Priya Jha",
+    category: "Creatot | Influencer",
+    image: "/influencers/priyajha.png",
+    followers: "59.3K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Priya%20Jha",
   },
   {
-    name: "Manish Rawat",
-    category: "Tech Reviewer",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "102K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Manish",
+    name: "Sofia Hoda",
+    category: "Actor | Comedian | Artist",
+    image: "/influencers/sofiahoda.png",
+    followers: "174KK",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sofia%20Hoda",
   },
-  {
-    name: "Ritika Sen",
-    category: "Travel Blogger",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "75K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Ritika",
-  },
-  {
-    name: "Kabir Bansal",
-    category: "Gaming",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "130K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Kabir",
-  },
-  {
-    name: "Sakshi Aggarwal",
-    category: "Parenting & Kids",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "70K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sakshi",
-  },
-  {
-    name: "Deepak Rana",
-    category: "Motivation & Talks",
-    image: "/teams/rajnish-kumar.jpg",
-    followers: "95K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Deepak",
-  },
+  
+ 
 ];
 
 const InfluencerList = () => {
@@ -167,15 +151,18 @@ const InfluencerList = () => {
               </div>
 
               <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
-                <span>Powered by</span>
-                <Image
-                  src="/brand/logo1.png"
-                  alt="Webitya Logo"
-                  width={70}
-                  height={20}
-                  className="object-contain"
-                />
-              </div>
+  <span>Powered by</span>
+  <Link href="/">
+    <Image
+      src="/brand/logo1.png"
+      alt="Webitya Logo"
+      width={70}
+      height={20}
+      className="object-contain cursor-pointer"
+    />
+  </Link>
+</div>
+
             </div>
           </motion.div>
         ))}
