@@ -1,85 +1,125 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@mui/material";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Link from "next/link";
+import { IconButton } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const slides = [
   {
-    title: "Hi, I'm Aditya Kumar",
-    subtitle: "React Developer & Digital Marketing Specialist",
-    buttonText: "Explore My Work",
-    buttonLink: "#projects",
-    bg: "from-[#e0f2fe] to-[#c7d2fe]",
+    mobilePreview: "/aboutHero.webp",
+    desktopPreview: "/portfolio/bannerImage/1.png",
   },
   {
-    title: "Crafting Beautiful UIs",
-    subtitle: "I design responsive, high-performing web interfaces.",
-    buttonText: "See My UI Projects",
-    buttonLink: "#design",
-    bg: "from-[#fdf2f8] to-[#e0e7ff]",
+    mobilePreview: "/aboutHero.webp",
+    desktopPreview: "/portfolio/bannerImage/2.png",
   },
   {
-    title: "Boost Your Business Online",
-    subtitle: "SEO, Social Media, and Performance Marketing that works.",
-    buttonText: "Let’s Talk",
-    buttonLink: "#contact",
-    bg: "from-[#fefce8] to-[#d1fae5]",
+    mobilePreview: "/aboutHero.webp",
+    desktopPreview: "/portfolio/bannerImage/3.png",
   },
 ];
 
 const PortfolioHeroSection = () => {
   const [index, setIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % slides.length);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, []);
+    if (!isHovered) {
+      intervalRef.current = setInterval(() => {
+        setIndex((prev) => (prev + 1) % slides.length);
+      }, 7000);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [isHovered]);
+
+  const goToPrevious = () => {
+    setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const goToNext = () => {
+    setIndex((prev) => (prev + 1) % slides.length);
+  };
 
   const current = slides[index];
 
   return (
-    <section className={`w-full md:h-[40vh] h-[40vh] flex items-center justify-center bg-gradient-to-br ${current.bg} transition-all duration-1000 ease-in-out`}>
+    <section
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative w-full md:h-[55vh] h-[220px] flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out"
+    >
+      {/* Arrow Buttons */}
+      <IconButton
+        onClick={goToPrevious}
+        className="!absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md transition-all"
+        size="large"
+      >
+        <ArrowBackIosNewIcon fontSize="small" />
+      </IconButton>
+
+      <IconButton
+        onClick={goToNext}
+        className="!absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md transition-all"
+        size="large"
+      >
+        <ArrowForwardIosIcon fontSize="small" />
+      </IconButton>
+
+      {/* Slide Image */}
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -40 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center px-6 max-w-3xl"
+          className="w-full h-full flex items-center justify-center"
         >
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 md:mb-4 mb-1">
-            {current.title}
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-700 md:mb-8 mb-2">
-            {current.subtitle}
-          </p>
-          <Link href={current.buttonLink}>
-            <Button
-              variant="contained"
-              endIcon={<ArrowForwardIcon />}
-              sx={{
-                borderRadius: "999px",
-                px: 4,
-                py: 1.5,
-                fontWeight: 600,
-                textTransform: "none",
-                backgroundColor: "#0284c7",
-                "&:hover": {
-                  backgroundColor: "#0369a1",
-                },
-              }}
-            >
-              {current.buttonText}
-            </Button>
-          </Link>
+          {/* Mobile image */}
+          <img
+            src={current.mobilePreview}
+            alt={`Mobile Banner ${index + 1}`}
+            className="w-full h-full object-cover md:hidden"
+          />
+          {/* Desktop image */}
+          <img
+            src={current.desktopPreview}
+            alt={`Desktop Banner ${index + 1}`}
+            className="w-full h-full object-cover hidden md:block"
+          />
         </motion.div>
       </AnimatePresence>
+
+      {/* Preview Thumbnails */}
+      <div className="absolute bottom-6 flex gap-4 z-10">
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            onClick={() => setIndex(i)}
+            className="cursor-pointer"
+          >
+            {/* Mobile Preview */}
+            <img
+              src={slide.mobilePreview}
+              alt={`Mobile Preview ${i + 1}`}
+              className={`w-12 h-8 object-cover rounded-md md:hidden transition-transform duration-300 hover:scale-105 ${
+                i === index ? "ring-2 ring-blue-500" : "opacity-60"
+              }`}
+            />
+            {/* Desktop Preview */}
+            <img
+              src={slide.desktopPreview}
+              alt={`Desktop Preview ${i + 1}`}
+              className={`w-12 h-8 object-cover rounded-md hidden md:block transition-transform duration-300 hover:scale-105 ${
+                i === index ? "ring-2 ring-blue-500" : "opacity-60"
+              }`}
+            />
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
