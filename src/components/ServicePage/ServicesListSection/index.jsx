@@ -1,92 +1,103 @@
 "use client";
 
+import "./servicesListPage.css";
 import { Grid, Paper, Typography, Box } from "@mui/material";
-import { DesignServices, BarChart, Campaign, Security, School, Language, Email, PhoneIphone } from "@mui/icons-material";
+import {
+  DesignServices,
+  BarChart,
+  Campaign,
+  Security,
+  School,
+  Language,
+  Email,
+  PhoneIphone,
+} from "@mui/icons-material";
+import Link from "next/link";
 
 const services = [
   {
     title: "Website Designing",
-    icon: <DesignServices fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "Modern, responsive websites tailored to your brand and audience."
+    icon: <DesignServices className="service-icon" />,
+    description: "Modern, responsive websites tailored to your brand and audience.",
+    image: "/aboutHero.webp",
   },
   {
     title: "SEO Optimization",
-    icon: <BarChart fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "Boost your rankings on search engines and attract organic traffic."
+    icon: <BarChart className="service-icon" />,
+    description: "Boost your rankings on search engines and attract organic traffic.",
+    image: "/aboutHero.webp",
   },
   {
     title: "Digital Marketing",
-    icon: <Campaign fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "Complete marketing campaigns including PPC, social, and strategy."
+    icon: <Campaign className="service-icon" />,
+    description: "Complete marketing campaigns including PPC, social, and strategy.",
+    image: "/aboutHero.webp",
   },
   {
     title: "Website Security",
-    icon: <Security fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "We secure your website with the latest tools and SSL integrations."
+    icon: <Security className="service-icon" />,
+    description: "We secure your website with the latest tools and SSL integrations.",
+    image: "/aboutHero.webp",
   },
   {
     title: "Online Training",
-    icon: <School fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "Learn SEO, design, and digital marketing through our online programs."
+    icon: <School className="service-icon" />,
+    description: "Learn SEO, design, and digital marketing through our online programs.",
+    image: "/aboutHero.webp",
   },
   {
     title: "Domain & Hosting",
-    icon: <Language fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "One-stop solutions for domains and fast, secure hosting plans."
+    icon: <Language className="service-icon" />,
+    description: "One-stop solutions for domains and fast, secure hosting plans.",
+    image: "/aboutHero.webp",
   },
   {
     title: "Email Marketing",
-    icon: <Email fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "Email campaigns that engage your audience and boost conversions."
+    icon: <Email className="service-icon" />,
+    description: "Email campaigns that engage your audience and boost conversions.",
+    image: "/aboutHero.webp",
   },
   {
     title: "Mobile Optimization",
-    icon: <PhoneIphone fontSize="large" sx={{ color: "#0284c7" }} />,
-    description: "Ensure your site looks and works great on all mobile devices."
-  }
+    icon: <PhoneIphone className="service-icon" />,
+    description: "Ensure your site looks and works great on all mobile devices.",
+    image: "/aboutHero.webp",
+  },
 ];
 
 const ServicesListSection = () => {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-24 bg-white" id="list">
-      <div className=" mx-auto text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-          What We Offer
-        </h2>
-        <p className="text-gray-600 text-lg">
+    <section className="services-section" id="services">
+      <div className="section-header">
+        <h2 className="section-title">What We Offer</h2>
+        <p className="section-subtitle">
           A full suite of services to grow your business digitally.
         </p>
       </div>
 
-      <Grid className="flex justify-center" container spacing={4}>
+      <Grid container spacing={4} className="services-grid">
         {services.map((service, index) => (
           <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
-            <Paper
-              elevation={2}
-              sx={{
-                p: 3,
-                borderRadius: 4,
-                height: "100%",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  backgroundColor: "#f1f5f9",
-                  transform: "translateY(-4px)",
-                }
-              }}
-            >
-              <Box display="flex" alignItems="center" mb={2}>
+            <Paper elevation={2} className="service-card">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="service-image"
+              />
+              <Box className="card-header">
                 {service.icon}
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  sx={{ ml: 2, fontWeight: 600, color: "#0f172a" }}
-                >
+                <Typography className="service-title">
                   {service.title}
                 </Typography>
               </Box>
-              <Typography variant="body2" sx={{ color: "#475569" }}>
+              <Typography className="service-description">
                 {service.description}
               </Typography>
+              <div className="cta-box">
+                <Link href="/contact-us" className="service-cta">
+                  Contact Us →
+                </Link>
+              </div>
             </Paper>
           </Grid>
         ))}
