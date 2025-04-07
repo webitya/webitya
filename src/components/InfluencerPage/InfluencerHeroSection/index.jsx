@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import Link from "next/link";
 
 const InfluencerHeroSection = () => {
   return (
@@ -76,15 +77,17 @@ const InfluencerHeroSection = () => {
 
       {/* 🔽 Powered by Webitya */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10 text-sm text-slate-600">
-        <span>Powered by</span>
-        <Image
-          src="/brand/logo1.png" // 🔁 Replace with the actual logo path
-          alt="Webitya Logo"
-          width={90}
-          height={30}
-          className="object-contain"
-        />
-      </div>
+  <span>Powered by</span>
+  <Link href="/">
+    <Image
+      src="/brand/logo1.png"
+      alt="Webitya Logo"
+      width={90}
+      height={30}
+      className="object-contain cursor-pointer"
+    />
+  </Link>
+</div>
     </section>
   );
 };

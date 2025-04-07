@@ -92,9 +92,15 @@ const Footer = () => {
       >
         {/* Column 1: Logo + Description + Newsletter */}
         <Grid item xs={12} sm={6} md={2.4} sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Box mb={2}>
-            <img src="/brand/logo2.png" alt="WEBITYA Logo" style={{ width: '170px' }} />
-          </Box>
+        <Box mb={2}>
+  <Link href="/">
+    <img
+      src="/brand/logo2.png"
+      alt="WEBITYA Logo"
+      style={{ width: '170px', cursor: 'pointer' }}
+    />
+  </Link>
+</Box>
           <Typography variant="body2" mb={2}>
             WEBITYA is your trusted digital marketing agency<br></br> specializing in SEO,
             Social Media, <br></br> and Content Marketing.
