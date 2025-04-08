@@ -75,7 +75,7 @@ const courses = [
     title: "Content Marketing",
     price: "₹4,999",
     icon: <LanguageIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/content-marketing.webp",
     color: "#ec4899",
     syllabus: "/syllabus/website-designing.pdf",
   },
@@ -83,7 +83,7 @@ const courses = [
     title: "Python Programming",
     price: "₹3,999",
     icon: <CodeIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/python-programming.webp",
     color: "#f59e0b",
     syllabus: "/syllabus/python.pdf",
   },
@@ -91,7 +91,7 @@ const courses = [
     title: "Advanced JavaScript",
     price: "₹3,999",
     icon: <CodeIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/advance-javascript.webp",
     color: "#10b981",
     syllabus: "/syllabus/advanced-js.pdf",
   },
@@ -99,7 +99,7 @@ const courses = [
     title: "Frontend Dev (ReactJS, NextJS)",
     price: "₹5,999",
     icon: <CodeIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/frontend-developement.webp",
     color: "#6366f1",
     syllabus: "/syllabus/frontend-dev.pdf",
   },
@@ -107,7 +107,7 @@ const courses = [
     title: "Backend Dev (NodeJS)",
     price: "₹5,499",
     icon: <CodeIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/backend-developement.webp",
     color: "#16a34a",
     syllabus: "/syllabus/backend-dev.pdf",
   },
@@ -115,7 +115,7 @@ const courses = [
     title: "Full Stack Dev (MERN)",
     price: "₹8,999",
     icon: <CodeIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/full-stact-developer.webp",
     color: "#7c3aed",
     syllabus: "/syllabus/fullstack-mern.pdf",
   },
@@ -123,7 +123,7 @@ const courses = [
     title: "Website with HTML/CSS/JS",
     price: "₹3,999",
     icon: <LanguageIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/html-css-javascript.webp",
     color: "#f43f5e",
     syllabus: "/syllabus/html-css-js.pdf",
   },
@@ -131,7 +131,7 @@ const courses = [
     title: "Website using WordPress",
     price: "₹3,499",
     icon: <LanguageIcon />,
-    image: "/aboutHero.webp",
+    image: "/courses/Courses-Images/wordpress.webp",
     color: "#0ea5e9",
     syllabus: "/syllabus/wordpress.pdf",
   },
@@ -192,18 +192,22 @@ const CoursesList = () => {
 
                 <div className="mt-auto">
                   <p className="text-xl font-bold text-gray-700 mb-4 flex justify-between items-center">
-                    {course.price}   <span>           <div className="flex items-center gap-2 text-xs text-slate-500">
-  <span>Powered by</span>
-  <Link href="/">
-    <Image
-      src="/brand/logo1.png"
-      alt="Webitya Logo"
-      width={70}
-      height={20}
-      className="object-contain cursor-pointer"
-    />
-  </Link>
-</div></span>
+                    {course.price}{" "}
+                    <span>
+                      {" "}
+                      <div className="flex items-center gap-2 text-xs text-slate-500">
+                        <span>Powered by</span>
+                        <Link href="/">
+                          <Image
+                            src="/brand/logo1.png"
+                            alt="Webitya Logo"
+                            width={70}
+                            height={20}
+                            className="object-contain cursor-pointer"
+                          />
+                        </Link>
+                      </div>
+                    </span>
                   </p>
                   <a
                     href="https://wa.me/919693245941?text=Hi%20I'm%20interested%20in%20your%20courses!"
