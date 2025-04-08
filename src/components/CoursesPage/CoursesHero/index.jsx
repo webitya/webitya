@@ -16,10 +16,6 @@ const slides = [
   },
   {
     mobilePreview: "/aboutHero.webp",
-    desktopPreview: "/courses/3.webp",
-  },
-  {
-    mobilePreview: "/aboutHero.webp",
     desktopPreview: "/courses/4.webp",
   },
 ];
