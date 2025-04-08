@@ -10,6 +10,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import AdsClickIcon from "@mui/icons-material/AdsClick";
 import LanguageIcon from "@mui/icons-material/Language";
 import CodeIcon from "@mui/icons-material/Code";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const courses = [
   {
@@ -18,6 +19,7 @@ const courses = [
     icon: <SchoolIcon />,
     image: "/aboutHero.webp",
     color: "#3b82f6",
+    syllabus: "/syllabus/complete-digital-marketing.pdf",
   },
   {
     title: "Email Marketing",
@@ -25,6 +27,7 @@ const courses = [
     icon: <EmailIcon />,
     image: "/aboutHero.webp",
     color: "#ef4444",
+    syllabus: "/syllabus/email-marketing.pdf",
   },
   {
     title: "Social Media Marketing",
@@ -32,6 +35,7 @@ const courses = [
     icon: <FacebookIcon />,
     image: "/aboutHero.webp",
     color: "#3b5998",
+    syllabus: "/syllabus/social-media-marketing.pdf",
   },
   {
     title: "Graphic Design",
@@ -39,6 +43,7 @@ const courses = [
     icon: <BrushIcon />,
     image: "/aboutHero.webp",
     color: "#eab308",
+    syllabus: "/syllabus/graphic-design.pdf",
   },
   {
     title: "Video Editing",
@@ -46,6 +51,7 @@ const courses = [
     icon: <VideoLibraryIcon />,
     image: "/aboutHero.webp",
     color: "#8b5cf6",
+    syllabus: "/syllabus/video-editing.pdf",
   },
   {
     title: "Google Ads",
@@ -53,6 +59,7 @@ const courses = [
     icon: <GoogleIcon />,
     image: "/aboutHero.webp",
     color: "#34d399",
+    syllabus: "/syllabus/google-ads.pdf",
   },
   {
     title: "Meta Ads",
@@ -60,13 +67,15 @@ const courses = [
     icon: <AdsClickIcon />,
     image: "/aboutHero.webp",
     color: "#2563eb",
+    syllabus: "/syllabus/meta-ads.pdf",
   },
   {
-    title: "Website Designing",
+    title: "Content Marketing",
     price: "₹4,999",
     icon: <LanguageIcon />,
     image: "/aboutHero.webp",
     color: "#ec4899",
+    syllabus: "/syllabus/website-designing.pdf",
   },
   {
     title: "Python Programming",
@@ -74,6 +83,55 @@ const courses = [
     icon: <CodeIcon />,
     image: "/aboutHero.webp",
     color: "#f59e0b",
+    syllabus: "/syllabus/python.pdf",
+  },
+  {
+    title: "Advanced JavaScript",
+    price: "₹3,999",
+    icon: <CodeIcon />,
+    image: "/aboutHero.webp",
+    color: "#10b981",
+    syllabus: "/syllabus/advanced-js.pdf",
+  },
+  {
+    title: "Frontend Dev (ReactJS, NextJS)",
+    price: "₹5,999",
+    icon: <CodeIcon />,
+    image: "/aboutHero.webp",
+    color: "#6366f1",
+    syllabus: "/syllabus/frontend-dev.pdf",
+  },
+  {
+    title: "Backend Dev (NodeJS)",
+    price: "₹5,499",
+    icon: <CodeIcon />,
+    image: "/aboutHero.webp",
+    color: "#16a34a",
+    syllabus: "/syllabus/backend-dev.pdf",
+  },
+  {
+    title: "Full Stack Dev (MERN)",
+    price: "₹8,999",
+    icon: <CodeIcon />,
+    image: "/aboutHero.webp",
+    color: "#7c3aed",
+    syllabus: "/syllabus/fullstack-mern.pdf",
+  },
+  {
+    title: "Website with HTML/CSS/JS",
+    price: "₹3,999",
+    icon: <LanguageIcon />,
+    image: "/aboutHero.webp",
+    color: "#f43f5e",
+    syllabus: "/syllabus/html-css-js.pdf",
+  },
+  {
+    title: "Website using WordPress",
+    price: "₹3,499",
+    icon: <LanguageIcon />,
+    image: "/aboutHero.webp",
+    color: "#0ea5e9",
+    syllabus: "/syllabus/wordpress.pdf",
   },
 ];
 
@@ -106,16 +164,28 @@ const CoursesList = () => {
 
               {/* Card Content */}
               <div className="p-5 flex flex-col justify-between h-full">
-                <div className="flex items-center gap-4 mb-3">
-                  <div
-                    className="text-white p-2 rounded-full"
-                    style={{ backgroundColor: course.color }}
-                  >
-                    {course.icon}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="text-white p-2 rounded-full"
+                      style={{ backgroundColor: course.color }}
+                    >
+                      {course.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      {course.title}
+                    </h3>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    {course.title}
-                  </h3>
+
+                  {/* Download Icon */}
+                  <a
+                    href={course.syllabus}
+                    download
+                    title="Download Syllabus"
+                    className="text-gray-600 hover:text-blue-600 transition"
+                  >
+                    <DownloadIcon />
+                  </a>
                 </div>
 
                 <div className="mt-auto">
