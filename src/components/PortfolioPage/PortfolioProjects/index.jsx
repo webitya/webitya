@@ -9,22 +9,22 @@ const categories = ["All", "Website", "SEO", "Paid Ads", "UI/UX", "Content"];
 
 // Expanded Sample Data
 const sampleProjects = [
-  { title: "Modern Business Website", category: "Website", image: "/aboutHero.webp" },
-  { title: "Advanced SEO Strategy", category: "SEO", image: "/aboutHero.webp" },
-  { title: "Facebook Ads Campaign", category: "Paid Ads", image: "/aboutHero.webp" },
-  { title: "UI Redesign for App", category: "UI/UX", image: "/aboutHero.webp" },
-  { title: "eCommerce Website", category: "Website", image: "/aboutHero.webp" },
-  { title: "Google Ads Setup", category: "Paid Ads", image: "/aboutHero.webp" },
-  { title: "Brand Style Guide", category: "UI/UX", image: "/aboutHero.webp" },
-  { title: "SEO for Blog", category: "SEO", image: "/aboutHero.webp" },
-  { title: "Content Strategy Plan", category: "Content", image: "/aboutHero.webp" },
-  { title: "Corporate Website", category: "Website", image: "/aboutHero.webp" },
-  { title: "Instagram Ad Design", category: "Paid Ads", image: "/aboutHero.webp" },
-  { title: "SEO Audit Report", category: "SEO", image: "/aboutHero.webp" },
-  { title: "SaaS UI Kit", category: "UI/UX", image: "/aboutHero.webp" },
-  { title: "Landing Page Design", category: "Website", image: "/aboutHero.webp" },
-  { title: "Content Calendar", category: "Content", image: "/aboutHero.webp" },
-  { title: "B2B Ads Funnel", category: "Paid Ads", image: "/aboutHero.webp" },
+  { title: "Modern Business Website", category: "Website", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "Advanced SEO Strategy", category: "SEO", image: "/portfolio/portfolioImages/advance-seo.webp" },
+  { title: "Facebook Ads Campaign", category: "Paid Ads", image: "/portfolio/portfolioImages/facebook-ads.webp" },
+  { title: "UI Redesign for App", category: "UI/UX", image: "/portfolio/portfolioImages/ui-mobile-apps.webp" },
+  { title: "eCommerce Website", category: "Website", image: "/portfolio/portfolioImages/e-commerce-website.webp" },
+  { title: "Google Ads Setup", category: "Paid Ads", image: "/portfolio/portfolioImages/google-ads.webp" },
+  { title: "Brand Style Guide", category: "UI/UX", image: "/portfolio/portfolioImages/seo-blogs.webp" },
+  { title: "SEO for Blog", category: "SEO", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "Content Strategy Plan", category: "Content", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "Corporate Website", category: "Website", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "Instagram Ad Design", category: "Paid Ads", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "SEO Audit Report", category: "SEO", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "SaaS UI Kit", category: "UI/UX", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "Landing Page Design", category: "Website", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "Content Calendar", category: "Content", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "B2B Ads Funnel", category: "Paid Ads", image: "/portfolio/portfolioImages/modern-website.webp" },
 ];
 
 const PortfolioProjects = () => {
