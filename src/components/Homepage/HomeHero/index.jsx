@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import Link from 'next/link';
+import Link from "next/link";
 import "./HomeHero.css";
 import {
   TextField,
@@ -16,8 +16,8 @@ import {
   DialogActions,
   Slide,
 } from "@mui/material";
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
 const logos = [
   { src: "/logos/logo1.svg", alt: "Logo 1" },
@@ -63,109 +63,108 @@ const HomeHero = () => {
   return (
     <>
       {/* Animated Background */}
-      <div className="relative min-h-screen overflow-hidden bg-gradient-to-r from-white via-neutral-100 to-white
- text-black">
+      <div
+        className="relative min-h-screen overflow-hidden bg-gradient-to-r from-white via-neutral-100 to-white
+ text-black"
+      >
         <div className="bubble-wrapper pointer-events-none">
-  {/* Bubbles */}
-  {[...Array(20)].map((_, i) => (
-    <div
-      key={`bubble-${i}`}
-      className="bubble"
-      style={{
-        left: `${Math.random() * 100}%`,
-        animationDuration: `${5 + Math.random() * 5}s`,
-        animationDelay: `${Math.random() * 5}s`,
-        bottom: `-${Math.random() * 100}px`,
-      }}
-    />
-  ))}
+          {/* Bubbles */}
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={`bubble-${i}`}
+              className="bubble"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${5 + Math.random() * 5}s`,
+                animationDelay: `${Math.random() * 5}s`,
+                bottom: `-${Math.random() * 100}px`,
+              }}
+            />
+          ))}
 
-  {/* Squares */}
-  {[...Array(25)].map((_, i) => (
-    <div
-      key={`square-${i}`}
-      className="square"
-      style={{
-        left: `${Math.random() * 100}%`,
-        animationDuration: `${6 + Math.random() * 6}s`,
-        animationDelay: `${Math.random() * 5}s`,
-        bottom: `-${Math.random() * 100}px`,
-      }}
-    />
-  ))}
+          {/* Squares */}
+          {[...Array(25)].map((_, i) => (
+            <div
+              key={`square-${i}`}
+              className="square"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${6 + Math.random() * 6}s`,
+                animationDelay: `${Math.random() * 5}s`,
+                bottom: `-${Math.random() * 100}px`,
+              }}
+            />
+          ))}
 
-  {/* Triangles */}
-  {[...Array(15)].map((_, i) => (
-    <div
-      key={`triangle-${i}`}
-      className="triangle"
-      style={{
-        left: `${Math.random() * 100}%`,
-        animationDuration: `${5 + Math.random() * 4}s`,
-        animationDelay: `${Math.random() * 4}s`,
-        bottom: `-${Math.random() * 100}px`,
-        transform: `rotate(${Math.random() * 360}deg)`,
-      }}
-    />
-  ))}
-  {/* Hexagons */}
-{[...Array(30)].map((_, i) => (
-  <div
-    key={`hexagon-${i}`}
-    className="hexagon"
-    style={{
-      left: `${Math.random() * 100}%`,
-      animationDuration: `${6 + Math.random() * 5}s`,
-      animationDelay: `${Math.random() * 4}s`,
-      bottom: `-${Math.random() * 100}px`,
-      transform: `rotate(${Math.random() * 360}deg)`,
-    }}
-  />
-))}
-{/* Stars */}
-{[...Array(20)].map((_, i) => (
-  <div
-    key={`star-${i}`}
-    className="star"
-    style={{
-      left: `${Math.random() * 100}%`,
-      animationDuration: `${5 + Math.random() * 4}s`,
-      animationDelay: `${Math.random() * 5}s`,
-      bottom: `-${Math.random() * 100}px`,
-      transform: `rotate(${Math.random() * 360}deg)`,
-    }}
-  />
-))}
+          {/* Triangles */}
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={`triangle-${i}`}
+              className="triangle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${5 + Math.random() * 4}s`,
+                animationDelay: `${Math.random() * 4}s`,
+                bottom: `-${Math.random() * 100}px`,
+                transform: `rotate(${Math.random() * 360}deg)`,
+              }}
+            />
+          ))}
+          {/* Hexagons */}
+          {[...Array(30)].map((_, i) => (
+            <div
+              key={`hexagon-${i}`}
+              className="hexagon"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${6 + Math.random() * 5}s`,
+                animationDelay: `${Math.random() * 4}s`,
+                bottom: `-${Math.random() * 100}px`,
+                transform: `rotate(${Math.random() * 360}deg)`,
+              }}
+            />
+          ))}
+          {/* Stars */}
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={`star-${i}`}
+              className="star"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${5 + Math.random() * 4}s`,
+                animationDelay: `${Math.random() * 5}s`,
+                bottom: `-${Math.random() * 100}px`,
+                transform: `rotate(${Math.random() * 360}deg)`,
+              }}
+            />
+          ))}
 
-{/* Diamonds */}
-{[...Array(22)].map((_, i) => (
-  <div
-    key={`diamond-${i}`}
-    className="diamond"
-    style={{
-      left: `${Math.random() * 100}%`,
-      animationDuration: `${6 + Math.random() * 5}s`,
-      animationDelay: `${Math.random() * 5}s`,
-      bottom: `-${Math.random() * 100}px`,
-      transform: `rotate(${Math.random() * 45}deg)`,
-    }}
-  />
-))}
-
-</div>
-
+          {/* Diamonds */}
+          {[...Array(22)].map((_, i) => (
+            <div
+              key={`diamond-${i}`}
+              className="diamond"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${6 + Math.random() * 5}s`,
+                animationDelay: `${Math.random() * 5}s`,
+                bottom: `-${Math.random() * 100}px`,
+                transform: `rotate(${Math.random() * 45}deg)`,
+              }}
+            />
+          ))}
+        </div>
 
         {/* Content */}
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-4 md:px-10 py-10 min-h-screen">
           {/* Left: Text */}
           <div className="md:w-2/3 text-center md:text-left space-y-4">
-          <Box display="flex" alignItems="center" gap={1}>
- 
-  <Typography variant="h3" fontWeight="bold" gutterBottom>
-    Webitya Web Services  <RocketLaunchIcon color="primary" fontSize="large" />
-  </Typography>
-</Box>
-
+            <Box display="flex" alignItems="center" gap={1}>
+              <Typography variant="h3" fontWeight="bold" gutterBottom>
+                Webitya Web Services{" "}
+                <RocketLaunchIcon color="primary" fontSize="large" />
+              </Typography>
+            </Box>
 
             <Typography
               variant="subtitle2"
@@ -221,44 +220,42 @@ const HomeHero = () => {
 
             {/* CTA */}
             <Box mt={3}>
-      {/* Let’s Talk button linking to /contact */}
-      <Link href="https://wa.me/919693245941?text=Hello%20Webitya" passHref>
-        <Button
-          component="a"
-          variant="contained"
-          size="large"
-          sx={{
-            mr: 2,
-            backgroundColor: "#000",
-            "&:hover": { backgroundColor: "#222" },
-          }}
-        >
-          Let’s Talk
-        </Button>
-      </Link>
+              {/* Let’s Talk button linking to /contact */}
+              <Link
+                href="https://wa.me/919693245941?text=Hello%20Webitya"
+                passHref
+              >
+                <Button
+                  component="a"
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    mr: 2,
+                    backgroundColor: "#000",
+                    "&:hover": { backgroundColor: "#222" },
+                  }}
+                >
+                  Let’s Talk
+                </Button>
+              </Link>
 
-      {/* Explore Services button linking to /services */}
-      <Link href="/services" passHref>
-        <Button
-          component="a"
-          variant="outlined"
-          size="large"
-        >
-          Explore Services
-        </Button>
-      </Link>
-    </Box>
+              {/* Explore Services button linking to /services */}
+              <Link href="/services" passHref>
+                <Button component="a" variant="outlined" size="large">
+                  Explore Services
+                </Button>
+              </Link>
+            </Box>
           </div>
 
           {/* Right: Form */}
           <div className="w-full md:w-1/3 mt-10 md:mt-0">
             <Paper elevation={4} sx={{ p: 3, borderRadius: 3 }}>
-            <Box display="flex" alignItems="center" gap={1} mb={0}>
-  
-  <Typography variant="h6" fontWeight="bold" gutterBottom>
-    Drop Your Query <MailOutlineIcon color="primary" />
-  </Typography>
-</Box>
+              <Box display="flex" alignItems="center" gap={1} mb={0}>
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  Drop Your Query <MailOutlineIcon color="primary" />
+                </Typography>
+              </Box>
               <form onSubmit={handleSubmit}>
                 <TextField
                   name="name"
@@ -313,35 +310,33 @@ const HomeHero = () => {
 
       {/* Modal */}
       <Dialog
-  open={openModal}
-  TransitionComponent={Slide}
-  TransitionProps={{ direction: "up" }}
-  onClose={() => setOpenModal(false)}
-  PaperProps={{
-    className: "rounded-2xl shadow-xl p-6 min-w-[300px] bg-gray-100",
-  }}
->
-  <DialogTitle className="text-xl font-bold text-center text-gray-800">
-    Thank You!
-  </DialogTitle>
-  <DialogContent>
-    <Typography className="text-center text-base text-gray-600 mb-2">
-      Your message has been sent. We'll reach out shortly.
-    </Typography>
-  </DialogContent>
-  <DialogActions className="flex justify-center">
-    <Button
-      onClick={() => setOpenModal(false)}
-      autoFocus
-      variant="contained"
-      className="rounded-md px-6 bg-blue-600 text-white hover:bg-blue-800 transition-colors"
-    >
-      Close
-    </Button>
-  </DialogActions>
-</Dialog>
-
-
+        open={openModal}
+        TransitionComponent={Slide}
+        TransitionProps={{ direction: "up" }}
+        onClose={() => setOpenModal(false)}
+        PaperProps={{
+          className: "rounded-2xl shadow-xl p-6 min-w-[300px] bg-gray-100",
+        }}
+      >
+        <DialogTitle className="text-xl font-bold text-center text-gray-800">
+          Thank You!
+        </DialogTitle>
+        <DialogContent>
+          <Typography className="text-center text-base text-gray-600 mb-2">
+            Your message has been sent. We'll reach out shortly.
+          </Typography>
+        </DialogContent>
+        <DialogActions className="flex justify-center">
+          <Button
+            onClick={() => setOpenModal(false)}
+            autoFocus
+            variant="contained"
+            className="rounded-md px-6 bg-blue-600 text-white hover:bg-blue-800 transition-colors"
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
