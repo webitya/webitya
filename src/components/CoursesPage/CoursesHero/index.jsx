@@ -11,7 +11,7 @@ const slides = [
     desktopPreview: "/courses/1.webp",
   },
   {
-    mobilePreview: "/courses/6m.png",
+    mobilePreview: "/courses/7m.png",
     desktopPreview: "/courses/2.webp",
   },
   {
