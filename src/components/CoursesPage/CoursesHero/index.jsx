@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
 const slides = [
   {
-    mobilePreview: "/aboutHero.webp",
+    mobilePreview: "/courses/5m.png",
     desktopPreview: "/courses/1.webp",
   },
   {
