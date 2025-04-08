@@ -30,7 +30,7 @@ const PortfolioHeroSection = () => {
     if (!isHovered) {
       intervalRef.current = setInterval(() => {
         setIndex((prev) => (prev + 1) % slides.length);
-      }, 7000);
+      }, 5000);
     }
     return () => clearInterval(intervalRef.current);
   }, [isHovered]);
@@ -49,7 +49,7 @@ const PortfolioHeroSection = () => {
     <section
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full md:h-[55vh] h-[220px] flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out"
+      className="relative w-full md:h-[55vh] h-[220px] flex items-center justify-center overflow-hidden transition-all duration-100 ease-in-out"
     >
       {/* Arrow Buttons */}
       <IconButton
