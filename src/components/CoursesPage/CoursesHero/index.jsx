@@ -8,15 +8,19 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 const slides = [
   {
     mobilePreview: "/aboutHero.webp",
-    desktopPreview: "/portfolio/bannerImage/1.png",
+    desktopPreview: "/courses/1.webp",
   },
   {
     mobilePreview: "/aboutHero.webp",
-    desktopPreview: "/portfolio/bannerImage/2.png",
+    desktopPreview: "/courses/2.webp",
   },
   {
     mobilePreview: "/aboutHero.webp",
-    desktopPreview: "/portfolio/bannerImage/3.png",
+    desktopPreview: "/courses/3.webp",
+  },
+  {
+    mobilePreview: "/aboutHero.webp",
+    desktopPreview: "/courses/4.webp",
   },
 ];
 
@@ -29,7 +33,7 @@ const CoursesCarousel = () => {
     if (!isHovered) {
       intervalRef.current = setInterval(() => {
         setIndex((prev) => (prev + 1) % slides.length);
-      }, 6000);
+      }, 5000);
     }
     return () => clearInterval(intervalRef.current);
   }, [isHovered]);
@@ -48,7 +52,7 @@ const CoursesCarousel = () => {
       {/* Arrows */}
       <IconButton
         onClick={goToPrevious}
-        className="!absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md"
+        className="!absolute left-4 top-1/2 !text-white  -translate-y-1/2 z-10 !bg-white/50 hover:bg-white shadow-md"
         size="large"
       >
         <ChevronLeft fontSize="medium" />
@@ -56,7 +60,7 @@ const CoursesCarousel = () => {
 
       <IconButton
         onClick={goToNext}
-        className="!absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md"
+        className="!absolute right-4 top-1/2 !text-white -translate-y-1/2 z-10 !bg-white/50 hover:bg-white shadow-md"
         size="large"
       >
         <ChevronRight fontSize="medium" />
@@ -93,14 +97,14 @@ const CoursesCarousel = () => {
               src={slide.desktopPreview}
               alt={`Preview ${i}`}
               className={`w-12 h-8 object-cover rounded-md transition-all duration-300 border-2 ${
-                i === index ? "border-blue-600 scale-105" : "border-transparent opacity-60 hover:opacity-100"
+                i === index ? "border-white scale-105" : "border-transparent opacity-60 hover:opacity-100"
               } hidden md:block`}
             />
             <img
               src={slide.mobilePreview}
               alt={`Preview ${i}`}
               className={`w-10 h-6 object-cover rounded-md transition-all duration-300 border-2 ${
-                i === index ? "border-blue-600 scale-105" : "border-transparent opacity-60 hover:opacity-100"
+                i === index ? "border-white scale-105" : "border-transparent opacity-60 hover:opacity-100"
               } md:hidden`}
             />
           </button>
