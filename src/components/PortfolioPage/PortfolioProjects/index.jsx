@@ -20,11 +20,11 @@ const sampleProjects = [
   { title: "Content Strategy Plan", category: "Content", image: "/portfolio/portfolioImages/content-strategy.webp" },
   { title: "Corporate Website", category: "Website", image: "/portfolio/portfolioImages/corporate-website.webp" },
   { title: "Instagram Ad Design", category: "Paid Ads", image: "/portfolio/portfolioImages/instagram-ads.webp" },
-  { title: "SEO Audit Report", category: "SEO", image: "/portfolio/portfolioImages/modern-website.webp" },
-  { title: "SaaS UI Kit", category: "UI/UX", image: "/portfolio/portfolioImages/modern-website.webp" },
-  { title: "Landing Page Design", category: "Website", image: "/portfolio/portfolioImages/modern-website.webp" },
-  { title: "Content Calendar", category: "Content", image: "/portfolio/portfolioImages/modern-website.webp" },
-  { title: "B2B Ads Funnel", category: "Paid Ads", image: "/portfolio/portfolioImages/modern-website.webp" },
+  { title: "SEO Audit Report", category: "SEO", image: "/portfolio/portfolioImages/seo-audits.webp" },
+  { title: "SaaS UI Kit", category: "UI/UX", image: "/portfolio/portfolioImages/saas-ui-kit.webp" },
+  { title: "Landing Page Design", category: "Website", image: "/portfolio/portfolioImages/landing-page-design.webp" },
+  { title: "Content Calendar", category: "Content", image: "/portfolio/portfolioImages/content-calender.webp" },
+  { title: "B2B Ads Funnel", category: "Paid Ads", image: "/portfolio/portfolioImages/b2b-ads-funnel.webp" },
 ];
 
 const PortfolioProjects = () => {
