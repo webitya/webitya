@@ -85,13 +85,13 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 260, damping: 25 }}
-            className="fixed top-0 right-0 w-3/5 sm:w-2/3 md:w-1/3 h-full bg-white shadow-2xl z-[9999]  flex flex-col"
+            className="fixed top-0 right-0 w-2/3 sm:w-2/3 md:w-1/3 h-full bg-white shadow-2xl z-[9999]  flex flex-col"
           >
             {/* Header */}
             <div className="flex justify-end items-center px-4 py-4 border-b border-gray-200">
               {/* <h2 className="text-lg font-semibold text-gray-800">Menu</h2> */}
               <button
-                className="text-gray-600 hover:text-gray-800 transition"
+                className="text-gray-800 hover:text-gray-900 transition"
                 onClick={toggleMenu}
               >
                 <X size={32} />
