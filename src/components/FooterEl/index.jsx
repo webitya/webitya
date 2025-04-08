@@ -48,12 +48,12 @@ const footerData = [
   {
     title: 'Courses',
     links: [
-      { name: 'SEO', href: '#' },
-      { name: 'Social Media Marketing', href: '#' },
-      { name: 'PPC Advertising', href: '#' },
-      { name: 'Email Marketing', href: '#' },
-      { name: 'Content Marketing', href: '#' },
-      { name: 'Web Design', href: '#' },
+      { name: 'SEO', href: '/courses' },
+      { name: 'Social Media Marketing', href: '/courses' },
+      { name: 'PPC Advertising', href: '/courses' },
+      { name: 'Email Marketing', href: '/courses' },
+      { name: 'Content Marketing', href: '/courses' },
+      { name: 'Web Design', href: '/courses' },
     ],
   },
   {
