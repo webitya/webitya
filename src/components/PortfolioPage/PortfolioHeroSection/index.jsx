@@ -9,15 +9,15 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 const slides = [
   {
     mobilePreview: "/aboutHero.webp",
-    desktopPreview: "/portfolio/bannerImage/1.png",
+    desktopPreview: "/portfolio/bannerImage/1.webp",
   },
   {
     mobilePreview: "/aboutHero.webp",
-    desktopPreview: "/portfolio/bannerImage/2.png",
+    desktopPreview: "/portfolio/bannerImage/2.webp",
   },
   {
     mobilePreview: "/aboutHero.webp",
-    desktopPreview: "/portfolio/bannerImage/3.png",
+    desktopPreview: "/portfolio/bannerImage/3.webp",
   },
 ];
 
@@ -54,7 +54,7 @@ const PortfolioHeroSection = () => {
       {/* Arrow Buttons */}
       <IconButton
         onClick={goToPrevious}
-        className="!absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md transition-all"
+        className="!absolute left-4 top-1/2 !text-white -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md transition-all"
         size="large"
       >
         <ArrowBackIosNewIcon fontSize="small" />
@@ -62,7 +62,7 @@ const PortfolioHeroSection = () => {
 
       <IconButton
         onClick={goToNext}
-        className="!absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md transition-all"
+        className="!absolute right-4 top-1/2 !text-white -translate-y-1/2 z-10 bg-white/80 hover:bg-white shadow-md transition-all"
         size="large"
       >
         <ArrowForwardIosIcon fontSize="small" />
@@ -106,7 +106,7 @@ const PortfolioHeroSection = () => {
               src={slide.mobilePreview}
               alt={`Mobile Preview ${i + 1}`}
               className={`w-12 h-8 object-cover rounded-md md:hidden transition-transform duration-300 hover:scale-105 ${
-                i === index ? "ring-2 ring-blue-500" : "opacity-60"
+                i === index ? "ring-2 ring-white" : "opacity-60"
               }`}
             />
             {/* Desktop Preview */}
@@ -114,7 +114,7 @@ const PortfolioHeroSection = () => {
               src={slide.desktopPreview}
               alt={`Desktop Preview ${i + 1}`}
               className={`w-12 h-8 object-cover rounded-md hidden md:block transition-transform duration-300 hover:scale-105 ${
-                i === index ? "ring-2 ring-blue-500" : "opacity-60"
+                i === index ? "ring-2 ring-white" : "opacity-60"
               }`}
             />
           </div>
