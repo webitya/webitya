@@ -11,6 +11,8 @@ import AdsClickIcon from "@mui/icons-material/AdsClick";
 import LanguageIcon from "@mui/icons-material/Language";
 import CodeIcon from "@mui/icons-material/Code";
 import DownloadIcon from "@mui/icons-material/Download";
+import Link from "next/link";
+import Image from "next/image";
 
 const courses = [
   {
@@ -65,7 +67,7 @@ const courses = [
     title: "Meta Ads",
     price: "₹3,999",
     icon: <AdsClickIcon />,
-    image: "/courses/Courses-Images/1.svg",
+    image: "/courses/Courses-Images/meta-ads.webp",
     color: "#2563eb",
     syllabus: "/syllabus/meta-ads.pdf",
   },
@@ -189,8 +191,19 @@ const CoursesList = () => {
                 </div>
 
                 <div className="mt-auto">
-                  <p className="text-xl font-bold text-gray-700 mb-4">
-                    {course.price}
+                  <p className="text-xl font-bold text-gray-700 mb-4 flex justify-between items-center">
+                    {course.price}   <span>           <div className="flex items-center gap-2 text-xs text-slate-500">
+  <span>Powered by</span>
+  <Link href="/">
+    <Image
+      src="/brand/logo1.png"
+      alt="Webitya Logo"
+      width={70}
+      height={20}
+      className="object-contain cursor-pointer"
+    />
+  </Link>
+</div></span>
                   </p>
                   <a
                     href="https://wa.me/919693245941?text=Hi%20I'm%20interested%20in%20your%20courses!"
