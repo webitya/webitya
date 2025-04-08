@@ -313,21 +313,35 @@ const HomeHero = () => {
 
       {/* Modal */}
       <Dialog
-        open={openModal}
-        TransitionComponent={Slide}
-        TransitionProps={{ direction: "up" }}
-        onClose={() => setOpenModal(false)}
-      >
-        <DialogTitle>🎉 Thank You!</DialogTitle>
-        <DialogContent>
-          <Typography>Your message has been sent. We'll reach out shortly.</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenModal(false)} autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+  open={openModal}
+  TransitionComponent={Slide}
+  TransitionProps={{ direction: "up" }}
+  onClose={() => setOpenModal(false)}
+  PaperProps={{
+    className: "rounded-2xl shadow-xl p-6 min-w-[300px] bg-gray-100",
+  }}
+>
+  <DialogTitle className="text-xl font-bold text-center text-gray-800">
+    Thank You!
+  </DialogTitle>
+  <DialogContent>
+    <Typography className="text-center text-base text-gray-600 mb-2">
+      Your message has been sent. We'll reach out shortly.
+    </Typography>
+  </DialogContent>
+  <DialogActions className="flex justify-center">
+    <Button
+      onClick={() => setOpenModal(false)}
+      autoFocus
+      variant="contained"
+      className="rounded-md px-6 bg-blue-600 text-white hover:bg-blue-800 transition-colors"
+    >
+      Close
+    </Button>
+  </DialogActions>
+</Dialog>
+
+
     </>
   );
 };
