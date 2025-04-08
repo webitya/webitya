@@ -13,6 +13,7 @@ import {
   PhoneIphone,
 } from "@mui/icons-material";
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   {
@@ -93,10 +94,22 @@ const ServicesListSection = () => {
               <Typography className="service-description">
                 {service.description}
               </Typography>
-              <div className="cta-box">
+              <div className="cta-box flex justify-between !mt-3 items-center">
                 <Link href="/contact-us" className="service-cta">
                   Contact Us →
                 </Link>
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                        <span></span>
+                        <Link href="/">
+                          <Image
+                            src="/brand/logo1.png"
+                            alt="Webitya Logo"
+                            width={70}
+                            height={20}
+                            className="object-contain cursor-pointer"
+                          />
+                        </Link>
+                      </div>
               </div>
             </Paper>
           </Grid>
