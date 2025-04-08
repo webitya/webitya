@@ -1,3 +1,4 @@
+import CourseCTA from "@/components/CoursesPage/CoursesCTA"
 import CourseFAQ from "@/components/CoursesPage/CoursesFAQS"
 import CourseFeatures from "@/components/CoursesPage/CoursesFeatures"
 import CoursesHeroCarousel from "@/components/CoursesPage/CoursesHero"
@@ -14,6 +15,7 @@ const Courses=()=>{
           <CourseFeatures/>
           <CourseTestimonials/>
           <CourseFAQ/>
+          <CourseCTA/>
           <Footer/>
         </>
     )
