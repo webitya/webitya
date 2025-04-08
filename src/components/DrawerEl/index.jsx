@@ -1,144 +1,176 @@
 "use client";
 
 import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { X, BookOpen, Users, Calendar } from "lucide-react";
 import {
   Box,
   List,
   ListItem,
   ListItemText,
   Divider,
+  ListItemIcon,
 } from "@mui/material";
+
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Contact", path: "/contact-us" },
+];
+
+const highlightLinks = [
+  {
+    name: "Courses",
+    path: "/courses",
+    icon: <BookOpen size={18} />,
+    bg: "#e3f2fd",
+    hover: "#bbdefb",
+    iconColor: "#1976d2",
+  },
+  {
+    name: "Influencers",
+    path: "/influencers",
+    icon: <Users size={18} />,
+    bg: "#ede7f6",
+    hover: "#d1c4e9",
+    iconColor: "#6a1b9a",
+  },
+  {
+    name: "Book Appointment",
+    path: "/appointment",
+    icon: <Calendar size={18} />,
+    bg: "#e8f5e9",
+    hover: "#c8e6c9",
+    iconColor: "#2e7d32",
+  },
+];
 
 const DrawerEl = ({ isOpen, toggleMenu }) => {
   useEffect(() => {
     if (isOpen) {
-      const handleScroll = () => {
-        toggleMenu();
-      };
-      window.addEventListener("scroll", handleScroll, { passive: true });
+      document.body.style.overflow = "hidden";
       return () => {
-        window.removeEventListener("scroll", handleScroll);
+        document.body.style.overflow = "auto";
       };
     }
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      const handleScroll = () => toggleMenu();
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [isOpen]);
 
   return (
-    <motion.div
-      initial={{ x: "100%" }}
-      animate={{ x: 0 }}
-      exit={{ x: "100%" }}
-      transition={{ type: "spring", stiffness: 260, damping: 25 }}
-      className="fixed top-0 right-0 w-2/3 md:w-1/3 h-full bg-white shadow-xl z-[9999] p-0 flex flex-col"
-    >
-      {/* Close Button */}
-      <div className="flex justify-end p-4">
-        <button
-          className="text-black hover:text-gray-500 transition duration-200"
-          onClick={toggleMenu}
-        >
-          <X size={32} />
-        </button>
-      </div>
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Background overlay */}
+          <motion.div
+            className="fixed inset-0 bg-black/40 z-[9998]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={toggleMenu}
+          />
 
-      {/* Drawer Content with MUI List */}
-      <Box sx={{ px: 2 }}>
-        <List>
-          {[
-            { name: "Home", path: "/" },
-            { name: "About", path: "/about" },
-            { name: "Services", path: "/services" },
-            { name: "Portfolio", path: "/portfolio" },
-            { name: "Influencers", path: "/influencers" },
-            { name: "Contact", path: "/contact-us" },
-          ].map((link) => (
-            <Link key={link.name} href={link.path} passHref>
-              <ListItem
-                button
-                component="a"
+          {/* Drawer */}
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 260, damping: 25 }}
+            className="fixed top-0 right-0 w-4/5 sm:w-2/3 md:w-1/3 h-full bg-white shadow-2xl z-[9999]  flex flex-col"
+          >
+            {/* Header */}
+            <div className="flex justify-end items-center px-4 py-4 border-b border-gray-200">
+              {/* <h2 className="text-lg font-semibold text-gray-800">Menu</h2> */}
+              <button
+                className="text-gray-600 hover:text-gray-800 transition"
                 onClick={toggleMenu}
               >
-                <ListItemText primary={link.name} />
-              </ListItem>
-            </Link>
-          ))}
-             <Divider sx={{ my: 1 }} />
+                <X size={28} />
+              </button>
+            </div>
 
-<Link href="/courses" passHref>
-  <ListItem
-    button
-    component="a"
-    onClick={toggleMenu}
-    sx={{
-      bgcolor: "#f5f5f5",
-      borderRadius: 1,
-      mt: 1,
-      "&:hover": { bgcolor: "#e0e0e0" },
-    }}
-  >
-    <ListItemText
-      primary="Courses"
-      primaryTypographyProps={{
-        fontWeight: "bold",
-        textAlign: "center",
-      }}
-    />
-  </ListItem>
-</Link>
+            {/* Drawer Content */}
+            <Box sx={{ px: 2, py: 2, overflowY: "auto", flex: 1 }}>
+              {/* Navigation Links */}
+              <List>
+                {navLinks.map((link) => (
+                  <Link key={link.name} href={link.path} passHref>
+                    <ListItem
+                      button
+                      component="a"
+                      onClick={toggleMenu}
+                      sx={{
+                        borderRadius: 1,
+                        mb: 0.5,
+                        "&:hover": {
+                          backgroundColor: "#f5f5f5",
+                        },
+                      }}
+                    >
+                      <ListItemText
+                        primary={link.name}
+                        primaryTypographyProps={{
+                          fontSize: "1rem",
+                          fontWeight: 500,
+                          color: "#333",
+                        }}
+                      />
+                    </ListItem>
+                  </Link>
+                ))}
+              </List>
 
-          <Divider sx={{ my: 1 }} />
+              <Divider sx={{ my: 2 }} />
 
-          <Link href="/appointment" passHref>
-            <ListItem
-              button
-              component="a"
-              onClick={toggleMenu}
-              sx={{
-                bgcolor: "#f5f5f5",
-                borderRadius: 1,
-                mt: 1,
-                "&:hover": { bgcolor: "#e0e0e0" },
-              }}
-            >
-              <ListItemText
-                primary="Book Appointment"
-                primaryTypographyProps={{
-                  fontWeight: "bold",
-                  textAlign: "center",
-                }}
-              />
-            </ListItem>
-          </Link>
-          <Divider sx={{ my: 1 }} />
-
-{/* <Link href="tel:-9693245941" passHref>
-  <ListItem
-    button
-    component="a"
-    onClick={toggleMenu}
-    sx={{
-      bgcolor: "#f5f5f5",
-      borderRadius: 1,
-      mt: 1,
-      "&:hover": { bgcolor: "#e0e0e0" },
-    }}
-  >
-    <ListItemText
-      primary="+91 9693245941"
-      primaryTypographyProps={{
-        fontWeight: "bold",
-        textAlign: "center",
-      }}
-    />
-  </ListItem>
-</Link> */}
-        </List>
-      </Box>
-    </motion.div>
+              {/* Highlighted Section */}
+              <List>
+                {highlightLinks.map((link) => (
+                  <Link key={link.name} href={link.path} passHref>
+                    <ListItem
+                      button
+                      component="a"
+                      onClick={toggleMenu}
+                      sx={{
+                        backgroundColor: link.bg,
+                        borderRadius: "8px",
+                        mb: 1.2,
+                        transition: "all 0.2s ease-in-out",
+                        "&:hover": {
+                          backgroundColor: link.hover,
+                        },
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{ minWidth: 32, color: link.iconColor, mr: 1 }}
+                      >
+                        {link.icon}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={link.name}
+                        primaryTypographyProps={{
+                          fontWeight: 500,
+                          fontSize: "0.95rem",
+                          color: "#222",
+                        }}
+                      />
+                    </ListItem>
+                  </Link>
+                ))}
+              </List>
+            </Box>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 
