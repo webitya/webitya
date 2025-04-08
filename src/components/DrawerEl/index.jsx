@@ -38,14 +38,14 @@ const highlightLinks = [
     hover: "#d1c4e9",
     iconColor: "#6a1b9a",
   },
-  {
-    name: "Book Appointment",
-    path: "/appointment",
-    icon: <Calendar size={18} />,
-    bg: "#e8f5e9",
-    hover: "#c8e6c9",
-    iconColor: "#2e7d32",
-  },
+  // {
+  //   name: "Book Appointment",
+  //   path: "/appointment",
+  //   icon: <Calendar size={18} />,
+  //   bg: "#e8f5e9",
+  //   hover: "#c8e6c9",
+  //   iconColor: "#2e7d32",
+  // },
 ];
 
 const DrawerEl = ({ isOpen, toggleMenu }) => {
