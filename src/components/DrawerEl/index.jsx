@@ -115,7 +115,7 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
           </Link>
           <Divider sx={{ my: 1 }} />
 
-<Link href="tel:-9693245941" passHref>
+{/* <Link href="tel:-9693245941" passHref>
   <ListItem
     button
     component="a"
@@ -135,7 +135,7 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       }}
     />
   </ListItem>
-</Link>
+</Link> */}
         </List>
       </Box>
     </motion.div>
