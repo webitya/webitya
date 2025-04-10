@@ -12,11 +12,11 @@ const slides = [
     desktopPreview: "/portfolio/bannerImage/1.webp",
   },
   {
-    mobilePreview: "/portfolio/bannerImage/6m.webp",
+    mobilePreview: "/portfolio/bannerImage/7m.webp",
     desktopPreview: "/portfolio/bannerImage/2.webp",
   },
   {
-    mobilePreview: "/portfolio/bannerImage/7m.webp",
+    mobilePreview: "/portfolio/bannerImage/6m.webp",
     desktopPreview: "/portfolio/bannerImage/3.webp",
   },
 ];
