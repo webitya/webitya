@@ -12,6 +12,7 @@ const influencers = [
     image: "/influencers/pravinbrother.png",
     followers: "326K",
     link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Pravin%20Brother",
+    detailUrl: "https://webitya.in/influencers/pravin-brother",
   },
   {
     name: "Anjali Mahto",
@@ -19,64 +20,48 @@ const influencers = [
     image: "/influencers/anjalimahto.png",
     followers: "709K",
     link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Anjali%20Mahto",
+    detailUrl: "https://webitya.in/influencers/anjali-mahto",
   },
   {
-    name: "Amit Creators",
-    category: "FLATTS, HOUSE, ROOM , HOSTEL, PG",
-    image: "/influencers/amitcreators.png",
-    followers: "49.3K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Amit%20Creators",
+    name: "Preeti Raj",
+    category: "Fashion Model",
+    image: "/influencers/preetiraj.png",
+    followers: "502K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Preeti%20Raj",
+    detailUrl: "https://webitya.in/influencers/preeti-raj",
   },
   {
-    name: "Yog Sah",
-    category: "Graphic Designer & Video Editor ",
-    image: "/influencers/yogshah.png",
-    followers: "83.1K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Yog%20Sah",
-  },
-
- 
-  {
-    name: "Rohit Kumar",
-    category: "Creator | Influencer",
-    image: "/influencers/rohitkumarboi.png",
-    followers: "20.7K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Rohit%20Kumar",
+    name: "Rahul Chauhan",
+    category: "Lifestyle | For Ads",
+    image: "/influencers/rahulchauhan.png",
+    followers: "430K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Rahul%20Chauhan",
+    detailUrl: "https://webitya.in/influencers/rahul-chauhan",
   },
   {
-    name: "Arun Kumar",
-    category: "Creator | Influencer",
-    image: "/influencers/arunkumar.png",
-    followers: "56.6K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Arun%20Kumar",
+    name: "Nisha Soni",
+    category: "Beauty | Influencer",
+    image: "/influencers/nishasoni.png",
+    followers: "650K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Nisha%20Soni",
+    detailUrl: "https://webitya.in/influencers/nisha-soni",
   },
   {
-    name: "Kriti",
-    category: "Model | Creator",
-    image: "/influencers/kriti.png",
-    followers: "27K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Kriti%20",
+    name: "Aman Singh",
+    category: "Fitness | Creator",
+    image: "/influencers/amansingh.png",
+    followers: "390K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Aman%20Singh",
+    detailUrl: "https://webitya.in/influencers/aman-singh",
   },
-  {
-    name: "Priya Jha",
-    category: "Creatot | Influencer",
-    image: "/influencers/priyajha.png",
-    followers: "59.3K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Priya%20Jha",
-  },
-  {
-    name: "Sofia Hoda",
-    category: "Actor | Comedian | Artist",
-    image: "/influencers/sofiahoda.png",
-    followers: "174K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sofia%20Hoda",
-  },
-  
- 
 ];
+
+const filterOptions = ["All", "Creator", "Influencer", "Model", "For Ads"];
 
 const InfluencerList = () => {
   const [visibleCount, setVisibleCount] = useState(6);
+  const [search, setSearch] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("All");
 
   const handleScroll = () => {
     const bottom =
@@ -91,29 +76,59 @@ const InfluencerList = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [visibleCount]);
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 3, influencers.length));
-  };
+  const filteredInfluencers = influencers.filter((inf) => {
+    const matchesSearch = inf.name.toLowerCase().includes(search.toLowerCase());
+    const matchesFilter =
+      selectedFilter === "All" ||
+      inf.category.toLowerCase().includes(selectedFilter.toLowerCase());
+    return matchesSearch && matchesFilter;
+  });
 
   return (
-    <section
-      id="collection"
-      className="py-24 px-6 md:px-20 bg-gradient-to-br from-[#fdfbfb] to-[#ebedee] text-center"
-    >
+    <section className="py-24 px-6 md:px-20 bg-gradient-to-br from-[#fdfbfb] to-[#ebedee] text-center">
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4"
+        className="text-4xl md:text-5xl font-extrabold text-slate-800 mb-6"
       >
         Top Influencers
       </motion.h2>
-      <p className="text-slate-600 text-lg mb-12 max-w-2xl mx-auto">
+      <p className="text-slate-600 text-lg mb-8 max-w-2xl mx-auto">
         Discover, connect, and book influencers that match your brand's vibe.
       </p>
 
+      {/* Search */}
+      <div className="max-w-2xl mx-auto mb-6">
+        <input
+          type="text"
+          placeholder="Search influencer by name..."
+          className="w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      {/* Filter Buttons */}
+      <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {filterOptions.map((option) => (
+          <button
+            key={option}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+              selectedFilter === option
+                ? "bg-pink-600 text-white"
+                : "bg-white text-slate-700 border border-gray-300 hover:bg-slate-100"
+            }`}
+            onClick={() => setSelectedFilter(option)}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+
+      {/* Influencer Cards */}
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-        {influencers.slice(0, visibleCount).map((influencer, i) => (
+        {filteredInfluencers.slice(0, visibleCount).map((influencer, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 40 }}
@@ -139,7 +154,8 @@ const InfluencerList = () => {
                 </p>
               </div>
 
-              <div className="mt-4">
+              {/* Action Buttons */}
+              <div className="mt-4 flex flex-wrap gap-3">
                 <a
                   href={influencer.link}
                   target="_blank"
@@ -148,30 +164,42 @@ const InfluencerList = () => {
                 >
                   Book Now
                 </a>
+
+                <a
+                  href={influencer.detailUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 transition duration-300"
+                >
+                  View Details
+                </a>
               </div>
 
-              <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
-  <span>Powered by</span>
-  <Link href="/">
-    <Image
-      src="/brand/logo1.png"
-      alt="Webitya Logo"
-      width={70}
-      height={20}
-      className="object-contain cursor-pointer"
-    />
-  </Link>
-</div>
-
+              {/* Branding */}
+              <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
+                <span>Powered by</span>
+                <Link href="/">
+                  <Image
+                    src="/brand/logo1.png"
+                    alt="Webitya Logo"
+                    width={70}
+                    height={20}
+                    className="object-contain cursor-pointer"
+                  />
+                </Link>
+              </div>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {visibleCount < influencers.length && (
+      {/* Load More */}
+      {visibleCount < filteredInfluencers.length && (
         <div className="mt-10">
           <button
-            onClick={handleLoadMore}
+            onClick={() =>
+              setVisibleCount((prev) => Math.min(prev + 3, influencers.length))
+            }
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-6 py-3 rounded-full shadow-md hover:scale-105 transition-all duration-300"
           >
             Load More
