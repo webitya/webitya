@@ -11,11 +11,11 @@ const slides = [
     desktopPreview: "/courses/1.webp",
   },
   {
-    mobilePreview: "/courses/9m.webp",
+    mobilePreview: "/courses/7m.webp",
     desktopPreview: "/courses/2.webp",
   },
   {
-    mobilePreview: "/courses/7m.webp",
+    mobilePreview: "/courses/8m.webp",
     desktopPreview: "/courses/4.webp",
   },
 ];
