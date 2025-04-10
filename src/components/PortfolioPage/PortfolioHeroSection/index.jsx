@@ -8,15 +8,15 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const slides = [
   {
-    mobilePreview: "/portfolio/bannerImage/6m.png",
+    mobilePreview: "/portfolio/bannerImage/9m.webp",
     desktopPreview: "/portfolio/bannerImage/1.webp",
   },
   {
-    mobilePreview: "/portfolio/bannerImage/7m.png",
+    mobilePreview: "/portfolio/bannerImage/6m.webp",
     desktopPreview: "/portfolio/bannerImage/2.webp",
   },
   {
-    mobilePreview: "/portfolio/bannerImage/6m.png",
+    mobilePreview: "/portfolio/bannerImage/7m.webp",
     desktopPreview: "/portfolio/bannerImage/3.webp",
   },
 ];
