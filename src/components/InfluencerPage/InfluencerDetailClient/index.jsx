@@ -29,7 +29,7 @@ const InfluencerDetailClient = ({ influencer }) => {
         className="min-h-screen bg-gradient-to-br from-white via-[#f9fafb] to-[#f3f4f6]"
       >
         {/* Main Card */}
-        <div className="mx-auto backdrop-blur-lg bg-white/80 border border-gray-200/70 p-4 md:p-10  shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="mx-auto backdrop-blur-lg bg-white/80 border border-gray-200/70 p-4 md:p-10  shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10 py-5 pb-12 items-center">
           {/* Image Section */}
           <div className="relative w-full h-96 overflow-hidden rounded-2xl group shadow-md">
             <Image
@@ -43,14 +43,14 @@ const InfluencerDetailClient = ({ influencer }) => {
 
           {/* Info Section */}
           <div>
-            <h1 className="text-4xl font-bold text-slate-900 mb-3 leading-tight tracking-tight">
+            <h1 className="md:text-4xl text-4xl font-bold text-slate-900 mb-3 leading-tight tracking-tight">
               {influencer.name}
             </h1>
             <span className="inline-block bg-gradient-to-r from-pink-100 to-red-100 text-pink-600 font-semibold px-4 py-1 rounded-full text-sm mb-5">
               {influencer.category}
             </span>
 
-            <div className="space-y-2 text-slate-700 text-base">
+            <div className="space-y-1 text-slate-700 text-base">
               <p>
                 <strong className="text-slate-900">Followers:</strong>{" "}
                 {influencer.followers}
@@ -69,7 +69,7 @@ const InfluencerDetailClient = ({ influencer }) => {
               </p>
             </div>
 
-            <p className="text-slate-600 mt-6 mb-8 leading-relaxed text-[15.5px]">
+            <p className="text-slate-600 mt-3 mb-3 leading-relaxed text-[15.5px]">
               {influencer.description ||
                 "This influencer is perfect for brand deals, content promotion, and more!"}
             </p>
