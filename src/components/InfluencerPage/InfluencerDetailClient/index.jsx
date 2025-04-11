@@ -9,6 +9,7 @@ import {
   Send,
   PhotoLibrary,
   MonetizationOn,
+  Download,
 } from "@mui/icons-material";
 import Footer from "@/components/FooterEl";
 import InfluencerVideosSection from "../InfluencerVideosSection"; // 👈 NEW
@@ -31,7 +32,7 @@ const InfluencerDetailClient = ({ influencer }) => {
         {/* Main Card */}
         <div className="mx-auto backdrop-blur-lg bg-white/80 border border-gray-200/70 p-4 md:p-10  shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10 py-5 pb-12 items-center">
           {/* Image Section */}
-          <div className="relative w-full h-96 overflow-hidden rounded-2xl group shadow-md">
+          <div className="relative w-full md:min-h-96 min-h-80  overflow-hidden rounded-2xl group shadow-md">
             <Image
               src={influencer.image}
               alt={influencer.name}
@@ -46,9 +47,11 @@ const InfluencerDetailClient = ({ influencer }) => {
             <h1 className="md:text-4xl text-4xl font-bold text-slate-900 mb-3 leading-tight tracking-tight">
               {influencer.name}
             </h1>
+
             <span className="inline-block bg-gradient-to-r from-pink-100 to-red-100 text-pink-600 font-semibold px-4 py-1 rounded-full text-sm mb-5">
               {influencer.category}
             </span>
+
             <div className="space-y-1.5 text-sm text-slate-700 leading-relaxed">
               <p>
                 <span className="font-semibold text-slate-900">Followers:</span>{" "}
@@ -77,11 +80,27 @@ const InfluencerDetailClient = ({ influencer }) => {
 
             {/* Price Table */}
             <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden text-sm mb-6">
-              <div className="flex items-center gap-2 bg-gray-100 px-4 py-2 border-b border-gray-200">
-                <MonetizationOn className="text-yellow-500" />
-                <h3 className="font-semibold text-slate-800">
-                  Services & Pricing
-                </h3>
+              <div className="flex items-center justify-between gap-2 bg-gray-100 px-4 py-2 border-b border-gray-200">
+                <span className="flex items-center gap-2 bg-gray-100 border-gray-200">
+                  <MonetizationOn className="text-yellow-500" />
+                  <h3 className="font-semibold text-slate-800">
+                    Services & Pricing
+                  </h3>
+                </span>
+
+                {/* Powered by Webitya - Positioned at bottom right */}
+                <div className=" flex items-center justify-end gap-2 text-xs text-slate-500">
+                  <span>Powered by</span>
+                  <Link href="/">
+                    <Image
+                      src="/brand/logo1.png"
+                      alt="Webitya Logo"
+                      width={70}
+                      height={20}
+                      className="object-contain cursor-pointer"
+                    />
+                  </Link>
+                </div>
               </div>
               <table className="w-full text-left">
                 <tbody>
@@ -101,6 +120,7 @@ const InfluencerDetailClient = ({ influencer }) => {
               </table>
             </div>
 
+            {/* Buttons */}
             <div className="flex flex-wrap gap-4">
               <a
                 href={influencer.link}
@@ -140,6 +160,7 @@ const InfluencerDetailClient = ({ influencer }) => {
                   whileHover={{ scale: 1.05 }}
                   className="relative w-full aspect-square rounded-xl overflow-hidden shadow-sm group"
                 >
+                  {/* Image */}
                   <Image
                     src={img}
                     alt={`Gallery ${index + 1}`}
@@ -147,6 +168,31 @@ const InfluencerDetailClient = ({ influencer }) => {
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition" />
+
+                  {/* Branding + Download icon */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm p-2 flex items-center justify-between text-xs text-slate-600">
+                    <div className="flex items-center gap-2">
+                      <span>Powered by</span>
+                      <Link href="/">
+                        <Image
+                          src="/brand/logo1.png"
+                          alt="Webitya Logo"
+                          width={70}
+                          height={20}
+                          className="object-contain cursor-pointer"
+                        />
+                      </Link>
+                    </div>
+                    <a
+                      href={img}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-600 hover:text-pink-500 transition"
+                    >
+                      <Download fontSize="small" />
+                    </a>
+                  </div>
                 </motion.div>
               ))}
             </div>

@@ -16,12 +16,12 @@ const influencers = [
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Anjali%20Mahto",
     },
     {
-      slug: "preeti-raj",
-      name: "Preeti Raj",
-      category: "Fashion Model",
-      image: "/influencers/preetiraj.png",
-      followers: "502K",
-      link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Preeti%20Raj",
+      slug: "sau-mya",
+      name: "Sau Mya",
+      category: "Fashion Model Creator",
+      image: "/influencers/sau-mya/img4.jpg",
+      followers: "7.2K",
+      link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sau%20Mya",
     },
     {
       slug: "rahul-chauhan",

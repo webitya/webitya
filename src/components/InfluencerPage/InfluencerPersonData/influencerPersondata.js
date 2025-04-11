@@ -40,24 +40,24 @@ const influencers = [
     gallery: ["/gallery/anjali1.jpg", "/gallery/anjali2.jpg", "/gallery/anjali3.jpg"]
   },
   {
-    slug: "preeti-raj",
-    name: "Preeti Raj",
-    category: "Fashion Model",
-    image: "/influencers/preetiraj.png",
-    followers: "502K",
+    slug: "sau-mya",
+    name: "Sau Mya",
+    category: "Fashion Model Content-Creator",
+    image: "/influencers/sau-mya/img4.jpg",
+    followers: "7.2K",
     link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Preeti%20Raj",
     description: "Preeti is a rising fashion model known for bold style and elegant shoots.",
-    age: 24,
-    height: "5'7\"",
+    age: 18,
+    height: "5'3\"",
     startingPrice: "₹3,000",
     workingFields: {
-      collaborator: "₹6,000 - ₹9,000",
-      shopPromotion: "₹5,000 - ₹7,000",
+      collaborator: "₹4,000 - ₹5,000",
+      shopPromotion: "₹3,000 - ₹5,000",
       storyPromotion: "₹3,000 - ₹4,500",
-      brandPromotion: "₹8,000 - ₹12,000"
+      brandPromotion: "₹4,000 - ₹5,000"
     },
-    demoVideos: ["/demos/preeti1.mp4", "/demos/preeti2.mp4", "/demos/preeti3.mp4"],
-    gallery: ["/gallery/preeti1.jpg", "/gallery/preeti2.jpg", "/gallery/preeti3.jpg"]
+    demoVideos: ["/influencers/sau-mya/1.mp4", "/influencers/sau-mya/2.mp4", "/influencers/sau-mya/3.mp4"],
+    gallery: ["/influencers/sau-mya/img1.jpg", "/influencers/sau-mya/img2.jpg", "/influencers/sau-mya/img3.jpg", "/influencers/sau-mya/img4.jpg"]
   },
   {
     slug: "rahul-chauhan",
