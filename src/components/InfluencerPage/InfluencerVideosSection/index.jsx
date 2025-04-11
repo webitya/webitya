@@ -153,7 +153,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
 
             {/* Branding - inside video container */}
         {/* Branding - centered bottom inside video container */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-white rounded-md shadow-sm flex items-center gap-2 min-w-[160px] text-xs text-slate-600 z-10">
+        <div className="absolute bottom-2 left-[90px] transform -translate-x-1/2 px-4 py-1 bg-white rounded-md shadow-sm flex items-center gap-2 min-w-[160px] text-xs text-slate-600 z-10">
   <span className="whitespace-nowrap text-xs">Powered by</span>
   <a href="/" className="block">
     <img
