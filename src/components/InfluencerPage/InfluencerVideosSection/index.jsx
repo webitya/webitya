@@ -162,18 +162,20 @@ const InfluencerVideosSection = ({ videos = [] }) => {
             {!loadingStates[index] && !errorStates[index] && (
               <>
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-white/30 via-transparent to-transparent rounded-2xl">
-                  <button
-                    onClick={() => togglePlay(index)}
-                    className="bg-white/90 text-black rounded-full p-3 shadow-lg backdrop-blur-md hover:scale-105 transition"
-                  >
-                    {endedStates[index] ? (
-                      <Replay fontSize="small" />
-                    ) : playingIndex === index ? (
-                      <Pause fontSize="small" />
-                    ) : (
-                      <PlayArrow fontSize="small" />
-                    )}
-                  </button>
+                <button
+  onClick={() => togglePlay(index)}
+  className="bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-lg w-10 h-10 flex items-center justify-center shadow-lg backdrop-blur-md hover:scale-105 transition"
+>
+  {endedStates[index] ? (
+    <Replay fontSize="small" />
+  ) : playingIndex === index ? (
+    <Pause fontSize="small" />
+  ) : (
+    <PlayArrow fontSize="small" />
+  )}
+</button>
+
+
                 </div>
 
                 {/* Mute Button */}
