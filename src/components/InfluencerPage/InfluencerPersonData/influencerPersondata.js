@@ -57,7 +57,7 @@ const influencers = [
       brandPromotion: "₹4,000 - ₹5,000"
     },
     demoVideos: ["/influencers/sau-mya/1.mp4", "/influencers/sau-mya/2.mp4", "/influencers/sau-mya/3.mp4"],
-    gallery: ["/influencers/sau-mya/img1.jpg", "/influencers/sau-mya/img2.jpg", "/influencers/sau-mya/img3.jpg", "/influencers/sau-mya/img4.jpg"]
+    gallery: ["/influencers/sau-mya/img1.webp", "/influencers/sau-mya/img2.webp", "/influencers/sau-mya/img3.webp", "/influencers/sau-mya/img4.webp"]
   },
   {
     slug: "rahul-chauhan",

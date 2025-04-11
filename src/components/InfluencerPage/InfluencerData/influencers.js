@@ -19,7 +19,7 @@ const influencers = [
       slug: "sau-mya",
       name: "Sau Mya",
       category: "Fashion Model Creator",
-      image: "/influencers/sau-mya/img4.jpg",
+      image: "/influencers/sau-mya/img4.webp",
       followers: "7.2K",
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sau%20Mya",
     },
