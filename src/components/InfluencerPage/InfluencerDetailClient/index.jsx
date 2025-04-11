@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,10 +20,10 @@ const InfluencerDetailClient = ({ influencer }) => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="min-h-screen bg-gradient-to-br from-white via-[#f9fafb] to-[#f3f4f6] px-2 py-4 md:px-16 md:py-10"
+        className="min-h-screen bg-gradient-to-br from-white via-[#f9fafb] to-[#f3f4f6] px-4 md:px-16 py-6 md:py-12"
       >
         {/* Main Card */}
-        <div className="mx-auto backdrop-blur-lg bg-white/80 border border-gray-200/70 md:p-8 p-2 rounded-xl md:rounded-3xl shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="max-w-7xl mx-auto backdrop-blur-lg bg-white/80 border border-gray-200/70 p-4 md:p-10 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Image Section */}
           <div className="relative w-full h-96 overflow-hidden rounded-2xl group shadow-md">
             <Image
@@ -44,22 +45,10 @@ const InfluencerDetailClient = ({ influencer }) => {
             </span>
 
             <div className="space-y-2 text-slate-700 text-base">
-              <p>
-                <strong className="text-slate-900">Followers:</strong>{" "}
-                {influencer.followers}
-              </p>
-              <p>
-                <strong className="text-slate-900">Age:</strong>{" "}
-                {influencer.age}
-              </p>
-              <p>
-                <strong className="text-slate-900">Height:</strong>{" "}
-                {influencer.height}
-              </p>
-              <p>
-                <strong className="text-slate-900">Starting Price:</strong>{" "}
-                {influencer.startingPrice}
-              </p>
+              <p><strong className="text-slate-900">Followers:</strong> {influencer.followers}</p>
+              <p><strong className="text-slate-900">Age:</strong> {influencer.age}</p>
+              <p><strong className="text-slate-900">Height:</strong> {influencer.height}</p>
+              <p><strong className="text-slate-900">Starting Price:</strong> {influencer.startingPrice}</p>
             </div>
 
             <p className="text-slate-600 mt-6 mb-8 leading-relaxed text-[15.5px]">
@@ -109,49 +98,86 @@ const InfluencerDetailClient = ({ influencer }) => {
           </div>
         </div>
 
-        {/* Demo Videos Section */}
+        {/* Demo Videos */}
         {influencer.demoVideos?.length > 0 && (
-          <div className="mt-16">
+          <div className="mt-20">
             <div className="flex items-center gap-2 mb-6 justify-center">
               <VideoLibrary className="text-red-500" />
               <h2 className="text-3xl font-bold text-slate-800">Demo Videos</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {influencer.demoVideos.map((video, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.03 }}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="relative group rounded-2xl overflow-hidden shadow-lg bg-black"
-                >
-                  <video
-                    src={video}
-                    controls
-                    preload="metadata"
-                    className="w-full h-64 object-cover group-hover:brightness-95 transition-all duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                    <div className="bg-white/80 p-3 rounded-full shadow-md">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        className="w-6 h-6 text-red-500"
-                        viewBox="0 0 16 16"
+              {influencer.demoVideos.map((video, index) => {
+                const videoRef = useRef(null);
+                const [isPlaying, setIsPlaying] = useState(false);
+
+                const handleVideoClick = () => {
+                  if (videoRef.current) {
+                    if (videoRef.current.paused) {
+                      videoRef.current.play();
+                      setIsPlaying(true);
+                    } else {
+                      videoRef.current.pause();
+                      setIsPlaying(false);
+                    }
+                  }
+                };
+
+                return (
+                  <motion.div
+                    key={index}
+                    whileHover={{ scale: 1.03 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="relative group overflow-hidden rounded-2xl shadow-xl w-full aspect-[9/16] bg-black"
+                  >
+                    <video
+                      ref={videoRef}
+                      src={video}
+                      preload="metadata"
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                      style={{ aspectRatio: "9 / 16" }}
+                    />
+
+                    {/* Play Button */}
+                    {!isPlaying && (
+                      <button
+                        onClick={handleVideoClick}
+                        className="absolute inset-0 flex items-center justify-center bg-black/40 transition"
                       >
-                        <path d="M6.79 5.093a.5.5 0 0 1 .71-.093l4 3a.5.5 0 0 1 0 .8l-4 3A.5.5 0 0 1 6 11.5v-6a.5.5 0 0 1 .79-.407z" />
-                      </svg>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                        <div className="bg-white/90 p-4 rounded-full shadow-lg">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            className="w-6 h-6 text-red-500"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M6.79 5.093a.5.5 0 0 1 .71-.093l4 3a.5.5 0 0 1 0 .8l-4 3A.5.5 0 0 1 6 11.5v-6a.5.5 0 0 1 .79-.407z" />
+                          </svg>
+                        </div>
+                      </button>
+                    )}
+
+                    {/* Pause Button */}
+                    {isPlaying && (
+                      <button
+                        onClick={handleVideoClick}
+                        className="absolute bottom-4 right-4 bg-white/80 text-slate-700 px-2 py-1 rounded-full text-xs shadow-md z-10"
+                      >
+                        Pause
+                      </button>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         )}
 
-        {/* Gallery Section */}
+        {/* Gallery */}
         {influencer.gallery?.length > 0 && (
           <div className="mt-20">
             <div className="flex items-center gap-2 mb-6 justify-center">
@@ -178,6 +204,7 @@ const InfluencerDetailClient = ({ influencer }) => {
           </div>
         )}
       </motion.div>
+
       <Footer />
     </>
   );
