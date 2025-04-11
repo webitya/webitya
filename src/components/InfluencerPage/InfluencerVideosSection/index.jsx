@@ -49,7 +49,9 @@ const InfluencerVideosSection = ({ videos = [] }) => {
       });
       video.play();
       setPlayingIndex(index);
-      setEndedStates((prev) => prev.map((_, i) => i === index ? false : prev[i]));
+      setEndedStates((prev) =>
+        prev.map((_, i) => (i === index ? false : prev[i]))
+      );
     } else {
       video.pause();
       setPlayingIndex(null);
@@ -103,7 +105,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               delay: index * 0.1,
             }}
             viewport={{ once: true }}
-            className="relative group overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-[#fdf3f7] to-[#f0f4fd] border border-white/40 backdrop-blur-md p-1 w-[220px]"
+            className="relative group overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-[#fdf3f7] to-[#f0f4fd] border border-white/40 backdrop-blur-md p-1 w-[220px] flex flex-col items-center"
           >
             {/* Video Element */}
             <video
@@ -122,10 +124,10 @@ const InfluencerVideosSection = ({ videos = [] }) => {
             />
 
             {/* Overlay Controls */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent rounded-xl flex items-center justify-center">
               <button
                 onClick={() => togglePlay(index)}
-                className="bg-white text-black rounded-full p-2 shadow-md hover:scale-110 transition"
+                className="bg-white text-black rounded-full p-3 shadow-md hover:scale-110 transition sm:opacity-0 sm:group-hover:opacity-100"
               >
                 {endedStates[index] ? (
                   <Replay fontSize="small" />
@@ -142,8 +144,27 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               onClick={() => toggleMute(index)}
               className="absolute bottom-2 right-2 bg-black/60 text-white rounded-full p-1 hover:bg-black/80 transition"
             >
-              {mutedStates[index] ? <VolumeOff fontSize="small" /> : <VolumeUp fontSize="small" />}
+              {mutedStates[index] ? (
+                <VolumeOff fontSize="small" />
+              ) : (
+                <VolumeUp fontSize="small" />
+              )}
             </button>
+
+            {/* Branding - inside video container */}
+        {/* Branding - centered bottom inside video container */}
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-white rounded-md shadow-sm flex items-center gap-2 min-w-[160px] text-xs text-slate-600 z-10">
+  <span className="whitespace-nowrap text-xs">Powered by</span>
+  <a href="/" className="block">
+    <img
+      src="/brand/logo1.png"
+      alt="Webitya Logo"
+      className="w-[80px] h-[24px] object-contain cursor-pointer"
+    />
+  </a>
+</div>
+
+
 
             {/* Progress Bar */}
             <div className="absolute bottom-0 left-0 w-full h-1 bg-black/20">
