@@ -1,19 +1,25 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowBack,
   Send,
-  VideoLibrary,
   PhotoLibrary,
   MonetizationOn,
 } from "@mui/icons-material";
 import Footer from "@/components/FooterEl";
+import InfluencerVideosSection from "../InfluencerVideosSection"; // 👈 NEW
 
 const InfluencerDetailClient = ({ influencer }) => {
+  useEffect(() => {
+    return () => {
+      document.querySelectorAll("video").forEach((video) => video.pause());
+    };
+  }, []);
+
   return (
     <>
       <motion.div
@@ -45,10 +51,22 @@ const InfluencerDetailClient = ({ influencer }) => {
             </span>
 
             <div className="space-y-2 text-slate-700 text-base">
-              <p><strong className="text-slate-900">Followers:</strong> {influencer.followers}</p>
-              <p><strong className="text-slate-900">Age:</strong> {influencer.age}</p>
-              <p><strong className="text-slate-900">Height:</strong> {influencer.height}</p>
-              <p><strong className="text-slate-900">Starting Price:</strong> {influencer.startingPrice}</p>
+              <p>
+                <strong className="text-slate-900">Followers:</strong>{" "}
+                {influencer.followers}
+              </p>
+              <p>
+                <strong className="text-slate-900">Age:</strong>{" "}
+                {influencer.age}
+              </p>
+              <p>
+                <strong className="text-slate-900">Height:</strong>{" "}
+                {influencer.height}
+              </p>
+              <p>
+                <strong className="text-slate-900">Starting Price:</strong>{" "}
+                {influencer.startingPrice}
+              </p>
             </div>
 
             <p className="text-slate-600 mt-6 mb-8 leading-relaxed text-[15.5px]">
@@ -56,11 +74,13 @@ const InfluencerDetailClient = ({ influencer }) => {
                 "This influencer is perfect for brand deals, content promotion, and more!"}
             </p>
 
-            {/* Price Breakdown Table */}
+            {/* Price Table */}
             <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden text-sm mb-6">
               <div className="flex items-center gap-2 bg-gray-100 px-4 py-2 border-b border-gray-200">
                 <MonetizationOn className="text-yellow-500" />
-                <h3 className="font-semibold text-slate-800">Services & Pricing</h3>
+                <h3 className="font-semibold text-slate-800">
+                  Services & Pricing
+                </h3>
               </div>
               <table className="w-full text-left">
                 <tbody>
@@ -70,7 +90,9 @@ const InfluencerDetailClient = ({ influencer }) => {
                         <td className="px-4 py-2 capitalize text-slate-700">
                           {field.replace(/([A-Z])/g, " $1")}
                         </td>
-                        <td className="px-4 py-2 text-slate-900 font-medium">{price}</td>
+                        <td className="px-4 py-2 text-slate-900 font-medium">
+                          {price}
+                        </td>
                       </tr>
                     )
                   )}
@@ -98,83 +120,9 @@ const InfluencerDetailClient = ({ influencer }) => {
           </div>
         </div>
 
-        {/* Demo Videos */}
+        {/* ✅ Custom Video Player Section */}
         {influencer.demoVideos?.length > 0 && (
-          <div className="mt-20">
-            <div className="flex items-center gap-2 mb-6 justify-center">
-              <VideoLibrary className="text-red-500" />
-              <h2 className="text-3xl font-bold text-slate-800">Demo Videos</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {influencer.demoVideos.map((video, index) => {
-                const videoRef = useRef(null);
-                const [isPlaying, setIsPlaying] = useState(false);
-
-                const handleVideoClick = () => {
-                  if (videoRef.current) {
-                    if (videoRef.current.paused) {
-                      videoRef.current.play();
-                      setIsPlaying(true);
-                    } else {
-                      videoRef.current.pause();
-                      setIsPlaying(false);
-                    }
-                  }
-                };
-
-                return (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.03 }}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="relative group overflow-hidden rounded-2xl shadow-xl w-full aspect-[9/16] bg-black"
-                  >
-                    <video
-                      ref={videoRef}
-                      src={video}
-                      preload="metadata"
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                      style={{ aspectRatio: "9 / 16" }}
-                    />
-
-                    {/* Play Button */}
-                    {!isPlaying && (
-                      <button
-                        onClick={handleVideoClick}
-                        className="absolute inset-0 flex items-center justify-center bg-black/40 transition"
-                      >
-                        <div className="bg-white/90 p-4 rounded-full shadow-lg">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            className="w-6 h-6 text-red-500"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M6.79 5.093a.5.5 0 0 1 .71-.093l4 3a.5.5 0 0 1 0 .8l-4 3A.5.5 0 0 1 6 11.5v-6a.5.5 0 0 1 .79-.407z" />
-                          </svg>
-                        </div>
-                      </button>
-                    )}
-
-                    {/* Pause Button */}
-                    {isPlaying && (
-                      <button
-                        onClick={handleVideoClick}
-                        className="absolute bottom-4 right-4 bg-white/80 text-slate-700 px-2 py-1 rounded-full text-xs shadow-md z-10"
-                      >
-                        Pause
-                      </button>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
+          <InfluencerVideosSection videos={influencer.demoVideos} />
         )}
 
         {/* Gallery */}
