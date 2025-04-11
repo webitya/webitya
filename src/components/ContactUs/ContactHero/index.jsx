@@ -91,6 +91,18 @@ export default function ContactHero() {
                 </a>
               </div>
             </div>
+            <div className="flex items-start gap-3 mb-5">
+              <Phone className="text-purple-600 mt-1" />
+              <div>
+                <p className="text-sm font-semibold">Phone</p>
+                <a
+                  href="tel:+918709392484"
+                  className="text-blue-600 text-sm hover:underline"
+                >
+                  +91 8709392484
+                </a>
+              </div>
+            </div>
 
             <div className="flex items-start gap-3">
               <MapPin className="text-purple-600 mt-1" />
