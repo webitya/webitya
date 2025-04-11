@@ -178,15 +178,19 @@ const InfluencerVideosSection = ({ videos = [] }) => {
 
                 {/* Mute Button */}
                 <button
-                  onClick={() => toggleMute(index)}
-                  className="absolute bottom-3 right-3 bg-black/50 text-white rounded-full p-1 hover:bg-black/70 transition"
-                >
-                  {mutedStates[index] ? (
-                    <VolumeOff fontSize="small" />
-                  ) : (
-                    <VolumeUp fontSize="small" />
-                  )}
-                </button>
+  onClick={() => toggleMute(index)}
+  className="absolute top-3 right-3 bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-md w-8 h-8 flex items-center justify-center hover:opacity-90 transition duration-200 shadow-md"
+>
+  {mutedStates[index] ? (
+    <VolumeOff fontSize="small" />
+  ) : (
+    <VolumeUp fontSize="small" />
+  )}
+</button>
+
+
+
+
 
                 {/* Branding */}
                 <div className="absolute bottom-6 left-1/2 transform min-w-[180px] -translate-x-1/2 px-4 py-1 bg-white/90 backdrop-blur-md rounded-lg shadow-sm flex items-center gap-2 text-xs text-slate-700">
