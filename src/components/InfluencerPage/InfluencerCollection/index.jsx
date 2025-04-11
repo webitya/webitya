@@ -1,60 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-
-const influencers = [
-  {
-    name: "Pravin Brother",
-    category: "Actor | Content Creator",
-    image: "/influencers/pravinbrother.png",
-    followers: "326K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Pravin%20Brother",
-    detailUrl: "https://webitya.in/influencers/pravin-brother",
-  },
-  {
-    name: "Anjali Mahto",
-    category: "Creator | Influencer",
-    image: "/influencers/anjalimahto.png",
-    followers: "709K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Anjali%20Mahto",
-    detailUrl: "https://webitya.in/influencers/anjali-mahto",
-  },
-  {
-    name: "Preeti Raj",
-    category: "Fashion Model",
-    image: "/influencers/preetiraj.png",
-    followers: "502K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Preeti%20Raj",
-    detailUrl: "https://webitya.in/influencers/preeti-raj",
-  },
-  {
-    name: "Rahul Chauhan",
-    category: "Lifestyle | For Ads",
-    image: "/influencers/rahulchauhan.png",
-    followers: "430K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Rahul%20Chauhan",
-    detailUrl: "https://webitya.in/influencers/rahul-chauhan",
-  },
-  {
-    name: "Nisha Soni",
-    category: "Beauty | Influencer",
-    image: "/influencers/nishasoni.png",
-    followers: "650K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Nisha%20Soni",
-    detailUrl: "https://webitya.in/influencers/nisha-soni",
-  },
-  {
-    name: "Aman Singh",
-    category: "Fitness | Creator",
-    image: "/influencers/amansingh.png",
-    followers: "390K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Aman%20Singh",
-    detailUrl: "https://webitya.in/influencers/aman-singh",
-  },
-];
+import influencers from "../InfluencerData/influencers";
 
 const filterOptions = ["All", "Creator", "Influencer", "Model", "For Ads"];
 
@@ -62,6 +12,9 @@ const InfluencerList = () => {
   const [visibleCount, setVisibleCount] = useState(6);
   const [search, setSearch] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
+  const [searchDropdown, setSearchDropdown] = useState(false);
+
+  const searchRef = useRef(null);
 
   const handleScroll = () => {
     const bottom =
@@ -75,6 +28,21 @@ const InfluencerList = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [visibleCount]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        searchRef.current &&
+        searchRef.current instanceof HTMLElement &&
+        !searchRef.current.contains(e.target)
+      ) {
+        setSearchDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const filteredInfluencers = influencers.filter((inf) => {
     const matchesSearch = inf.name.toLowerCase().includes(search.toLowerCase());
@@ -94,22 +62,66 @@ const InfluencerList = () => {
       >
         Top Influencers
       </motion.h2>
+
       <p className="text-slate-600 text-lg mb-8 max-w-2xl mx-auto">
         Discover, connect, and book influencers that match your brand's vibe.
       </p>
 
       {/* Search */}
-      <div className="max-w-2xl mx-auto mb-6">
+      <div className="max-w-2xl mx-auto mb-6 relative" ref={searchRef}>
         <input
           type="text"
           placeholder="Search influencer by name..."
-          className="w-full px-4 py-3 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+          className="w-full px-4 py-3 pr-10 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setSearchDropdown(true);
+          }}
+          onFocus={() => setSearchDropdown(true)}
         />
+
+        {search && (
+          <button
+            onClick={() => {
+              setSearch("");
+              setSearchDropdown(false);
+            }}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          >
+            &#x2715;
+          </button>
+        )}
+
+        {searchDropdown && search.length > 0 && (
+          <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-xl mt-2 shadow-lg max-h-60 overflow-y-auto text-left">
+            {influencers
+              .filter((inf) =>
+                inf.name.toLowerCase().includes(search.toLowerCase())
+              )
+              .slice(0, 5)
+              .map((inf, index) => (
+                <li
+                  key={index}
+                  onClick={() => {
+                    setSearch(inf.name);
+                    setSearchDropdown(false);
+                  }}
+                  className="px-4 py-2 cursor-pointer hover:bg-pink-100"
+                >
+                  {inf.name}
+                </li>
+              ))}
+            {influencers.filter((inf) =>
+              inf.name.toLowerCase().includes(search.toLowerCase())
+            ).length === 0 && (
+              <li className="px-4 py-2 text-gray-500">No results found</li>
+            )}
+          </ul>
+        )}
       </div>
 
-      {/* Filter Buttons */}
+      {/* Filters */}
       <div className="flex flex-wrap justify-center gap-2 mb-12">
         {filterOptions.map((option) => (
           <button
@@ -147,14 +159,17 @@ const InfluencerList = () => {
             </div>
             <div className="p-6 text-left flex-1 flex flex-col justify-between">
               <div>
-                <h3 className="text-xl font-bold text-gray-800">{influencer.name}</h3>
-                <p className="text-sm text-gray-500 mt-1">{influencer.category}</p>
+                <h3 className="text-xl font-bold text-gray-800">
+                  {influencer.name}
+                </h3>
+                <p className="text-sm text-gray-500 mt-1">
+                  {influencer.category}
+                </p>
                 <p className="text-sm text-gray-400 mt-1">
                   Followers: {influencer.followers}
                 </p>
               </div>
 
-              {/* Action Buttons */}
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
                   href={influencer.link}
@@ -165,17 +180,14 @@ const InfluencerList = () => {
                   Book Now
                 </a>
 
-                <a
-                  href={influencer.detailUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={`/influencers/${influencer.slug}`}
                   className="inline-block bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200 transition duration-300"
                 >
                   View Details
-                </a>
+                </Link>
               </div>
 
-              {/* Branding */}
               <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
                 <span>Powered by</span>
                 <Link href="/">
@@ -193,7 +205,7 @@ const InfluencerList = () => {
         ))}
       </div>
 
-      {/* Load More */}
+      {/* Load More Button */}
       {visibleCount < filteredInfluencers.length && (
         <div className="mt-10">
           <button
