@@ -18,19 +18,6 @@ const InfluencerVideosSection = ({ videos = [] }) => {
   const [progress, setProgress] = useState(videos.map(() => 0));
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 150) {
-        videoRefs.current.forEach((video) => {
-          if (video && !video.paused) {
-            video.pause();
-          }
-        });
-        setPlayingIndex(null);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -49,10 +36,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
       if (video) observer.observe(video);
     });
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   const togglePlay = (index) => {
@@ -65,9 +49,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
       });
       video.play();
       setPlayingIndex(index);
-      setEndedStates((prev) =>
-        prev.map((_, i) => (i === index ? false : prev[i]))
-      );
+      setEndedStates((prev) => prev.map((_, i) => i === index ? false : prev[i]));
     } else {
       video.pause();
       setPlayingIndex(null);
@@ -123,7 +105,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
             viewport={{ once: true }}
             className="relative group overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-[#fdf3f7] to-[#f0f4fd] border border-white/40 backdrop-blur-md p-1 w-[220px]"
           >
-            {/* Video */}
+            {/* Video Element */}
             <video
               ref={(el) => (videoRefs.current[index] = el)}
               src={src}
@@ -139,7 +121,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               style={{ aspectRatio: "7 / 13" }}
             />
 
-            {/* Play/Pause Overlay */}
+            {/* Overlay Controls */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
               <button
                 onClick={() => togglePlay(index)}
@@ -160,11 +142,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               onClick={() => toggleMute(index)}
               className="absolute bottom-2 right-2 bg-black/60 text-white rounded-full p-1 hover:bg-black/80 transition"
             >
-              {mutedStates[index] ? (
-                <VolumeOff fontSize="small" />
-              ) : (
-                <VolumeUp fontSize="small" />
-              )}
+              {mutedStates[index] ? <VolumeOff fontSize="small" /> : <VolumeUp fontSize="small" />}
             </button>
 
             {/* Progress Bar */}
