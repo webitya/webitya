@@ -17,7 +17,7 @@ const influencers = [
       brandPromotion: "₹6,000 - ₹10,000"
     },
     demoVideos: ["/influencers/1.mp4", "/influencers/1.mp4", "/influencers/1.mp4"],
-    gallery: ["/gallery/pravin1.jpg", "/gallery/pravin2.jpg", "/gallery/pravin3.jpg", "/gallery/akjali3.jpg"]
+    gallery: ["/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png"]
   },
   {
     slug: "anjali-mahto",
