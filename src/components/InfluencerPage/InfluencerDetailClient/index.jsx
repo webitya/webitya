@@ -49,22 +49,23 @@ const InfluencerDetailClient = ({ influencer }) => {
             <span className="inline-block bg-gradient-to-r from-pink-100 to-red-100 text-pink-600 font-semibold px-4 py-1 rounded-full text-sm mb-5">
               {influencer.category}
             </span>
-
-            <div className="space-y-1 text-slate-700 text-base">
+            <div className="space-y-1.5 text-sm text-slate-700 leading-relaxed">
               <p>
-                <strong className="text-slate-900">Followers:</strong>{" "}
+                <span className="font-semibold text-slate-900">Followers:</span>{" "}
                 {influencer.followers}
               </p>
               <p>
-                <strong className="text-slate-900">Age:</strong>{" "}
+                <span className="font-semibold text-slate-900">Age:</span>{" "}
                 {influencer.age}
               </p>
               <p>
-                <strong className="text-slate-900">Height:</strong>{" "}
+                <span className="font-semibold text-slate-900">Height:</span>{" "}
                 {influencer.height}
               </p>
               <p>
-                <strong className="text-slate-900">Starting Price:</strong>{" "}
+                <span className="font-semibold text-slate-900">
+                  Starting Price:
+                </span>{" "}
                 {influencer.startingPrice}
               </p>
             </div>
