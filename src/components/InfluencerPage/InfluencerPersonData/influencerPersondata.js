@@ -45,7 +45,7 @@ const influencers = [
     category: "Fashion Model Content-Creator",
     image: "/influencers/sau-mya/img4.webp",
     followers: "7.2K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Preeti%20Raj",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sau%20Mya",
     description: "Sau Mya is a rising fashion model known for bold style and elegant shoots.",
     age: 18,
     height: "5'3\"",
