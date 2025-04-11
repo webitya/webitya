@@ -16,6 +16,8 @@ const InfluencerVideosSection = ({ videos = [] }) => {
   const [mutedStates, setMutedStates] = useState(videos.map(() => true));
   const [endedStates, setEndedStates] = useState(videos.map(() => false));
   const [progress, setProgress] = useState(videos.map(() => 0));
+  const [loadingStates, setLoadingStates] = useState(videos.map(() => true));
+  const [errorStates, setErrorStates] = useState(videos.map(() => false));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -85,18 +87,34 @@ const InfluencerVideosSection = ({ videos = [] }) => {
     setPlayingIndex(null);
   };
 
+  const handleLoaded = (index) => {
+    setLoadingStates((prev) => {
+      const updated = [...prev];
+      updated[index] = false;
+      return updated;
+    });
+  };
+
+  const handleError = (index) => {
+    setErrorStates((prev) => {
+      const updated = [...prev];
+      updated[index] = true;
+      return updated;
+    });
+  };
+
   return (
-    <div className="mt-20 px-4">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-extrabold text-slate-800">Demo Videos</h2>
+    <div className="pb-14 px-4 bg-gradient-to-b from-[#fdfbfb] to-[#ebedee] py-10 rounded-t-3xl shadow-inner">
+      <div className="text-center mb-10">
+        <h2 className="text-4xl font-bold text-slate-800 mb-2">Influencer Reels</h2>
+        <p className="text-slate-500 text-sm">Preview how creators perform</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
+      <div className="flex flex-wrap justify-center gap-6">
         {videos.map((src, index) => (
           <motion.div
             key={index}
             data-index={index}
-            whileHover={{ scale: 1.02 }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{
@@ -105,74 +123,92 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               delay: index * 0.1,
             }}
             viewport={{ once: true }}
-            className="relative group overflow-hidden rounded-2xl shadow-xl bg-gradient-to-br from-[#fdf3f7] to-[#f0f4fd] border border-white/40 backdrop-blur-md p-1 w-[220px] flex flex-col items-center"
+            className="relative overflow-hidden rounded-3xl shadow-lg !bg-white backdrop-blur-xl border border-white/20 p-1 flex flex-col items-center w-full sm:w-[48%] md:w-[30%] max-w-[330px] aspect-[7/13]"
           >
-            {/* Video Element */}
-            <video
-              ref={(el) => (videoRefs.current[index] = el)}
-              src={src}
-              className="w-full h-auto object-cover rounded-xl"
-              muted={mutedStates[index]}
-              controls={false}
-              playsInline
-              preload="metadata"
-              data-index={index}
-              onClick={() => togglePlay(index)}
-              onTimeUpdate={() => handleTimeUpdate(index)}
-              onEnded={() => handleEnded(index)}
-              style={{ aspectRatio: "7 / 13" }}
-            />
+            {/* Skeleton Loader */}
+            {loadingStates[index] && !errorStates[index] && (
+              <div className="w-full h-full rounded-2xl bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 animate-pulse" />
+            )}
+
+            {/* Error Fallback */}
+            {errorStates[index] && (
+              <div className="flex items-center justify-center w-full h-full text-red-500 text-sm font-semibold bg-slate-100 rounded-2xl p-4">
+                Failed to load video
+              </div>
+            )}
+
+            {/* Video */}
+            {!errorStates[index] && (
+              <video
+                ref={(el) => (videoRefs.current[index] = el)}
+                src={src}
+                className={`w-full h-auto object-cover rounded-2xl ${
+                  loadingStates[index] ? "hidden" : "block"
+                }`}
+                muted={mutedStates[index]}
+                controls={false}
+                playsInline
+                preload="metadata"
+                data-index={index}
+                onClick={() => togglePlay(index)}
+                onTimeUpdate={() => handleTimeUpdate(index)}
+                onEnded={() => handleEnded(index)}
+                onLoadedData={() => handleLoaded(index)}
+                onError={() => handleError(index)}
+              />
+            )}
 
             {/* Overlay Controls */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent rounded-xl flex items-center justify-center">
-              <button
-                onClick={() => togglePlay(index)}
-                className="bg-white text-black rounded-full p-3 shadow-md hover:scale-110 transition sm:opacity-0 sm:group-hover:opacity-100"
-              >
-                {endedStates[index] ? (
-                  <Replay fontSize="small" />
-                ) : playingIndex === index ? (
-                  <Pause fontSize="small" />
-                ) : (
-                  <PlayArrow fontSize="small" />
-                )}
-              </button>
-            </div>
+            {!loadingStates[index] && !errorStates[index] && (
+              <>
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-white/30 via-transparent to-transparent rounded-2xl">
+                  <button
+                    onClick={() => togglePlay(index)}
+                    className="bg-white/90 text-black rounded-full p-3 shadow-lg backdrop-blur-md hover:scale-105 transition"
+                  >
+                    {endedStates[index] ? (
+                      <Replay fontSize="small" />
+                    ) : playingIndex === index ? (
+                      <Pause fontSize="small" />
+                    ) : (
+                      <PlayArrow fontSize="small" />
+                    )}
+                  </button>
+                </div>
 
-            {/* Mute Button */}
-            <button
-              onClick={() => toggleMute(index)}
-              className="absolute bottom-2 right-2 bg-black/60 text-white rounded-full p-1 hover:bg-black/80 transition"
-            >
-              {mutedStates[index] ? (
-                <VolumeOff fontSize="small" />
-              ) : (
-                <VolumeUp fontSize="small" />
-              )}
-            </button>
+                {/* Mute Button */}
+                <button
+                  onClick={() => toggleMute(index)}
+                  className="absolute bottom-3 right-3 bg-black/50 text-white rounded-full p-1 hover:bg-black/70 transition"
+                >
+                  {mutedStates[index] ? (
+                    <VolumeOff fontSize="small" />
+                  ) : (
+                    <VolumeUp fontSize="small" />
+                  )}
+                </button>
 
-            {/* Branding - inside video container */}
-        {/* Branding - centered bottom inside video container */}
-        <div className="absolute bottom-2 left-[90px] transform -translate-x-1/2 px-4 py-1 bg-white rounded-md shadow-sm flex items-center gap-2 min-w-[160px] text-xs text-slate-600 z-10">
-  <span className="whitespace-nowrap text-xs">Powered by</span>
-  <a href="/" className="block">
-    <img
-      src="/brand/logo1.png"
-      alt="Webitya Logo"
-      className="w-[80px] h-[24px] object-contain cursor-pointer"
-    />
-  </a>
-</div>
+                {/* Branding */}
+                <div className="absolute bottom-6 left-1/2 transform min-w-[180px] -translate-x-1/2 px-4 py-1 bg-white/90 backdrop-blur-md rounded-lg shadow-sm flex items-center gap-2 text-xs text-slate-700">
+                  <span>Powered by</span>
+                  <a href="/" className="block">
+                    <img
+                      src="/brand/logo1.png"
+                      alt="Webitya Logo"
+                      className="w-[70px] h-[22px] object-contain cursor-pointer"
+                    />
+                  </a>
+                </div>
 
-
-
-            {/* Progress Bar */}
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-black/20">
-              <div
-                className="h-full bg-gradient-to-r from-pink-500 to-red-500 transition-all duration-200"
-                style={{ width: `${progress[index]}%` }}
-              />
-            </div>
+                {/* Progress Bar */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-white">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] transition-all duration-200"
+                    style={{ width: `${progress[index]}%` }}
+                  />
+                </div>
+              </>
+            )}
           </motion.div>
         ))}
       </div>

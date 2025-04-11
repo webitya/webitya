@@ -26,10 +26,10 @@ const InfluencerDetailClient = ({ influencer }) => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="min-h-screen bg-gradient-to-br from-white via-[#f9fafb] to-[#f3f4f6] px-4 md:px-16 py-6 md:py-12"
+        className="min-h-screen bg-gradient-to-br from-white via-[#f9fafb] to-[#f3f4f6]"
       >
         {/* Main Card */}
-        <div className="max-w-7xl mx-auto backdrop-blur-lg bg-white/80 border border-gray-200/70 p-4 md:p-10 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="mx-auto backdrop-blur-lg bg-white/80 border border-gray-200/70 p-4 md:p-10  shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           {/* Image Section */}
           <div className="relative w-full h-96 overflow-hidden rounded-2xl group shadow-md">
             <Image
@@ -43,7 +43,7 @@ const InfluencerDetailClient = ({ influencer }) => {
 
           {/* Info Section */}
           <div>
-            <h1 className="text-5xl font-bold text-slate-900 mb-3 leading-tight tracking-tight">
+            <h1 className="text-4xl font-bold text-slate-900 mb-3 leading-tight tracking-tight">
               {influencer.name}
             </h1>
             <span className="inline-block bg-gradient-to-r from-pink-100 to-red-100 text-pink-600 font-semibold px-4 py-1 rounded-full text-sm mb-5">
@@ -111,7 +111,7 @@ const InfluencerDetailClient = ({ influencer }) => {
               </a>
 
               <Link
-                href="/influencers"
+                href="/influencers#collection"
                 className="flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded-full text-sm font-medium hover:bg-gray-100 transition"
               >
                 <ArrowBack fontSize="small" /> Back to List
@@ -127,12 +127,12 @@ const InfluencerDetailClient = ({ influencer }) => {
 
         {/* Gallery */}
         {influencer.gallery?.length > 0 && (
-          <div className="mt-20">
+          <div className="my-10">
             <div className="flex items-center gap-2 mb-6 justify-center">
               <PhotoLibrary className="text-pink-500" />
               <h2 className="text-3xl font-bold text-slate-800">Gallery</h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 p-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
               {influencer.gallery.map((img, index) => (
                 <motion.div
                   key={index}
