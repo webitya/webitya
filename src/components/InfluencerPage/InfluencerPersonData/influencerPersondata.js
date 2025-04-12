@@ -39,7 +39,7 @@ const influencers = [
       brandPromotion: "₹4,000 - ₹7,000"
     },
     demoVideos: ["/influencers/yog-saha/vid1.mp4", "/influencers/yog-saha/vid2.mp4", "/influencers/yog-saha/vid3.mp4"],
-    gallery: ["/influencers/yog-saha/img1.webp", "/influencers/yog-saha/img2.webp", "/influencers/yog-saha/img3.webp","/influencers/yog-saha/img4.webp4"]
+    gallery: ["/influencers/yog-saha/img1.webp", "/influencers/yog-saha/img2.webp", "/influencers/yog-saha/img3.webp","/influencers/yog-saha/img4.webp"]
   },
   {
     slug: "sau-mya",
