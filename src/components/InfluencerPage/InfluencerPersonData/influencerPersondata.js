@@ -2,6 +2,7 @@ const influencers = [
   {
     slug: "pravin-brother",
     name: "Pravin Brother",
+    location:"Ranchi, Jharkhand",
     category: "Actor | Content Creator",
     image: "/influencers/pravinbrother.png",
     followers: "326K",
@@ -20,15 +21,16 @@ const influencers = [
     gallery: ["/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png"]
   },
   {
-    slug: "anjali-mahto",
-    name: "Anjali Mahto",
-    category: "Fashion",
-    image: "/influencers/anjalimahto.png",
-    followers: "709K+",
-    link: "https://bookwith.me/anjali",
-    description: "Anjali is a trending fashion influencer from Ranchi who collaborates with popular brands.",
+    slug: "yog-saha",
+    name: "Yog Saha",
+    location:"Ranchi, Jharkhand",
+    category: "Digital-Creator Influencer",
+    image: "/influencers/yog-saha/img1.webp",
+    followers: "84K+",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Yog%20Saha",
+    description: "Yog Sah is a rising Graphic Designer & Video Editor from Patna, Bihar who collaborates with popular brands to deliver visually compelling content and creative edits.",
     age: 22,
-    height: "5'6\"",
+    height: "5'7\"",
     startingPrice: "₹1,500",
     workingFields: {
       collaborator: "₹3,000 - ₹6,000",
@@ -36,13 +38,14 @@ const influencers = [
       storyPromotion: "₹1,500 - ₹2,500",
       brandPromotion: "₹4,000 - ₹7,000"
     },
-    demoVideos: ["/demos/anjali1.mp4", "/demos/anjali2.mp4", "/demos/anjali3.mp4"],
-    gallery: ["/gallery/anjali1.jpg", "/gallery/anjali2.jpg", "/gallery/anjali3.jpg"]
+    demoVideos: ["/influencers/yog-saha/vid1.mp4", "/influencers/yog-saha/vid2.mp4", "/influencers/yog-saha/vid3.mp4"],
+    gallery: ["/influencers/yog-saha/img1.webp", "/influencers/yog-saha/img2.webp", "/influencers/yog-saha/img3.webp","/influencers/yog-saha/img4.webp4"]
   },
   {
     slug: "sau-mya",
     name: "Sau Mya",
     category: "Fashion Model Content-Creator",
+    location:"Ranchi, Jharkhand",
     image: "/influencers/sau-mya/img4.webp",
     followers: "7.2K",
     link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sau%20Mya",
@@ -62,6 +65,7 @@ const influencers = [
   {
     slug: "rahul-chauhan",
     name: "Rahul Chauhan",
+    location:"Ranchi, Jharkhand",
     category: "Lifestyle | For Ads",
     image: "/influencers/rahulchauhan.png",
     followers: "430K",
@@ -82,6 +86,7 @@ const influencers = [
   {
     slug: "nisha-soni",
     name: "Nisha Soni",
+    location:"Ranchi, Jharkhand",
     category: "Beauty | Influencer",
     image: "/influencers/nishasoni.png",
     followers: "650K",
@@ -102,6 +107,7 @@ const influencers = [
   {
     slug: "aman-singh",
     name: "Aman Singh",
+    location:"Ranchi, Jharkhand",
     category: "Fitness | Creator",
     image: "/influencers/amansingh.png",
     followers: "390K",
@@ -122,6 +128,7 @@ const influencers = [
   {
     slug: "akjali-mahto",
     name: "Akjali Mahto",
+    location:"Ranchi, Jharkhand",
     category: "Creator | Influencer",
     image: "/influencers/anjalimahto.png",
     followers: "709K",

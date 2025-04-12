@@ -71,6 +71,12 @@ const InfluencerDetailClient = ({ influencer }) => {
                 </span>{" "}
                 {influencer.startingPrice}
               </p>
+              <p>
+                <span className="font-semibold text-slate-900">
+                  location:
+                </span>{" "}
+                {influencer.location}
+              </p>
             </div>
 
             <p className="text-slate-600 mt-3 mb-3 leading-relaxed text-[15.5px]">

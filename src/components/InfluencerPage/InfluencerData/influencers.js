@@ -8,12 +8,12 @@ const influencers = [
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Pravin%20Brother",
     },
     {
-      slug: "anjali-mahto",
-      name: "Anjali Mahto",
-      category: "Creator | Influencer",
-      image: "/influencers/anjalimahto.png",
-      followers: "709K",
-      link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Anjali%20Mahto",
+      slug: "yog-saha",
+      name: "Yog Saha",
+      category: "Digital-Creator | Influencer",
+      image: "/influencers/yog-saha/img1.webp",
+      followers: "84K",
+      link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Yog%20Saha",
     },
     {
       slug: "sau-mya",
