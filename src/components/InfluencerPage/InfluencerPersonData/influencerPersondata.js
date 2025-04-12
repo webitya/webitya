@@ -21,13 +21,13 @@ const influencers = [
     gallery: ["/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png"]
   },
   {
-    slug: "yog-saha",
-    name: "Yog Saha",
+    slug: "yog-sah",
+    name: "Yog Sah",
     location:"Ranchi, Jharkhand",
     category: "Digital-Creator Influencer",
     image: "/influencers/yog-saha/img1.webp",
     followers: "84K+",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Yog%20Saha",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Yog%20Sah",
     description: "Yog Sah is a rising Graphic Designer & Video Editor from Patna, Bihar who collaborates with popular brands to deliver visually compelling content and creative edits.",
     age: 22,
     height: "5'7\"",

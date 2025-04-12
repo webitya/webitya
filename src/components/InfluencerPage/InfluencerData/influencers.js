@@ -8,8 +8,8 @@ const influencers = [
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Pravin%20Brother",
     },
     {
-      slug: "yog-saha",
-      name: "Yog Saha",
+      slug: "yog-sah",
+      name: "Yog Sah",
       category: "Digital-Creator | Influencer",
       image: "/influencers/yog-saha/img1.webp",
       followers: "84K",
