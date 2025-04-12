@@ -62,6 +62,7 @@ const footerData = [
       { name: 'Privacy', href: '/legal/privacy-policy' },
       { name: 'Terms of service', href: '/legal/terms' },
       { name: 'Disclaimer', href: '/legal/disclaimer' },
+      { name: 'Book Influencer', href: '/influencers' },
       { name: 'Contact', href: '/contact-us' },
     ],
   },
