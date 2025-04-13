@@ -95,7 +95,7 @@ const InfluencerVideosSection = ({ videos = [] }) => {
         updated[index] = false;
         return updated;
       });
-    }, 3000);
+    }, 3500);
   };
 
   const handleError = (index) => {
