@@ -84,25 +84,25 @@ const influencers = [
     gallery: ["/influencers/amit-creators/img1.webp", "/influencers/amit-creators/img2.webp", "/influencers/amit-creators/img3.webp","/influencers/amit-creators/img4.webp"]
   },
   {
-    slug: "nisha-soni",
-    name: "Nisha Soni",
+    slug: "harry",
+    name: "Harry",
     location:"Ranchi, Jharkhand",
-    category: "Beauty | Influencer",
-    image: "/influencers/nishasoni.png",
-    followers: "650K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Nisha%20Soni",
+    category: "Acting | Action | Creatot | Action",
+    image: "/influencers/HarryPriyanshu/img3.webp",
+    followers: "800",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
     description: "Nisha shares beauty tips and skincare routines with a growing audience.",
-    age: 23,
-    height: "5'5\"",
-    startingPrice: "₹3,000",
+    age: 21,
+    height: "5'9\"",
+    startingPrice: "₹2,000",
     workingFields: {
-      collaborator: "₹6,000 - ₹9,000",
-      shopPromotion: "₹5,000 - ₹7,500",
-      storyPromotion: "₹3,000 - ₹4,000",
-      brandPromotion: "₹9,000 - ₹13,000"
+      collaborator: "₹2,000 - ₹4,000",
+      shopPromotion: "₹4,000 - ₹5,500",
+      storyPromotion: "₹2,000 - ₹3,000",
+      brandPromotion: "₹4,000 - ₹5,000"
     },
-    demoVideos: ["/demos/nisha1.mp4", "/demos/nisha2.mp4", "/demos/nisha3.mp4"],
-    gallery: ["/gallery/nisha1.jpg", "/gallery/nisha2.jpg", "/gallery/nisha3.jpg"]
+    demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744514220/IMG_7167_l99u5r.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744514359/IMG_7513_iusoow.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744514339/IMG_5099_nmpuoj.mov"],
+    gallery: ["/influencers/HarryPriyanshu/img1.webp", "/influencers/HarryPriyanshu/img2.webp", "/influencers/HarryPriyanshu/img3.webp", "/influencers/HarryPriyanshu/img4.webp"]
   },
   {
     slug: "aman-singh",
