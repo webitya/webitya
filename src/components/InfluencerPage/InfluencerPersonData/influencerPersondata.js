@@ -30,12 +30,12 @@ const influencers = [
     description: "Pravin is a talented actor and content creator known for his unique storytelling and charm.",
     age: 25,
     height: "5'8\"",
-    startingPrice: "₹2,000",
+    startingPrice: "₹5,000",
     workingFields: {
-      collaborator: "₹5,000 - ₹8,000",
-      shopPromotion: "₹4,000 - ₹7,000",
-      storyPromotion: "₹2,000 - ₹3,500",
-      brandPromotion: "₹6,000 - ₹10,000"
+      collaborator: "₹15,000 - ₹17,000",
+      shopPromotion: "₹15,000 - ₹20,000",
+      storyPromotion: "₹5,000 - ₹10,500",
+      brandPromotion: "₹20,000 - ₹25,000"
     },
     demoVideos: ["/influencers/1.mp4", "/influencers/1.mp4", "/influencers/1.mp4"],
     gallery: ["/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png", "/influencers/pravinbrother.png"]
