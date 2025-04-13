@@ -91,7 +91,7 @@ const influencers = [
     image: "/influencers/HarryPriyanshu/img3.webp",
     followers: "800",
     link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
-    description: "Nisha shares beauty tips and skincare routines with a growing audience.",
+    description: "Harry is a passionate actor and action creator from Ranchi, Jharkhand, known for his dynamic performances and impactful brand collaborations.",
     age: 21,
     height: "5'9\"",
     startingPrice: "₹2,000",
@@ -104,48 +104,28 @@ const influencers = [
     demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515598/IMG_7167_e8uwyw.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515678/IMG_6445_e4ifds.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515637/IMG_7513_iy8gei.mov"],
     gallery: ["/influencers/HarryPriyanshu/img1.webp", "/influencers/HarryPriyanshu/img2.webp", "/influencers/HarryPriyanshu/img3.webp", "/influencers/HarryPriyanshu/img4.webp"]
   },
-  {
-    slug: "aman-singh",
-    name: "Aman Singh",
-    location:"Ranchi, Jharkhand",
-    category: "Fitness | Creator",
-    image: "/influencers/amansingh.png",
-    followers: "390K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Aman%20Singh",
-    description: "Aman is a fitness enthusiast and motivator for the youth.",
-    age: 26,
-    height: "6'0\"",
-    startingPrice: "₹2,000",
-    workingFields: {
-      collaborator: "₹4,000 - ₹7,000",
-      shopPromotion: "₹3,000 - ₹5,000",
-      storyPromotion: "₹2,000 - ₹3,000",
-      brandPromotion: "₹6,000 - ₹9,000"
-    },
-    demoVideos: ["/demos/aman1.mp4", "/demos/aman2.mp4", "/demos/aman3.mp4"],
-    gallery: ["/gallery/aman1.jpg", "/gallery/aman2.jpg", "/gallery/aman3.jpg"]
-  },
-  {
-    slug: "akjali-mahto",
-    name: "Akjali Mahto",
-    location:"Ranchi, Jharkhand",
-    category: "Creator | Influencer",
-    image: "/influencers/anjalimahto.png",
-    followers: "709K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Akjali%20Mahto",
-    description: "Akjali creates fun, trendy content that resonates with young audiences.",
-    age: 21,
-    height: "5'4\"",
-    startingPrice: "₹2,500",
-    workingFields: {
-      collaborator: "₹5,500 - ₹8,500",
-      shopPromotion: "₹4,500 - ₹7,000",
-      storyPromotion: "₹2,500 - ₹4,000",
-      brandPromotion: "₹7,000 - ₹11,000"
-    },
-    demoVideos: ["/demos/akjali1.mp4", "/demos/akjali2.mp4", "/demos/akjali3.mp4"],
-    gallery: ["/gallery/akjali1.jpg", "/gallery/akjali2.jpg", "/gallery/akjali3.jpg", "/gallery/akjali3.jpg"]
-  }
+
+  // {
+  //   slug: "akjali-mahto",
+  //   name: "Akjali Mahto",
+  //   location:"Ranchi, Jharkhand",
+  //   category: "Creator | Influencer",
+  //   image: "/influencers/anjalimahto.png",
+  //   followers: "709K",
+  //   link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Akjali%20Mahto",
+  //   description: "Akjali creates fun, trendy content that resonates with young audiences.",
+  //   age: 21,
+  //   height: "5'4\"",
+  //   startingPrice: "₹2,500",
+  //   workingFields: {
+  //     collaborator: "₹5,500 - ₹8,500",
+  //     shopPromotion: "₹4,500 - ₹7,000",
+  //     storyPromotion: "₹2,500 - ₹4,000",
+  //     brandPromotion: "₹7,000 - ₹11,000"
+  //   },
+  //   demoVideos: ["/demos/akjali1.mp4", "/demos/akjali2.mp4", "/demos/akjali3.mp4"],
+  //   gallery: ["/gallery/akjali1.jpg", "/gallery/akjali2.jpg", "/gallery/akjali3.jpg", "/gallery/akjali3.jpg"]
+  // }
 ];
 
 export default influencers;

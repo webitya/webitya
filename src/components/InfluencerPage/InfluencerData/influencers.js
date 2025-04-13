@@ -39,22 +39,14 @@ const influencers = [
       followers: "800",
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
     },
-    {
-      slug: "aman-singh",
-      name: "Aman Singh",
-      category: "Fitness | Creator",
-      image: "/influencers/amansingh.png",
-      followers: "390K",
-      link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Aman%20Singh",
-    },
-    {
-      slug: "akjali-mahto",
-      name: "Akjali Mahto",
-      category: "Creator | Influencer",
-      image: "/influencers/anjalimahto.png",
-      followers: "709K",
-      link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Anjali%20Mahto",
-    },
+    // {
+    //   slug: "akjali-mahto",
+    //   name: "Akjali Mahto",
+    //   category: "Creator | Influencer",
+    //   image: "/influencers/anjalimahto.png",
+    //   followers: "709K",
+    //   link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Anjali%20Mahto",
+    // },
   ];
   
   export default influencers;
