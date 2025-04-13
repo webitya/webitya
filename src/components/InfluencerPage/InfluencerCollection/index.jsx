@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import influencers from "../InfluencerData/influencers";
 
-const filterOptions = ["All", "Creator", "Influencer", "Model", "For Ads"];
+const filterOptions = ["All", "Creator", "Influencer", "Model", "For Ads","Actor"];
 
 const InfluencerList = () => {
   const [visibleCount, setVisibleCount] = useState(6);

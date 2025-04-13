@@ -8,6 +8,7 @@ import {
   VolumeOff,
   VolumeUp,
   Replay,
+  HourglassEmpty,
 } from "@mui/icons-material";
 
 const InfluencerVideosSection = ({ videos = [] }) => {
@@ -125,9 +126,14 @@ const InfluencerVideosSection = ({ videos = [] }) => {
             viewport={{ once: true }}
             className="relative overflow-hidden rounded-3xl shadow-lg !bg-white backdrop-blur-xl border border-white/20 p-1 flex flex-col items-center w-full sm:w-[48%] md:w-[30%] max-w-[330px] aspect-[7/13]"
           >
-            {/* Skeleton Loader */}
+            {/* Loading Spinner */}
             {loadingStates[index] && !errorStates[index] && (
-              <div className="w-full h-full rounded-2xl bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 animate-pulse" />
+              <div className="absolute inset-0 flex items-center justify-center bg-white/60 rounded-2xl z-10">
+                <HourglassEmpty
+                  fontSize="large"
+                  className="animate-spin text-transparent bg-clip-text bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045]"
+                />
+              </div>
             )}
 
             {/* Error Fallback */}
@@ -142,8 +148,8 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               <video
                 ref={(el) => (videoRefs.current[index] = el)}
                 src={src}
-                className={`w-full h-auto object-cover rounded-2xl ${
-                  loadingStates[index] ? "hidden" : "block"
+                className={`w-full h-auto object-cover rounded-2xl transition-opacity duration-500 ${
+                  loadingStates[index] ? "opacity-0" : "opacity-100"
                 }`}
                 muted={mutedStates[index]}
                 controls={false}
@@ -162,37 +168,31 @@ const InfluencerVideosSection = ({ videos = [] }) => {
             {!loadingStates[index] && !errorStates[index] && (
               <>
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-white/30 via-transparent to-transparent rounded-2xl">
-                <button
-  onClick={() => togglePlay(index)}
-  className="bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-lg w-10 h-10 flex items-center justify-center shadow-lg backdrop-blur-md hover:scale-105 transition"
->
-  {endedStates[index] ? (
-    <Replay fontSize="small" />
-  ) : playingIndex === index ? (
-    <Pause fontSize="small" />
-  ) : (
-    <PlayArrow fontSize="small" />
-  )}
-</button>
-
-
+                  <button
+                    onClick={() => togglePlay(index)}
+                    className="bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-lg w-10 h-10 flex items-center justify-center shadow-lg backdrop-blur-md hover:scale-105 transition"
+                  >
+                    {endedStates[index] ? (
+                      <Replay fontSize="small" />
+                    ) : playingIndex === index ? (
+                      <Pause fontSize="small" />
+                    ) : (
+                      <PlayArrow fontSize="small" />
+                    )}
+                  </button>
                 </div>
 
                 {/* Mute Button */}
                 <button
-  onClick={() => toggleMute(index)}
-  className="absolute top-3 right-3 bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-md w-8 h-8 flex items-center justify-center hover:opacity-90 transition duration-200 shadow-md"
->
-  {mutedStates[index] ? (
-    <VolumeOff fontSize="small" />
-  ) : (
-    <VolumeUp fontSize="small" />
-  )}
-</button>
-
-
-
-
+                  onClick={() => toggleMute(index)}
+                  className="absolute top-3 right-3 bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-md w-8 h-8 flex items-center justify-center hover:opacity-90 transition duration-200 shadow-md"
+                >
+                  {mutedStates[index] ? (
+                    <VolumeOff fontSize="small" />
+                  ) : (
+                    <VolumeUp fontSize="small" />
+                  )}
+                </button>
 
                 {/* Branding */}
                 <div className="absolute bottom-6 left-1/2 transform min-w-[180px] -translate-x-1/2 px-4 py-1 bg-white/90 backdrop-blur-md rounded-lg shadow-sm flex items-center gap-2 text-xs text-slate-700">

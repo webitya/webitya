@@ -3,7 +3,7 @@ const influencers = [
     slug: "harry",
     name: "Harry",
     location:"Ranchi, Jharkhand",
-    category: "Acting | Action | Creator | Action",
+    category: "Actor | Action | Creator | Movie | Ads",
     image: "/influencers/HarryPriyanshu/img3.webp",
     followers: "800",
     link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
