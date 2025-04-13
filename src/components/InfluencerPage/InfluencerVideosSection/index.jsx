@@ -8,7 +8,6 @@ import {
   VolumeOff,
   VolumeUp,
   Replay,
-  HourglassEmpty,
 } from "@mui/icons-material";
 
 const InfluencerVideosSection = ({ videos = [] }) => {
@@ -89,11 +88,14 @@ const InfluencerVideosSection = ({ videos = [] }) => {
   };
 
   const handleLoaded = (index) => {
-    setLoadingStates((prev) => {
-      const updated = [...prev];
-      updated[index] = false;
-      return updated;
-    });
+    // Force loading to stay visible for 2 seconds
+    setTimeout(() => {
+      setLoadingStates((prev) => {
+        const updated = [...prev];
+        updated[index] = false;
+        return updated;
+      });
+    }, 3000);
   };
 
   const handleError = (index) => {
@@ -128,15 +130,17 @@ const InfluencerVideosSection = ({ videos = [] }) => {
           >
             {/* Loading Spinner */}
             {loadingStates[index] && !errorStates[index] && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white/60 rounded-2xl z-10">
-                <HourglassEmpty
-                  fontSize="large"
-                  className="animate-spin text-transparent bg-clip-text bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045]"
+              <div className="absolute inset-0 z-10 bg-white/70 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl">
+                <div className="w-10 h-10 border-4 border-dashed rounded-full animate-spin"
+                  style={{
+                    borderColor: "#833ab4 #fd1d1d #fcb045 transparent",
+                  }}
                 />
+                <p className="mt-2 text-sm text-slate-600">Loading...</p>
               </div>
             )}
 
-            {/* Error Fallback */}
+            {/* Error fallback */}
             {errorStates[index] && (
               <div className="flex items-center justify-center w-full h-full text-red-500 text-sm font-semibold bg-slate-100 rounded-2xl p-4">
                 Failed to load video
@@ -148,8 +152,8 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               <video
                 ref={(el) => (videoRefs.current[index] = el)}
                 src={src}
-                className={`w-full h-auto object-cover rounded-2xl transition-opacity duration-500 ${
-                  loadingStates[index] ? "opacity-0" : "opacity-100"
+                className={`w-full h-auto object-cover rounded-2xl ${
+                  loadingStates[index] ? "hidden" : "block"
                 }`}
                 muted={mutedStates[index]}
                 controls={false}
@@ -164,13 +168,13 @@ const InfluencerVideosSection = ({ videos = [] }) => {
               />
             )}
 
-            {/* Overlay Controls */}
+            {/* Controls */}
             {!loadingStates[index] && !errorStates[index] && (
               <>
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-white/30 via-transparent to-transparent rounded-2xl">
                   <button
                     onClick={() => togglePlay(index)}
-                    className="bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-lg w-10 h-10 flex items-center justify-center shadow-lg backdrop-blur-md hover:scale-105 transition"
+                    className="bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white rounded-lg w-10 h-10 flex items-center justify-center shadow-lg backdrop-blur-md hover:scale-105 transition"
                   >
                     {endedStates[index] ? (
                       <Replay fontSize="small" />
@@ -182,10 +186,9 @@ const InfluencerVideosSection = ({ videos = [] }) => {
                   </button>
                 </div>
 
-                {/* Mute Button */}
                 <button
                   onClick={() => toggleMute(index)}
-                  className="absolute top-3 right-3 bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 text-white rounded-md w-8 h-8 flex items-center justify-center hover:opacity-90 transition duration-200 shadow-md"
+                  className="absolute top-3 right-3 bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white rounded-md w-8 h-8 flex items-center justify-center hover:opacity-90 transition duration-200 shadow-md"
                 >
                   {mutedStates[index] ? (
                     <VolumeOff fontSize="small" />
@@ -194,7 +197,6 @@ const InfluencerVideosSection = ({ videos = [] }) => {
                   )}
                 </button>
 
-                {/* Branding */}
                 <div className="absolute bottom-6 left-1/2 transform min-w-[180px] -translate-x-1/2 px-4 py-1 bg-white/90 backdrop-blur-md rounded-lg shadow-sm flex items-center gap-2 text-xs text-slate-700">
                   <span>Powered by</span>
                   <a href="/" className="block">
@@ -206,7 +208,6 @@ const InfluencerVideosSection = ({ videos = [] }) => {
                   </a>
                 </div>
 
-                {/* Progress Bar */}
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-white">
                   <div
                     className="h-full bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] transition-all duration-200"
