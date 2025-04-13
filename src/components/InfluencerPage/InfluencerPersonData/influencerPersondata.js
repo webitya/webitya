@@ -63,25 +63,25 @@ const influencers = [
     gallery: ["/influencers/sau-mya/img1.webp", "/influencers/sau-mya/img2.webp", "/influencers/sau-mya/img3.webp", "/influencers/sau-mya/img4.webp"]
   },
   {
-    slug: "rahul-chauhan",
-    name: "Rahul Chauhan",
-    location:"Ranchi, Jharkhand",
-    category: "Lifestyle | For Ads",
-    image: "/influencers/rahulchauhan.png",
-    followers: "430K",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Rahul%20Chauhan",
-    description: "Rahul shares powerful lifestyle content and is open for brand collaborations.",
-    age: 27,
-    height: "5'9\"",
+    slug: "amit-creators",
+    name: "Amit",
+    location:"Patna, Bihar",
+    category: "Lifestyle | Creator",
+    image: "/influencers/amit-creators/img2.webp",
+    followers: "49.7K",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Amit%20Creators",
+    description: "Amit is a Lifestyle Creator from Patna, Bihar, known for showcasing rental spaces and offering impactful paid promotions and brand collaborations.",
+    age: 22,
+    height: "5'7\"",
     startingPrice: "₹2,000",
     workingFields: {
-      collaborator: "₹5,000 - ₹7,500",
-      shopPromotion: "₹4,000 - ₹6,500",
-      storyPromotion: "₹2,000 - ₹3,500",
-      brandPromotion: "₹7,000 - ₹11,000"
+      collaborator: "₹4,000 - ₹5000",
+      shopPromotion: "₹5,000 - ₹6,500",
+      storyPromotion: "₹2,000 - ₹3,000",
+      brandPromotion: "₹5,000 - ₹7,000"
     },
-    demoVideos: ["/demos/rahul1.mp4", "/demos/rahul2.mp4", "/demos/rahul3.mp4"],
-    gallery: ["/gallery/rahul1.jpg", "/gallery/rahul2.jpg", "/gallery/rahul3.jpg"]
+    demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744513388/How_to_search_room_rent_in_patna_bihar_patna_patnacity_patnabihar_trending_comedy_funnynews_cgcomedy_patnabihar_couple_girlfriend_trending_ebs6bb.mp4", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744513406/Patna_junction_meethapur_Ramkrishna_nagar_single_room_rent_2500_patna_patnacity_patnabihar_couple_trending_hostel_pg_study_xtbmld.mp4", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744513388/How_to_search_room_rent_in_patna_bihar_patna_patnacity_patnabihar_trending_comedy_funnynews_cgcomedy_patnabihar_couple_girlfriend_trending_ebs6bb.mp4"],
+    gallery: ["/influencers/amit-creators/img1.webp", "/influencers/amit-creators/img2.webp", "/influencers/amit-creators/img3.webp","/influencers/amit-creators/img4.webp"]
   },
   {
     slug: "nisha-soni",

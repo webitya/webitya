@@ -24,11 +24,11 @@ const influencers = [
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Sau%20Mya",
     },
     {
-      slug: "rahul-chauhan",
-      name: "Rahul Chauhan",
-      category: "Lifestyle | For Ads",
-      image: "/influencers/rahulchauhan.png",
-      followers: "430K",
+      slug: "amit-creators",
+      name: "Amit",
+      category: "Lifestyle | Creator",
+      image: "/influencers/amit-creators/img2.webp",
+      followers: "49.7K",
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Rahul%20Chauhan",
     },
     {
