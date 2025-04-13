@@ -101,7 +101,7 @@ const influencers = [
       storyPromotion: "₹2,000 - ₹3,000",
       brandPromotion: "₹4,000 - ₹5,000"
     },
-    demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744514220/IMG_7167_l99u5r.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744514359/IMG_7513_iusoow.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744514339/IMG_5099_nmpuoj.mov"],
+    demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515598/IMG_7167_e8uwyw.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515678/IMG_6445_e4ifds.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515637/IMG_7513_iy8gei.mov"],
     gallery: ["/influencers/HarryPriyanshu/img1.webp", "/influencers/HarryPriyanshu/img2.webp", "/influencers/HarryPriyanshu/img3.webp", "/influencers/HarryPriyanshu/img4.webp"]
   },
   {
