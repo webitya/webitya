@@ -1,5 +1,13 @@
 const influencers = [
-    {
+  {
+    slug: "harry",
+    name: "Harry",
+    category: "Acting | Action | Creatot | Action",
+    image: "/influencers/HarryPriyanshu/img3.webp",
+    followers: "800",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
+  },  
+  {
       slug: "pravin-brother",
       name: "Pravin Brother",
       category: "Actor | Content Creator",
@@ -31,14 +39,7 @@ const influencers = [
       followers: "49.7K",
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Amit",
     },
-    {
-      slug: "harry",
-      name: "Harry",
-      category: "Acting | Action | Creatot | Action",
-      image: "/influencers/HarryPriyanshu/img3.webp",
-      followers: "800",
-      link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
-    },
+ 
     // {
     //   slug: "akjali-mahto",
     //   name: "Akjali Mahto",

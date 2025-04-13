@@ -1,5 +1,25 @@
 const influencers = [ 
   {
+    slug: "harry",
+    name: "Harry",
+    location:"Ranchi, Jharkhand",
+    category: "Acting | Action | Creatot | Action",
+    image: "/influencers/HarryPriyanshu/img3.webp",
+    followers: "800",
+    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
+    description: "Harry is a passionate actor and action creator from Ranchi, Jharkhand, known for his dynamic performances and impactful brand collaborations.",
+    age: 21,
+    height: "5'9\"",
+    startingPrice: "₹2,000",
+    workingFields: {
+      collaborator: "₹2,000 - ₹4,000",
+      shopPromotion: "₹4,000 - ₹5,500",
+      storyPromotion: "₹2,000 - ₹3,000",
+      brandPromotion: "₹4,000 - ₹5,000"
+    },
+    demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515598/IMG_7167_e8uwyw.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515678/IMG_6445_e4ifds.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515637/IMG_7513_iy8gei.mov"],
+    gallery: ["/influencers/HarryPriyanshu/img1.webp", "/influencers/HarryPriyanshu/img2.webp", "/influencers/HarryPriyanshu/img3.webp", "/influencers/HarryPriyanshu/img4.webp"]
+  },{
     slug: "pravin-brother",
     name: "Pravin Brother",
     location:"Ranchi, Jharkhand",
@@ -83,27 +103,7 @@ const influencers = [
     demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744513388/How_to_search_room_rent_in_patna_bihar_patna_patnacity_patnabihar_trending_comedy_funnynews_cgcomedy_patnabihar_couple_girlfriend_trending_ebs6bb.mp4", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744513406/Patna_junction_meethapur_Ramkrishna_nagar_single_room_rent_2500_patna_patnacity_patnabihar_couple_trending_hostel_pg_study_xtbmld.mp4", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744513388/How_to_search_room_rent_in_patna_bihar_patna_patnacity_patnabihar_trending_comedy_funnynews_cgcomedy_patnabihar_couple_girlfriend_trending_ebs6bb.mp4"],
     gallery: ["/influencers/amit-creators/img1.webp", "/influencers/amit-creators/img2.webp", "/influencers/amit-creators/img3.webp","/influencers/amit-creators/img4.webp"]
   },
-  {
-    slug: "harry",
-    name: "Harry",
-    location:"Ranchi, Jharkhand",
-    category: "Acting | Action | Creatot | Action",
-    image: "/influencers/HarryPriyanshu/img3.webp",
-    followers: "800",
-    link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Harry%20Actor",
-    description: "Harry is a passionate actor and action creator from Ranchi, Jharkhand, known for his dynamic performances and impactful brand collaborations.",
-    age: 21,
-    height: "5'9\"",
-    startingPrice: "₹2,000",
-    workingFields: {
-      collaborator: "₹2,000 - ₹4,000",
-      shopPromotion: "₹4,000 - ₹5,500",
-      storyPromotion: "₹2,000 - ₹3,000",
-      brandPromotion: "₹4,000 - ₹5,000"
-    },
-    demoVideos: ["https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515598/IMG_7167_e8uwyw.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515678/IMG_6445_e4ifds.mov", "https://res.cloudinary.com/dxqthnbx7/video/upload/v1744515637/IMG_7513_iy8gei.mov"],
-    gallery: ["/influencers/HarryPriyanshu/img1.webp", "/influencers/HarryPriyanshu/img2.webp", "/influencers/HarryPriyanshu/img3.webp", "/influencers/HarryPriyanshu/img4.webp"]
-  },
+
 
   // {
   //   slug: "akjali-mahto",
