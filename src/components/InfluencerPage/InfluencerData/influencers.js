@@ -10,7 +10,7 @@ const influencers = [
   {
       slug: "pravin-brother",
       name: "Pravin Brother",
-      category: "Actor | Content Creator",
+      category: "Content Creator",
       image: "/influencers/pravinbrother.png",
       followers: "326K",
       link: "https://wa.me/917323839108?text=I%20want%20to%20book%20Pravin%20Brother",
