@@ -22,9 +22,9 @@ import emailjs from 'emailjs-com';
 
 const footerData = [
   {
-    title: 'Resources',
+    title: 'Exclusive Services',
     links: [
-      { name: 'Docs', href: '#' },
+      { name: 'चार धाम यात्रा ', href: '/char-dham-yatra' },
       { name: 'Learn', href: '#' },
       { name: 'Case Studies', href: '#' },
       { name: 'Blog', href: '#' },
@@ -62,6 +62,7 @@ const footerData = [
       { name: 'Privacy', href: '/legal/privacy-policy' },
       { name: 'Terms of service', href: '/legal/terms' },
       { name: 'Disclaimer', href: '/legal/disclaimer' },
+      { name: 'FAQS', href: '/faqs' },
       { name: 'Book Influencer', href: '/influencers#collection' },
       { name: 'Contact', href: '/contact-us' },
     ],
