@@ -55,7 +55,7 @@ const footerData = [
       { name: 'Email Marketing', href: '/courses' },
       { name: 'Content Marketing', href: '/courses' },
       { name: 'Web Design', href: '/courses' },
-      { name: 'Students', href: '/courses/all-students' },
+      { name: 'Our Students', href: '/courses/all-students' },
     ],
   },
   {
