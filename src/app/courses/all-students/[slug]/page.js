@@ -175,8 +175,8 @@ export default function StudentDetailPage({ params }) {
       <Card className="shadow-md rounded-2xl">
         <CardContent>
           <Box className="flex justify-between items-center mb-4">
-            <div className='flex gap-1 items-center'>
-              <Typography variant="h6" fontWeight="bold">Course Journey</Typography>
+            <div className='flex gap-2 items-center'>
+              <Typography variant="h6" fontWeight="bold">60-Day Course Journey</Typography>
               <Chip
   label="Track Progress"
   color="info"
