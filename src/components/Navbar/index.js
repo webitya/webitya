@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // ✅ For detecting route
+import { usePathname } from "next/navigation";
 import {
   AppBar,
   Toolbar,
@@ -17,19 +17,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DrawerEl from "../DrawerEl";
 
-const menuLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Portfolio", path: "/portfolio" },
-  { name: "Courses", path: "/courses" },
-  { name: "Influencers", path: "/influencers" },
-  { name: "Contact", path: "/contact-us" },
-];
-
 const Navbar = () => {
-  const pathname = usePathname(); // ✅ Detect current route
-
+  const pathname = usePathname();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -44,7 +33,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -54,14 +42,55 @@ const Navbar = () => {
     threshold: 100,
   });
 
-  // ✅ Dynamically change logo
-  let logoSrc = "/brand/logo1.png"; // Default logo
+  // ✅ Dynamic styles and logo
+  let logoSrc = "/brand/logo1.png";
+  let bgColor = "rgba(255, 255, 255, 0.9)";
+  let textColor = "black";
+  let hoverTextColor = "black";
+  let ctaBgColor = "black";
+  let ctaTextColor = "white";
+  let ctaHoverBgColor = "#1a1a1a";
+
+  // ✅ Dynamic menuLinks
+  let menuLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
+    { name: "Portfolio", path: "/portfolio" },
+    { name: "Courses", path: "/courses" },
+    { name: "Influencers", path: "/influencers" },
+    { name: "Contact", path: "/contact-us" },
+  ];
+
   if (pathname === "/cars") {
     logoSrc = "/brand/logo-cars.png";
-  } else if (pathname === "/char-dham-yatra") {
-    logoSrc = "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
-  } else if (pathname === "/tour&travells/char-dham-yatra") {
-    logoSrc = "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
+    bgColor = "black";
+    textColor = "white";
+    hoverTextColor = "#00ff7f";
+    ctaBgColor = "white";
+    ctaTextColor = "black";
+    ctaHoverBgColor = "#00ff7f";
+
+    menuLinks = [
+      { name: "Ford", path: "/cars/ford" },
+      { name: "Jaguar", path: "/cars/jaguar" },
+      { name: "Audi", path: "/cars/audi" },
+    ];
+  } else if (
+    pathname === "/char-dham-yatra" ||
+    pathname === "/tour&travells/char-dham-yatra"
+  ) {
+    logoSrc =
+      "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
+    bgColor = "#f8e4c0";
+    textColor = "black";
+    hoverTextColor = "#d2691e";
+
+    menuLinks = [
+      { name: "Pricing", path: "/tour&travells/char-dham-yatra#pricing" },
+      { name: "Hotels", path: "/tour&travells/char-dham-yatra#hotels" },
+      { name: "Cars", path: "/tour&travells/char-dham-yatra#cars" },
+    ];
   }
 
   return (
@@ -71,9 +100,9 @@ const Navbar = () => {
           position="fixed"
           elevation={isSticky ? 4 : 0}
           sx={{
-            bgcolor: "rgba(255, 255, 255, 0.9)",
+            bgcolor: bgColor,
             backdropFilter: "blur(6px)",
-            color: "black",
+            color: textColor,
             transition: "all 0.3s ease-in-out",
             boxShadow: isSticky
               ? "0 2px 10px rgba(0,0,0,0.1)"
@@ -82,12 +111,12 @@ const Navbar = () => {
           }}
         >
           <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, sm: 3 } }}>
-            {/* ✅ Logo based on route */}
+            {/* Logo */}
             <Link href="/" passHref>
               <img src={logoSrc} alt="WEBITYA Logo" style={{ width: "160px" }} />
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Menu */}
             {!isMobile && (
               <Box display="flex" alignItems="center" gap={3}>
                 {menuLinks.map((link) => (
@@ -95,10 +124,11 @@ const Navbar = () => {
                     <Button
                       component="a"
                       sx={{
-                        color: "#007bff",
+                        color: textColor,
                         fontWeight: 500,
                         textTransform: "none",
-                        "&:hover": { color: "black" },
+                        transition: "color 0.2s ease-in-out",
+                        "&:hover": { color: hoverTextColor },
                       }}
                     >
                       {link.name}
@@ -112,16 +142,18 @@ const Navbar = () => {
                     component="a"
                     variant="contained"
                     sx={{
-                      bgcolor: "black",
-                      color: "white",
+                      bgcolor: ctaBgColor,
+                      color: ctaTextColor,
                       px: 3,
                       py: 1,
                       borderRadius: 2,
                       textTransform: "none",
                       fontWeight: "bold",
                       fontSize: "0.95rem",
+                      transition: "all 0.3s ease-in-out",
                       "&:hover": {
-                        bgcolor: "#1a1a1a",
+                        bgcolor: ctaHoverBgColor,
+                        color: "white",
                       },
                     }}
                   >
@@ -135,7 +167,7 @@ const Navbar = () => {
             {isMobile && (
               <IconButton
                 onClick={toggleDrawer(true)}
-                sx={{ color: "black" }}
+                sx={{ color: textColor }}
                 aria-label="menu"
               >
                 <MenuIcon fontSize="large" />
