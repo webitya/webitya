@@ -1,32 +1,33 @@
 const studentViewAllData = {
-  "rahul-sharma": {
-    name: "Rahul Sharma",
+  "satyam-digital-marketing": {
+    name: "Satyam",
     image: "/images/rahul.jpg",
-    email: "rahul@example.com",
-    contact: "rahul@example.com",
-    linkedin: "https://linkedin.com/in/rahulsharma",
+    email: "satyam@gmail.com",
+    contact: "satyam@gmail.com",
+    linkedin: "https://linkedin.com/in/#",
     address: "Ranchi, Jharkhand",
-    qualification: "B.Sc IT",
-    course: "MERN Stack",
+    qualification: "Commerce",
+    course: "Digital Marketing",
     journey: [
       {
-        day: 1,
-        date: "2025-04-01",
-        topic: "Introduction to MERN",
-        homework: "Done",
-        homeworkLink: "/homework/day1-homework.pdf",
-        lectureLink: "https://youtube.com/lecture1",
-        resourceLink: "/resources/mern_intro.pdf"
+        day: 'Day 1',
+        date: '2025-04-16',
+        topic: 'Intro Website',
+        homeworkFile: 'https://docs.google.com/spreadsheets/d/1x2_ymyiEk9uKaq85BmI424SNvgVKNjrrxzsXaRHkzBk/edit?usp=sharing',   // file for student to download
+        homeworkSubmitted: true,              // student has submitted or not
+        lectureLink: 'https://youtube.com/@webitya',
+        resourceLink: 'https://docs.google.com/spreadsheets/d/1x2_ymyiEk9uKaq85BmI424SNvgVKNjrrxzsXaRHkzBk/edit?usp=sharing',
       },
-      {
-        day: 2,
-        date: "2025-04-02",
-        topic: "Node.js Basics",
-        homework: "Pending",
-        homeworkLink: "",
-        lectureLink: "https://youtube.com/lecture2",
-        resourceLink: "/resources/node_basics.pdf"
-      }
+      
+      // {
+      //   day: 'Day 1',
+      //   date: '2025-04-16',
+      //   topic: 'Intro to Marketing',
+      //   homeworkFile: '/homeworks/day1.pdf',   // file for student to download
+      //   homeworkSubmitted: false,              // student has submitted or not
+      //   lectureLink: 'https://lecturelink.com',
+      //   resourceLink: 'https://docs.google.com/spreadsheets/d/1x2_ymyiEk9uKaq85BmI424SNvgVKNjrrxzsXaRHkzBk/edit?usp=sharing',
+      // }
       // Add more entries up to day 60 following the same pattern
     ]
   }

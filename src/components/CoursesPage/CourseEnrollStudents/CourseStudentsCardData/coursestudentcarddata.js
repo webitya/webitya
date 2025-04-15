@@ -2,10 +2,10 @@
 const coursestudentCardData = [
     {
       id: 1,
-      name: "Rahul Sharma",
-      course: "MERN Stack",
-      slug: "rahul-sharma",
-      shortDesc: "Learning MERN from scratch",
+      name: "Satyam",
+      course: "Digital Marketing",
+      slug: "satyam-digital-marketing",
+      shortDesc: "Learning Digital Marketing from scratch",
       image: "/images/rahul.jpg"
     },
     // Add more students
