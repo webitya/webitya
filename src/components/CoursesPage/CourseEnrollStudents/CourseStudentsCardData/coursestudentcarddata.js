@@ -6,7 +6,7 @@ const coursestudentCardData = [
       course: "Digital Marketing",
       slug: "satyam-digital-marketing",
       shortDesc: "Learning Digital Marketing from scratch",
-      image: "/images/rahul.jpg"
+      image: "/aboutHero.webp"
     },
     // Add more students
   ];
