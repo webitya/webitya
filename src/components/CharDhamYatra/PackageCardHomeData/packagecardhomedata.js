@@ -16,7 +16,7 @@ const charDhamPackages = [
   },
   {
     title: "Char Dham Package 2",
-    slug: "package-2",
+    slug: "/tour&travells/char-dham-yatra/package2",
     description: "Experience peace and divinity with this exclusive Char Dham tour.",
     price: 37000,
     discountedPrice: 27999,
@@ -30,7 +30,7 @@ const charDhamPackages = [
   },
   {
     title: "Char Dham Package 3",
-    slug: "package-3",
+    slug: "/tour&travells/char-dham-yatra/package3",
     description: "A spiritual retreat to the four holy shrines of Char Dham.",
     price: 40000,
     discountedPrice: 29999,

@@ -76,22 +76,20 @@ const Navbar = () => {
       { name: "Jaguar", path: "/cars/jaguar" },
       { name: "Audi", path: "/cars/audi" },
     ];
-  } else if (
-    pathname === "/char-dham-yatra" ||
-    pathname === "/tour&travells/char-dham-yatra"
-  ) {
+  } else if (pathname.includes("/tour&travells")) {
     logoSrc =
       "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
     bgColor = "#f8e4c0";
     textColor = "black";
     hoverTextColor = "#d2691e";
-
+  
     menuLinks = [
       { name: "Pricing", path: "/tour&travells/char-dham-yatra#pricing" },
       { name: "Hotels", path: "/tour&travells/char-dham-yatra#hotels" },
       { name: "Cars", path: "/tour&travells/char-dham-yatra#cars" },
     ];
   }
+  
 
   return (
     <>

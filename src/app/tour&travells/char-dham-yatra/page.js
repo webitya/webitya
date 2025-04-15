@@ -38,9 +38,9 @@ export const metadata = {
 export default function CharDhamYatra() {
   return (
     <main className="mx-auto">
-      
+      <div className="bg-black text-white text-center py-2 px-2 text-xl">This Page In Maintainace Mode Coming Soon..</div>
       <CharDhamCarousel />
-      
+      <div className="bg-black text-white text-center py-2 px-2 text-xl">This Page In Maintainace Mode Coming Soon..</div>
       <PackageCardDetail />
       
       <CharDhamServices />
