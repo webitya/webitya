@@ -11,7 +11,7 @@ const studentViewAllData = {
     journey: [
       {
         day: 'Day 1',
-        date: '2025-04-16',
+        date: '2025-04-15',
         topic: 'Introduction to Website',
         homeworkFile: 'https://docs.google.com/spreadsheets/d/1x2_ymyiEk9uKaq85BmI424SNvgVKNjrrxzsXaRHkzBk/edit?usp=sharing',   // file for student to download
         homeworkSubmitted: true,              // student has submitted or not
