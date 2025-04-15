@@ -25,6 +25,7 @@ import Link from 'next/link';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Image from 'next/image';
+import Footer from '@/components/FooterEl';
 
 export default function StudentDetailPage({ params }) {
   const { slug } = params;
@@ -134,6 +135,7 @@ export default function StudentDetailPage({ params }) {
   };
 
   return (
+  <>
     <div className="p-4 md:p-8 max-w-7xl mx-auto">
       {/* Profile Header */}
       <Card className="mb-10 shadow-lg rounded-2xl">
@@ -288,5 +290,7 @@ export default function StudentDetailPage({ params }) {
         </Button>
       </div>
     </div>
+    <Footer/>
+  </>
   );
 }

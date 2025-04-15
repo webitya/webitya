@@ -1,9 +1,11 @@
 // app/courses/all-students/page.js
+import Footer from '@/components/FooterEl';
 import studentCardData from '../../../components/CoursesPage/CourseEnrollStudents/CourseStudentsCardData/coursestudentcarddata';
 import Link from 'next/link';
 
 export default function AllStudentsPage() {
   return (
+   <>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6">
       {studentCardData.map(student => (
         <div key={student.id} className="border p-4 rounded shadow">
@@ -19,5 +21,7 @@ export default function AllStudentsPage() {
         </div>
       ))}
     </div>
+    <Footer/>
+   </>
   );
 }
