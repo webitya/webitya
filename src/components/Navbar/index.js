@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // ✅ For detecting route
 import {
   AppBar,
   Toolbar,
@@ -10,7 +11,6 @@ import {
   Box,
   useTheme,
   useMediaQuery,
-  Typography,
   Slide,
   useScrollTrigger,
 } from "@mui/material";
@@ -28,6 +28,8 @@ const menuLinks = [
 ];
 
 const Navbar = () => {
+  const pathname = usePathname(); // ✅ Detect current route
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -52,9 +54,16 @@ const Navbar = () => {
     threshold: 100,
   });
 
+  // ✅ Dynamically change logo
+  let logoSrc = "/brand/logo1.png"; // Default logo
+  if (pathname === "/cars") {
+    logoSrc = "/brand/logo-cars.png";
+  } else if (pathname === "/char-dham-yatra") {
+    logoSrc = "/brand/logo-chardham.png";
+  }
+
   return (
     <>
-      {/* Sticky navbar with slide effect */}
       <Slide appear={false} direction="down" in={!trigger || isSticky}>
         <AppBar
           position="fixed"
@@ -64,30 +73,16 @@ const Navbar = () => {
             backdropFilter: "blur(6px)",
             color: "black",
             transition: "all 0.3s ease-in-out",
-            boxShadow: isSticky ? "0 2px 10px rgba(0,0,0,0.1)" : "0 2px 10px rgba(0,0,0,0.1)",
+            boxShadow: isSticky
+              ? "0 2px 10px rgba(0,0,0,0.1)"
+              : "0 2px 10px rgba(0,0,0,0.1)",
             zIndex: (theme) => theme.zIndex.modal + 1,
           }}
         >
           <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, sm: 3 } }}>
-            {/* Logo */}
+            {/* ✅ Logo based on route */}
             <Link href="/" passHref>
-              {/* <Typography
-                variant="h6"
-                fontWeight="bold"
-                component="a"
-                sx={{
-                  color: "black",
-                  textDecoration: "none",
-                  letterSpacing: 1,
-                  "&:hover": {
-                    color: "primary.main",
-                    transition: "color 0.3s ease",
-                  },
-                }}
-              >
-                WEBITYA
-              </Typography> */}
-              <img src="/brand/logo1.png" alt="WEBITYA Logo" style={{ width: '160px' }} />
+              <img src={logoSrc} alt="WEBITYA Logo" style={{ width: "160px" }} />
             </Link>
 
             {/* Desktop Navigation */}
@@ -148,7 +143,7 @@ const Navbar = () => {
         </AppBar>
       </Slide>
 
-      {/* Mobile Drawer (placed outside AppBar to avoid z-index issues) */}
+      {/* Mobile Drawer */}
       <DrawerEl isOpen={drawerOpen} toggleMenu={() => setDrawerOpen(false)} />
     </>
   );
