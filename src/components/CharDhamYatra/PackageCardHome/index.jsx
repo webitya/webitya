@@ -25,14 +25,20 @@ const PackageCardHome = () => {
 };
 
 const CharDhamPackageCard = ({ packageData }) => {
-  const [index, setIndex] = useState(0);
+  const [[index, direction], setIndex] = useState([0, 0]);
 
   const goToPrevious = () => {
-    setIndex((prev) => (prev - 1 + packageData.images.length) % packageData.images.length);
+    setIndex(([prevIndex]) => [
+      (prevIndex - 1 + packageData.images.length) % packageData.images.length,
+      -1,
+    ]);
   };
 
   const goToNext = () => {
-    setIndex((prev) => (prev + 1) % packageData.images.length);
+    setIndex(([prevIndex]) => [
+      (prevIndex + 1) % packageData.images.length,
+      1,
+    ]);
   };
 
   useEffect(() => {
@@ -49,12 +55,13 @@ const CharDhamPackageCard = ({ packageData }) => {
     >
       {/* Image Carousel */}
       <div className="relative w-full h-64">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={index}
-            initial={{ opacity: 0.3 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            custom={direction}
+            initial={{ x: direction > 0 ? 300 : -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: direction > 0 ? -300 : 300, opacity: 0 }}
             transition={{ duration: 0.6 }}
             className="absolute inset-0"
           >
@@ -92,7 +99,7 @@ const CharDhamPackageCard = ({ packageData }) => {
           {packageData.images.map((_, i) => (
             <div
               key={i}
-              onClick={() => setIndex(i)}
+              onClick={() => setIndex([i, i > index ? 1 : -1])}
               className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
                 i === index ? "bg-white scale-125" : "bg-white/50"
               }`}

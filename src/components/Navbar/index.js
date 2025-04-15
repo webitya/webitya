@@ -59,7 +59,9 @@ const Navbar = () => {
   if (pathname === "/cars") {
     logoSrc = "/brand/logo-cars.png";
   } else if (pathname === "/char-dham-yatra") {
-    logoSrc = "/brand/logo-chardham.png";
+    logoSrc = "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
+  } else if (pathname === "/tour&travells/char-dham-yatra") {
+    logoSrc = "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
   }
 
   return (

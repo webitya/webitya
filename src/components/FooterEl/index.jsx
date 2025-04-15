@@ -24,7 +24,8 @@ const footerData = [
   {
     title: 'Exclusive Services',
     links: [
-      { name: 'चार धाम यात्रा ', href: '/char-dham-yatra' },
+      { name: 'चार धाम यात्रा ', href: '/tour&travells/char-dham-yatra' },
+      { name: 'Tour & Travells ', href: '/tour&travells/char-dham-yatra' },
       // { name: 'Learn', href: '#' },
       // { name: 'Case Studies', href: '#' },
       // { name: 'Blog', href: '#' },

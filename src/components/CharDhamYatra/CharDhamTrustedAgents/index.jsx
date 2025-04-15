@@ -6,32 +6,32 @@ const trustedAgents = [
   {
     name: "Shri Hari Travels",
     location: "Haridwar, Uttarakhand",
-    image: "/agents/shri-hari.jpg",
+    image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744693125/Untitled_design_-_2025-04-15T102825.884_imaq9a.png",
   },
   {
     name: "Divine Yatra Tours",
     location: "Rishikesh, Uttarakhand",
-    image: "/agents/divine-yatra.jpg",
+    image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744693125/Untitled_design_-_2025-04-15T102825.884_imaq9a.png",
   },
   {
     name: "Bhakti Path",
     location: "Varanasi, Uttar Pradesh",
-    image: "/agents/bhakti-path.jpg",
+    image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744693125/Untitled_design_-_2025-04-15T102825.884_imaq9a.png",
   },
   {
     name: "Holy Steps Tours",
     location: "Delhi NCR",
-    image: "/agents/holy-steps.jpg",
+    image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744693125/Untitled_design_-_2025-04-15T102825.884_imaq9a.png",
   },
   {
     name: "Chardham Connect",
     location: "Dehradun, Uttarakhand",
-    image: "/agents/chardham-connect.jpg",
+    image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744693125/Untitled_design_-_2025-04-15T102825.884_imaq9a.png",
   },
   {
     name: "Spiritual Journeys",
     location: "Ahmedabad, Gujarat",
-    image: "/agents/spiritual-journeys.jpg",
+    image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744693125/Untitled_design_-_2025-04-15T102825.884_imaq9a.png",
   },
 ];
 

@@ -24,7 +24,7 @@ const CharDhamRouteMap = () => {
         >
           {/* Replace the src with your route map image */}
           <img
-            src="/images/char-dham-route.jpg"
+            src="https://res.cloudinary.com/dxqthnbx7/image/upload/v1744693859/Untitled_design_-_2025-04-15T104041.977_ydfrc7.png"
             alt="Char Dham Route Map"
             className="w-full rounded-xl shadow-lg"
           />

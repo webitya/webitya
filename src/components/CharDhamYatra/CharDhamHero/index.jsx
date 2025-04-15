@@ -8,15 +8,15 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 const slides = [
   {
     mobilePreview: "/courses/8m.webp",
-    desktopPreview: "/courses/1.webp",
+    desktopPreview: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744689242/Copy_of_Copy_of_our_projects_osdsrk.webp",
   },
   {
-    mobilePreview: "/courses/7m.webp",
-    desktopPreview: "/courses/2.webp",
+    mobilePreview: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744688817/4_ghm8fe.webp",
+    desktopPreview: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744688817/4_ghm8fe.webp",
   },
   {
     mobilePreview: "/courses/6m.webp",
-    desktopPreview: "/courses/4.webp",
+    desktopPreview: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744688816/3_yzwvhg.webp",
   },
 ];
 
@@ -115,7 +115,7 @@ const CharDhamCarousel = () => {
               alt={`Preview ${i}`}
               className={`w-12 h-8 object-cover rounded-md transition-all duration-300 border-2 ${
                 i === index
-                  ? "border-[#e0b94a] scale-105"
+                  ? "border-[#ffffff] scale-105"
                   : "border-transparent opacity-60 hover:opacity-100"
               } hidden md:block`}
             />

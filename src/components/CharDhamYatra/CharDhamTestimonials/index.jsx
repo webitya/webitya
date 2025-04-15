@@ -9,28 +9,28 @@ const testimonials = [
     location: "Delhi",
     review:
       "The Char Dham Yatra was a life-changing experience for me. The services provided, from the transport to the accommodations, were flawless. I felt spiritually connected every step of the journey. Highly recommended!",
-    image: "/images/amit-sharma.jpg",
+    image: "/team.webp",
   },
   {
     name: "Priya Gupta",
     location: "Mumbai",
     review:
       "My family and I had an unforgettable experience on the Char Dham Yatra. The tour guides were knowledgeable, the meals were delicious, and the entire trip was seamless. Thank you for making this pilgrimage so memorable.",
-    image: "/images/priya-gupta.jpg",
+    image: "/team.webp",
   },
   {
     name: "Ravi Kumar",
     location: "Bangalore",
     review:
       "As a first-timer, I was nervous about the journey, but everything was perfectly organized. The accommodations were great, and I felt well-supported throughout. It was truly a spiritual journey, and I will cherish it forever.",
-    image: "/images/ravi-kumar.jpg",
+    image: "/team.webp",
   },
   {
     name: "Seema Patel",
     location: "Ahmedabad",
     review:
       "A deeply spiritual and peaceful journey. The staff took care of every little detail, allowing me to focus on my spiritual experience. The Char Dham Yatra is a must-do for anyone looking for peace of mind and soul.",
-    image: "/images/seema-patel.jpg",
+    image: "/team.webp",
   },
 ];
 
