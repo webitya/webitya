@@ -150,11 +150,19 @@ export default function StudentDetailPage({ params }) {
         {/* Profile Header */}
         <Card className="mb-2 shadow-lg rounded-2xl">
           <CardContent className="flex flex-col md:flex-row items-center gap-6">
-            <Avatar
-              src={student.image}
-              alt={student.name}
-              sx={{ width: 100, height: 100 }}
-            />
+          <Avatar
+  src={student.image}
+  alt={student.name}
+  sx={{
+    width: 100,
+    height: 100,
+    border: '3px solid #D1D5DB',       // Light gray border
+    borderRadius: '50%',
+    objectFit: 'contain',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)', // Optional soft shadow
+  }}
+/>
+
             <div className="space-y-1">
               <Typography variant="h4" fontWeight="bold">{student.name}</Typography>
               <Chip
