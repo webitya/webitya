@@ -19,7 +19,7 @@ import {
   Card,
   CardContent
 } from '@mui/material';
-import { FileDownload } from '@mui/icons-material';
+import { FileDownload, ArrowBack } from '@mui/icons-material';
 import studentViewAllData from '../../../../components/CoursesPage/CourseEnrollStudents/CourseStudentViewAllData/coursestudentviewalldata';
 import Link from 'next/link';
 import jsPDF from 'jspdf';
@@ -135,162 +135,181 @@ export default function StudentDetailPage({ params }) {
   };
 
   return (
-  <>
-    <div className="p-4 md:p-8 max-w-7xl mx-auto">
-      {/* Profile Header */}
-      <Card className="mb-10 shadow-lg rounded-2xl">
-        <CardContent className="flex flex-col md:flex-row items-center gap-6">
-          <Avatar
-            src={student.image}
-            alt={student.name}
-            sx={{ width: 100, height: 100 }}
-          />
-          <div className="space-y-1">
-            <Typography variant="h4" fontWeight="bold">{student.name}</Typography>
-            <Chip
-              label={student.qualification}
-              sx={{
-                background: 'linear-gradient(to right, #00bcd4, #009688)',
-                color: '#fff',
-                fontWeight: 500,
-              }}
+    <>
+      <div className="p-2 md:p-4  mx-auto">
+        
+        {/* Back Button */}
+        <Box className="flex justify-end items-center mb-3">
+          <Link href="/courses/all-students" passHref>
+            <Button variant="outlined" startIcon={<ArrowBack />} color="primary">
+              Back
+            </Button>
+          </Link>
+        </Box>
+
+        {/* Profile Header */}
+        <Card className="mb-2 shadow-lg rounded-2xl">
+          <CardContent className="flex flex-col md:flex-row items-center gap-6">
+            <Avatar
+              src={student.image}
+              alt={student.name}
+              sx={{ width: 100, height: 100 }}
             />
-            <Typography>{student.course}</Typography>
-            <Typography>{student.address}</Typography>
-            <MuiLink
-              href={student.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              color="primary"
-              underline="hover"
-            >
-              LinkedIn Profile
-            </MuiLink>
-            <Typography variant="body2" color="text.secondary">{student.email}</Typography>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Course Journey Table */}
-      <Card className="shadow-md rounded-2xl">
-        <CardContent>
-          <Box className="flex justify-between items-center mb-4">
-            <div className='flex gap-2 items-center'>
-              <Typography variant="h6" fontWeight="bold">60-Day Course Journey</Typography>
+            <div className="space-y-1">
+              <Typography variant="h4" fontWeight="bold">{student.name}</Typography>
               <Chip
-  label="Track Progress"
-  color="info"
-  variant="outlined"
-  onClick={handleDownloadCSV}
-  sx={{ cursor: 'pointer' }}
-  icon={<FileDownload fontSize="small" />}
-/>
-            </div>
-            <div className="flex items-center justify-end gap-2 text-xs text-slate-500">
-              <span>Powered by</span>
-              <MuiLink href="/">
-                <Image
-                  src="/brand/logo1.png"
-                  alt="Webitya Logo"
-                  width={70}
-                  height={20}
-                  className="object-contain cursor-pointer"
-                />
+                label={student.qualification}
+                sx={{
+                  background: 'linear-gradient(to right, #00bcd4, #009688)',
+                  color: '#fff',
+                  fontWeight: 500,
+                }}
+              />
+              <Typography>{student.course}</Typography>
+              <Typography>{student.address}</Typography>
+              <MuiLink
+                href={student.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                color="primary"
+                underline="hover"
+              >
+                LinkedIn Profile
               </MuiLink>
+              <Typography variant="body2" color="text.secondary">{student.email}</Typography>
             </div>
-          </Box>
-          <Divider className="mb-3" />
-          <TableContainer component={Paper} sx={{ maxHeight: 500, borderRadius: 2 }}>
-            <Table stickyHeader size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ fontWeight: 600 }}>Day</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Topic</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Homework</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Lecture</TableCell>
-                  <TableCell sx={{ fontWeight: 600 }}>Resource</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {student.journey.map((entry, index) => (
-                  <TableRow key={index} hover>
-                    <TableCell>{entry.day}</TableCell>
-                    <TableCell>{entry.date}</TableCell>
-                    <TableCell>{entry.topic}</TableCell>
-                    <TableCell>
-                      {entry.homeworkFile ? (
-                        <Tooltip title="Download Homework">
-                          <Button
-                            href={entry.homeworkFile}
-                            download
-                            variant="outlined"
-                            size="small"
-                            sx={{
-                              minWidth: 0,
-                              padding: 1,
-                              borderRadius: '50%',
-                              color: 'primary.main',
-                              borderColor: 'primary.main',
-                            }}
-                          >
-                            <FileDownload fontSize="small" />
-                          </Button>
-                        </Tooltip>
-                      ) : (
-                        <Typography variant="body2" color="text.disabled">—</Typography>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={entry.homeworkSubmitted ? 'Completed' : 'Pending'}
-                        color={entry.homeworkSubmitted ? 'success' : 'warning'}
-                        size="small"
-                        variant="outlined"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <MuiLink
-                        href={entry.lectureLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        underline="hover"
-                        color="primary"
-                      >
-                        Watch
-                      </MuiLink>
-                    </TableCell>
-                    <TableCell>
-                      <MuiLink
-                        href={entry.resourceLink}
-                        download
-                        underline="hover"
-                        color="secondary"
-                      >
-                        Download
-                      </MuiLink>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* PDF Download Button */}
-      <div className="mt-6 flex justify-end">
-        <Button
-          onClick={handleDownloadPDF}
-          variant="contained"
-          color="primary"
-        >
-          Download PDF
-        </Button>
+        {/* Course Journey Table */}
+        <Card className="shadow-md rounded-2xl">
+          <CardContent>
+              {/* Powerd By Section */}
+              <div className="flex items-center justify-end gap-2 mb-2 text-xs text-slate-500">
+                <span>Powered by</span>
+                <MuiLink href="/">
+                  <Image
+                    src="/brand/logo1.png"
+                    alt="Webitya Logo"
+                    width={70}
+                    height={20}
+                    className="object-contain cursor-pointer"
+                  />
+                </MuiLink>
+              </div>
+            <Box className="flex justify-between items-center mb-4">
+              <div className='flex gap-2 items-center'>
+                <Typography variant="h6" fontWeight="bold">60-Day Course Journey</Typography>
+                
+              </div>
+              <Chip
+                  label="Track Progress"
+                  color="info"
+                  variant="outlined"
+                  onClick={handleDownloadCSV}
+                  sx={{ cursor: 'pointer' }}
+                  icon={<FileDownload fontSize="small" />}
+                />
+              
+            </Box>
+            <Divider className="mb-3" />
+            <TableContainer component={Paper} sx={{ maxHeight: 500, borderRadius: 2 }}>
+              <Table stickyHeader size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontWeight: 600 }}>Day</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Topic</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Homework</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Lecture</TableCell>
+                    <TableCell sx={{ fontWeight: 600 }}>Resource</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {student.journey.map((entry, index) => (
+                    <TableRow key={index} hover>
+                      <TableCell>{entry.day}</TableCell>
+                      <TableCell>{entry.date}</TableCell>
+                      <TableCell>{entry.topic}</TableCell>
+                      <TableCell>
+                        {entry.homeworkFile ? (
+                          <Tooltip title="Download Homework">
+                            <Button
+                              href={entry.homeworkFile}
+                              download
+                              variant="outlined"
+                              size="small"
+                              sx={{
+                                minWidth: 0,
+                                padding: 1,
+                                borderRadius: '50%',
+                                color: 'primary.main',
+                                borderColor: 'primary.main',
+                              }}
+                            >
+                              <FileDownload fontSize="small" />
+                            </Button>
+                          </Tooltip>
+                        ) : (
+                          <Typography variant="body2" color="text.disabled">—</Typography>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Chip
+                          label={entry.homeworkSubmitted ? 'Completed' : 'Pending'}
+                          color={entry.homeworkSubmitted ? 'success' : 'warning'}
+                          size="small"
+                          variant="outlined"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <MuiLink
+                          href={entry.lectureLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          underline="hover"
+                          color="primary"
+                        >
+                          Watch
+                        </MuiLink>
+                      </TableCell>
+                      <TableCell>
+                        <MuiLink
+                          href={entry.resourceLink}
+                          download
+                          underline="hover"
+                          color="secondary"
+                        >
+                          Download
+                        </MuiLink>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </CardContent>
+        </Card>
+
+        {/* PDF Download Button */}
+        <div className="mt-6 flex gap-2 justify-end">
+        <Link href="/courses/all-students" passHref>
+            <Button variant="outlined" startIcon={<ArrowBack />} color="primary">
+              Back
+            </Button>
+          </Link>
+          <Button
+            onClick={handleDownloadPDF}
+            variant="contained"
+            color="primary"
+          >
+            Download PDF
+          </Button>
+
+        </div>
       </div>
-    </div>
-    <Footer/>
-  </>
+      <Footer />
+    </>
   );
 }

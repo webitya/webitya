@@ -40,7 +40,7 @@ export default function AllStudentsPage() {
 
                   <p className="text-blue-700 font-medium mb-1 flex items-center gap-2">
                     <MenuBookIcon className="text-sm" />
-                    {student.course}
+                    Course : {student.course}
                   </p>
 
                   <p className="text-gray-600 text-sm">{student.shortDesc}</p>
