@@ -1,8 +1,9 @@
 const studentViewAllData = {
   "satyam-digital-marketing": {
-    name: "Satyam",
-    image: "/images/rahul.jpg",
-    email: "satyam@gmail.com",
+    name: "Satyam Kumar",
+    image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744860461/WhatsApp_Image_2025-04-17_at_08.50.40_7196e4fa_hiuhxf.jpg",
+    // dob:"21/10/1995",
+    email: "business.satyam21@gmail.com",
     contact: "satyam@gmail.com",
     linkedin: "https://linkedin.com/in/#",
     address: "Ranchi, Jharkhand",
@@ -17,6 +18,15 @@ const studentViewAllData = {
         homeworkSubmitted: true,              // student has submitted or not
         lectureLink: 'https://youtube.com/@webitya',
         resourceLink: 'https://docs.google.com/spreadsheets/d/1x2_ymyiEk9uKaq85BmI424SNvgVKNjrrxzsXaRHkzBk/edit?usp=sharing',
+      },
+      {
+        day: 'Day 2',
+        date: '2025-04-16',
+        topic: 'Introduction to Wordpress',
+        homeworkFile: 'https://docs.google.com/document/d/1CtXbs1UUojtQdclLABu98nSViasqC_v1RuWKBITzbaw/edit?usp=sharing',   // file for student to download
+        homeworkSubmitted: false,              // student has submitted or not
+        lectureLink: 'https://youtube.com/@webitya',
+        resourceLink: 'https://docs.google.com/document/d/1CtXbs1UUojtQdclLABu98nSViasqC_v1RuWKBITzbaw/edit?usp=sharing',
       },
       
       // {
