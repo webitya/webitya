@@ -6,7 +6,7 @@ const coursestudentCardData = [
       course: "Digital Marketing",
       slug: "satyam-digital-marketing",
       shortDesc: "Learning Digital Marketing from scratch",
-      image: "/courses/10.png"
+      image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744863508/satyamkumar_batg4i.webp"
     },
     // Add more students
   ];
