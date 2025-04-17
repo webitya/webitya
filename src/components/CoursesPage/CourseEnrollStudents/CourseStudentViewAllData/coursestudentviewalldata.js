@@ -5,7 +5,7 @@ const studentViewAllData = {
     // dob:"21/10/1995",
     email: "business.satyam21@gmail.com",
     contact: "satyam@gmail.com",
-    linkedin: "https://linkedin.com/in/#",
+    linkedin: "#",
     address: "Ranchi, Jharkhand",
     qualification: "Commerce",
     course: "Digital Marketing",
