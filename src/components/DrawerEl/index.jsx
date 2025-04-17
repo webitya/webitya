@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { X, BookOpen, Users } from "lucide-react";
+import { X, BookOpen, Users, SchoolIcon } from "lucide-react";
 import {
   Box,
   List,
@@ -36,6 +36,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       iconColor: "#1976d2",
     },
     {
+      name: "Our Students",
+      path: "/courses/all-students",
+      icon: <SchoolIcon fontSize="small" />,
+      bg: "#e3f2fd",
+      hover: "#bbdefb",
+      iconColor: "#1565c0",
+    },
+    {
       name: "Influencers",
       path: "/influencers",
       icon: <Users size={18} />,
@@ -43,6 +51,8 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       hover: "#d1c4e9",
       iconColor: "#6a1b9a",
     },
+   
+    
   ];
 
   // 🟩 Cars route menu
