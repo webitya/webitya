@@ -24,9 +24,18 @@ const studentViewAllData = {
         date: '2025-04-16',
         topic: 'Introduction to Wordpress',
         homeworkFile: 'https://docs.google.com/document/d/1CtXbs1UUojtQdclLABu98nSViasqC_v1RuWKBITzbaw/edit?usp=sharing',   // file for student to download
-        homeworkSubmitted: false,              // student has submitted or not
+        homeworkSubmitted: true,              // student has submitted or not
         lectureLink: 'https://youtube.com/@webitya',
         resourceLink: 'https://docs.google.com/document/d/1CtXbs1UUojtQdclLABu98nSViasqC_v1RuWKBITzbaw/edit?usp=sharing',
+      },
+      {
+        day: 'Day 3',
+        date: '2025-04-17',
+        topic: 'Element Container',
+        homeworkFile: 'https://satyam.saninnovation.in',   // file for student to download
+        homeworkSubmitted: false,              // student has submitted or not
+        lectureLink: 'https://youtube.com/@webitya',
+        resourceLink: 'https://satyam.saninnovation.in',
       },
       
       // {
