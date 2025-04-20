@@ -122,7 +122,7 @@ export default function SendEmailsFunction() {
     <>
       <div className="mt-10 p-6 bg-white shadow-xl rounded-xl border border-gray-200">
         <h3 className="text-2xl font-bold text-blue-800 mb-4 flex items-center gap-2">
-          <span className="material-icons text-green-600">send</span>
+          {/* <span className="material-icons text-green-600">send</span> */}
           Send Email Campaign
         </h3>
 
@@ -136,7 +136,7 @@ export default function SendEmailsFunction() {
           disabled={loading}
           className={`flex items-center gap-2 px-6 py-2 rounded-md text-white font-medium ${loading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'} transition`}
         >
-          <span className="material-icons">{loading ? 'autorenew' : 'send'}</span>
+          <span className="material-icons">{loading ? 'autorenew' : ''}</span>
           {loading ? 'Sending...' : 'Send Campaign'}
         </button>
 
