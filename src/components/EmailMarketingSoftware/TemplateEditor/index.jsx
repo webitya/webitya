@@ -70,7 +70,7 @@ export default function TemplateEditor() {
 
   return (
     <>
-      <div className="flex flex-col items-center p-6 space-y-6 bg-white rounded-xl shadow-lg mt-10 border border-gray-200 max-w-2xl mx-auto">
+      <div className="flex flex-col items-center p-6 space-y-6 bg-white rounded-xl shadow-lg mt-10 border border-gray-200">
         <h3 className="text-3xl font-bold text-blue-700 text-center">Email Template Editor</h3>
 
         <textarea
