@@ -1,7 +1,30 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Eye, EyeOff, Trash2, Info } from 'lucide-react';
-import Modal from '../SendEmailFunctionModal'; // Adjust the path to your modal
+import {
+  Box,
+  Button,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  IconButton,
+  InputAdornment,
+  FormHelperText,
+  Alert,
+  FormControl,
+  InputLabel,
+  Paper,
+  Divider,
+  Stack,
+} from '@mui/material';
+import {
+  Visibility,
+  VisibilityOff,
+  Delete as DeleteIcon,
+  InfoOutlined,
+  CheckCircleOutline,
+} from '@mui/icons-material';
+import Modal from '../SendEmailFunctionModal'; // Adjust path accordingly
 
 export default function SenderForm() {
   const [email, setEmail] = useState('');
@@ -22,22 +45,20 @@ export default function SenderForm() {
   const showModal = ({ title, message, icon = 'info', iconColor = 'blue' }) => {
     setModal({ isOpen: true, title, message, icon, iconColor });
   };
+
   const closeModal = () => setModal({ ...modal, isOpen: false });
 
-  const loadSenders = () => {
+  useEffect(() => {
     const storedSenders = JSON.parse(localStorage.getItem('senders') || '[]');
     setSenders(storedSenders);
-  };
 
-  useEffect(() => {
-    loadSenders();
     const saved = localStorage.getItem('selectedSender');
     if (saved) setSelectedEmail(saved);
   }, []);
 
   const saveSender = () => {
     if (!email || !password) {
-      setValidationError('⚠️ Please enter both email and app password.');
+      setValidationError('Please enter both email and app password.');
       return;
     }
 
@@ -65,10 +86,17 @@ export default function SenderForm() {
 
     showModal({
       title: 'Saved!',
-      message: '✅ Sender email saved successfully.',
+      message: 'Sender email saved successfully.',
       icon: 'check_circle',
       iconColor: 'green',
     });
+  };
+
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+    setSelectedEmail('');
+    setValidationError('');
   };
 
   const handleSelect = (selected) => {
@@ -92,112 +120,123 @@ export default function SenderForm() {
     }
   };
 
-  const resetForm = () => {
-    setEmail('');
-    setPassword('');
-    setSelectedEmail('');
-    setValidationError('');
-  };
-
   return (
     <>
-      <div className="bg-gradient-to-br from-white to-blue-50 shadow-2xl rounded-2xl p-6 my-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">📧 Manage Sender Emails</h2>
-        <p className="text-sm text-gray-500 mb-4">Total Saved: {senders.length}</p>
+      <Paper
+        elevation={8}
+        sx={{
+          p: 4,
+          borderRadius: 6,
+          mt: 4,
+          background: 'linear-gradient(to bottom right, #ffffff, #f9fbfc)',
+          boxShadow: '0 8px 40px rgba(0,0,0,0.05)',
+        }}
+      >
+        <Typography variant="h5" fontWeight="bold" mb={1} color="primary">
+          Manage Sender Emails
+        </Typography>
+        <Typography variant="body2" color="text.secondary" mb={3}>
+          Total Saved: {senders.length}
+        </Typography>
 
-        {/* Info Box */}
-        <div className="bg-blue-100 text-blue-800 p-3 rounded-lg text-sm flex items-start gap-2 mb-5 border-l-4 border-blue-400">
-          <Info className="w-5 h-5 mt-0.5" />
-          <p>
-            Use an <strong>App Password</strong> instead of your regular email password.
-            You can generate this in your email account settings for secure access.
-          </p>
-        </div>
+        <Alert
+          severity="info"
+          icon={<InfoOutlined />}
+          sx={{ mb: 4, background: '#e3f2fd', borderRadius: 2 }}
+        >
+          Use an <strong>App Password</strong> instead of your regular email password. You can generate this in your email account settings for secure access.
+        </Alert>
 
-        {/* Saved Sender Dropdown */}
         {senders.length > 0 && (
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-1">📂 Select a Saved Sender</label>
-            <div className="flex gap-2">
-              <select
-                value={selectedEmail}
-                onChange={(e) => handleSelect(e.target.value)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">-- Choose Sender --</option>
-                {senders.map((sender, index) => (
-                  <option key={index} value={sender.email}>
-                    {sender.email}
-                  </option>
-                ))}
-              </select>
-              {selectedEmail && (
-                <button
-                  onClick={() => deleteSender(selectedEmail)}
-                  className="text-red-600 hover:text-red-800 transition"
-                  title="Delete Sender"
-                >
-                  <Trash2 className="w-5 h-5" />
-                </button>
-              )}
-            </div>
-          </div>
+       <FormControl sx={{ width: '95vw', mb: 3 }}>
+       <InputLabel>Select a Saved Sender</InputLabel>
+       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+         <Select
+           value={selectedEmail}
+           label="Select a Saved Sender"
+           onChange={(e) => handleSelect(e.target.value)}
+           fullWidth
+         >
+           <MenuItem value="">-- Choose Sender --</MenuItem>
+           {senders.map((sender, index) => (
+             <MenuItem key={index} value={sender.email}>
+               {sender.email}
+             </MenuItem>
+           ))}
+         </Select>
+     
+         {selectedEmail && (
+           <IconButton
+             onClick={() => deleteSender(selectedEmail)}
+             color="error"
+             title="Delete Sender"
+             sx={{ ml: 1 }}
+           >
+             <DeleteIcon />
+           </IconButton>
+         )}
+       </Box>
+     </FormControl>
+     
+     
         )}
 
-        {/* Email Input */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Sender Email</label>
-          <input
+        <Stack spacing={3}>
+          <TextField
+            fullWidth
+            label="Sender Email"
             type="email"
             placeholder="e.g. sender@example.com"
             value={email}
-            onChange={e => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
 
-        {/* Password Input */}
-        <div className="mb-5 relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">App Password</label>
-          <input
-            type={showPassword ? 'text' : 'password'}
+          <TextField
+            fullWidth
+            label="App Password"
             placeholder="App-specific password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
-            onChange={e => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm pr-10"
+            onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute top-9 right-3 text-gray-500 hover:text-gray-800"
-          >
-            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-          </button>
-        </div>
 
-        {/* Validation Error */}
-        {validationError && (
-          <div className="text-red-600 text-sm mb-4">{validationError}</div>
-        )}
+          {validationError && (
+            <FormHelperText error>{validationError}</FormHelperText>
+          )}
+        </Stack>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-4">
-          <button
+        <Divider sx={{ my: 4 }} />
+
+        <Box display="flex" gap={2} justifyContent="flex-end">
+          <Button
+            variant="contained"
+            color="primary"
             onClick={saveSender}
-            className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
+            startIcon={<CheckCircleOutline />}
+            sx={{ borderRadius: 2, px: 3, py: 1 }}
           >
-            💾 Save Sender
-          </button>
-          <button
+            Save Sender
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
             onClick={resetForm}
-            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+            sx={{ borderRadius: 2, px: 3, py: 1 }}
           >
-            🔄 Reset
-          </button>
-        </div>
-      </div>
+            Reset
+          </Button>
+        </Box>
+      </Paper>
 
-      {/* Modal Component */}
       <Modal
         isOpen={modal.isOpen}
         title={modal.title}

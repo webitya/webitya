@@ -5,7 +5,7 @@ import Modal from '../SendEmailFunctionModal'; // ⬅️ Adjust path as needed
 export default function SendEmailsFunction() {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]); // Corrected line: no type annotations
   const [successCount, setSuccessCount] = useState(0);
   const [sendersCount, setSendersCount] = useState(0);
   const [receiversCount, setReceiversCount] = useState(0);
