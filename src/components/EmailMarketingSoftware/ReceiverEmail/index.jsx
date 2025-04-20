@@ -51,7 +51,11 @@ export default function ReceiverInput() {
       return;
     }
 
-    localStorage.setItem('receivers', emailList.join(','));
+    // ✅ Prevents ReferenceError on server side
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('receivers', emailList.join(','));
+    }
+
     setError('');
     alert('✅ Valid client emails saved!');
   };
@@ -92,6 +96,6 @@ export default function ReceiverInput() {
       >
         Save Emails
       </button>
-    </div>
-  );
+    </div>
+  );
 }

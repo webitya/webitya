@@ -1,5 +1,5 @@
-"use client"
-import { useState } from 'react';
+'use client';
+import { useState, useEffect } from 'react';
 import Modal from '../SendEmailFunctionModal'; // ⬅️ Adjust path as needed
 
 export default function SendEmailsFunction() {
@@ -7,6 +7,8 @@ export default function SendEmailsFunction() {
   const [progress, setProgress] = useState(0);
   const [errors, setErrors] = useState([]);
   const [successCount, setSuccessCount] = useState(0);
+  const [sendersCount, setSendersCount] = useState(0);
+  const [receiversCount, setReceiversCount] = useState(0);
 
   // Modal state
   const [modal, setModal] = useState({
@@ -16,6 +18,15 @@ export default function SendEmailsFunction() {
     icon: 'info',
     iconColor: 'blue',
   });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const senders = JSON.parse(localStorage.getItem('senders') || '[]');
+      const receivers = localStorage.getItem('receivers') || '';
+      setSendersCount(senders.length);
+      setReceiversCount(receivers.split(',').filter(Boolean).length);
+    }
+  }, []);
 
   const showModal = ({ title, message, icon = 'info', iconColor = 'blue' }) => {
     setModal({ isOpen: true, title, message, icon, iconColor });
@@ -28,6 +39,8 @@ export default function SendEmailsFunction() {
     setProgress(0);
     setErrors([]);
     setSuccessCount(0);
+
+    if (typeof window === 'undefined') return;
 
     const senders = JSON.parse(localStorage.getItem('senders') || '[]');
     const receivers = localStorage.getItem('receivers') || '';
@@ -107,15 +120,15 @@ export default function SendEmailsFunction() {
 
   return (
     <>
-      <div className="mt-10 p-6 bg-white shadow-xl rounded-xl  border border-gray-200">
+      <div className="mt-10 p-6 bg-white shadow-xl rounded-xl border border-gray-200">
         <h3 className="text-2xl font-bold text-blue-800 mb-4 flex items-center gap-2">
           <span className="material-icons text-green-600">send</span>
           Send Email Campaign
         </h3>
 
         <div className="mb-4 text-gray-600 text-sm">
-          <p><span className="material-icons text-base text-blue-600 mr-1 align-middle">person</span> Senders loaded: <strong>{JSON.parse(localStorage.getItem('senders') || '[]').length}</strong></p>
-          <p><span className="material-icons text-base text-orange-600 mr-1 align-middle">group</span> Receivers count: <strong>{(localStorage.getItem('receivers') || '').split(',').filter(Boolean).length}</strong></p>
+          <p><span className="material-icons text-base text-blue-600 mr-1 align-middle">person</span> Senders loaded: <strong>{sendersCount}</strong></p>
+          <p><span className="material-icons text-base text-orange-600 mr-1 align-middle">group</span> Receivers count: <strong>{receiversCount}</strong></p>
         </div>
 
         <button
