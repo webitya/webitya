@@ -1,6 +1,6 @@
 const handiSketchData = [
     {
-        slug: "realistic-portrait4",
+        slug: "realistic-portrait1",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
         image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233347/art7_ixwxxe.jpg",
@@ -9,7 +9,7 @@ const handiSketchData = [
       }
       ,
       {
-        slug: "realistic-portrait4",
+        slug: "realistic-portrait2",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
         image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233346/art5_swgx0m.jpg",
@@ -17,7 +17,7 @@ const handiSketchData = [
         discountedPrice: 1500
       },
     {
-        slug: "realistic-portrait1",
+        slug: "realistic-portrait3",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
         image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233359/art3_pvoums.png",
@@ -26,7 +26,7 @@ const handiSketchData = [
       },
       
       {
-        slug: "realistic-portrait2",
+        slug: "realistic-portrait4",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
         image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233350/art1_ik7wce.jpg",
@@ -34,7 +34,7 @@ const handiSketchData = [
         discountedPrice: 1500
       },
       {
-        slug: "realistic-portrait3",
+        slug: "realistic-portrait5",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
         image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233350/art6_unwd65.jpg",
@@ -43,7 +43,7 @@ const handiSketchData = [
       }
       ,
       {
-        slug: "realistic-portrait4",
+        slug: "realistic-portrait6",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
         image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233571/art4_okbjjg.webp",
@@ -53,7 +53,7 @@ const handiSketchData = [
       ,
    
       {
-        slug: "realistic-portrait4",
+        slug: "realistic-portrait7",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
         image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233343/art2_uqygxw.jpg",

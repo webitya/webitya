@@ -56,26 +56,34 @@ export default function PortraitDetailDynamic({ portrait }) {
 
       {/* Image */}
       <Box
-        sx={{
-          overflow: "hidden",
-          borderRadius: 3,
-          boxShadow: 2,
-          my: 6,
-        }}
-      >
-        <img
-          src={portrait.image}
-          alt={portrait.title}
-          style={{
-            width: "100%",
-            height: "500px",
-            objectFit: "cover",
-            transition: "transform 0.3s ease-in-out",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
-          onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-        />
-      </Box>
+  sx={{
+    overflow: "hidden",
+    borderRadius: 3,
+    boxShadow: 2,
+    p:1,
+    my: 6,
+    background: "linear-gradient(135deg, #f3f4f6, #e5e7eb)", // Light gray gradient
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "500px", // Ensure the container height is maintained
+  }}
+>
+  <img
+    src={portrait.image}
+    alt={portrait.title}
+    style={{
+      maxWidth: "100%",
+      maxHeight: "100%",
+      objectFit: "contain",
+      transition: "transform 0.3s ease-in-out",
+    }}
+    onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
+    onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+  />
+</Box>
+
+
 
       {/* Title */}
       <Typography
