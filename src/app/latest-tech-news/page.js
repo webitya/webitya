@@ -39,7 +39,7 @@ const LatestTechNewsPage = () => {
 
   return (
     <>
-      <div className="px-4 py-6  mx-auto space-y-10">
+      <div className="px-4 py-6 max-w-6xl mx-auto space-y-10">
         {/* Filter */}
         <FilterNews
           searchQuery={searchQuery}
