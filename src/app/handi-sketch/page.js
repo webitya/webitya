@@ -87,6 +87,19 @@ export default function HandiSketchGallery() {
     <DownloadIcon fontSize="small" />
   </button>
 </div>
+{/* powered by */}
+       <div className="mt-1 flex items-center px-3 gap-2 mb-0 text-xs text-slate-500">
+  <span>Powered by</span>
+  <Link href="/">
+    <img
+      src="/brand/logo1.png"
+      alt="Webitya Logo"
+      width={70}
+      height={20}
+      className="object-contain cursor-pointer"
+    />
+  </Link>
+</div>
 
 
 

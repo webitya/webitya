@@ -16,9 +16,6 @@ const handiSketchData = [
         actualPrice: 2000,
         discountedPrice: 1500
       },
-      
-    
-   
       {
         slug: "realistic-portrait7",
         title: "Realistic Portrait",
