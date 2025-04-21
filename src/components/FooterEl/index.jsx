@@ -67,6 +67,7 @@ const footerData = [
       { name: 'FAQS', href: '/faqs' },
       { name: 'Book Influencer', href: '/influencers#collection' },
       { name: 'Email Marketing Software', href: '/email-marketing-software' },
+      { name: 'Handi Sketch', href: '/handi-sketch' },
       { name: 'Contact', href: '/contact-us' },
     ],
   },
