@@ -1,5 +1,22 @@
 const handiSketchData = [
     {
+        slug: "realistic-portrait4",
+        title: "Realistic Portrait",
+        description: "Beautiful hand-drawn sketch.",
+        image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233347/art7_ixwxxe.jpg",
+        actualPrice: 2000,
+        discountedPrice: 1500
+      }
+      ,
+      {
+        slug: "realistic-portrait4",
+        title: "Realistic Portrait",
+        description: "Beautiful hand-drawn sketch.",
+        image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233346/art5_swgx0m.jpg",
+        actualPrice: 2000,
+        discountedPrice: 1500
+      },
+    {
         slug: "realistic-portrait1",
         title: "Realistic Portrait",
         description: "Beautiful hand-drawn sketch.",
@@ -34,23 +51,7 @@ const handiSketchData = [
         discountedPrice: 1500
       }
       ,
-      {
-        slug: "realistic-portrait4",
-        title: "Realistic Portrait",
-        description: "Beautiful hand-drawn sketch.",
-        image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233347/art7_ixwxxe.jpg",
-        actualPrice: 2000,
-        discountedPrice: 1500
-      }
-      ,
-      {
-        slug: "realistic-portrait4",
-        title: "Realistic Portrait",
-        description: "Beautiful hand-drawn sketch.",
-        image: "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745233346/art5_swgx0m.jpg",
-        actualPrice: 2000,
-        discountedPrice: 1500
-      },
+   
       {
         slug: "realistic-portrait4",
         title: "Realistic Portrait",
