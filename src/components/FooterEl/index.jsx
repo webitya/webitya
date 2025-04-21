@@ -44,6 +44,7 @@ const footerData = [
       { name: 'Email Marketing', href: '/services' },
       { name: 'Content Marketing', href: '/services' },
       { name: 'Web Design', href: '/services' },
+      { name: 'Latest Tech News', href: '/latest-tech-news' },
     ],
   },
   {
