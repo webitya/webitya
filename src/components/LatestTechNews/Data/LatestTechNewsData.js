@@ -40,6 +40,7 @@ const LatestTechNewsData = [
         },
       },
     },
+    // ===================================================================
     {
       slug: 'google-announces-pixel-8-2025',
       heading: 'Google Announces Pixel 8 in 2025 with Revolutionary Camera Tech',
@@ -80,6 +81,7 @@ const LatestTechNewsData = [
         },
       },
     },
+// ===================================================================
     {
       slug: 'tesla-releases-full-self-driving-update-2025',
       heading: 'Tesla Rolls Out Full Self-Driving Update in 2025 for Autopilot',
@@ -120,6 +122,7 @@ const LatestTechNewsData = [
         },
       },
     },
+    // ===================================================================
     {
       slug: 'nasa-discovers-habitable-exoplanet-2025',
       heading: 'NASA Discovers Potentially Habitable Exoplanet in 2025',
@@ -159,6 +162,7 @@ const LatestTechNewsData = [
         },
       },
     },
+    // ===================================================================
     {
       slug: 'blockchain-security-breach-2025',
       heading: 'Major Blockchain Platform Hit by $100M Security Breach',
