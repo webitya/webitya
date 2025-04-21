@@ -80,7 +80,7 @@ export default function HandiSketchGallery() {
 
 
                     <a
-                      href={`https://wa.me/919876543210?text=${whatsappText}`}
+                      href={`https://wa.me/919693245941?text=${whatsappText}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

@@ -114,7 +114,7 @@ export default function PortraitDetailDynamic({ portrait }) {
           variant="contained"
           color="success"
           startIcon={<WhatsAppIcon />}
-          href={`https://wa.me/919876543210?text=${whatsappMessage}`}
+          href={`https://wa.me/919693245941?text=${whatsappMessage}`}
           target="_blank"
           rel="noopener noreferrer"
           fullWidth
