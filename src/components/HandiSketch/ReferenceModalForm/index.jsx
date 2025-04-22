@@ -26,13 +26,14 @@ export default function ReferenceModalForm({ open, handleClose, title }) {
 
   const sendEmail = (e) => {
     e.preventDefault();
+ 
 
     emailjs
       .sendForm(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your template ID
+        "service_webitya", // Replace with your EmailJS service ID
+        "template_y9g4vob", // Replace with your template ID
         form.current,
-        "YOUR_PUBLIC_KEY" // Replace with your public key
+        "Iw_1wMHg3mqNItEUH" // Replace with your user ID from EmailJS
       )
       .then(
         (result) => {

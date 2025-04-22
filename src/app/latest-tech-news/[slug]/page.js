@@ -2,18 +2,15 @@ import LatestTechNewsData from '../../../components/LatestTechNews/Data/LatestTe
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Footer from '@/components/FooterEl';
-
 // ✅ SEO metadata generator
 export async function generateMetadata({ params }) {
   const news = LatestTechNewsData.find((item) => item.slug === params.slug);
-
   if (!news) {
     return {
       title: 'News Not Found',
       description: 'The news article you are looking for does not exist.',
     };
   }
-
   return {
     title: news.seo.title || news.heading,
     description: news.seo.description || news.subtitle,
@@ -38,7 +35,6 @@ export async function generateMetadata({ params }) {
     },
   };
 }
-
 // ✅ Page component
 const NewsDetailPage = ({ params }) => {
   const news = LatestTechNewsData.find((item) => item.slug === params.slug);
@@ -60,7 +56,6 @@ const NewsDetailPage = ({ params }) => {
           height={500}
           className="rounded-xl w-full object-cover mb-8"
         />
-
         {/* Article Body */}
         <div className="space-y-6 text-gray-800 leading-relaxed">
           {news.articleBody.map((block, index) => {
@@ -95,5 +90,4 @@ const NewsDetailPage = ({ params }) => {
     </>
   );
 };
-
 export default NewsDetailPage;

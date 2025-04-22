@@ -26,6 +26,10 @@ const footerData = [
     links: [
       { name: 'चार धाम यात्रा ', href: '/tour&travells/char-dham-yatra' },
       { name: 'Tour & Travells ', href: '/tour&travells/char-dham-yatra' },
+      { name: 'Latest Tech News', href: '/latest-tech-news' },
+      { name: 'Handi Sketch', href: '/handi-sketch' },
+      { name: 'Email Marketing Software', href: '/email-marketing-software' },
+      { name: 'Essential Service Ranchi', href: '/essential-services-ranchi' },
       // { name: 'Learn', href: '#' },
       // { name: 'Case Studies', href: '#' },
       // { name: 'Blog', href: '#' },
@@ -44,7 +48,7 @@ const footerData = [
       { name: 'Email Marketing', href: '/services' },
       { name: 'Content Marketing', href: '/services' },
       { name: 'Web Design', href: '/services' },
-      { name: 'Latest Tech News', href: '/latest-tech-news' },
+ 
     ],
   },
   {
@@ -67,8 +71,8 @@ const footerData = [
       { name: 'Disclaimer', href: '/legal/disclaimer' },
       { name: 'FAQS', href: '/faqs' },
       { name: 'Book Influencer', href: '/influencers#collection' },
-      { name: 'Email Marketing Software', href: '/email-marketing-software' },
-      { name: 'Handi Sketch', href: '/handi-sketch' },
+   
+   
       { name: 'Contact', href: '/contact-us' },
     ],
   },

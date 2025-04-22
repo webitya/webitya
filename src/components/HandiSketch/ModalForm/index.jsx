@@ -49,10 +49,10 @@ export default function ModalForm({ open, handleClose }) {
     setIsSubmitting(true);
     emailjs
       .send(
-        "your_service_id", // Replace with your EmailJS service ID
-        "your_template_id", // Replace with your template ID
+        "service_webitya", // Replace with your EmailJS service ID
+        "template_y9g4vob", // Replace with your template ID
         formData,
-        "your_user_id" // Replace with your user ID from EmailJS
+        "Iw_1wMHg3mqNItEUH" // Replace with your user ID from EmailJS
       )
       .then(
         (response) => {
