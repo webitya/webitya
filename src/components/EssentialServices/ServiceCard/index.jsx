@@ -1,5 +1,7 @@
 import { Rating, Chip, Stack } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function ServiceCard({ service }) {
   const { name, description, rating, locations, contact, availability, image } = service;
@@ -14,6 +16,18 @@ export default function ServiceCard({ service }) {
           className="h-full w-full object-cover"
         />
       </div>
+      <div className="flex items-center gap-2 px-4 text-xs text-slate-500">
+                        <span>Powered by</span>
+                        <Link href="/">
+                          <Image
+                            src="/brand/logo1.png"
+                            alt="Webitya Logo"
+                            width={70}
+                            height={20}
+                            className="object-contain cursor-pointer"
+                          />
+                        </Link>
+                      </div>
 
       {/* Content */}
       <div className="flex flex-col justify-between flex-1 p-4">
