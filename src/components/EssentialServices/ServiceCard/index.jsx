@@ -1,54 +1,30 @@
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    Typography,
-    Rating,
-    Chip,
-    Stack,
-    Divider,
-  } from "@mui/material";
-  import PlaceIcon from "@mui/icons-material/Place";
-  
-  export default function ServiceCard({ service }) {
-    const { name, description, rating, locations, contact, availability, image } = service;
-  
-    return (
-      <Card sx={{ borderRadius: 3, boxShadow: 2, height: "100%" }}>
-        {image && (
-          <CardMedia
-            component="img"
-            height="180"
-            src={image}
-            alt={name}
-            sx={{ objectFit: "cover" }}
-          />
-        )}
-        
-        {/* Fallback Image if `service.image` is not defined */}
-        {!image && (
-          <CardMedia
-            component="img"
-            height="180"
-            src="/images/default-image.jpg" // Default placeholder image
-            alt="default"
-            sx={{ objectFit: "cover" }}
-          />
-        )}
-  
-        <CardContent>
-          <Typography variant="h6" fontWeight="bold" gutterBottom>
-            {name}
-          </Typography>
-  
-          <Typography variant="body2" color="text.secondary" mb={1}>
-            {description}
-          </Typography>
-  
+import { Rating, Chip, Stack } from "@mui/material";
+import PlaceIcon from "@mui/icons-material/Place";
+
+export default function ServiceCard({ service }) {
+  const { name, description, rating, locations, contact, availability, image } = service;
+
+  return (
+    <div className="bg-white shadow-md rounded-2xl overflow-hidden flex flex-col h-full">
+      {/* Image */}
+      <div className="h-44 w-full">
+        <img
+          src={image || "/images/default-image.jpg"}
+          alt={name}
+          className="h-full w-full object-cover"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-col justify-between flex-1 p-4">
+        <div>
+          <h2 className="text-lg font-bold mb-1">{name}</h2>
+          <p className="text-sm text-gray-600 mb-2">{description}</p>
           <Rating value={rating || 0} readOnly precision={0.5} size="small" />
-  
-          <Divider sx={{ my: 1.5 }} />
-  
+        </div>
+
+        {/* Locations */}
+        <div className="my-3">
           <Stack direction="row" spacing={1} flexWrap="wrap">
             {locations?.map((loc, index) => (
               <Chip
@@ -61,12 +37,13 @@ import {
               />
             ))}
           </Stack>
-  
-          <Typography variant="body2" color="text.secondary" mt={2}>
-            📞 <strong>{contact}</strong> &nbsp;&nbsp; | &nbsp;&nbsp; 🕘 {availability}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  }
-  
+        </div>
+
+        {/* Footer */}
+        <div className="text-sm text-gray-600 mt-auto pt-2 border-t">
+          📞 <strong>{contact}</strong> &nbsp;&nbsp; | &nbsp;&nbsp; 🕘 {availability}
+        </div>
+      </div>
+    </div>
+  );
+}

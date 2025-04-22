@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Box, Typography } from "@mui/material";
 import ServiceFiltersClient from "../../components/EssentialServices/MainPage"; 
 import essentialServices from "../../components/EssentialServices/Data/essentialServices";  // assuming this is server-side data
+import Footer from "@/components/FooterEl";
 
 // ✅ SEO metadata generator for Essential Services page
 export async function generateMetadata() {
@@ -64,6 +65,7 @@ export default function EssentialServicesPage() {
         {/* Pass all services to client component */}
         <ServiceFiltersClient services={essentialServices} />
       </Box>
+      <Footer/>
     </>
   );
 }
