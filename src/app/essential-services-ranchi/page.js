@@ -4,6 +4,7 @@ import ServiceFiltersClient from "../../components/EssentialServices/MainPage";
 import essentialServices from "../../components/EssentialServices/Data/essentialServices";  // assuming this is server-side data
 import Footer from "@/components/FooterEl";
 
+
 // ✅ SEO metadata generator for Essential Services page
 export async function generateMetadata() {
   return {
@@ -57,6 +58,8 @@ export default function EssentialServicesPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div>
+
       <Box sx={{ p: { xs: 2, md: 6 } }}>
         <Typography variant="h4" fontWeight="bold" mb={4}>
           Essential Services in Ranchi
@@ -65,7 +68,9 @@ export default function EssentialServicesPage() {
         {/* Pass all services to client component */}
         <ServiceFiltersClient services={essentialServices} />
       </Box>
+      </div>
       <Footer/>
+      
     </>
   );
 }

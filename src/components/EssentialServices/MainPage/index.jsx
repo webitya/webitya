@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import ServiceCard from "../ServiceCard";
 import ServiceFilters from "../ServiceFilter";
+import Footer from "@/components/FooterEl";
 
 export default function ServiceFiltersClient({ services }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -25,7 +26,8 @@ export default function ServiceFiltersClient({ services }) {
   }, [services, selectedCategory, selectedLocation, searchTerm]);
 
   return (
-    <Box>
+   <div>
+     <Box>
       <ServiceFilters
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
@@ -51,5 +53,7 @@ export default function ServiceFiltersClient({ services }) {
 
 
     </Box>
+   
+   </div>
   );
 }
