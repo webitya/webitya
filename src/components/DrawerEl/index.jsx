@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { X, BookOpen, Users, SchoolIcon } from "lucide-react";
+import { X, BookOpen, Users } from "lucide-react";
+import { School as SchoolIcon } from "@mui/icons-material";
 import {
   Box,
   List,
@@ -17,7 +18,7 @@ import {
 const DrawerEl = ({ isOpen, toggleMenu }) => {
   const pathname = usePathname();
 
-  // Default links
+  // Default navLinks and highlightLinks
   let navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -51,61 +52,86 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       hover: "#d1c4e9",
       iconColor: "#6a1b9a",
     },
-   
-    
   ];
 
-  // 🟩 Cars route menu
-  if (pathname === "/cars") {
+  // 🟨 Dynamic Yatra route logic
+  if ((pathname.includes("/tour&travells"))) {
+    navLinks = [
+      { name: "Pricing", path: `${pathname}#pricing` },
+      { name: "Hotels", path: `${pathname}#hotels` },
+      { name: "Cars", path: `${pathname}#cars` },
+    ];
+    highlightLinks = [
+      {
+        name: "Courses",
+        path: "/courses",
+        icon: <BookOpen size={18} />,
+        bg: "#e3f2fd",
+        hover: "#bbdefb",
+        iconColor: "#1976d2",
+      },
+      {
+        name: "Influencers",
+        path: "/influencers",
+        icon: <Users size={18} />,
+        bg: "#ede7f6",
+        hover: "#d1c4e9",
+        iconColor: "#6a1b9a",
+      },
+    ];
+  }
+  // 🟨 Dynamic Latest Tech News logic
+  if ((pathname.includes("/latest-tech-news"))) {
+    navLinks = [
+      { name: "Latest News", path: `/latest-tech-news` },
+      { name: "Tech Trends", path: `/latest-tech-news/trends` },
+      { name: "Gadgets", path: `/latest-tech-news/gadgets` },
+      { name: "AI Updates", path: `/latest-tech-news/ai-updates` },
+    ];
+    highlightLinks = [
+      {
+        name: "Courses",
+        path: "/courses",
+        icon: <BookOpen size={18} />,
+        bg: "#e3f2fd",
+        hover: "#bbdefb",
+        iconColor: "#1976d2",
+      },
+      {
+        name: "Influencers",
+        path: "/influencers",
+        icon: <Users size={18} />,
+        bg: "#ede7f6",
+        hover: "#d1c4e9",
+        iconColor: "#6a1b9a",
+      },
+    ];
+  }
+  // 🟩 Dynamic Cars route logic
+  if (pathname.includes("/cars")) {
     navLinks = [
       { name: "Ford", path: "/cars/ford" },
       { name: "Jaguar", path: "/cars/jaguar" },
       { name: "Audi", path: "/cars/audi" },
     ];
-    highlightLinks = [    {
-      name: "Courses",
-      path: "/courses",
-      icon: <BookOpen size={18} />,
-      bg: "#e3f2fd",
-      hover: "#bbdefb",
-      iconColor: "#1976d2",
-    },
-    {
-      name: "Influencers",
-      path: "/influencers",
-      icon: <Users size={18} />,
-      bg: "#ede7f6",
-      hover: "#d1c4e9",
-      iconColor: "#6a1b9a",
-    },];
-  }
-
-  // 🟨 Char Dham route menu
-  if (
-    pathname === "/char-dham-yatra" ||
-    pathname === "/tour&travells/char-dham-yatra"
-  ) {
-    navLinks = [
-      { name: "Pricing", path: "/tour&travells/char-dham-yatra#pricing" },
-      { name: "Hotels", path: "/tour&travells/char-dham-yatra#hotels" },
-      { name: "Cars", path: "/tour&travells/char-dham-yatra#cars" },
+    highlightLinks = [
+      {
+        name: "Courses",
+        path: "/courses",
+        icon: <BookOpen size={18} />,
+        bg: "#e3f2fd",
+        hover: "#bbdefb",
+        iconColor: "#1976d2",
+      },
+      {
+        name: "Influencers",
+        path: "/influencers",
+        icon: <Users size={18} />,
+        bg: "#ede7f6",
+        hover: "#d1c4e9",
+        iconColor: "#6a1b9a",
+      },
     ];
-    highlightLinks = [    {
-      name: "Courses",
-      path: "/courses",
-      icon: <BookOpen size={18} />,
-      bg: "#e3f2fd",
-      hover: "#bbdefb",
-      iconColor: "#1976d2",
-    },
-    {
-      name: "Influencers",
-      path: "/influencers",
-      icon: <Users size={18} />,
-      bg: "#ede7f6",
-      hover: "#d1c4e9",
-      iconColor: "#6a1b9a",
-    },];
   }
 
   useEffect(() => {

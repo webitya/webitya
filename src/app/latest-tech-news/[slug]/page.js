@@ -2,6 +2,7 @@ import LatestTechNewsData from '../../../components/LatestTechNews/Data/LatestTe
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Footer from '@/components/FooterEl';
+
 // ✅ SEO metadata generator
 export async function generateMetadata({ params }) {
   const news = LatestTechNewsData.find((item) => item.slug === params.slug);
@@ -35,11 +36,15 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+
 // ✅ Page component
 const NewsDetailPage = ({ params }) => {
   const news = LatestTechNewsData.find((item) => item.slug === params.slug);
-
   if (!news) return notFound();
+
+  const moreNews = LatestTechNewsData
+    .filter((item) => item.slug !== params.slug)
+    .slice(0, 6);
 
   return (
     <>
@@ -56,6 +61,7 @@ const NewsDetailPage = ({ params }) => {
           height={500}
           className="rounded-xl w-full object-cover mb-8"
         />
+
         {/* Article Body */}
         <div className="space-y-6 text-gray-800 leading-relaxed">
           {news.articleBody.map((block, index) => {
@@ -85,9 +91,30 @@ const NewsDetailPage = ({ params }) => {
         </div>
       </div>
 
+      {/* More Latest News Section */}
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-blue-600 mb-6">More Latest News</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {moreNews.map((item, index) => (
+            <a href={`/latest-tech-news/${item.slug}`} key={index} className="block bg-white rounded-xl shadow hover:shadow-lg transition p-4">
+              <Image
+                src={item.image}
+                alt={item.heading}
+                width={400}
+                height={250}
+                className="rounded-lg w-full object-cover mb-3"
+              />
+              <h3 className="text-lg font-semibold text-gray-800">{item.heading}</h3>
+              <p className="text-sm text-gray-600">{item.subtitle}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
       {/* Footer */}
       <Footer />
     </>
   );
 };
+
 export default NewsDetailPage;

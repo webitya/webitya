@@ -42,8 +42,9 @@ const Navbar = () => {
     threshold: 100,
   });
 
-  // ✅ Dynamic styles and logo
+  // Default values
   let logoSrc = "/brand/logo1.png";
+  let logoLink = "/";
   let bgColor = "rgba(255, 255, 255, 0.9)";
   let textColor = "black";
   let hoverTextColor = "black";
@@ -51,7 +52,6 @@ const Navbar = () => {
   let ctaTextColor = "white";
   let ctaHoverBgColor = "#1a1a1a";
 
-  // ✅ Dynamic menuLinks
   let menuLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -63,8 +63,10 @@ const Navbar = () => {
     { name: "Contact", path: "/contact-us" },
   ];
 
-  if (pathname === "/cars") {
+  // Cars route
+  if (pathname.includes("/cars")) {
     logoSrc = "/brand/logo-cars.png";
+    logoLink = "/cars";
     bgColor = "black";
     textColor = "white";
     hoverTextColor = "#00ff7f";
@@ -77,20 +79,38 @@ const Navbar = () => {
       { name: "Jaguar", path: "/cars/jaguar" },
       { name: "Audi", path: "/cars/audi" },
     ];
-  } else if (pathname.includes("/tour&travells")) {
+  }
+  // Tour & Travells route
+  else if (pathname.includes("/tour&travells")) {
     logoSrc =
       "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
+    logoLink = "/tour&travells";
     bgColor = "#f8e4c0";
     textColor = "black";
     hoverTextColor = "#d2691e";
-  
+
     menuLinks = [
       { name: "Pricing", path: "/tour&travells/char-dham-yatra#pricing" },
       { name: "Hotels", path: "/tour&travells/char-dham-yatra#hotels" },
       { name: "Cars", path: "/tour&travells/char-dham-yatra#cars" },
     ];
   }
-  
+  // Latest Tech News route
+  else if (pathname.includes("/latest-tech-news")) {
+    logoSrc =
+      "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745380966/Copy_of_WEBITYA_6_cndv73.webp";
+    logoLink = "/latest-tech-news";
+    bgColor = "#f1f5f9";
+    textColor = "#1e293b";
+    hoverTextColor = "#0ea5e9";
+
+    menuLinks = [
+      { name: "Latest News", path: "/latest-tech-news" },
+      { name: "Tech Trends", path: "/latest-tech-news/trends" },
+      { name: "Gadgets", path: "/latest-tech-news/gadgets" },
+      { name: "AI Updates", path: "/latest-tech-news/ai-updates" },
+    ];
+  }
 
   return (
     <>
@@ -111,8 +131,8 @@ const Navbar = () => {
         >
           <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, sm: 3 } }}>
             {/* Logo */}
-            <Link href="/" passHref>
-              <img src={logoSrc} alt="WEBITYA Logo" style={{ width: "160px" }} />
+            <Link href={logoLink} passHref>
+              <img src={logoSrc} alt="WEBITYA Logo" style={{ width: "160px", cursor: "pointer" }} />
             </Link>
 
             {/* Desktop Menu */}
