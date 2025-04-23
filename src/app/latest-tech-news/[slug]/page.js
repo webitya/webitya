@@ -1,9 +1,8 @@
 import LatestTechNewsData from '../../../components/LatestTechNews/Data/LatestTechNewsData';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Footer from '@/components/FooterEl';
 
-// ✅ SEO metadata generator
+// ✅ SEO metadata generator (server-side)
 export async function generateMetadata({ params }) {
   const news = LatestTechNewsData.find((item) => item.slug === params.slug);
   if (!news) {
@@ -37,7 +36,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// ✅ Page component
+// ✅ Page component (server-side rendering)
 const NewsDetailPage = ({ params }) => {
   const news = LatestTechNewsData.find((item) => item.slug === params.slug);
   if (!news) return notFound();
@@ -48,40 +47,40 @@ const NewsDetailPage = ({ params }) => {
 
   return (
     <>
-      <div className="max-w-4xl mx-auto px-4 py-10">
+      <div className="max-w-3xl mx-auto px-4 py-8">
         {/* News Header */}
-        <h1 className="text-4xl font-bold text-blue-700 mb-4">{news.heading}</h1>
-        <p className="text-lg text-gray-600 mb-6">{news.subtitle}</p>
+        <h1 className="text-3xl font-semibold text-blue-800 mb-4">{news.heading}</h1>
+        <p className="text-sm text-gray-600 mb-4">{news.subtitle}</p>
 
         {/* Header Image */}
-        <Image
+        <img
           src={news.image}
           alt={news.heading}
+          className="rounded-lg w-full object-cover mb-6"
           width={1000}
           height={500}
-          className="rounded-xl w-full object-cover mb-8"
         />
 
         {/* Article Body */}
-        <div className="space-y-6 text-gray-800 leading-relaxed">
+        <div className="space-y-4 text-gray-800 leading-relaxed">
           {news.articleBody.map((block, index) => {
             if (block.type === 'paragraph') {
-              return <p key={index}>{block.content}</p>;
+              return <p key={index} className="text-sm">{block.content}</p>;
             } else if (block.type === 'image') {
               return (
-                <div key={index} className="mb-8">
-                  <Image
+                <div key={index} className="mb-6">
+                  <img
                     src={block.src}
                     alt={block.alt}
+                    className="rounded-md w-full object-cover"
                     width={1000}
                     height={500}
-                    className="rounded-xl w-full object-cover"
                   />
                 </div>
               );
             } else if (block.type === 'quote') {
               return (
-                <blockquote key={index} className="text-xl italic border-l-4 pl-4 border-gray-300 mt-4 mb-6">
+                <blockquote key={index} className="text-sm italic border-l-4 pl-4 border-blue-600 mt-4 mb-4">
                   <p>{block.content}</p>
                 </blockquote>
               );
@@ -92,20 +91,20 @@ const NewsDetailPage = ({ params }) => {
       </div>
 
       {/* More Latest News Section */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-blue-600 mb-6">More Latest News</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        <h2 className="text-2xl font-medium text-blue-700 mb-4">More Latest News</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {moreNews.map((item, index) => (
-            <a href={`/latest-tech-news/${item.slug}`} key={index} className="block bg-white rounded-xl shadow hover:shadow-lg transition p-4">
-              <Image
+            <a href={`/latest-tech-news/${item.slug}`} key={index} className="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all p-4">
+              <img
                 src={item.image}
                 alt={item.heading}
+                className="rounded-md w-full object-cover mb-3"
                 width={400}
                 height={250}
-                className="rounded-lg w-full object-cover mb-3"
               />
-              <h3 className="text-lg font-semibold text-gray-800">{item.heading}</h3>
-              <p className="text-sm text-gray-600">{item.subtitle}</p>
+              <h3 className="text-md font-semibold text-gray-800 mb-1">{item.heading}</h3>
+              <p className="text-xs text-gray-600">{item.subtitle}</p>
             </a>
           ))}
         </div>
