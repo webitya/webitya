@@ -1,25 +1,43 @@
 export async function GET() {
-  const baseUrl = "https://webitya.com";
+  const baseUrl = "https://www.webitya.com";
 
-  // Define your static pages
-  const staticPages = ["", "about", "services", "contact", "blog", "faqs", "pricing"];
-
-  // Fetch dynamic blog posts from your API (if applicable)
-  const blogPosts = []; // Fetch from API if blog is dynamic
-  // Example: const blogPosts = await fetch(`${baseUrl}/api/blog`).then(res => res.json());
-
-  const allPages = [...staticPages, ...blogPosts.map((post) => `blog/${post.slug}`)];
+  // Full list of static and dynamic URLs
+  const urls = [
+    "", // Homepage
+    "about",
+    "services",
+    "portfolio",
+    "courses",
+    "courses/all-students",
+    "influencers",
+    "contact-us",
+    "tour&travells",
+    "tour&travells/char-dham-yatra",
+    "latest-tech-news",
+    "latest-tech-news/trends",
+    "latest-tech-news/gadgets",
+    "latest-tech-news/ai-updates",
+    "handi-sketch",
+    "email-marketing-software",
+    "essential-services-ranchi",
+    "legal/privacy-policy",
+    "legal/terms",
+    "legal/disclaimer",
+    "faqs",
+  ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${allPages
+    ${urls
       .map(
-        (page) => `
+        (path) => `
       <url>
-        <loc>${baseUrl}/${page}</loc>
+        <loc>${baseUrl}/${path}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
         <priority>${
-          page === "" ? "1.0" : ["about", "services", "pricing", "faqs"].includes(page) ? "0.9" : "0.7"
+          path === "" ? "1.0" :
+          ["about", "services", "portfolio", "courses", "contact-us", "faqs"].includes(path) ? "0.9" :
+          "0.7"
         }</priority>
       </url>
     `
