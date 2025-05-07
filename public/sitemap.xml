@@ -6,7 +6,6 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-
 <url>
   <loc>https://www.webitya.com/</loc>
   <lastmod>2025-05-06T02:49:57+00:00</lastmod>
@@ -222,6 +221,5 @@
   <lastmod>2025-05-06T02:49:57+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
 
 </urlset>
