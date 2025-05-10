@@ -12,8 +12,8 @@ import {
   Missile,
   Building,
   Tree,
-} from "./game-sprites"
-import MiniMap from "./mini-map"
+} from "@/components/game-sprites"
+import MiniMap from "@/components/mini-map"
 
 export default function GameBoard({ setScore, setGameOver, difficulty, muted }) {
   const [playerPosition, setPlayerPosition] = useState({ x: 100, y: 400 })
@@ -34,6 +34,11 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
   const [specialWeaponCooldown, setSpecialWeaponCooldown] = useState(0)
   const [messages, setMessages] = useState([])
   const [viewportOffset, setViewportOffset] = useState({ x: 0, y: 0 })
+  const [kills, setKills] = useState(0)
+  const [killStreak, setKillStreak] = useState(0)
+  const [lastKillTime, setLastKillTime] = useState(0)
+  const [showKillFeed, setShowKillFeed] = useState(false)
+  const [killFeedMessage, setKillFeedMessage] = useState("")
 
   const gameLoopRef = useRef()
   const enemySpawnRef = useRef()
@@ -86,15 +91,15 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     const handleKeyDown = (e) => {
       keysPressed.current.add(e.key)
 
-      // Shoot on spacebar
-      if (e.key === " " && Date.now() - lastShot > 300 && playerAmmo > 0) {
+      // Shoot on F key
+      if ((e.key === " " || e.key.toLowerCase() === "f") && Date.now() - lastShot > 300 && playerAmmo > 0) {
         shoot("india", "regular")
         setLastShot(Date.now())
         setPlayerAmmo((prev) => prev - 1)
       }
 
-      // Special weapon on Shift
-      if (e.key === "Shift" && specialWeaponCooldown === 0 && playerSpecialAmmo > 0) {
+      // Special weapon on M key
+      if ((e.key === "Shift" || e.key.toLowerCase() === "m") && specialWeaponCooldown === 0 && playerSpecialAmmo > 0) {
         shoot("india", "special")
         setSpecialWeaponCooldown(5000) // 5 second cooldown
         setPlayerSpecialAmmo((prev) => prev - 1)
@@ -139,7 +144,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     // Initialize canvas for particles
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext("2d")
-      canvasRef.current.width = 800
+      canvasRef.current.width = window.innerWidth
       canvasRef.current.height = 600
     }
 
@@ -182,15 +187,40 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     }
   }, [specialWeaponCooldown])
 
+  // Kill streak timer
+  useEffect(() => {
+    if (Date.now() - lastKillTime > 5000 && killStreak > 0) {
+      setKillStreak(0)
+    }
+
+    const timer = setTimeout(() => {
+      if (Date.now() - lastKillTime > 5000 && killStreak > 0) {
+        setKillStreak(0)
+      }
+    }, 5000)
+
+    return () => clearTimeout(timer)
+  }, [lastKillTime, killStreak])
+
+  // Kill feed display
+  useEffect(() => {
+    if (showKillFeed) {
+      const timer = setTimeout(() => {
+        setShowKillFeed(false)
+      }, 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [showKillFeed])
+
   // Initialize terrain elements
   const initializeTerrain = () => {
     const newTerrain = []
 
     // Add some buildings
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 8; i++) {
       newTerrain.push({
         id: `building-${i}`,
-        x: 200 + Math.random() * 400,
+        x: 200 + Math.random() * 1200,
         y: 100 + Math.random() * 400,
         type: "building",
         variant: Math.floor(Math.random() * 3),
@@ -198,10 +228,10 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     }
 
     // Add some trees
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 25; i++) {
       newTerrain.push({
         id: `tree-${i}`,
-        x: 50 + Math.random() * 700,
+        x: 50 + Math.random() * 1400,
         y: 50 + Math.random() * 500,
         type: "tree",
         variant: Math.floor(Math.random() * 2),
@@ -289,7 +319,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
         newX = Math.max(50, prev.x - speed)
       }
       if (keysPressed.current.has("ArrowRight") || keysPressed.current.has("d")) {
-        newX = Math.min(750, prev.x + speed)
+        newX = Math.min(1450, prev.x + speed)
       }
       if (keysPressed.current.has("ArrowUp") || keysPressed.current.has("w")) {
         newY = Math.max(50, prev.y - speed)
@@ -361,19 +391,19 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
     switch (spawnSide) {
       case 0: // Right
-        x = 800
+        x = 1500
         y = 100 + Math.random() * 400
         break
       case 1: // Top
-        x = 100 + Math.random() * 600
+        x = 100 + Math.random() * 1300
         y = 0
         break
       case 2: // Bottom
-        x = 100 + Math.random() * 600
+        x = 100 + Math.random() * 1300
         y = 600
         break
       default:
-        x = 800
+        x = 1500
         y = 300
     }
 
@@ -426,7 +456,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
     const newPowerUp = {
       id: Date.now() + Math.random(),
-      x: 100 + Math.random() * 600,
+      x: 100 + Math.random() * 1300,
       y: 100 + Math.random() * 400,
       type,
       duration: 10000, // 10 seconds
@@ -524,7 +554,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             direction: newDirection,
           }
         })
-        .filter((enemy) => enemy.x > -50 && enemy.x < 850 && enemy.y > -50 && enemy.y < 650 && enemy.health > 0),
+        .filter((enemy) => enemy.x > -50 && enemy.x < 1550 && enemy.y > -50 && enemy.y < 650 && enemy.health > 0),
     )
   }
 
@@ -598,7 +628,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             direction: newDirection,
           }
         })
-        .filter((ally) => ally.x > -50 && ally.x < 850 && ally.y > -50 && ally.y < 650 && ally.health > 0),
+        .filter((ally) => ally.x > -50 && ally.x < 1550 && ally.y > -50 && ally.y < 650 && ally.health > 0),
     )
   }
 
@@ -646,11 +676,11 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
       if (distance < minDistance) {
         minDistance = distance
-        closestEnemy = { x: enemy.x, y: enemy.y }
+        closestEnemy = { x: enemy.x, y: enemy.y, id: enemy.id }
       }
     })
 
-    return closestEnemy || { x: 800, y: 300 } // Default target if no enemies
+    return closestEnemy || { x: 1500, y: 300 } // Default target if no enemies
   }
 
   const enemiesShoot = () => {
@@ -705,7 +735,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           }
         })
         .filter(Boolean) // Remove null entries (exploded missiles)
-        .filter((projectile) => projectile.x > -20 && projectile.x < 820 && projectile.y > -20 && projectile.y < 620),
+        .filter((projectile) => projectile.x > -20 && projectile.x < 1520 && projectile.y > -20 && projectile.y < 620),
     )
   }
 
@@ -735,11 +765,14 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           // Different hit radius based on projectile type
-          const hitRadius = projectile.type === "missile" ? 50 : 20
+          const hitRadius = projectile.type === "missile" ? 80 : 20
 
           if (distance < hitRadius) {
             // Hit!
-            const damage = projectile.type === "missile" ? 100 : 25
+            const damage = projectile.type === "missile" ? 150 : 25
+
+            // Check if this hit will destroy the enemy
+            const willDestroy = enemy.health <= damage
 
             setEnemies((prev) =>
               prev.map((e) => (e.id === enemy.id ? { ...e, health: Math.max(0, e.health - damage) } : e)),
@@ -753,8 +786,8 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             // Create explosion
             createExplosion(enemy.x, enemy.y, projectile.type === "missile" ? "large" : "small")
 
-            // Add score if enemy destroyed
-            if (enemy.health <= damage) {
+            // Add score and handle kill if enemy destroyed
+            if (willDestroy) {
               let points
               switch (enemy.type) {
                 case "pakistaniTank":
@@ -771,7 +804,37 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
               }
 
               setLocalScore((prev) => prev + points)
-              addMessage(`+${points} points!`)
+              setKills((prev) => prev + 1)
+
+              // Update kill streak
+              setLastKillTime(Date.now())
+              setKillStreak((prev) => prev + 1)
+
+              // Show kill feed
+              let killType = ""
+              switch (enemy.type) {
+                case "pakistaniTank":
+                  killType = "Pakistani Tank"
+                  break
+                case "pakistaniSoldier":
+                  killType = "Pakistani Soldier"
+                  break
+                case "helicopter":
+                  killType = "Pakistani Helicopter"
+                  break
+              }
+
+              const weaponType = projectile.type === "missile" ? "Missile" : "Bullet"
+              setKillFeedMessage(`Destroyed ${killType} with ${weaponType}! +${points}`)
+              setShowKillFeed(true)
+
+              // Show streak message if applicable
+              if (killStreak >= 3) {
+                addMessage(`KILL STREAK: ${killStreak}!`)
+                if (killStreak === 3) playSound("kill_streak_3")
+                if (killStreak === 5) playSound("kill_streak_5")
+                if (killStreak === 10) playSound("kill_streak_10")
+              }
             }
           }
         })
@@ -900,9 +963,55 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           const dy = enemy.y - y
           const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 100) {
+          if (distance < 150) {
             // Calculate damage based on distance (more damage closer to center)
-            const damage = Math.floor(100 * (1 - distance / 100))
+            const damage = Math.floor(150 * (1 - distance / 150))
+
+            // Check if this will destroy the enemy
+            const willDestroy = enemy.health <= damage
+
+            // If it will destroy, handle the kill
+            if (willDestroy) {
+              let points
+              switch (enemy.type) {
+                case "pakistaniTank":
+                  points = 100
+                  break
+                case "pakistaniSoldier":
+                  points = 50
+                  break
+                case "helicopter":
+                  points = 200
+                  break
+                default:
+                  points = 50
+              }
+
+              setLocalScore((prev) => prev + points)
+              setKills((prev) => prev + 1)
+
+              // Update kill streak
+              setLastKillTime(Date.now())
+              setKillStreak((prev) => prev + 1)
+
+              // Show kill feed for missile area damage
+              let killType = ""
+              switch (enemy.type) {
+                case "pakistaniTank":
+                  killType = "Pakistani Tank"
+                  break
+                case "pakistaniSoldier":
+                  killType = "Pakistani Soldier"
+                  break
+                case "helicopter":
+                  killType = "Pakistani Helicopter"
+                  break
+              }
+
+              setKillFeedMessage(`Destroyed ${killType} with Missile Blast! +${points}`)
+              setShowKillFeed(true)
+            }
+
             return { ...enemy, health: Math.max(0, enemy.health - damage) }
           }
 
@@ -1206,7 +1315,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
         {/* Particles - rendered on canvas for better performance */}
         <canvas
           ref={canvasRef}
-          width="800"
+          width="1500"
           height="600"
           className="absolute top-0 left-0 pointer-events-none z-[1500]"
           style={{
@@ -1277,6 +1386,29 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             <div className="text-white text-xs text-center mt-1">{Math.ceil(specialWeaponCooldown / 1000)}s</div>
           </div>
         )}
+
+        {/* Kill counter */}
+        <div className="bg-black bg-opacity-70 p-2 rounded-lg mt-4">
+          <div className="flex items-center justify-between">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="red"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M2 12h20M12 2v20"></path>
+            </svg>
+            <span className="text-white text-xs font-bold ml-2">KILLS: {kills}</span>
+          </div>
+          {killStreak >= 3 && (
+            <div className="text-red-500 text-xs font-bold mt-1 animate-pulse">STREAK: {killStreak}</div>
+          )}
+        </div>
       </div>
 
       {/* Mini-map */}
@@ -1300,11 +1432,20 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
         ))}
       </div>
 
+      {/* Kill feed */}
+      {showKillFeed && (
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 z-[3000]">
+          <div className="bg-red-900 bg-opacity-80 px-4 py-2 rounded-lg text-white font-bold text-lg shadow-lg border border-red-500 animate-bounce">
+            {killFeedMessage}
+          </div>
+        </div>
+      )}
+
       {/* Controls hint */}
       <div className="absolute bottom-4 left-4 z-[3000] bg-black bg-opacity-70 p-2 rounded-lg text-white text-xs">
         <div>WASD/Arrows: Move</div>
-        <div>SPACE: Shoot</div>
-        <div>SHIFT: Missile ({playerSpecialAmmo})</div>
+        <div>F/SPACE: Shoot ({playerAmmo})</div>
+        <div>M/SHIFT: Missile ({playerSpecialAmmo})</div>
       </div>
     </div>
   )

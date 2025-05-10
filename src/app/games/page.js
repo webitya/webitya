@@ -1,14 +1,10 @@
 "use client"
 
-import GameAudio from "@/components/Games/game-audio"
-import GameBoard from "@/components/Games/game-board"
-import GameControls from "@/components/Games/game-controls"
-import GameStatus from "@/components/Games/game-status"
 import { useState } from "react"
-// import GameBoard from "@/components/game-board"
-// import GameControls from "@/components/game-controls"
-// import GameStatus from "@/components/game-status"
-// import GameAudio from "@/components/game-audio"
+import GameBoard from "@/components/game-board"
+import GameControls from "@/components/game-controls"
+import GameStatus from "@/components/game-status"
+import GameAudio from "@/components/game-audio"
 
 export default function Home() {
   const [gameStarted, setGameStarted] = useState(false)
@@ -33,7 +29,7 @@ export default function Home() {
 
       <GameAudio muted={muted} gameStarted={gameStarted} gameOver={gameOver} />
 
-      <div className="z-10 w-full max-w-6xl items-center justify-center font-mono text-sm flex flex-col relative">
+      <div className="z-10 w-full max-w-full items-center justify-center font-mono text-sm flex flex-col relative">
         <div className="absolute top-4 right-4 flex space-x-4">
           <button
             onClick={() => setMuted(!muted)}

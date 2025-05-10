@@ -1,6 +1,6 @@
 export default function GameControls() {
   return (
-    <div className="mt-4 p-4 bg-black bg-opacity-70 rounded-lg shadow-md border border-gray-700 text-white">
+    <div className="mt-4 p-4 bg-black bg-opacity-70 rounded-lg shadow-md border border-gray-700 text-white w-full">
       <h2 className="text-xl font-bold mb-2 text-orange-500">BATTLEFIELD CONTROLS</h2>
       <div className="grid grid-cols-2 gap-6">
         <div>
@@ -20,11 +20,11 @@ export default function GameControls() {
           <h3 className="font-semibold text-green-400 mb-2">COMBAT</h3>
           <div className="space-y-2">
             <div className="flex items-center">
-              <div className="bg-gray-800 p-2 rounded text-center w-24">SPACE</div>
+              <div className="bg-gray-800 p-2 rounded text-center w-24">F / SPACE</div>
               <span className="ml-2">Fire Weapon</span>
             </div>
             <div className="flex items-center">
-              <div className="bg-gray-800 p-2 rounded text-center w-24">SHIFT</div>
+              <div className="bg-gray-800 p-2 rounded text-center w-24">M / SHIFT</div>
               <span className="ml-2">Launch Missile</span>
             </div>
           </div>
@@ -45,6 +45,8 @@ export default function GameControls() {
         <p>TIP: Collect power-ups to replenish health, ammo, and special weapons.</p>
         <p>TIP: Buildings provide cover from enemy fire.</p>
         <p>TIP: Allied soldiers will help you fight the enemy.</p>
+        <p>TIP: Missiles have a large blast radius and can destroy multiple enemies at once.</p>
+        <p>TIP: Kill streaks will earn you bonus points and special messages.</p>
       </div>
     </div>
   )
