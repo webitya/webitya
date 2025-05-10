@@ -1,10 +1,9 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import {
   IndianTank,
   PakistaniTank,
-  IndianSoldier,
   PakistaniSoldier,
   Helicopter,
   Explosion,
@@ -12,22 +11,21 @@ import {
   Missile,
   Building,
   Tree,
-} from "@/components/game-sprites"
-import MiniMap from "@/components/mini-map"
+} from "./game-sprites"
+import MiniMap from "./mini-map"
 
 export default function GameBoard({ setScore, setGameOver, difficulty, muted }) {
-  const [playerPosition, setPlayerPosition] = useState({ x: 100, y: 400 })
+  // Game state
+  const [playerPosition, setPlayerPosition] = useState({ x: 400, y: 300 })
   const [playerHealth, setPlayerHealth] = useState(100)
   const [playerAmmo, setPlayerAmmo] = useState(100)
   const [playerSpecialAmmo, setPlayerSpecialAmmo] = useState(5)
+  const [playerDirection, setPlayerDirection] = useState("right")
   const [enemies, setEnemies] = useState([])
-  const [allies, setAllies] = useState([])
   const [projectiles, setProjectiles] = useState([])
   const [explosions, setExplosions] = useState([])
-  const [particles, setParticles] = useState([])
   const [terrainElements, setTerrainElements] = useState([])
   const [powerUps, setPowerUps] = useState([])
-  const [gameTime, setGameTime] = useState(0)
   const [score, setLocalScore] = useState(0)
   const [cameraShake, setCameraShake] = useState(0)
   const [lastShot, setLastShot] = useState(0)
@@ -39,77 +37,141 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
   const [lastKillTime, setLastKillTime] = useState(0)
   const [showKillFeed, setShowKillFeed] = useState(false)
   const [killFeedMessage, setKillFeedMessage] = useState("")
+  const [worldDimensions, setWorldDimensions] = useState({ width: 4000, height: 2000 })
+  const [gameTime, setGameTime] = useState(0)
+  const [isFiring, setIsFiring] = useState(false)
+  const [isLaunchingMissile, setIsLaunchingMissile] = useState(false)
+  const [muzzleFlash, setMuzzleFlash] = useState(false)
 
-  const gameLoopRef = useRef()
-  const enemySpawnRef = useRef()
-  const enemyShootRef = useRef()
-  const allySpawnRef = useRef()
-  const powerUpSpawnRef = useRef()
+  // Refs
+  const gameLoopRef = useRef(null)
+  const enemySpawnRef = useRef(null)
+  const enemyShootRef = useRef(null)
+  const powerUpSpawnRef = useRef(null)
   const keysPressed = useRef(new Set())
-  const boardRef = useRef()
-  const canvasRef = useRef()
+  const boardRef = useRef(null)
+  const canvasRef = useRef(null)
+  const gameAreaRef = useRef(null)
+  const lastFrameTimeRef = useRef(0)
+  const playerRef = useRef(null)
+  const enemiesRef = useRef([])
+  const projectilesRef = useRef([])
+  const terrainElementsRef = useRef([])
+  const powerUpsRef = useRef([])
+
+  // Sync refs with state for performance
+  useEffect(() => {
+    enemiesRef.current = enemies
+  }, [enemies])
+
+  useEffect(() => {
+    projectilesRef.current = projectiles
+  }, [projectiles])
+
+  useEffect(() => {
+    terrainElementsRef.current = terrainElements
+  }, [terrainElements])
+
+  useEffect(() => {
+    powerUpsRef.current = powerUps
+  }, [powerUps])
 
   // Difficulty settings
   const difficultySettings = {
     easy: {
       enemySpawnRate: 3000,
       enemyShootRate: 2000,
-      enemyHealth: { tank: 80, soldier: 40, helicopter: 120 },
+      enemyHealth: { tank: 40, soldier: 20, helicopter: 60 },
       enemyDamage: 5,
-      allySpawnRate: 5000,
     },
     medium: {
       enemySpawnRate: 2000,
       enemyShootRate: 1500,
-      enemyHealth: { tank: 100, soldier: 50, helicopter: 150 },
+      enemyHealth: { tank: 60, soldier: 30, helicopter: 80 },
       enemyDamage: 10,
-      allySpawnRate: 8000,
     },
     hard: {
       enemySpawnRate: 1500,
       enemyShootRate: 1000,
-      enemyHealth: { tank: 120, soldier: 60, helicopter: 180 },
+      enemyHealth: { tank: 80, soldier: 40, helicopter: 100 },
       enemyDamage: 15,
-      allySpawnRate: 12000,
     },
   }
 
   const settings = difficultySettings[difficulty]
 
   // Sound effects
-  const playSound = (sound) => {
-    if (muted) return
+  const playSound = useCallback(
+    (sound) => {
+      if (muted) return
+      if (window.playGameSound) {
+        window.playGameSound(sound)
+      }
+    },
+    [muted],
+  )
 
-    const audio = new Audio(`/sounds/${sound}.mp3`)
-    audio.volume = sound.includes("explosion") ? 0.4 : 0.2
-    audio.play().catch((e) => console.error("Audio play error:", e))
-  }
+  // Initialize game dimensions
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (gameAreaRef.current) {
+        const width = Math.max(window.innerWidth * 3, 4000)
+        const height = Math.max(window.innerHeight * 3, 2000)
+        setWorldDimensions({ width, height })
+
+        if (canvasRef.current) {
+          canvasRef.current.width = window.innerWidth
+          canvasRef.current.height = window.innerHeight - 200
+        }
+      }
+    }
+
+    updateDimensions()
+    window.addEventListener("resize", updateDimensions)
+
+    return () => {
+      window.removeEventListener("resize", updateDimensions)
+    }
+  }, [])
 
   // Initialize game
   useEffect(() => {
     // Set up key listeners
     const handleKeyDown = (e) => {
-      keysPressed.current.add(e.key)
+      keysPressed.current.add(e.key.toLowerCase())
 
-      // Shoot on F key
+      // Shoot on F key or Space
       if ((e.key === " " || e.key.toLowerCase() === "f") && Date.now() - lastShot > 300 && playerAmmo > 0) {
         shoot("india", "regular")
         setLastShot(Date.now())
         setPlayerAmmo((prev) => prev - 1)
+        setIsFiring(true)
+        setMuzzleFlash(true)
+        setTimeout(() => setMuzzleFlash(false), 100)
       }
 
-      // Special weapon on M key
+      // Special weapon on M key or Shift
       if ((e.key === "Shift" || e.key.toLowerCase() === "m") && specialWeaponCooldown === 0 && playerSpecialAmmo > 0) {
         shoot("india", "special")
         setSpecialWeaponCooldown(5000) // 5 second cooldown
         setPlayerSpecialAmmo((prev) => prev - 1)
         addMessage("Missile Launched!")
         playSound("missile_launch")
+        setIsLaunchingMissile(true)
+        setTimeout(() => setIsLaunchingMissile(false), 500)
       }
     }
 
     const handleKeyUp = (e) => {
-      keysPressed.current.delete(e.key)
+      keysPressed.current.delete(e.key.toLowerCase())
+
+      if (e.key === " " || e.key.toLowerCase() === "f") {
+        setIsFiring(false)
+      }
+
+      if (e.key === "Shift" || e.key.toLowerCase() === "m") {
+        setIsLaunchingMissile(false)
+      }
     }
 
     window.addEventListener("keydown", handleKeyDown)
@@ -131,22 +193,10 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
       enemiesShoot()
     }, settings.enemyShootRate)
 
-    // Start ally spawning
-    allySpawnRef.current = setInterval(() => {
-      spawnAlly()
-    }, settings.allySpawnRate)
-
     // Start power-up spawning
     powerUpSpawnRef.current = setInterval(() => {
       spawnPowerUp()
     }, 15000)
-
-    // Initialize canvas for particles
-    if (canvasRef.current) {
-      const ctx = canvasRef.current.getContext("2d")
-      canvasRef.current.width = window.innerWidth
-      canvasRef.current.height = 600
-    }
 
     // Add initial message
     addMessage("Defend the border!")
@@ -157,10 +207,19 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
       clearInterval(gameLoopRef.current)
       clearInterval(enemySpawnRef.current)
       clearInterval(enemyShootRef.current)
-      clearInterval(allySpawnRef.current)
       clearInterval(powerUpSpawnRef.current)
     }
-  }, [difficulty, muted])
+  }, [
+    difficulty,
+    muted,
+    playerAmmo,
+    lastShot,
+    specialWeaponCooldown,
+    playerSpecialAmmo,
+    playSound,
+    settings.enemyShootRate,
+    settings.enemySpawnRate,
+  ])
 
   // Update score
   useEffect(() => {
@@ -172,10 +231,9 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
       clearInterval(gameLoopRef.current)
       clearInterval(enemySpawnRef.current)
       clearInterval(enemyShootRef.current)
-      clearInterval(allySpawnRef.current)
       clearInterval(powerUpSpawnRef.current)
     }
-  }, [score, playerHealth, setScore, setGameOver, muted])
+  }, [score, playerHealth, setScore, setGameOver, playSound])
 
   // Special weapon cooldown
   useEffect(() => {
@@ -215,48 +273,61 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
   // Initialize terrain elements
   const initializeTerrain = () => {
     const newTerrain = []
+    const { width, height } = worldDimensions
 
     // Add some buildings
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 20; i++) {
       newTerrain.push({
         id: `building-${i}`,
-        x: 200 + Math.random() * 1200,
-        y: 100 + Math.random() * 400,
+        x: 200 + Math.random() * (width - 400),
+        y: 100 + Math.random() * (height - 200),
         type: "building",
         variant: Math.floor(Math.random() * 3),
+        width: 60,
+        height: 60,
       })
     }
 
     // Add some trees
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 40; i++) {
       newTerrain.push({
         id: `tree-${i}`,
-        x: 50 + Math.random() * 1400,
-        y: 50 + Math.random() * 500,
+        x: 50 + Math.random() * (width - 100),
+        y: 50 + Math.random() * (height - 100),
         type: "tree",
         variant: Math.floor(Math.random() * 2),
+        width: 30,
+        height: 50,
       })
     }
 
     setTerrainElements(newTerrain)
+    terrainElementsRef.current = newTerrain
   }
 
   const startGameLoop = () => {
-    gameLoopRef.current = setInterval(() => {
-      // Update game time
-      setGameTime((prev) => prev + 1)
+    // Use requestAnimationFrame for smoother animation
+    const gameLoop = (timestamp) => {
+      // Calculate delta time for smooth animation
+      if (!lastFrameTimeRef.current) {
+        lastFrameTimeRef.current = timestamp
+      }
+      const deltaTime = timestamp - lastFrameTimeRef.current
+      lastFrameTimeRef.current = timestamp
+
+      // Update game time (roughly 60 ticks per second)
+      if (deltaTime > 0) {
+        setGameTime((prev) => prev + deltaTime / 16.67)
+      }
 
       // Handle player movement
-      handlePlayerMovement()
+      handlePlayerMovement(deltaTime)
 
       // Move projectiles
-      moveProjectiles()
+      moveProjectiles(deltaTime)
 
       // Move enemies
-      moveEnemies()
-
-      // Move allies
-      moveAllies()
+      moveEnemies(deltaTime)
 
       // Check collisions
       checkCollisions()
@@ -264,31 +335,34 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
       // Update explosions
       updateExplosions()
 
-      // Update particles
-      updateParticles()
-
       // Update camera shake
       if (cameraShake > 0) {
-        setCameraShake((prev) => prev - 1)
+        setCameraShake((prev) => Math.max(0, prev - deltaTime / 16.67))
       }
 
       // Update special weapon cooldown
       if (specialWeaponCooldown > 0) {
-        setSpecialWeaponCooldown((prev) => Math.max(0, prev - 16.67)) // 60fps = 16.67ms per frame
+        setSpecialWeaponCooldown((prev) => Math.max(0, prev - deltaTime))
       }
 
       // Update messages
       setMessages((prev) => prev.filter((msg) => Date.now() - msg.time < 3000))
 
       // Occasionally replenish ammo
-      if (gameTime % 300 === 0 && playerAmmo < 100) {
+      if (Math.floor(gameTime / 300) > Math.floor((gameTime - deltaTime / 16.67) / 300) && playerAmmo < 100) {
         setPlayerAmmo((prev) => Math.min(100, prev + 10))
         addMessage("Ammo Replenished!")
       }
 
       // Update viewport offset (camera follow)
       updateViewportOffset()
-    }, 1000 / 60) // 60 FPS
+
+      // Continue the game loop
+      gameLoopRef.current = requestAnimationFrame(gameLoop)
+    }
+
+    // Start the game loop
+    gameLoopRef.current = requestAnimationFrame(gameLoop)
   }
 
   const updateViewportOffset = () => {
@@ -304,38 +378,42 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
     // Smooth camera follow
     setViewportOffset((prev) => ({
-      x: prev.x + (targetX - prev.x) * 0.05,
-      y: prev.y + (targetY - prev.y) * 0.05,
+      x: prev.x + (targetX - prev.x) * 0.1,
+      y: prev.y + (targetY - prev.y) * 0.1,
     }))
   }
 
-  const handlePlayerMovement = () => {
+  const handlePlayerMovement = (deltaTime) => {
+    const speed = 5 * (deltaTime / 16.67) // Base speed adjusted for frame rate
+
     setPlayerPosition((prev) => {
       let newX = prev.x
       let newY = prev.y
-      const speed = 4
+      let newDirection = playerDirection
 
-      if (keysPressed.current.has("ArrowLeft") || keysPressed.current.has("a")) {
+      if (keysPressed.current.has("arrowleft") || keysPressed.current.has("a")) {
         newX = Math.max(50, prev.x - speed)
+        newDirection = "left"
       }
-      if (keysPressed.current.has("ArrowRight") || keysPressed.current.has("d")) {
-        newX = Math.min(1450, prev.x + speed)
+      if (keysPressed.current.has("arrowright") || keysPressed.current.has("d")) {
+        newX = Math.min(worldDimensions.width - 50, prev.x + speed)
+        newDirection = "right"
       }
-      if (keysPressed.current.has("ArrowUp") || keysPressed.current.has("w")) {
+      if (keysPressed.current.has("arrowup") || keysPressed.current.has("w")) {
         newY = Math.max(50, prev.y - speed)
       }
-      if (keysPressed.current.has("ArrowDown") || keysPressed.current.has("s")) {
-        newY = Math.min(550, prev.y + speed)
+      if (keysPressed.current.has("arrowdown") || keysPressed.current.has("s")) {
+        newY = Math.min(worldDimensions.height - 50, prev.y + speed)
       }
 
       // Check collision with terrain
       const playerRadius = 25
       let canMove = true
 
-      terrainElements.forEach((element) => {
+      terrainElementsRef.current.forEach((element) => {
         if (element.type === "building") {
-          const buildingWidth = 60
-          const buildingHeight = 60
+          const buildingWidth = element.width || 60
+          const buildingHeight = element.height || 60
 
           // Simple rectangular collision
           if (
@@ -348,6 +426,24 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           }
         }
       })
+
+      // Update player direction
+      if (newDirection !== playerDirection) {
+        setPlayerDirection(newDirection)
+      }
+
+      // Auto-fire if holding F or Space
+      if (
+        (keysPressed.current.has("f") || keysPressed.current.has(" ")) &&
+        Date.now() - lastShot > 300 &&
+        playerAmmo > 0
+      ) {
+        shoot("india", "regular")
+        setLastShot(Date.now())
+        setPlayerAmmo((prev) => prev - 1)
+        setMuzzleFlash(true)
+        setTimeout(() => setMuzzleFlash(false), 100)
+      }
 
       return canMove ? { x: newX, y: newY } : prev
     })
@@ -388,23 +484,35 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     // Spawn position - from right, top or bottom
     let x, y
     const spawnSide = Math.floor(Math.random() * 3)
+    const { width, height } = worldDimensions
 
     switch (spawnSide) {
       case 0: // Right
-        x = 1500
-        y = 100 + Math.random() * 400
+        x = width - 100
+        y = 100 + Math.random() * (height - 200)
         break
       case 1: // Top
-        x = 100 + Math.random() * 1300
-        y = 0
+        x = 100 + Math.random() * (width - 200)
+        y = 50
         break
       case 2: // Bottom
-        x = 100 + Math.random() * 1300
-        y = 600
+        x = 100 + Math.random() * (width - 200)
+        y = height - 50
         break
       default:
-        x = 1500
-        y = 300
+        x = width - 100
+        y = height / 2
+    }
+
+    // Don't spawn too close to player
+    const dx = x - playerPosition.x
+    const dy = y - playerPosition.y
+    const distanceToPlayer = Math.sqrt(dx * dx + dy * dy)
+
+    if (distanceToPlayer < 300) {
+      // Too close to player, try again
+      setTimeout(spawnEnemy, 500)
+      return
     }
 
     const newEnemy = {
@@ -417,57 +525,48 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
       direction: "left",
       speed: type === "helicopter" ? 2 : type === "pakistaniSoldier" ? 1.5 : 1,
       lastShot: 0,
+      width: type === "helicopter" ? 40 : 30,
+      height: type === "helicopter" ? 20 : 30,
     }
 
     setEnemies((prev) => [...prev, newEnemy])
+    enemiesRef.current = [...enemiesRef.current, newEnemy]
 
     if (type === "helicopter") {
       playSound("helicopter")
     }
   }
 
-  const spawnAlly = () => {
-    // Only spawn allies if there are fewer than 3
-    if (allies.length >= 3) return
-
-    const allyTypes = ["indianSoldier"]
-    const type = allyTypes[Math.floor(Math.random() * allyTypes.length)]
-
-    // Spawn from left side
-    const newAlly = {
-      id: Date.now() + Math.random(),
-      x: 0,
-      y: 300 + Math.random() * 200,
-      type,
-      health: 70,
-      maxHealth: 70,
-      direction: "right",
-      speed: 1,
-      lastShot: 0,
-    }
-
-    setAllies((prev) => [...prev, newAlly])
-    addMessage("Reinforcements have arrived!")
-  }
-
   const spawnPowerUp = () => {
     const powerUpTypes = ["health", "ammo", "special"]
     const type = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)]
+    const { width, height } = worldDimensions
+
+    // Spawn near player for better gameplay
+    const angle = Math.random() * Math.PI * 2
+    const distance = 300 + Math.random() * 300
+    const x = Math.max(50, Math.min(width - 50, playerPosition.x + Math.cos(angle) * distance))
+    const y = Math.max(50, Math.min(height - 50, playerPosition.y + Math.sin(angle) * distance))
 
     const newPowerUp = {
       id: Date.now() + Math.random(),
-      x: 100 + Math.random() * 1300,
-      y: 100 + Math.random() * 400,
+      x,
+      y,
       type,
       duration: 10000, // 10 seconds
+      width: 10,
+      height: 10,
     }
 
     setPowerUps((prev) => [...prev, newPowerUp])
+    powerUpsRef.current = [...powerUpsRef.current, newPowerUp]
     addMessage("Supply drop incoming!")
     playSound("powerup_spawn")
   }
 
-  const moveEnemies = () => {
+  const moveEnemies = (deltaTime) => {
+    const speedMultiplier = deltaTime / 16.67 // Adjust speed based on frame rate
+
     setEnemies((prev) =>
       prev
         .map((enemy) => {
@@ -486,8 +585,8 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             if (distance < 300) {
               // If close to player, circle around
               const angle = Math.atan2(dy, dx) + Math.PI / 2 // Perpendicular
-              newX += Math.cos(angle) * enemy.speed
-              newY += Math.sin(angle) * enemy.speed
+              newX += Math.cos(angle) * enemy.speed * speedMultiplier
+              newY += Math.sin(angle) * enemy.speed * speedMultiplier
 
               // Occasionally shoot if close
               if (Math.random() < 0.02 && Date.now() - enemy.lastShot > 1000) {
@@ -496,8 +595,8 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
               }
             } else {
               // Move toward player
-              newX += (dx / distance) * enemy.speed
-              newY += (dy / distance) * enemy.speed
+              newX += (dx / distance) * enemy.speed * speedMultiplier
+              newY += (dy / distance) * enemy.speed * speedMultiplier
             }
 
             // Update direction based on movement
@@ -507,12 +606,12 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             if (distance < 200) {
               // If close, move perpendicular to player
               const angle = Math.atan2(dy, dx) + (Math.random() > 0.5 ? Math.PI / 2 : -Math.PI / 2)
-              newX += Math.cos(angle) * enemy.speed
-              newY += Math.sin(angle) * enemy.speed
+              newX += Math.cos(angle) * enemy.speed * speedMultiplier
+              newY += Math.sin(angle) * enemy.speed * speedMultiplier
             } else {
               // Move toward player
-              newX += (dx / distance) * enemy.speed
-              newY += (dy / distance) * enemy.speed
+              newX += (dx / distance) * enemy.speed * speedMultiplier
+              newY += (dy / distance) * enemy.speed * speedMultiplier
             }
 
             // Update direction
@@ -520,8 +619,8 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           } else {
             // Tanks move directly toward player
             if (distance > 50) {
-              newX += (dx / distance) * enemy.speed
-              newY += (dy / distance) * enemy.speed
+              newX += (dx / distance) * enemy.speed * speedMultiplier
+              newY += (dy / distance) * enemy.speed * speedMultiplier
             }
 
             // Update direction
@@ -530,10 +629,10 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
           // Check terrain collision
           let canMove = true
-          terrainElements.forEach((element) => {
+          terrainElementsRef.current.forEach((element) => {
             if (element.type === "building") {
-              const buildingWidth = 60
-              const buildingHeight = 60
+              const buildingWidth = element.width || 60
+              const buildingHeight = element.height || 60
               const enemyRadius = enemy.type === "helicopter" ? 0 : 20 // Helicopters fly over buildings
 
               if (
@@ -554,81 +653,10 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             direction: newDirection,
           }
         })
-        .filter((enemy) => enemy.x > -50 && enemy.x < 1550 && enemy.y > -50 && enemy.y < 650 && enemy.health > 0),
-    )
-  }
-
-  const moveAllies = () => {
-    setAllies((prev) =>
-      prev
-        .map((ally) => {
-          // Find closest enemy
-          let closestEnemy = null
-          let minDistance = Number.POSITIVE_INFINITY
-
-          enemies.forEach((enemy) => {
-            const dx = enemy.x - ally.x
-            const dy = enemy.y - ally.y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            if (distance < minDistance) {
-              minDistance = distance
-              closestEnemy = enemy
-            }
-          })
-
-          let newX = ally.x
-          let newY = ally.y
-          let newDirection = ally.direction
-
-          if (closestEnemy && minDistance < 300) {
-            // Move toward closest enemy
-            const dx = closestEnemy.x - ally.x
-            const dy = closestEnemy.y - ally.y
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            newX += (dx / distance) * ally.speed
-            newY += (dy / distance) * ally.speed
-            newDirection = dx > 0 ? "right" : "left"
-
-            // Shoot at enemy if close enough
-            if (minDistance < 200 && Math.random() < 0.01 && Date.now() - ally.lastShot > 2000) {
-              shoot("india", "regular", ally)
-              ally.lastShot = Date.now()
-            }
-          } else {
-            // Patrol - move right
-            newX += ally.speed
-            newDirection = "right"
-          }
-
-          // Check terrain collision
-          let canMove = true
-          terrainElements.forEach((element) => {
-            if (element.type === "building") {
-              const buildingWidth = 60
-              const buildingHeight = 60
-              const allyRadius = 20
-
-              if (
-                newX + allyRadius > element.x - buildingWidth / 2 &&
-                newX - allyRadius < element.x + buildingWidth / 2 &&
-                newY + allyRadius > element.y - buildingHeight / 2 &&
-                newY - allyRadius < element.y + buildingHeight / 2
-              ) {
-                canMove = false
-              }
-            }
-          })
-
-          return {
-            ...ally,
-            x: canMove ? newX : ally.x,
-            y: canMove ? newY : ally.y,
-            direction: newDirection,
-          }
-        })
-        .filter((ally) => ally.x > -50 && ally.x < 1550 && ally.y > -50 && ally.y < 650 && ally.health > 0),
+        .filter((enemy) => {
+          const { width, height } = worldDimensions
+          return enemy.x > -50 && enemy.x < width + 50 && enemy.y > -50 && enemy.y < height + 50 && enemy.health > 0
+        }),
     )
   }
 
@@ -638,29 +666,56 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
     if (weaponType === "special") {
       // Special weapon (missile)
+      const target =
+        source === "india" ? findClosestEnemy(sourceX, sourceY) : { x: playerPosition.x, y: playerPosition.y }
+
+      if (!target) return // No target found
+
       const newProjectile = {
         id: Date.now() + Math.random(),
         x: sourceX,
         y: sourceY,
-        direction: source === "india" ? "right" : "left",
+        direction: source === "india" ? playerDirection : "left",
         source,
         type: "missile",
-        target: source === "india" ? findClosestEnemy(sourceX, sourceY) : { x: playerPosition.x, y: playerPosition.y },
+        target,
+        speed: 4,
+        damage: 150,
+        width: 16,
+        height: 6,
       }
 
       setProjectiles((prev) => [...prev, newProjectile])
+      projectilesRef.current = [...projectilesRef.current, newProjectile]
     } else {
       // Regular weapon (bullet)
+      let direction = shooter ? shooter.direction : source === "india" ? playerDirection : "left"
+
+      // If no shooter (player), determine direction based on closest enemy
+      if (!shooter && source === "india") {
+        const target = findClosestEnemy(sourceX, sourceY)
+        if (target) {
+          direction = target.x > sourceX ? "right" : "left"
+        }
+      }
+
       const newProjectile = {
         id: Date.now() + Math.random(),
         x: sourceX,
         y: sourceY,
-        direction: shooter ? shooter.direction : source === "india" ? "right" : "left",
+        direction,
         source,
         type: "bullet",
+        targetX: shooter ? null : source === "india" ? findClosestEnemy(sourceX, sourceY)?.x : playerPosition.x,
+        targetY: shooter ? null : source === "india" ? findClosestEnemy(sourceX, sourceY)?.y : playerPosition.y,
+        speed: 10,
+        damage: 25,
+        width: 10,
+        height: 4,
       }
 
       setProjectiles((prev) => [...prev, newProjectile])
+      projectilesRef.current = [...projectilesRef.current, newProjectile]
       playSound(source === "india" ? "player_shoot" : "enemy_shoot")
     }
   }
@@ -669,7 +724,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     let closestEnemy = null
     let minDistance = Number.POSITIVE_INFINITY
 
-    enemies.forEach((enemy) => {
+    enemiesRef.current.forEach((enemy) => {
       const dx = enemy.x - x
       const dy = enemy.y - y
       const distance = Math.sqrt(dx * dx + dy * dy)
@@ -680,7 +735,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
       }
     })
 
-    return closestEnemy || { x: 1500, y: 300 } // Default target if no enemies
+    return closestEnemy
   }
 
   const enemiesShoot = () => {
@@ -692,7 +747,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
         const dy = playerPosition.y - enemy.y
         const distance = Math.sqrt(dx * dx + dy * dy)
 
-        if (distance < 300 && Math.random() < 0.3 && Date.now() - enemy.lastShot > 2000) {
+        if (distance < 400 && Math.random() < 0.3 && Date.now() - enemy.lastShot > 2000) {
           shoot("pakistan", "regular", enemy)
           return { ...enemy, lastShot: Date.now() }
         }
@@ -702,12 +757,16 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     )
   }
 
-  const moveProjectiles = () => {
+  const moveProjectiles = (deltaTime) => {
+    const speedMultiplier = deltaTime / 16.67 // Adjust speed based on frame rate
+
     setProjectiles((prev) =>
       prev
         .map((projectile) => {
           if (projectile.type === "missile") {
             // Guided missile movement
+            if (!projectile.target) return null // No target, remove missile
+
             const dx = projectile.target.x - projectile.x
             const dy = projectile.target.y - projectile.y
             const distance = Math.sqrt(dx * dx + dy * dy)
@@ -719,31 +778,61 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             }
 
             // Move toward target
-            const speed = 5
             return {
               ...projectile,
-              x: projectile.x + (dx / distance) * speed,
-              y: projectile.y + (dy / distance) * speed,
+              x: projectile.x + (dx / distance) * projectile.speed * speedMultiplier,
+              y: projectile.y + (dy / distance) * projectile.speed * speedMultiplier,
             }
           } else {
             // Regular bullet movement
-            const speed = 10
-            return {
-              ...projectile,
-              x: projectile.direction === "right" ? projectile.x + speed : projectile.x - speed,
+            if (projectile.targetX && projectile.targetY) {
+              // Targeted bullet (player's bullet)
+              const dx = projectile.targetX - projectile.x
+              const dy = projectile.targetY - projectile.y
+              const distance = Math.sqrt(dx * dx + dy * dy)
+
+              // If bullet is very far from target, just move in straight line
+              if (distance > 500) {
+                return {
+                  ...projectile,
+                  x:
+                    projectile.direction === "right"
+                      ? projectile.x + projectile.speed * speedMultiplier
+                      : projectile.x - projectile.speed * speedMultiplier,
+                }
+              }
+
+              // Otherwise, slightly home in on target
+              return {
+                ...projectile,
+                x: projectile.x + (dx / distance) * projectile.speed * speedMultiplier * 0.9,
+                y: projectile.y + (dy / distance) * projectile.speed * speedMultiplier * 0.3,
+              }
+            } else {
+              // Regular straight bullet
+              return {
+                ...projectile,
+                x:
+                  projectile.direction === "right"
+                    ? projectile.x + projectile.speed * speedMultiplier
+                    : projectile.x - projectile.speed * speedMultiplier,
+              }
             }
           }
         })
         .filter(Boolean) // Remove null entries (exploded missiles)
-        .filter((projectile) => projectile.x > -20 && projectile.x < 1520 && projectile.y > -20 && projectile.y < 620),
+        .filter((projectile) => {
+          const { width, height } = worldDimensions
+          return projectile.x > -50 && projectile.x < width + 50 && projectile.y > -50 && projectile.y < height + 50
+        }),
     )
   }
 
   const checkCollisions = () => {
     // Check projectile collisions
-    projectiles.forEach((projectile) => {
+    projectilesRef.current.forEach((projectile) => {
       // Check collision with terrain
-      terrainElements.forEach((element) => {
+      terrainElementsRef.current.forEach((element) => {
         if (element.type === "building") {
           const dx = projectile.x - element.x
           const dy = projectile.y - element.y
@@ -752,6 +841,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           if (distance < 30) {
             // Hit building
             setProjectiles((prev) => prev.filter((p) => p.id !== projectile.id))
+            projectilesRef.current = projectilesRef.current.filter((p) => p.id !== projectile.id)
             createExplosion(projectile.x, projectile.y, projectile.type === "missile" ? "large" : "small")
           }
         }
@@ -759,7 +849,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
       if (projectile.source === "india") {
         // Check if Indian projectile hit Pakistani units
-        enemies.forEach((enemy) => {
+        enemiesRef.current.forEach((enemy) => {
           const dx = projectile.x - enemy.x
           const dy = projectile.y - enemy.y
           const distance = Math.sqrt(dx * dx + dy * dy)
@@ -769,7 +859,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
           if (distance < hitRadius) {
             // Hit!
-            const damage = projectile.type === "missile" ? 150 : 25
+            const damage = projectile.damage || (projectile.type === "missile" ? 150 : 25)
 
             // Check if this hit will destroy the enemy
             const willDestroy = enemy.health <= damage
@@ -781,6 +871,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             // Remove projectile if it's a bullet (missiles explode on impact)
             if (projectile.type !== "missile") {
               setProjectiles((prev) => prev.filter((p) => p.id !== projectile.id))
+              projectilesRef.current = projectilesRef.current.filter((p) => p.id !== projectile.id)
             }
 
             // Create explosion
@@ -839,9 +930,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           }
         })
       } else {
-        // Check if Pakistani projectile hit Indian player or allies
-
-        // Check player hit
+        // Check if Pakistani projectile hit Indian player
         const dxPlayer = projectile.x - playerPosition.x
         const dyPlayer = projectile.y - playerPosition.y
         const distancePlayer = Math.sqrt(dxPlayer * dxPlayer + dyPlayer * dyPlayer)
@@ -852,6 +941,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
           // Remove projectile
           setProjectiles((prev) => prev.filter((p) => p.id !== projectile.id))
+          projectilesRef.current = projectilesRef.current.filter((p) => p.id !== projectile.id)
 
           // Create explosion
           createExplosion(playerPosition.x, playerPosition.y, "small")
@@ -862,29 +952,11 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           // Play hit sound
           playSound("player_hit")
         }
-
-        // Check ally hits
-        allies.forEach((ally) => {
-          const dx = projectile.x - ally.x
-          const dy = projectile.y - ally.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 20) {
-            // Ally hit!
-            setAllies((prev) => prev.map((a) => (a.id === ally.id ? { ...a, health: Math.max(0, a.health - 25) } : a)))
-
-            // Remove projectile
-            setProjectiles((prev) => prev.filter((p) => p.id !== projectile.id))
-
-            // Create explosion
-            createExplosion(ally.x, ally.y, "small")
-          }
-        })
       }
     })
 
     // Check power-up collisions with player
-    powerUps.forEach((powerUp) => {
+    powerUpsRef.current.forEach((powerUp) => {
       const dx = powerUp.x - playerPosition.x
       const dy = powerUp.y - playerPosition.y
       const distance = Math.sqrt(dx * dx + dy * dy)
@@ -892,6 +964,7 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
       if (distance < 30) {
         // Collect power-up
         setPowerUps((prev) => prev.filter((p) => p.id !== powerUp.id))
+        powerUpsRef.current = powerUpsRef.current.filter((p) => p.id !== powerUp.id)
 
         // Apply power-up effect
         switch (powerUp.type) {
@@ -913,6 +986,28 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
         playSound("powerup_collect")
       }
     })
+
+    // Check direct collision between player and enemies
+    enemiesRef.current.forEach((enemy) => {
+      const dx = enemy.x - playerPosition.x
+      const dy = enemy.y - playerPosition.y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance < 40) {
+        // Direct collision damage
+        setPlayerHealth((prev) => Math.max(0, prev - 1)) // Continuous small damage
+
+        // Visual feedback
+        if (Math.floor(gameTime) % 30 === 0) {
+          // Every half second
+          createExplosion(
+            playerPosition.x + (Math.random() - 0.5) * 20,
+            playerPosition.y + (Math.random() - 0.5) * 20,
+            "small",
+          )
+        }
+      }
+    })
   }
 
   const createExplosion = (x, y, size) => {
@@ -926,27 +1021,6 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     }
 
     setExplosions((prev) => [...prev, newExplosion])
-
-    // Add particles
-    const particleCount = size === "large" ? 30 : 15
-    const newParticles = []
-
-    for (let i = 0; i < particleCount; i++) {
-      const angle = Math.random() * Math.PI * 2
-      const speed = 1 + Math.random() * 3
-
-      newParticles.push({
-        id: Date.now() + Math.random(),
-        x,
-        y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        life: 30 + Math.random() * 30,
-        color: Math.random() > 0.6 ? "#ff4500" : "#ffcc00",
-      })
-    }
-
-    setParticles((prev) => [...prev, ...newParticles])
 
     // Play sound
     playSound(size === "large" ? "explosion_large" : "explosion_small")
@@ -1032,34 +1106,6 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
     )
   }
 
-  const updateParticles = () => {
-    // Update particles in state
-    setParticles((prev) =>
-      prev
-        .map((particle) => ({
-          ...particle,
-          x: particle.x + particle.vx,
-          y: particle.y + particle.vy,
-          life: particle.life - 1,
-        }))
-        .filter((particle) => particle.life > 0),
-    )
-
-    // Draw particles on canvas
-    if (canvasRef.current) {
-      const ctx = canvasRef.current.getContext("2d")
-      ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-
-      particles.forEach((particle) => {
-        ctx.fillStyle = particle.color
-        ctx.globalAlpha = particle.life / 60
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2)
-        ctx.fill()
-      })
-    }
-  }
-
   const addMessage = (text) => {
     setMessages((prev) => [...prev, { id: Date.now(), text, time: Date.now() }])
   }
@@ -1073,13 +1119,19 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
   return (
     <div
-      className="relative w-full h-[600px] border-2 border-gray-800 bg-gradient-to-b from-gray-900 to-gray-800 overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.7)]"
+      className="relative w-screen h-[calc(100vh-200px)] border-2 border-gray-800 bg-gradient-to-b from-gray-900 to-gray-800 overflow-hidden rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.7)]"
       ref={boardRef}
     >
       {/* Game world container with camera transform */}
       <div
-        className="absolute inset-0 w-[2000px] h-[1500px] transition-transform duration-100 ease-out"
-        style={{ transform: viewportTransform }}
+        className="absolute inset-0"
+        style={{
+          width: `${worldDimensions.width}px`,
+          height: `${worldDimensions.height}px`,
+          transform: viewportTransform,
+          transition: "transform 100ms ease-out",
+        }}
+        ref={gameAreaRef}
       >
         {/* Terrain background */}
         <div className="absolute inset-0 bg-gradient-to-b from-amber-800 via-amber-700 to-amber-800 opacity-70"></div>
@@ -1188,9 +1240,10 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
           style={{
             left: `${playerPosition.x}px`,
             top: `${playerPosition.y}px`,
-            transform: "translate(-50%, -50%)",
+            transform: `translate(-50%, -50%) scaleX(${playerDirection === "left" ? -1 : 1})`,
             zIndex: Math.floor(playerPosition.y),
           }}
+          ref={playerRef}
         >
           <div className="relative">
             <IndianTank />
@@ -1210,34 +1263,15 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 text-xs text-white font-bold bg-orange-600 px-2 py-0.5 rounded">
               INDIA
             </div>
+
+            {/* Muzzle flash */}
+            {muzzleFlash && (
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full">
+                <div className="w-6 h-6 bg-yellow-500 rounded-full blur-sm animate-pulse"></div>
+              </div>
+            )}
           </div>
         </div>
-
-        {/* Allies */}
-        {allies.map((ally) => (
-          <div
-            key={ally.id}
-            className="absolute transform-gpu"
-            style={{
-              left: `${ally.x}px`,
-              top: `${ally.y}px`,
-              transform: `translate(-50%, -50%) scaleX(${ally.direction === "left" ? 1 : -1})`,
-              zIndex: Math.floor(ally.y),
-            }}
-          >
-            <div className="relative">
-              <IndianSoldier />
-
-              {/* Health bar */}
-              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 w-16 h-2 bg-gray-800 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-green-600"
-                  style={{ width: `${(ally.health / ally.maxHealth) * 100}%` }}
-                ></div>
-              </div>
-            </div>
-          </div>
-        ))}
 
         {/* Enemies */}
         {enemies.map((enemy) => (
@@ -1311,18 +1345,6 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
             <Explosion frame={explosion.frame} size={explosion.size} />
           </div>
         ))}
-
-        {/* Particles - rendered on canvas for better performance */}
-        <canvas
-          ref={canvasRef}
-          width="1500"
-          height="600"
-          className="absolute top-0 left-0 pointer-events-none z-[1500]"
-          style={{
-            width: "2000px",
-            height: "1500px",
-          }}
-        />
       </div>
 
       {/* Fixed UI elements */}
@@ -1413,7 +1435,13 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
 
       {/* Mini-map */}
       <div className="absolute bottom-4 right-4 z-[3000]">
-        <MiniMap playerPosition={playerPosition} enemies={enemies} allies={allies} terrainElements={terrainElements} />
+        <MiniMap
+          playerPosition={playerPosition}
+          enemies={enemies}
+          terrainElements={terrainElements}
+          worldWidth={worldDimensions.width}
+          worldHeight={worldDimensions.height}
+        />
       </div>
 
       {/* Game messages */}
@@ -1421,10 +1449,9 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className="bg-black bg-opacity-70 px-3 py-1 rounded-lg text-white font-bold"
+            className="bg-black bg-opacity-70 px-3 py-1 rounded-lg text-white font-bold animate-fadeInOut"
             style={{
               opacity: 1 - (Date.now() - msg.time) / 3000,
-              animation: "fadeInOut 3s ease-in-out",
             }}
           >
             {msg.text}
@@ -1447,6 +1474,16 @@ export default function GameBoard({ setScore, setGameOver, difficulty, muted }) 
         <div>F/SPACE: Shoot ({playerAmmo})</div>
         <div>M/SHIFT: Missile ({playerSpecialAmmo})</div>
       </div>
+
+      {/* Canvas for particles */}
+      <canvas
+        ref={canvasRef}
+        className="absolute top-0 left-0 pointer-events-none z-[1500]"
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      />
     </div>
   )
 }

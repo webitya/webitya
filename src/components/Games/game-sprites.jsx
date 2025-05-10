@@ -39,9 +39,8 @@ export function IndianTank() {
 
       {/* Muzzle flash animation (only shows when firing) */}
       <div
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0"
+        className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 flash-animation"
         style={{
-          animation: "flash 0.3s ease-out",
           animationIterationCount: 0,
         }}
       >
@@ -90,63 +89,12 @@ export function PakistaniTank() {
 
       {/* Muzzle flash animation (only shows when firing) */}
       <div
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0"
+        className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full opacity-0 flash-animation"
         style={{
-          animation: "flash 0.3s ease-out",
           animationIterationCount: 0,
         }}
       >
         <div className="w-6 h-6 bg-yellow-500 rounded-full blur-sm"></div>
-      </div>
-    </div>
-  )
-}
-
-export function IndianSoldier() {
-  return (
-    <div className="relative transform-gpu" style={{ transform: "scale(1.2)" }}>
-      {/* Soldier shadow */}
-      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-10 h-3 bg-black opacity-30 rounded-full blur-sm"></div>
-
-      <svg width="20" height="30" viewBox="0 0 20 30" className="drop-shadow-md">
-        {/* Helmet */}
-        <path d="M5,5 Q10,-2 15,5 L15,8 Q10,10 5,8 Z" fill="#138808" />
-
-        {/* Face */}
-        <circle cx="10" cy="7" r="4" fill="#F3C19D" />
-
-        {/* Body with 3D effect */}
-        <rect x="5" y="10" width="10" height="15" fill="#FF9933" rx="2" />
-        <rect x="6" y="12" width="8" height="11" fill="#e67300" rx="1" />
-
-        {/* Belt */}
-        <rect x="3" y="12" width="14" height="2" fill="#138808" />
-
-        {/* Arms */}
-        <rect x="2" y="11" width="3" height="8" fill="#F3C19D" rx="1.5" />
-        <rect x="15" y="11" width="3" height="8" fill="#F3C19D" rx="1.5" />
-
-        {/* Legs */}
-        <rect x="5" y="25" width="3" height="5" fill="#FF9933" />
-        <rect x="12" y="25" width="3" height="5" fill="#FF9933" />
-
-        {/* Boots */}
-        <rect x="4" y="28" width="5" height="2" fill="#333" rx="1" />
-        <rect x="11" y="28" width="5" height="2" fill="#333" rx="1" />
-
-        {/* Gun */}
-        <rect x="18" y="14" width="6" height="2" fill="#333" />
-      </svg>
-
-      {/* Rifle muzzle flash */}
-      <div
-        className="absolute top-[14px] left-[24px] opacity-0"
-        style={{
-          animation: "flash 0.3s ease-out",
-          animationIterationCount: 0,
-        }}
-      >
-        <div className="w-3 h-3 bg-yellow-500 rounded-full blur-sm"></div>
       </div>
     </div>
   )
@@ -190,9 +138,8 @@ export function PakistaniSoldier() {
 
       {/* Rifle muzzle flash */}
       <div
-        className="absolute top-[14px] left-[24px] opacity-0"
+        className="absolute top-[14px] left-[24px] opacity-0 flash-animation"
         style={{
-          animation: "flash 0.3s ease-out",
           animationIterationCount: 0,
         }}
       >
@@ -222,24 +169,10 @@ export function Helicopter() {
 
         {/* Main rotor */}
         <rect x="18" y="4" width="4" height="2" fill="#333" />
-        <rect
-          x="0"
-          y="4"
-          width="40"
-          height="1"
-          fill="#666"
-          style={{ animation: "rotor 0.1s linear infinite", transformOrigin: "center" }}
-        />
+        <rect x="0" y="4" width="40" height="1" fill="#666" className="animate-rotor" />
 
         {/* Tail rotor */}
-        <rect
-          x="0"
-          y="7"
-          width="1"
-          height="8"
-          fill="#666"
-          style={{ animation: "tailRotor 0.2s linear infinite", transformOrigin: "center" }}
-        />
+        <rect x="0" y="7" width="1" height="8" fill="#666" className="animate-tail-rotor" />
 
         {/* Landing skids */}
         <path d="M10,18 L10,16 L30,16 L30,18" stroke="#666" strokeWidth="1" fill="none" />
@@ -254,26 +187,13 @@ export function Helicopter() {
 
       {/* Muzzle flash */}
       <div
-        className="absolute top-[12px] left-[35px] opacity-0"
+        className="absolute top-[12px] left-[35px] opacity-0 flash-animation"
         style={{
-          animation: "flash 0.3s ease-out",
           animationIterationCount: 0,
         }}
       >
         <div className="w-4 h-4 bg-yellow-500 rounded-full blur-sm"></div>
       </div>
-
-      <style jsx>{`
-        @keyframes rotor {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        @keyframes tailRotor {
-          0% { transform: scaleY(1); }
-          50% { transform: scaleY(0.5); }
-          100% { transform: scaleY(1); }
-        }
-      `}</style>
     </div>
   )
 }
@@ -341,23 +261,6 @@ export function Explosion({ frame = 0, size = "small" }) {
           opacity: opacity * 0.3,
         }}
       ></div>
-
-      <style jsx>{`
-        @keyframes flash {
-          0% {
-            opacity: 1;
-            transform: scale(0.5) translate(-50%, -50%);
-          }
-          50% {
-            opacity: 0.8;
-            transform: scale(1.5) translate(-50%, -50%);
-          }
-          100% {
-            opacity: 0;
-            transform: scale(0.5) translate(-50%, -50%);
-          }
-        }
-      `}</style>
     </div>
   )
 }

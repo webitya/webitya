@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react"
 export default function GameAudio({ muted, gameStarted, gameOver }) {
   const bgMusicRef = useRef(null)
   const battleSoundsRef = useRef(null)
+  const soundEffects = useRef({})
 
   useEffect(() => {
     // Create audio elements
@@ -19,6 +20,24 @@ export default function GameAudio({ muted, gameStarted, gameOver }) {
       battleSoundsRef.current.loop = true
       battleSoundsRef.current.volume = 0.2
     }
+
+    // Preload common sound effects
+    const effects = [
+      "player_shoot",
+      "enemy_shoot",
+      "explosion_small",
+      "explosion_large",
+      "player_hit",
+      "missile_launch",
+      "powerup_collect",
+    ]
+
+    effects.forEach((effect) => {
+      if (!soundEffects.current[effect]) {
+        soundEffects.current[effect] = new Audio(`/sounds/${effect}.mp3`)
+        soundEffects.current[effect].volume = effect.includes("explosion") ? 0.4 : 0.2
+      }
+    })
 
     // Play/pause based on game state
     if (gameStarted && !gameOver && !muted) {
@@ -40,6 +59,12 @@ export default function GameAudio({ muted, gameStarted, gameOver }) {
         battleSoundsRef.current.pause()
         battleSoundsRef.current.currentTime = 0
       }
+
+      // Clean up sound effects
+      Object.values(soundEffects.current).forEach((audio) => {
+        audio.pause()
+        audio.currentTime = 0
+      })
     }
   }, [gameStarted, gameOver, muted])
 
@@ -51,6 +76,39 @@ export default function GameAudio({ muted, gameStarted, gameOver }) {
 
     if (battleSoundsRef.current) {
       battleSoundsRef.current.muted = muted
+    }
+
+    // Mute all sound effects
+    Object.values(soundEffects.current).forEach((audio) => {
+      audio.muted = muted
+    })
+  }, [muted])
+
+  // Expose sound effects to window for game components to use
+  useEffect(() => {
+    window.playGameSound = (sound) => {
+      if (muted) return
+
+      if (soundEffects.current[sound]) {
+        // Clone the audio to allow overlapping sounds
+        const audioClone = soundEffects.current[sound].cloneNode()
+        audioClone.volume = soundEffects.current[sound].volume
+        audioClone.play().catch((e) => console.error("Sound play error:", e))
+
+        // Auto cleanup
+        audioClone.onended = () => {
+          audioClone.remove()
+        }
+      } else {
+        // Lazy load if not preloaded
+        const audio = new Audio(`/sounds/${sound}.mp3`)
+        audio.volume = sound.includes("explosion") ? 0.4 : 0.2
+        audio.play().catch((e) => console.error("Sound play error:", e))
+      }
+    }
+
+    return () => {
+      window.playGameSound = null
     }
   }, [muted])
 

@@ -1,10 +1,14 @@
 "use client"
 
-import { useState } from "react"
-import GameBoard from "@/components/game-board"
-import GameControls from "@/components/game-controls"
-import GameStatus from "@/components/game-status"
-import GameAudio from "@/components/game-audio"
+import GameAudio from "@/components/Games/game-audio"
+import GameBoard from "@/components/Games/game-board"
+import GameControls from "@/components/Games/game-controls"
+import GameStatus from "@/components/Games/game-status"
+import { useState, useEffect } from "react"
+// import GameBoard from "@/components/game-board"
+// import GameControls from "@/components/game-controls"
+// import GameStatus from "@/components/game-status"
+// import GameAudio from "@/components/game-audio"
 
 export default function Home() {
   const [gameStarted, setGameStarted] = useState(false)
@@ -13,6 +17,23 @@ export default function Home() {
   const [difficulty, setDifficulty] = useState("medium")
   const [muted, setMuted] = useState(false)
 
+  // Prevent scrolling when game is active
+  useEffect(() => {
+    if (gameStarted && !gameOver) {
+      const preventDefault = (e) => {
+        e.preventDefault()
+      }
+
+      window.addEventListener("wheel", preventDefault, { passive: false })
+      window.addEventListener("touchmove", preventDefault, { passive: false })
+
+      return () => {
+        window.removeEventListener("wheel", preventDefault)
+        window.removeEventListener("touchmove", preventDefault)
+      }
+    }
+  }, [gameStarted, gameOver])
+
   const startGame = () => {
     setGameStarted(true)
     setGameOver(false)
@@ -20,7 +41,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4 bg-black overflow-hidden">
+    <main className="flex min-h-screen flex-col items-center justify-between p-0 bg-black overflow-hidden">
       {/* Background war scene */}
       <div className="fixed inset-0 z-0 opacity-30">
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -29,8 +50,8 @@ export default function Home() {
 
       <GameAudio muted={muted} gameStarted={gameStarted} gameOver={gameOver} />
 
-      <div className="z-10 w-full max-w-full items-center justify-center font-mono text-sm flex flex-col relative">
-        <div className="absolute top-4 right-4 flex space-x-4">
+      <div className="z-10 w-full items-center justify-center font-mono text-sm flex flex-col relative">
+        <div className="absolute top-4 right-4 flex space-x-4 z-50">
           <button
             onClick={() => setMuted(!muted)}
             className="p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
@@ -72,105 +93,113 @@ export default function Home() {
           </button>
         </div>
 
-        <h1 className="text-5xl font-bold mb-4 text-center bg-gradient-to-r from-orange-500 via-white to-green-500 bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
-          BATTLEFIELD: INDO-PAK
-        </h1>
-
         {!gameStarted && !gameOver && (
-          <div className="flex flex-col items-center justify-center p-8 bg-black bg-opacity-70 rounded-lg shadow-[0_0_15px_rgba(255,153,51,0.5)] border border-orange-500 w-full max-w-2xl">
-            <div className="flex justify-between w-full mb-8">
-              <div className="w-24 h-24 relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-orange-500 via-white to-green-500 rounded-full animate-pulse"></div>
-                <div className="absolute inset-2 bg-black rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">INDIA</span>
-                </div>
-              </div>
-              <div className="text-red-600 text-6xl font-bold flex items-center">VS</div>
-              <div className="w-24 h-24 relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-green-700 to-white rounded-full animate-pulse"></div>
-                <div className="absolute inset-2 bg-black rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">PAKISTAN</span>
-                </div>
-              </div>
-            </div>
-
-            <p className="mb-6 text-center text-gray-300 text-lg">
-              Defend India against the more powerful Pakistani forces. The enemy has superior firepower and numbers. Use
-              strategy and tactical positioning to survive and turn the tide of war!
-            </p>
-
-            <div className="mb-6 w-full">
-              <h3 className="text-white mb-2 text-center">Select Difficulty</h3>
-              <div className="flex justify-center space-x-4">
-                <button
-                  onClick={() => setDifficulty("easy")}
-                  className={`px-4 py-2 rounded-md transition-colors ${
-                    difficulty === "easy" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  }`}
-                >
-                  Easy
-                </button>
-                <button
-                  onClick={() => setDifficulty("medium")}
-                  className={`px-4 py-2 rounded-md transition-colors ${
-                    difficulty === "medium" ? "bg-yellow-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  }`}
-                >
-                  Medium
-                </button>
-                <button
-                  onClick={() => setDifficulty("hard")}
-                  className={`px-4 py-2 rounded-md transition-colors ${
-                    difficulty === "hard" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  }`}
-                >
-                  Hard
-                </button>
-              </div>
-            </div>
-
-            <button
-              onClick={startGame}
-              className="px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white text-xl font-bold rounded-md hover:from-orange-700 hover:to-orange-600 transition-colors shadow-[0_0_10px_rgba(255,153,51,0.7)] transform hover:scale-105 transition-transform"
-            >
-              START BATTLE
-            </button>
-          </div>
-        )}
-
-        {gameStarted && !gameOver && (
           <>
-            <GameStatus score={score} difficulty={difficulty} />
-            <GameBoard setScore={setScore} setGameOver={setGameOver} difficulty={difficulty} muted={muted} />
-            <GameControls />
+            <h1 className="text-5xl font-bold my-4 text-center bg-gradient-to-r from-orange-500 via-white to-green-500 bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+              BATTLEFIELD: INDO-PAK
+            </h1>
+            <div className="flex flex-col items-center justify-center p-8 bg-black bg-opacity-70 rounded-lg shadow-[0_0_15px_rgba(255,153,51,0.5)] border border-orange-500 w-full max-w-2xl mx-4">
+              <div className="flex justify-between w-full mb-8">
+                <div className="w-24 h-24 relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-orange-500 via-white to-green-500 rounded-full animate-pulse"></div>
+                  <div className="absolute inset-2 bg-black rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">INDIA</span>
+                  </div>
+                </div>
+                <div className="text-red-600 text-6xl font-bold flex items-center">VS</div>
+                <div className="w-24 h-24 relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-green-700 to-white rounded-full animate-pulse"></div>
+                  <div className="absolute inset-2 bg-black rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold">PAKISTAN</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="mb-6 text-center text-gray-300 text-lg">
+                Defend India against the more powerful Pakistani forces. The enemy has superior firepower and numbers.
+                Use strategy and tactical positioning to survive and turn the tide of war!
+              </p>
+
+              <div className="mb-6 w-full">
+                <h3 className="text-white mb-2 text-center">Select Difficulty</h3>
+                <div className="flex justify-center space-x-4">
+                  <button
+                    onClick={() => setDifficulty("easy")}
+                    className={`px-4 py-2 rounded-md transition-colors ${
+                      difficulty === "easy" ? "bg-green-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                    }`}
+                  >
+                    Easy
+                  </button>
+                  <button
+                    onClick={() => setDifficulty("medium")}
+                    className={`px-4 py-2 rounded-md transition-colors ${
+                      difficulty === "medium"
+                        ? "bg-yellow-600 text-white"
+                        : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                    }`}
+                  >
+                    Medium
+                  </button>
+                  <button
+                    onClick={() => setDifficulty("hard")}
+                    className={`px-4 py-2 rounded-md transition-colors ${
+                      difficulty === "hard" ? "bg-red-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                    }`}
+                  >
+                    Hard
+                  </button>
+                </div>
+              </div>
+
+              <button
+                onClick={startGame}
+                className="px-8 py-4 bg-gradient-to-r from-orange-600 to-orange-500 text-white text-xl font-bold rounded-md hover:from-orange-700 hover:to-orange-600 transition-colors shadow-[0_0_10px_rgba(255,153,51,0.7)] transform hover:scale-105 transition-transform"
+              >
+                START BATTLE
+              </button>
+            </div>
           </>
         )}
 
-        {gameOver && (
-          <div className="flex flex-col items-center justify-center p-8 bg-black bg-opacity-70 rounded-lg shadow-[0_0_15px_rgba(255,0,0,0.5)] border border-red-500 w-full max-w-2xl">
-            <h2 className="text-4xl font-bold mb-4 text-red-500">MISSION FAILED</h2>
-            <p className="mb-6 text-2xl text-white">
-              Your final score: <span className="text-orange-500 font-bold">{score}</span>
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 w-full mb-6">
-              <button
-                onClick={startGame}
-                className="px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-md hover:from-orange-700 hover:to-orange-600 transition-colors shadow-[0_0_10px_rgba(255,153,51,0.7)]"
-              >
-                RETRY MISSION
-              </button>
-              <button
-                onClick={() => {
-                  setGameStarted(false)
-                  setGameOver(false)
-                }}
-                className="px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-md hover:from-gray-800 hover:to-gray-700 transition-colors"
-              >
-                BACK TO MENU
-              </button>
-            </div>
+        {gameStarted && !gameOver && (
+          <div className="w-full h-screen flex flex-col">
+            <GameStatus score={score} difficulty={difficulty} />
+            <GameBoard setScore={setScore} setGameOver={setGameOver} difficulty={difficulty} muted={muted} />
+            <GameControls />
           </div>
+        )}
+
+        {gameOver && (
+          <>
+            <h1 className="text-5xl font-bold my-4 text-center bg-gradient-to-r from-orange-500 via-white to-green-500 bg-clip-text text-transparent drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+              BATTLEFIELD: INDO-PAK
+            </h1>
+            <div className="flex flex-col items-center justify-center p-8 bg-black bg-opacity-70 rounded-lg shadow-[0_0_15px_rgba(255,0,0,0.5)] border border-red-500 w-full max-w-2xl mx-4">
+              <h2 className="text-4xl font-bold mb-4 text-red-500">MISSION FAILED</h2>
+              <p className="mb-6 text-2xl text-white">
+                Your final score: <span className="text-orange-500 font-bold">{score}</span>
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 w-full mb-6">
+                <button
+                  onClick={startGame}
+                  className="px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-500 text-white rounded-md hover:from-orange-700 hover:to-orange-600 transition-colors shadow-[0_0_10px_rgba(255,153,51,0.7)]"
+                >
+                  RETRY MISSION
+                </button>
+                <button
+                  onClick={() => {
+                    setGameStarted(false)
+                    setGameOver(false)
+                  }}
+                  className="px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-md hover:from-gray-800 hover:to-gray-700 transition-colors"
+                >
+                  BACK TO MENU
+                </button>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </main>

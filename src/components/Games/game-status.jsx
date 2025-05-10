@@ -4,7 +4,7 @@ export default function GameStatus({ score, difficulty }) {
     difficulty === "easy" ? "text-green-500" : difficulty === "medium" ? "text-yellow-500" : "text-red-500"
 
   return (
-    <div className="w-full flex justify-between items-center p-4 bg-black bg-opacity-70 rounded-lg shadow-md mb-4 border border-gray-700 text-white">
+    <div className="w-full flex justify-between items-center p-4 bg-black bg-opacity-70 rounded-lg shadow-md border border-gray-700 text-white">
       <div className="flex items-center">
         <div className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 via-white to-green-500 mr-2 shadow-[0_0_10px_rgba(255,153,51,0.7)]"></div>
         <div className="flex flex-col">
