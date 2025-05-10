@@ -163,8 +163,10 @@ export default function Home() {
         )}
 
         {gameStarted && !gameOver && (
-          <div className="w-full h-screen flex flex-col">
+          <div className="!w-full min-h-screen flex flex-col">
+           <div className="fixed top-1 left-1">
             <GameStatus score={score} difficulty={difficulty} />
+           </div>
             <GameBoard setScore={setScore} setGameOver={setGameOver} difficulty={difficulty} muted={muted} />
             <GameControls />
           </div>
