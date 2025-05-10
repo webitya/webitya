@@ -24,7 +24,7 @@ const footerData = [
   {
     title: 'Exclusive Services',
     links: [
-      { name: 'चार धाम यात्रा ', href: '/tour&travells/char-dham-yatra' },
+      { name: 'Zup Rides', href: '/zup-rides' },
       { name: 'Tour & Travells ', href: '/tour&travells/char-dham-yatra' },
       { name: 'Latest Tech News', href: '/latest-tech-news' },
       { name: 'Handi Sketch', href: '/handi-sketch' },

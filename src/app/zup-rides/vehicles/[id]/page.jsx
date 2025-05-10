@@ -22,6 +22,7 @@ import {
   ShoppingCart,
 } from "@mui/icons-material"
 import { getVehicleById, getPopularVehicles } from "../../../../components/ZupRides/data/vehicles"
+import Footer from "@/components/FooterEl"
 
 export default function VehicleDetailsPage({ params }) {
   const { id } = params
@@ -87,6 +88,7 @@ export default function VehicleDetailsPage({ params }) {
   }
 
   return (
+  <>
     <div className="min-h-screen bg-white">
       {/* Breadcrumb */}
       <div className="bg-gray-50 border-b">
@@ -553,5 +555,7 @@ export default function VehicleDetailsPage({ params }) {
         </div>
       </div>
     </div>
+    <Footer/>
+  </>
   )
 }
