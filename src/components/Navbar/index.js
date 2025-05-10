@@ -80,6 +80,26 @@ const Navbar = () => {
       { name: "Audi", path: "/cars/audi" },
     ];
   }
+  // Zup Rides
+   if (pathname.includes("/zup-rides")) {
+    logoSrc = "https://res.cloudinary.com/dxqthnbx7/image/upload/v1744691965/Copy_of_WEBITYA_3_tl6gr3.png";
+    logoLink = "/zup-rides";
+    bgColor = "teal";
+    textColor = "white";
+    hoverTextColor = "#00ff7f";
+    ctaBgColor = "white";
+    ctaTextColor = "black";
+    ctaHoverBgColor = "#00ff7f";
+
+    menuLinks = [
+      { name: "Home", path: "/zup-rides" },
+      { name: "About", path: "/zup-rides/about" },
+      { name: "Vehicles", path: "/zup-rides/vehicles" },
+      { name: "Blogs", path: "/zup-rides/blogs" },
+      { name: "Booking", path: "/zup-rides/booking" },
+      { name: "Contact Us", path: "/zup-rides/contact" },
+    ];
+  }
   // Tour & Travells route
   else if (pathname.includes("/tour&travells")) {
     logoSrc =

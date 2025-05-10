@@ -10,10 +10,12 @@ import {
   SupportAgent,
   ThumbUp,
 } from "@mui/icons-material"
+import Footer from "@/components/FooterEl"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white">
+<div>
+      <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
@@ -281,5 +283,7 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
+    <Footer/>
+</div>
   )
 }

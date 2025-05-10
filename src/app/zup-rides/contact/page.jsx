@@ -1,8 +1,10 @@
 import Image from "next/image"
 import { Call, Email, LocationOn, WhatsApp, Facebook, Instagram, Twitter } from "@mui/icons-material"
+import Footer from "@/components/FooterEl"
 
 export default function ContactPage() {
   return (
+ <>
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
@@ -235,5 +237,7 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
+    <Footer/>
+ </>
   )
 }

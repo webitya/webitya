@@ -251,12 +251,18 @@ export default function VehicleDetailsPage({ params }) {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <button
+              {/* <button
                 onClick={() => setShowBooking(true)}
                 className="flex-1 bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition duration-300 flex items-center justify-center"
               >
                 <ShoppingCart className="mr-2" /> Book Now
-              </button>
+              </button> */}
+                       <Link
+                href={`/zup-rides/booking?vehicleId=${vehicle.id}&plan=daily`}
+                className="bg-purple-600 text-white px-3 py-1.5 rounded-lg hover:bg-purple-700 transition duration-300 text-sm"
+              >
+                 <ShoppingCart className="mr-2" />  Book Now
+              </Link>
               <Link
                 href="/zup-rides/contact"
                 className="flex-1 bg-white border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-purple-50 transition duration-300 flex items-center justify-center"

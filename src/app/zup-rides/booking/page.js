@@ -19,6 +19,7 @@ import {
   Person,
 } from "@mui/icons-material"
 import { sendBookingConfirmation } from "./actions"
+import Footer from "@/components/FooterEl"
 
 // Mock function to get vehicle by ID
 const getVehicleById = (id) => {
@@ -946,6 +947,7 @@ export default function BookingPage() {
           )}
         </div>
       </div>
+      <Footer/>
     </>
   )
 }

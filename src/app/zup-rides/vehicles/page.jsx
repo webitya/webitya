@@ -14,6 +14,7 @@ import {
   Sort,
 } from "@mui/icons-material"
 import { getAllVehicles, getAllVehicleTypes, getAllVehicleBrands, getMinMaxPrices } from "../../../components/ZupRides/data/vehicles"
+import Footer from "@/components/FooterEl"
 
 export default function VehiclesPage() {
   const allVehicles = getAllVehicles()
@@ -113,6 +114,7 @@ export default function VehiclesPage() {
   }
 
   return (
+   <>
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
@@ -337,12 +339,18 @@ export default function VehiclesPage() {
                           >
                             View Details
                           </Link>
-                          <Link
+                          {/* <Link
                             href={`/zup-rides/vehicles/${vehicle.id}?book=true`}
                             className="bg-purple-600 text-white px-3 py-1.5 rounded-lg hover:bg-purple-700 transition duration-300 text-sm"
                           >
                             Book Now
-                          </Link>
+                          </Link> */}
+                           <Link
+                href={`/zup-rides/booking?vehicleId=${vehicle.id}&plan=daily`}
+                className="bg-purple-600 text-white px-3 py-1.5 rounded-lg hover:bg-purple-700 transition duration-300 text-sm"
+              >
+                Book Now
+              </Link>
                         </div>
                       </div>
                     </div>
@@ -368,5 +376,7 @@ export default function VehiclesPage() {
         </div>
       </div>
     </div>
+    <Footer/>
+   </>
   )
 }

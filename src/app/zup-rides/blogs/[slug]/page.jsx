@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { CalendarToday, Person, ArrowBack, ArrowForward } from "@mui/icons-material"
 import { getBlogBySlug, getAllBlogs } from "../../../../components/ZupRides/data/blogs"
+import Footer from "@/components/FooterEl"
 
 export async function generateStaticParams() {
   const blogs = getAllBlogs()
@@ -30,7 +31,8 @@ export default function BlogPost({ params }) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+<div>
+      <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative h-64 md:h-96">
         <Image src={blog.coverImage || "/placeholder.svg"} alt={blog.title} fill className="object-cover" priority />
@@ -123,5 +125,7 @@ export default function BlogPost({ params }) {
         </div>
       </section>
     </div>
+    <Footer/>
+</div>
   )
 }

@@ -2,11 +2,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowForward, CalendarToday, Person } from "@mui/icons-material"
 import { getAllBlogs } from "../../../components/ZupRides/data/blogs"
+import Footer from "@/components/FooterEl"
 
 export default function BlogsPage() {
   const blogs = getAllBlogs()
 
   return (
+<>
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
@@ -54,5 +56,7 @@ export default function BlogsPage() {
         </div>
       </section>
     </div>
+    <Footer/>
+</>
   )
 }

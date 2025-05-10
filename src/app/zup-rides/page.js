@@ -14,11 +14,13 @@ import {
   LocalGasStation,
 } from "@mui/icons-material"
 import { getPopularVehicles } from "../../components/ZupRides/data/vehicles"
+import Footer from "@/components/FooterEl"
 
 export default function ZupRides() {
   const popularVehicles = getPopularVehicles(3)
 
   return (
+<>
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
@@ -362,5 +364,7 @@ export default function ZupRides() {
         </div>
       </section>
     </div>
+    <Footer/>
+</>
   )
 }
