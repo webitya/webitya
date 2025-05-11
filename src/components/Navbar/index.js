@@ -96,7 +96,6 @@ const Navbar = () => {
       { name: "About", path: "/zup-rides/about" },
       { name: "Vehicles", path: "/zup-rides/vehicles" },
       { name: "Blogs", path: "/zup-rides/blogs" },
-      { name: "Booking", path: "/zup-rides/booking" },
       { name: "Contact Us", path: "/zup-rides/contact" },
     ];
   }
