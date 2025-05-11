@@ -24,6 +24,7 @@ import {
 
 // Import blog data
 import { getBlogBySlug, getRelatedBlogs } from "@/components/BlogsData/blog-data"
+import Footer from "@/components/FooterEl"
 
 // Add this Toast component at the top of the file, after the imports but before the ShareMenu component
 const Toast = ({ message, open, onClose }) => {
@@ -220,6 +221,7 @@ export default function BlogPost({ params }) {
   }
 
   return (
+<>
     <div className="min-h-screen bg-gray-50">
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
@@ -584,5 +586,7 @@ export default function BlogPost({ params }) {
         </div>
       </div>
     </div>
+    <Footer/>
+</>
   )
 }

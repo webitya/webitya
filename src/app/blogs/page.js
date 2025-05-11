@@ -9,6 +9,7 @@ import { Share, WhatsApp, Facebook, Email, Twitter, LinkedIn, ContentCopy } from
 
 // Import blog data
 import { getAllBlogs, getCategories } from "@/components/BlogsData/blog-data"
+import Footer from "@/components/FooterEl"
 
 // Add this Toast component at the top of the file, after the imports but before the ShareMenu component
 const Toast = ({ message, open, onClose }) => {
@@ -237,6 +238,7 @@ export default function BlogsPage() {
   }
 
   return (
+<>
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white py-16">
@@ -487,5 +489,7 @@ export default function BlogsPage() {
         </div>
       </div>
     </div>
+    <Footer/>
+</>
   )
 }
