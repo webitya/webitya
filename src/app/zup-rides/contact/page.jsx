@@ -37,7 +37,7 @@ export default function ContactPage() {
             <h3 className="text-xl font-semibold mb-2">Email Us</h3>
             <p className="text-gray-600 mb-2">Send us your queries anytime</p>
             <a href="mailto:info@webitya.com" className="text-purple-600 font-medium hover:underline">
-              info@webitya.com
+              zuprides@webitya.in
             </a>
           </div>
 
@@ -47,7 +47,7 @@ export default function ContactPage() {
             </div>
             <h3 className="text-xl font-semibold mb-2">Visit Us</h3>
             <p className="text-gray-600 mb-2">Come to our office location</p>
-            <p className="text-purple-600 font-medium">Webitya Office, India</p>
+            <p className="text-purple-600 font-medium">Webitya Office,Ranchi, India</p>
           </div>
         </div>
 
