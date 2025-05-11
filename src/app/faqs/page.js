@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Footer from "@/components/FooterEl";
 
 const FAQWebitya = () => {
   const faqs = [
@@ -56,6 +57,7 @@ const FAQWebitya = () => {
   ];
 
   return (
+ <>
     <section className="mt-20 px-6 md:px-6 mx-auto text-center">
       <h1 className="text-4xl font-extrabold text-gray-800 mb-12">
         Frequently Asked Questions
@@ -79,6 +81,8 @@ const FAQWebitya = () => {
         ))}
       </div>
     </section>
+    <Footer/>
+ </>
   );
 };
 
