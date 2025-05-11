@@ -1,247 +1,211 @@
 "use server"
 
-// Function to send booking confirmation emails
+import { vehiclesData } from "../../../components/ZupRides/data/vehicles"
+
+
+// Function to get vehicle by ID
+export async function getVehicleById(id) {
+  if (!id) return null
+  return vehiclesData.find((vehicle) => vehicle.id === id) || null
+}
+
+// Function to get all vehicles
+export async function getAllVehicles() {
+  return vehiclesData
+}
+
+export async function sendEmail(data) {
+  try {
+    // Validate input data
+    if (!data.name || !data.email || !data.vehicleName) {
+      throw new Error("Missing required booking information")
+    }
+
+    // Format the booking date and time
+    const bookingDate = data.date ? new Date(data.date).toLocaleDateString() : "Not specified"
+    const bookingTime = data.time || "Not specified"
+
+    // Create email content
+    const emailContent = `
+      <h1>Booking Confirmation</h1>
+      <p>Dear ${data.name},</p>
+      <p>Thank you for booking with Zup Rides. Your booking details are as follows:</p>
+      <ul>
+        <li><strong>Vehicle:</strong> ${data.vehicleName}</li>
+        <li><strong>Date:</strong> ${bookingDate}</li>
+        <li><strong>Time:</strong> ${bookingTime}</li>
+        <li><strong>Amount:</strong> ₹${data.vehiclePrice}</li>
+        <li><strong>Payment ID:</strong> ${data.paymentId || "Not available"}</li>
+      </ul>
+      <p>If you have any questions, please contact us at support@zuprides.com or call us at +91 9876543210.</p>
+      <p>Thank you for choosing Zup Rides!</p>
+    `
+
+    // In a real application, you would use a service like Nodemailer, SendGrid, etc.
+    // For now, we'll simulate a successful email send
+    console.log("Email would be sent to:", data.email)
+    console.log("Email content:", emailContent)
+
+    // Return success
+    return { success: true, message: "Email sent successfully" }
+  } catch (error) {
+    console.error("Error sending email:", error)
+    throw new Error("Failed to send email: " + error.message)
+  }
+}
+
+export async function saveBooking(bookingData) {
+  try {
+    // Validate booking data
+    if (!bookingData.name || !bookingData.email || !bookingData.vehicleName) {
+      throw new Error("Missing required booking information")
+    }
+
+    // In a real application, you would save this data to a database
+    // For now, we'll simulate a successful save
+    console.log("Booking data would be saved:", bookingData)
+
+    // Create a booking record with a timestamp
+    const booking = {
+      ...bookingData,
+      id: `booking_${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      status: "confirmed",
+    }
+
+    // You could store this in localStorage for demo purposes
+    const existingBookings = JSON.parse(localStorage.getItem("bookings") || "[]")
+    existingBookings.push(booking)
+    localStorage.setItem("bookings", JSON.stringify(existingBookings))
+
+    return { success: true, bookingId: booking.id, message: "Booking saved successfully" }
+  } catch (error) {
+    console.error("Error saving booking:", error)
+    throw new Error("Failed to save booking: " + error.message)
+  }
+}
+
+// Function to send booking confirmation email
 export async function sendBookingConfirmation(bookingDetails) {
   try {
-    // In a real application, you would use a service like Nodemailer, SendGrid, or Resend
-    // to send actual emails. This is a simulated implementation.
+    // Validate booking details
+    if (!bookingDetails || !bookingDetails.userEmail || !bookingDetails.userName) {
+      throw new Error("Invalid booking details")
+    }
 
-    // 1. Send email to the user
-    await sendEmailToUser(bookingDetails)
+    // Format dates for email
+    const startDate = new Date(bookingDetails.startDate).toLocaleDateString()
+    const endDate = new Date(bookingDetails.endDate).toLocaleDateString()
 
-    // 2. Send email to the admin
-    await sendEmailToAdmin(bookingDetails)
+    // Create email content
+    const emailContent = `
+      <h1>Booking Confirmation - Zup Rides</h1>
+      <p>Dear ${bookingDetails.userName},</p>
+      <p>Thank you for booking with Zup Rides. Your booking has been confirmed!</p>
+      
+      <h2>Booking Details</h2>
+      <ul>
+        <li><strong>Booking ID:</strong> ${bookingDetails.bookingId}</li>
+        <li><strong>Vehicle:</strong> ${bookingDetails.vehicleName}</li>
+        <li><strong>Start Date:</strong> ${startDate}</li>
+        <li><strong>End Date:</strong> ${endDate}</li>
+        ${bookingDetails.startTime ? `<li><strong>Start Time:</strong> ${bookingDetails.startTime}</li>` : ""}
+        ${bookingDetails.endTime ? `<li><strong>End Time:</strong> ${bookingDetails.endTime}</li>` : ""}
+        <li><strong>Rental Plan:</strong> ${bookingDetails.plan}</li>
+        <li><strong>Total Amount:</strong> ₹${bookingDetails.totalAmount}</li>
+        <li><strong>Payment Method:</strong> ${bookingDetails.paymentMethod === "razorpay" ? "Online Payment" : "Cash on Delivery"}</li>
+        ${bookingDetails.paymentId ? `<li><strong>Payment ID:</strong> ${bookingDetails.paymentId}</li>` : ""}
+      </ul>
+      
+      <h2>Important Information</h2>
+      <ul>
+        <li>Please bring your ID proof and driver's license for verification</li>
+        <li>Arrive at the pickup location 15 minutes before your scheduled time</li>
+        <li>The vehicle will be handed over after a brief inspection</li>
+        ${bookingDetails.paymentMethod === "cod" ? "<li>Please keep the exact amount ready for cash payment</li>" : ""}
+      </ul>
+      
+      <p>If you have any questions, please contact us at support@zuprides.com or call us at +91 9876543210.</p>
+      <p>Thank you for choosing Zup Rides!</p>
+    `
 
-    return { success: true, message: "Confirmation emails sent successfully" }
+    // In a real application, you would use a service like Nodemailer, SendGrid, etc.
+    console.log("Booking confirmation email would be sent to:", bookingDetails.userEmail)
+    console.log("Email content:", emailContent)
+
+    // Simulate sending email to admin
+    const adminEmailContent = `
+      New booking received:
+      Booking ID: ${bookingDetails.bookingId}
+      Customer: ${bookingDetails.userName} (${bookingDetails.userEmail})
+      Vehicle: ${bookingDetails.vehicleName}
+      Dates: ${startDate} to ${endDate}
+      Amount: ₹${bookingDetails.totalAmount}
+    `
+    console.log("Admin notification email would be sent to: admin@zuprides.com")
+    console.log("Admin email content:", adminEmailContent)
+
+    return { success: true, message: "Booking confirmation email sent successfully" }
   } catch (error) {
-    console.error("Error sending confirmation emails:", error)
-    throw new Error("Failed to send confirmation emails")
+    console.error("Error sending booking confirmation:", error)
+    throw new Error("Failed to send booking confirmation: " + error.message)
   }
 }
 
-// Helper function to send email to the user
-async function sendEmailToUser(bookingDetails) {
-  // In a real implementation, you would use an email service API
-  console.log("Sending email to user:", bookingDetails.userEmail)
+// Function to process payment with Razorpay
+export async function processRazorpayPayment(paymentDetails) {
+  try {
+    // In a real application, you would create an order on your server
+    // and then return the order details to initialize Razorpay
 
-  // Simulate API call to email service
-  const userEmailContent = {
-    to: bookingDetails.userEmail,
-    subject: `Booking Confirmation - ${bookingDetails.bookingId}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-        <div style="text-align: center; margin-bottom: 20px;">
-          <h1 style="color: #7C3AED; margin-bottom: 10px;">Booking Confirmed!</h1>
-          <p style="color: #6B7280; font-size: 16px;">Thank you for booking with Zup Rides</p>
-        </div>
-        
-        <div style="background-color: #F9FAFB; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-          <h2 style="color: #111827; font-size: 18px; margin-bottom: 15px;">Booking Details</h2>
-          
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280; width: 40%;">Booking ID</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.bookingId}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Vehicle</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.vehicleName} (${bookingDetails.vehicleBrand})</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Rental Plan</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.plan.charAt(0).toUpperCase() + bookingDetails.plan.slice(1)}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Start Date</td>
-              <td style="padding: 8px 0; font-weight: bold;">${new Date(bookingDetails.startDate).toLocaleDateString()}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">End Date</td>
-              <td style="padding: 8px 0; font-weight: bold;">${new Date(bookingDetails.endDate).toLocaleDateString()}</td>
-            </tr>
-            ${
-              bookingDetails.startTime
-                ? `
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Start Time</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.startTime}</td>
-            </tr>
-            `
-                : ""
-            }
-            ${
-              bookingDetails.endTime
-                ? `
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">End Time</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.endTime}</td>
-            </tr>
-            `
-                : ""
-            }
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Payment Method</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.paymentMethod === "razorpay" ? "Online Payment" : "Cash on Delivery"}</td>
-            </tr>
-            ${
-              bookingDetails.paymentId
-                ? `
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Payment ID</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.paymentId}</td>
-            </tr>
-            `
-                : ""
-            }
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Total Amount</td>
-              <td style="padding: 8px 0; font-weight: bold; color: #7C3AED;">₹${bookingDetails.totalAmount.toFixed(2)}</td>
-            </tr>
-          </table>
-        </div>
-        
-        <div style="background-color: #FEF3C7; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-          <h3 style="color: #92400E; font-size: 16px; margin-bottom: 10px;">Important Information</h3>
-          <ul style="color: #92400E; margin: 0; padding-left: 20px;">
-            <li>Please bring your ID proof and driver's license for verification</li>
-            <li>Arrive at the pickup location 15 minutes before your scheduled time</li>
-            <li>The vehicle will be handed over after a brief inspection</li>
-            ${bookingDetails.paymentMethod === "cod" ? "<li>Please keep the exact amount ready for cash payment</li>" : ""}
-          </ul>
-        </div>
-        
-        <div style="text-align: center; color: #6B7280; font-size: 14px;">
-          <p>If you have any questions, please contact our support team at support@zuprides.com</p>
-          <p>© ${new Date().getFullYear()} Zup Rides. All rights reserved.</p>
-        </div>
-      </div>
-    `,
+    // Validate payment details
+    if (!paymentDetails.amount || !paymentDetails.currency || !paymentDetails.receipt) {
+      throw new Error("Invalid payment details")
+    }
+
+    // Simulate creating an order
+    const order = {
+      id: `order_${Date.now()}`,
+      amount: paymentDetails.amount,
+      currency: paymentDetails.currency,
+      receipt: paymentDetails.receipt,
+      status: "created",
+      created_at: new Date().toISOString(),
+    }
+
+    console.log("Razorpay order would be created:", order)
+
+    return {
+      success: true,
+      orderId: order.id,
+      amount: order.amount,
+      currency: order.currency,
+      key: "rzp_live_xkYfvkSJJJucnU", // Your Razorpay API key
+    }
+  } catch (error) {
+    console.error("Error processing Razorpay payment:", error)
+    throw new Error("Failed to process payment: " + error.message)
   }
-
-  // In a real implementation, you would call your email service API here
-  // For example: await sendgrid.send(userEmailContent)
-
-  // For this example, we'll just log the email content
-  console.log("User email content prepared:", userEmailContent)
-
-  return true
 }
 
-// Helper function to send email to the admin
-async function sendEmailToAdmin(bookingDetails) {
-  // In a real implementation, you would use an email service API
-  console.log("Sending email to admin")
+// Function to verify Razorpay payment
+export async function verifyRazorpayPayment(paymentData) {
+  try {
+    // In a real application, you would verify the payment signature
+    // using Razorpay's API
 
-  // Admin email address - in a real app, this would be stored in environment variables
-  const adminEmail = "admin@zuprides.com"
+    // Validate payment data
+    if (!paymentData.razorpay_payment_id || !paymentData.razorpay_order_id || !paymentData.razorpay_signature) {
+      throw new Error("Invalid payment verification data")
+    }
 
-  // Simulate API call to email service
-  const adminEmailContent = {
-    to: adminEmail,
-    subject: `New Booking Alert - ${bookingDetails.bookingId}`,
-    html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-        <div style="text-align: center; margin-bottom: 20px;">
-          <h1 style="color: #7C3AED; margin-bottom: 10px;">New Booking Alert</h1>
-          <p style="color: #6B7280; font-size: 16px;">A new booking has been made on Zup Rides</p>
-        </div>
-        
-        <div style="background-color: #F9FAFB; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-          <h2 style="color: #111827; font-size: 18px; margin-bottom: 15px;">Booking Details</h2>
-          
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280; width: 40%;">Booking ID</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.bookingId}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Vehicle</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.vehicleName} (${bookingDetails.vehicleBrand})</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Rental Plan</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.plan.charAt(0).toUpperCase() + bookingDetails.plan.slice(1)}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Start Date</td>
-              <td style="padding: 8px 0; font-weight: bold;">${new Date(bookingDetails.startDate).toLocaleDateString()}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">End Date</td>
-              <td style="padding: 8px 0; font-weight: bold;">${new Date(bookingDetails.endDate).toLocaleDateString()}</td>
-            </tr>
-            ${
-              bookingDetails.startTime
-                ? `
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Start Time</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.startTime}</td>
-            </tr>
-            `
-                : ""
-            }
-            ${
-              bookingDetails.endTime
-                ? `
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">End Time</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.endTime}</td>
-            </tr>
-            `
-                : ""
-            }
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Payment Method</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.paymentMethod === "razorpay" ? "Online Payment" : "Cash on Delivery"}</td>
-            </tr>
-            ${
-              bookingDetails.paymentId
-                ? `
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Payment ID</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.paymentId}</td>
-            </tr>
-            `
-                : ""
-            }
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Total Amount</td>
-              <td style="padding: 8px 0; font-weight: bold; color: #7C3AED;">₹${bookingDetails.totalAmount.toFixed(2)}</td>
-            </tr>
-          </table>
-        </div>
-        
-        <div style="background-color: #F3F4F6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-          <h3 style="color: #111827; font-size: 16px; margin-bottom: 10px;">Customer Information</h3>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280; width: 40%;">Name</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.userName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Email</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.userEmail}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6B7280;">Phone</td>
-              <td style="padding: 8px 0; font-weight: bold;">${bookingDetails.userPhone}</td>
-            </tr>
-          </table>
-        </div>
-        
-        <div style="text-align: center; color: #6B7280; font-size: 14px;">
-          <p>This is an automated notification from the Zup Rides booking system.</p>
-          <p>© ${new Date().getFullYear()} Zup Rides. All rights reserved.</p>
-        </div>
-      </div>
-    `,
+    // Simulate verifying payment
+    console.log("Payment would be verified with Razorpay:", paymentData)
+
+    // Return success
+    return { success: true, verified: true, paymentId: paymentData.razorpay_payment_id }
+  } catch (error) {
+    console.error("Error verifying Razorpay payment:", error)
+    throw new Error("Failed to verify payment: " + error.message)
   }
-
-  // In a real implementation, you would call your email service API here
-  // For example: await sendgrid.send(adminEmailContent)
-
-  // For this example, we'll just log the email content
-  console.log("Admin email content prepared:", adminEmailContent)
-
-  return true
 }

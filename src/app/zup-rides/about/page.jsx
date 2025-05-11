@@ -287,3 +287,5 @@ export default function AboutPage() {
 </div>
   )
 }
+
+// "../../../components/ZupRides/data/vehicles"

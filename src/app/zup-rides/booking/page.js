@@ -18,43 +18,8 @@ import {
   Phone,
   Person,
 } from "@mui/icons-material"
-import { sendBookingConfirmation } from "./actions"
+import { sendBookingConfirmation, getAllVehicles, processRazorpayPayment, verifyRazorpayPayment } from "./actions"
 import Footer from "@/components/FooterEl"
-
-// Mock function to get vehicle by ID
-const getVehicleById = (id) => {
-  // This would normally fetch from an API or database
-  const vehicles = [
-    {
-      id: "1",
-      name: "Honda Activa 6G",
-      brand: "Honda",
-      type: "Scooter",
-      images: ["/placeholder.svg?height=300&width=300"],
-      pricing: {
-        hourly: 100,
-        daily: 500,
-        weekly: 3000,
-        monthly: 10000,
-      },
-    },
-    {
-      id: "2",
-      name: "Royal Enfield Classic 350",
-      brand: "Royal Enfield",
-      type: "Motorcycle",
-      images: ["/placeholder.svg?height=300&width=300"],
-      pricing: {
-        hourly: 200,
-        daily: 1000,
-        weekly: 6000,
-        monthly: 20000,
-      },
-    },
-  ]
-
-  return vehicles.find((vehicle) => vehicle.id === id) || vehicles[0]
-}
 
 export default function BookingPage() {
   const router = useRouter()
@@ -77,6 +42,8 @@ export default function BookingPage() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [bookingId, setBookingId] = useState("")
   const [razorpayLoaded, setRazorpayLoaded] = useState(false)
+  const [vehicles, setVehicles] = useState([])
+  const [loading, setLoading] = useState(true)
 
   // User details
   const [userName, setUserName] = useState("")
@@ -85,10 +52,31 @@ export default function BookingPage() {
   const [emailSent, setEmailSent] = useState(false)
 
   useEffect(() => {
-    if (vehicleId) {
-      const vehicleData = getVehicleById(vehicleId)
-      setVehicle(vehicleData)
+    const fetchVehicles = async () => {
+      try {
+        setLoading(true)
+        // Import vehicles data dynamically
+        const vehiclesData = await getAllVehicles()
+
+        if (Array.isArray(vehiclesData) && vehiclesData.length > 0) {
+          setVehicles(vehiclesData)
+
+          // Set the selected vehicle
+          if (vehicleId) {
+            const selectedVehicle = vehiclesData.find((v) => v.id === vehicleId) || vehiclesData[0]
+            setVehicle(selectedVehicle)
+          }
+        } else {
+          console.error("Vehicles data is not in expected format:", vehiclesData)
+        }
+        setLoading(false)
+      } catch (error) {
+        console.error("Error loading vehicles:", error)
+        setLoading(false)
+      }
     }
+
+    fetchVehicles()
   }, [vehicleId])
 
   useEffect(() => {
@@ -191,7 +179,7 @@ export default function BookingPage() {
     }
   }
 
-  const processPayment = () => {
+  const processPayment = async () => {
     setIsProcessing(true)
 
     // Generate a random booking ID
@@ -201,12 +189,25 @@ export default function BookingPage() {
     if (paymentMethod === "razorpay") {
       // Initialize Razorpay
       if (window.Razorpay && razorpayLoaded) {
-        initRazorpay(generatedBookingId)
+        try {
+          // Create an order on the server
+          const orderData = await processRazorpayPayment({
+            amount: totalPrice + 1000, // Including security deposit
+            currency: "INR",
+            receipt: generatedBookingId,
+          })
+
+          initRazorpay(generatedBookingId, orderData)
+        } catch (error) {
+          console.error("Error creating Razorpay order:", error)
+          alert("Failed to initialize payment. Please try again.")
+          setIsProcessing(false)
+        }
       } else {
         // If Razorpay is not loaded yet, wait a bit and try again
         setTimeout(() => {
           if (window.Razorpay) {
-            initRazorpay(generatedBookingId)
+            processPayment()
           } else {
             alert("Failed to load payment gateway. Please try again.")
             setIsProcessing(false)
@@ -221,25 +222,37 @@ export default function BookingPage() {
     }
   }
 
-  const initRazorpay = (bookingId) => {
+  const initRazorpay = (bookingId, orderData) => {
     const totalAmount = totalPrice + 1000 // Including security deposit
 
-    // In a real implementation, you would create an order on your server
-    // and then initialize Razorpay with the order details
-
     const options = {
-      key: "rzp_test_YourTestKeyHere", // Replace with your actual Razorpay key
+      key: orderData.key || "rzp_live_xkYfvkSJJJucnU", // Use the key from the server or fallback
       amount: totalAmount * 100, // Amount in paise
       currency: "INR",
       name: "Zup Rides",
       description: `Booking for ${vehicle?.name}`,
       image: "/placeholder-logo.svg",
+      order_id: orderData.orderId, // This should come from your server
       handler: async (response) => {
         // Handle successful payment
-        const paymentId = response.razorpay_payment_id
-        console.log("Payment successful:", paymentId)
+        try {
+          // Verify the payment
+          const verificationResult = await verifyRazorpayPayment({
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          })
 
-        await handleBookingSuccess(bookingId, paymentId)
+          if (verificationResult.verified) {
+            await handleBookingSuccess(bookingId, response.razorpay_payment_id)
+          } else {
+            throw new Error("Payment verification failed")
+          }
+        } catch (error) {
+          console.error("Payment verification error:", error)
+          alert("Payment verification failed. Please contact support.")
+          setIsProcessing(false)
+        }
       },
       prefill: {
         name: userName,
@@ -313,12 +326,25 @@ export default function BookingPage() {
     return startDate
   }
 
-  if (!vehicle) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+        </div>
+      </div>
+    )
+  }
+
+  if (!vehicle) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Vehicle not found</h1>
+          <Link href="/zup-rides/vehicles" className="text-purple-600 hover:underline">
+            Browse all vehicles
+          </Link>
         </div>
       </div>
     )
@@ -771,7 +797,7 @@ export default function BookingPage() {
                   <div className="flex items-center mb-6">
                     <div className="relative w-20 h-20 rounded-md overflow-hidden mr-4">
                       <Image
-                        src={vehicle.images[0] || "/placeholder.svg?height=80&width=80"}
+                        src={vehicle.images?.[0] || "/placeholder.svg?height=80&width=80"}
                         alt={vehicle.name}
                         fill
                         className="object-cover"
@@ -860,7 +886,7 @@ export default function BookingPage() {
                 <div className="flex items-center mb-4">
                   <div className="relative w-16 h-16 rounded-md overflow-hidden mr-4">
                     <Image
-                      src={vehicle.images[0] || "/placeholder.svg?height=64&width=64"}
+                      src={vehicle.images?.[0] || "/placeholder.svg?height=64&width=64"}
                       alt={vehicle.name}
                       fill
                       className="object-cover"
@@ -947,7 +973,7 @@ export default function BookingPage() {
           )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   )
 }

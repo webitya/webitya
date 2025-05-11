@@ -448,3 +448,5 @@ export function searchVehicles(query) {
     )
   })
 }
+
+export const vehiclesData = vehicles;
