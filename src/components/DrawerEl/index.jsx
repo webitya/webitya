@@ -54,6 +54,44 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
     },
   ];
 
+    // menuLinks = [
+    //   { name: "Home", path: "/zup-rides" },
+    //   { name: "About", path: "/zup-rides/about" },
+    //   { name: "Vehicles", path: "/zup-rides/vehicles" },
+    //   { name: "Blogs", path: "/zup-rides/blogs" },
+    //   { name: "Booking", path: "/zup-rides/booking" },
+    //   { name: "Contact Us", path: "/zup-rides/contact" },
+    // ];
+
+
+  // Zup Rides
+    if ((pathname.includes("/zup-rides"))) {
+    navLinks = [
+      { name: "Home", path: `/zup-rides` },
+      { name: "About", path: `/zup-rides/about` },
+      { name: "Vehicles", path: `/zup-rides/vehicles` },
+      { name: "Blogs", path: `/zup-rides/blogs` },
+      { name: "Contact Us", path: `/zup-rides/contact` },
+    ];
+    highlightLinks = [
+      {
+        name: "Courses",
+        path: "/courses",
+        icon: <BookOpen size={18} />,
+        bg: "#e3f2fd",
+        hover: "#bbdefb",
+        iconColor: "#1976d2",
+      },
+      {
+        name: "Influencers",
+        path: "/influencers",
+        icon: <Users size={18} />,
+        bg: "#ede7f6",
+        hover: "#d1c4e9",
+        iconColor: "#6a1b9a",
+      },
+    ];
+  }
   // 🟨 Dynamic Yatra route logic
   if ((pathname.includes("/tour&travells"))) {
     navLinks = [
