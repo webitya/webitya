@@ -70,6 +70,7 @@ const footerData = [
       { name: 'Terms of service', href: '/legal/terms' },
       { name: 'Disclaimer', href: '/legal/disclaimer' },
       { name: 'FAQS', href: '/faqs' },
+        { name: 'Blogs', href: '/blogs' },
       { name: 'Book Influencer', href: '/influencers#collection' },
    
    
