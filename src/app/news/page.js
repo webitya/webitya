@@ -10,6 +10,7 @@ import NewsBanner from "@/components/News/news/news-banner"
 import NewsletterCTA from "@/components/News/news/newsletter-cta"
 import newsData from "@/components/News/data/news-data"
 import sponsoredData from "@/components/News/data/sponsored-data"
+import Footer from "@/components/FooterEl"
 
 export default function NewsPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -56,6 +57,7 @@ export default function NewsPage() {
   const latestNews = [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
 
   return (
+<>
     <div className="min-h-screen bg-slate-50">
       {/* Header Section */}
       <div className="bg-gradient-to-r from-emerald-800 to-teal-600 py-16 md:py-20">
@@ -212,5 +214,7 @@ export default function NewsPage() {
         </div>
       </div>
     </div>
+    <Footer/>
+</>
   )
 }

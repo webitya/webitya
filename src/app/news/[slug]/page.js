@@ -3,12 +3,31 @@ import newsData from "@/components/News/data/news-data"
 import sponsoredData from "@/components/News/data/sponsored-data"
 
 export default function NewsDetailPage({ params }) {
-  return <NewsDetailPageClient params={params} />
+  // Find the article data on the server side
+  const { slug } = params
+  let article = newsData.find((item) => item.slug === slug)
+  let isSponsored = false
+
+  if (!article) {
+    article = sponsoredData.find((item) => item.slug === slug)
+    isSponsored = true
+  }
+
+  // Pass the pre-fetched data to the client component
+  return (
+    <NewsDetailPageClient
+      params={params}
+      serverArticle={article}
+      isServerSponsored={isSponsored}
+      allNewsData={newsData}
+      allSponsoredData={sponsoredData}
+    />
+  )
 }
 
-// ✅ Fix: Await `params`
+// Keep the generateMetadata function as is
 export async function generateMetadata({ params }) {
-  const { slug } = await params; // 👈 Await here to avoid error
+  const { slug } = params
 
   // Find article in either regular or sponsored data
   let article = newsData.find((item) => item.slug === slug)

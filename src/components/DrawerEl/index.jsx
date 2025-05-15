@@ -92,6 +92,35 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       },
     ];
   }
+    // Webitya.com/News News
+    if ((pathname.includes("/news"))) {
+    navLinks = [
+    { name: "All News", path: "/news" },
+    { name: "Latest", path: "/news/latest" },
+    { name: "Technology", path: "/news/category/technology" },
+    { name: "Business", path: "/news/category/business" },
+    { name: "Sports", path: "/news/category/sports" },
+    { name: "Global", path: "/news/category/global" },
+    ];
+    highlightLinks = [
+      {
+        name: "Courses",
+        path: "/courses",
+        icon: <BookOpen size={18} />,
+        bg: "#e3f2fd",
+        hover: "#bbdefb",
+        iconColor: "#1976d2",
+      },
+      {
+        name: "Influencers",
+        path: "/influencers",
+        icon: <Users size={18} />,
+        bg: "#ede7f6",
+        hover: "#d1c4e9",
+        iconColor: "#6a1b9a",
+      },
+    ];
+  }
   // 🟨 Dynamic Yatra route logic
   if ((pathname.includes("/tour&travells"))) {
     navLinks = [

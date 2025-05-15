@@ -114,6 +114,25 @@ const Navbar = () => {
       { name: "Cars", path: "/tour&travells/char-dham-yatra#cars" },
     ];
   }
+    // Webitya.com/news News
+else if (pathname.includes("/news")) {
+  logoSrc =
+    "https://res.cloudinary.com/dxqthnbx7/image/upload/v1745380966/Copy_of_WEBITYA_6_cndv73.webp";
+  logoLink = "/news";
+  bgColor = "#f4f6f8"; // light neutral grey-blue background
+  textColor = "#1a1a1a"; // dark readable text
+  hoverTextColor = "#0056b3"; // professional deep blue for hover
+
+  menuLinks = [
+    { name: "All News", path: "/news" },
+    { name: "Latest", path: "/news/latest" },
+    { name: "Technology", path: "/news/category/technology" },
+    { name: "Business", path: "/news/category/business" },
+    { name: "Sports", path: "/news/category/sports" },
+    { name: "Global", path: "/news/category/global" },
+  ];
+}
+
   // Latest Tech News route
   else if (pathname.includes("/latest-tech-news")) {
     logoSrc =
