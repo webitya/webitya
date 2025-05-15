@@ -1,5 +1,77 @@
 const LatestTechNewsData = [
   {
+  slug: 'real-madrid-2-1-mallorca-may-2025',
+  heading: 'Real Madrid 2-1 Mallorca: Dramatic 95th-Minute Winner Keeps Title Hopes Alive',
+  subtitle: 'Jacobo Ramón’s Late Volley Seals Comeback at the Bernabéu',
+  metaTitle: 'Real Madrid 2-1 Mallorca May 2025 | La Liga Match Report',
+  metaDescription: 'In a thrilling La Liga encounter on May 14, 2025, Real Madrid edged Mallorca 2-1 with a stoppage-time winner from academy graduate Jacobo Ramón, keeping their faint title hopes alive.',
+  keywords: 'Real Madrid, Mallorca, La Liga, match report, Jacobo Ramón, Kylian Mbappé, 2025',
+  image: 'https://res.cloudinary.com/yourcloud/image/upload/v1715700000/real-madrid-2-1-mallorca-may-2025.webp',
+  content: [
+    'Real Madrid came from behind to beat Mallorca 2-1 on May 14, 2025, at the Santiago Bernabéu.',
+    'Kylian Mbappé’s 68th-minute equalizer and Jacobo Ramón’s 95th-minute volley secured the win.',
+    'The result keeps Madrid four points behind Barcelona with one game in hand, preserving mathematical hopes of the La Liga title.'
+  ],
+  datePublished: '2025-05-14',
+  author: 'News Desk',
+  categories: ['Football', 'Spain', 'Real Madrid', 'La Liga'],
+  articleBody: [
+    {
+      type: 'paragraph',
+      content: 'On the evening of May 14, 2025, Real Madrid hosted Mallorca at the iconic Santiago Bernabéu Stadium in a crucial late-season La Liga fixture. Despite heavy possession and pressure, the hosts found themselves trailing early on to a composed finish from Martin Valjent in the 11th minute.'
+    },
+    {
+      type: 'image',
+      src: 'https://res.cloudinary.com/dxqthnbx7/image/upload/v1747279085/Real_Madrid_2-1_Mallorca_summary_goals_and_result_c1qu3d.webp',
+      alt: 'Martin Valjent celebrates his 11th-minute opener'
+    },
+    {
+      type: 'paragraph',
+      content: 'Throughout the first half, Mallorca’s goalkeeper Leo Román produced a series of outstanding saves to keep his side ahead, denying clear opportunities from Jude Bellingham, Luka Modrić, and Vinícius Júnior. By the break, Real had dominated possession but trailed 1-0 against the run of play.'
+    },
+    {
+      type: 'paragraph',
+      content: 'Carlo Ancelotti’s switch to a back three at halftime unlocked extra midfield control. The persistence paid off in the 68th minute when Kylian Mbappé weaved past two defenders and curled a pinpoint effort into the near post to level the score.'
+    },
+    {
+      type: 'paragraph',
+      content: 'As stoppage time ticked away, the breakthrough finally came. From a corner kick, Jesús Vallejo’s deft flick found debutant Jacobo Ramón, who unleashed a thunderous volley into the top corner in the fifth minute of added time, sparking jubilant celebrations in the Bernabéu.'
+    },
+    {
+      type: 'image',
+      src: 'https://res.cloudinary.com/dxqthnbx7/image/upload/v1747279085/Real_Madrid_2-1_Mallorca_summary_goals_and_result_c1qu3d.webp',
+      alt: 'Jacobo Ramón volleys the winner in the 95th minute'
+    },
+    {
+      type: 'paragraph',
+      content: 'Key performers included Leo Román, who finished with 11 saves for Mallorca; Mbappé, who notched his 28th league goal of the season; and Jacobo Ramón, whose maiden senior goal etched his name into club lore. Ancelotti praised the resiliency and youth contributions after the match.'
+    },
+    {
+      type: 'paragraph',
+      content: 'With this result, Real Madrid remain four points adrift of Barcelona, who hold a game in hand and can clinch the title by defeating Espanyol on May 15, 2025. Madrid travel to Cádiz next before rounding off their season at home to Villarreal.'
+    }
+  ],
+  seo: {
+    title: 'Real Madrid 2-1 Mallorca May 2025 | La Liga Match Report',
+    description: 'Full match report and analysis of Real Madrid’s 2-1 victory over Mallorca on May 14, 2025, featuring late drama and youth heroics.',
+    keywords: ['Real Madrid', 'Mallorca', 'La Liga', 'Jacobo Ramón', 'Mbappé', 'May 2025'],
+    openGraph: {
+      title: 'Real Madrid 2-1 Mallorca May 2025 | La Liga Match Report',
+      description: 'A stoppage-time winner from academy graduate Jacobo Ramón sealed Real Madrid’s 2-1 comeback victory over Mallorca at the Bernabéu.',
+      image: 'https://res.cloudinary.com/dxqthnbx7/image/upload/v1747279085/Real_Madrid_2-1_Mallorca_summary_goals_and_result_c1qu3d.webp',
+      url: '/blogs/real-madrid-2-1-mallorca-may-2025',
+      type: 'article'
+    },
+    twitterCard: {
+      card: 'summary_large_image',
+      title: 'Real Madrid 2-1 Mallorca May 2025 | La Liga Match Report',
+      description: 'Highlights and analysis of Real Madrid’s thrilling 2-1 win over Mallorca, capped by a 95th-minute volley.',
+      image: 'https://res.cloudinary.com/dxqthnbx7/image/upload/v1747279085/Real_Madrid_2-1_Mallorca_summary_goals_and_result_c1qu3d.webp'
+    }
+  }
+},
+
+  {
     slug: 'pahalgam-terror-attack-april-2025',
     heading: 'Pahalgam Terror Attack: April 2025 Massacre Shakes Kashmir',
     subtitle: '26 Tourists Killed in One of the Deadliest Attacks in Jammu & Kashmir',
