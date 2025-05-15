@@ -6,7 +6,7 @@ const LatestTechNewsData = [
   metaTitle: 'Real Madrid 2-1 Mallorca May 2025 | La Liga Match Report',
   metaDescription: 'In a thrilling La Liga encounter on May 14, 2025, Real Madrid edged Mallorca 2-1 with a stoppage-time winner from academy graduate Jacobo Ramón, keeping their faint title hopes alive.',
   keywords: 'Real Madrid, Mallorca, La Liga, match report, Jacobo Ramón, Kylian Mbappé, 2025',
-  image: 'https://res.cloudinary.com/yourcloud/image/upload/v1715700000/real-madrid-2-1-mallorca-may-2025.webp',
+  image: 'https://res.cloudinary.com/dxqthnbx7/image/upload/v1747279085/Real_Madrid_2-1_Mallorca_summary_goals_and_result_c1qu3d.webp',
   content: [
     'Real Madrid came from behind to beat Mallorca 2-1 on May 14, 2025, at the Santiago Bernabéu.',
     'Kylian Mbappé’s 68th-minute equalizer and Jacobo Ramón’s 95th-minute volley secured the win.',
