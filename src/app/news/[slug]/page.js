@@ -6,9 +6,9 @@ export default function NewsDetailPage({ params }) {
   return <NewsDetailPageClient params={params} />
 }
 
-// Generate metadata for SEO
+// ✅ Fix: Await `params`
 export async function generateMetadata({ params }) {
-  const { slug } = params
+  const { slug } = await params; // 👈 Await here to avoid error
 
   // Find article in either regular or sponsored data
   let article = newsData.find((item) => item.slug === slug)

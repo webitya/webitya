@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+// import CategoryNewsPage from "../[category]/category-news-page"
 import CategoryNewsPage from "../[category]/category-news-page"
 
 export const metadata = {
