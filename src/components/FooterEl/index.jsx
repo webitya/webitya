@@ -26,7 +26,9 @@ const footerData = [
     links: [
       { name: 'Zup Rides', href: '/zup-rides' },
       { name: 'Tour & Travells ', href: '/tour&travells/char-dham-yatra' },
+      { name: 'News', href: '/news' },
       { name: 'Latest Tech News', href: '/latest-tech-news' },
+      { name: 'Top Colleges INDIA', href: '/colleges' },
       { name: 'Handi Sketch', href: '/handi-sketch' },
       { name: 'Email Marketing Software', href: '/email-marketing-software' },
       { name: 'Essential Service Ranchi', href: '/essential-services-ranchi' },
