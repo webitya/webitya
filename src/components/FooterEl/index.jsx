@@ -30,6 +30,7 @@ const footerData = [
       { name: 'Latest Tech News', href: '/latest-tech-news' },
       { name: 'Top Colleges INDIA', href: '/colleges' },
       { name: 'Handi Sketch', href: '/handi-sketch' },
+      { name: 'Cars', href: '/cars' },
       { name: 'Email Marketing Software', href: '/email-marketing-software' },
       { name: 'Essential Service Ranchi', href: '/essential-services-ranchi' },
       // { name: 'Learn', href: '#' },
