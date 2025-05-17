@@ -75,9 +75,8 @@ const Navbar = () => {
     ctaHoverBgColor = "#00ff7f";
 
     menuLinks = [
-      { name: "Ford", path: "/cars/ford" },
-      { name: "Jaguar", path: "/cars/jaguar" },
-      { name: "Audi", path: "/cars/audi" },
+      { name: "Cars", path: "/cars" },
+      
     ];
   }
   // Zup Rides

@@ -1,6 +1,7 @@
 import { carsData } from "@/components/Cars/data/cars-data"
 import CarDetailPageClient from "./CarDetailPageClient"
 import Footer from "@/components/FooterEl"
+import FinanceCalculator from "@/components/Cars/cars/finance-calculator"
 
 
 // ✅ Metadata for SEO
@@ -35,6 +36,7 @@ export default async function CarDetailPage({ params }) {
     <>
       <CarDetailPageClient params={awaitedParams} />
       <Footer/>
+     
     </>
   )
 }

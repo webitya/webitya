@@ -12,6 +12,7 @@ import Car360Viewer from "@/components/Cars/cars/car-360-viewer"
 import ColorConfigurator from "@/components/Cars/cars/color-configurator"
 import VIPConcierge from "@/components/Cars/cars/vip-concierge"
 import CarComparisonTool from "@/components/Cars/cars/car-comparison-tool"
+import FinanceCalculator from "@/components/Cars/cars/finance-calculator"
 
 export default function CarDetailPageClient({ params }) {
   const [car, setCar] = useState(null)
@@ -413,54 +414,7 @@ export default function CarDetailPageClient({ params }) {
                   </div>
 
                   {/* Finance Calculator */}
-                  <div className="mt-8 pt-6 border-t border-zinc-800">
-                    <h3 className="text-lg font-semibold mb-4">Finance Calculator</h3>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm text-gray-400 mb-1">Down Payment</label>
-                        <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span>
-                          <input
-                            type="number"
-                            className="w-full bg-zinc-800 border border-zinc-700 rounded-sm py-2 pl-8 pr-3 text-white"
-                            defaultValue={Math.round(car.price * 0.2)}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label className="block text-sm text-gray-400 mb-1">Loan Term (months)</label>
-                        <select className="w-full bg-zinc-800 border border-zinc-700 rounded-sm py-2 px-3 text-white">
-                          <option value="36">36 months</option>
-                          <option value="48">48 months</option>
-                          <option value="60" selected>
-                            60 months
-                          </option>
-                          <option value="72">72 months</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm text-gray-400 mb-1">Interest Rate (%)</label>
-                        <input
-                          type="number"
-                          className="w-full bg-zinc-800 border border-zinc-700 rounded-sm py-2 px-3 text-white"
-                          defaultValue="3.99"
-                          step="0.01"
-                        />
-                      </div>
-                      <div className="pt-4 border-t border-zinc-800">
-                        <div className="flex justify-between mb-2">
-                          <span className="text-gray-400">Monthly Payment:</span>
-                          <span className="font-semibold">
-                            ${Math.round(((car.price * 0.8) / 60) * 1.1).toLocaleString()}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">Total Cost:</span>
-                          <span className="font-semibold">${Math.round(car.price * 1.1).toLocaleString()}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                   <FinanceCalculator/>
                 </motion.div>
               </div>
             </motion.div>
