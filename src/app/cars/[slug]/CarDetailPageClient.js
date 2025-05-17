@@ -115,6 +115,30 @@ export default function CarDetailPageClient({ params }) {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+
+        {/* Back to Cars Button - positioned in top-left of hero */}
+        <div className="absolute top-6 left-6 z-10">
+          <Link
+            href="/cars"
+            className="inline-flex items-center gap-2 bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-sm backdrop-blur-sm transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            Back to Cars
+          </Link>
+        </div>
+
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16">
           <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="container mx-auto">
@@ -414,7 +438,7 @@ export default function CarDetailPageClient({ params }) {
                   </div>
 
                   {/* Finance Calculator */}
-                   <FinanceCalculator/>
+                  <FinanceCalculator />
                 </motion.div>
               </div>
             </motion.div>

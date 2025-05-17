@@ -29,6 +29,7 @@ export default function Sidebar({ currentBrand, currentMinPrice, currentMaxPrice
   const [minPrice, setMinPrice] = useState(currentMinPrice || 0)
   const [maxPrice, setMaxPrice] = useState(currentMaxPrice || 10000000)
   const [priceRange, setPriceRange] = useState([Number(currentMinPrice) || 0, Number(currentMaxPrice) || 10000000])
+  const [bodyTypes, setBodyTypes] = useState([])
 
   // Update state when props change
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function Sidebar({ currentBrand, currentMinPrice, currentMaxPrice
       brand,
       minPrice: priceRange[0],
       maxPrice: priceRange[1],
+      bodyTypes: bodyTypes.length > 0 ? bodyTypes : undefined,
     })
   }
 
@@ -53,10 +55,12 @@ export default function Sidebar({ currentBrand, currentMinPrice, currentMaxPrice
     setMinPrice(0)
     setMaxPrice(10000000)
     setPriceRange([0, 10000000])
+    setBodyTypes([])
     onApplyFilters({
       brand: "",
       minPrice: 0,
       maxPrice: 10000000,
+      bodyTypes: [],
     })
   }
 
@@ -275,6 +279,14 @@ export default function Sidebar({ currentBrand, currentMinPrice, currentMaxPrice
               <input
                 type="checkbox"
                 id={`type-${type.toLowerCase()}`}
+                checked={bodyTypes.includes(type.toLowerCase())}
+                onChange={() => {
+                  if (bodyTypes.includes(type.toLowerCase())) {
+                    setBodyTypes(bodyTypes.filter((t) => t !== type.toLowerCase()))
+                  } else {
+                    setBodyTypes([...bodyTypes, type.toLowerCase()])
+                  }
+                }}
                 className="w-4 h-4 text-white bg-zinc-800 border-zinc-700 focus:ring-white focus:ring-1"
               />
               <label htmlFor={`type-${type.toLowerCase()}`} className="ml-2 text-sm font-medium text-gray-300">
