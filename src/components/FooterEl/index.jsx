@@ -73,6 +73,7 @@ const footerData = [
     links: [
       { name: 'Privacy', href: '/legal/privacy-policy' },
       { name: 'Terms of service', href: '/legal/terms' },
+        { name: 'Refund Policy', href: '/legal/refund-policy' },
       { name: 'Disclaimer', href: '/legal/disclaimer' },
       { name: 'FAQS', href: '/faqs' },
         { name: 'Blogs', href: '/blogs' },
