@@ -4,23 +4,28 @@ import newsData from "@/components/News/data/news-data";
 
 // Dynamically set page metadata
 export async function generateMetadata({ params }) {
-  const category = params?.category;
+  try {
+    const category = params?.category;
 
-  if (!category || typeof category !== "string") {
+    if (!category || typeof category !== "string" || category.trim().length === 0) {
+      throw new Error("Invalid category");
+    }
+
+    const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+
+    return {
+      title: `${formattedCategory} News | Webitya News`,
+      description: `Stay updated with the latest ${formattedCategory} news, trends, and insights from Webitya News.`,
+      keywords: `${category} news, ${category} updates, ${category} trends, Webitya news`,
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+
     return {
       title: "Category Not Found | Webitya News",
       description: "The requested news category does not exist.",
     };
   }
-
-  const formattedCategory =
-    category.charAt(0).toUpperCase() + category.slice(1);
-
-  return {
-    title: `${formattedCategory} News | Webitya News`,
-    description: `Stay updated with the latest ${formattedCategory} news, trends, and insights from Webitya News.`,
-    keywords: `${category} news, ${category} updates, ${category} trends, Webitya news`,
-  };
 }
 
 // Main category page component
@@ -34,15 +39,13 @@ export default function Page({ params }) {
 
 // Generate all static paths for available categories
 export async function generateStaticParams() {
-  const categories = [
-    ...new Set(
-      newsData
-        .map((item) => item.category?.toLowerCase())
-        .filter((cat) => typeof cat === "string" && cat.length > 0)
-    ),
-  ];
+  const categories = newsData
+    .filter((item) => typeof item.category === "string" && item.category.trim().length > 0)
+    .map((item) => item.category.toLowerCase());
 
-  return categories.map((category) => ({ category }));
+  const uniqueCategories = [...new Set(categories)];
+
+  return uniqueCategories.map((category) => ({ category }));
 }
 
 // Fallback loading skeleton
