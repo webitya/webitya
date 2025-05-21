@@ -75,6 +75,7 @@ const footerData = [
       { name: 'Terms of service', href: '/legal/terms' },
         { name: 'Refund Policy', href: '/legal/refund-policy' },
          { name: 'Return Policy', href: '/legal/return-policy' },
+               { name: 'Shipping Policy', href: '/legal/shipping-policy' },
       { name: 'Disclaimer', href: '/legal/disclaimer' },
       { name: 'FAQS', href: '/faqs' },
         { name: 'Blogs', href: '/blogs' },
