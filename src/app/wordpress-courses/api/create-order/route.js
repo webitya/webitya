@@ -1,9 +1,10 @@
+// "use server";
 import { NextResponse } from "next/server"
 
 // This would be your actual Razorpay integration
 // You would need to install the razorpay npm package
 // npm install razorpay
-// import Razorpay from 'razorpay';
+import Razorpay from 'razorpay';
 
 export async function POST(request) {
   try {
@@ -11,18 +12,18 @@ export async function POST(request) {
     const { amount, currency, receipt, notes } = body
 
     // In a real implementation, you would initialize Razorpay with your keys
-    // const razorpay = new Razorpay({
-    //   key_id: process.env.RAZORPAY_KEY_ID,
-    //   key_secret: process.env.RAZORPAY_KEY_SECRET,
-    // });
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
 
     // Create an order
-    // const order = await razorpay.orders.create({
-    //   amount,
-    //   currency,
-    //   receipt,
-    //   notes,
-    // });
+    const order = await razorpay.orders.create({
+      amount,
+      currency,
+      receipt,
+      notes,
+    });
 
     // For demonstration purposes, we'll mock the response
     const mockOrder = {

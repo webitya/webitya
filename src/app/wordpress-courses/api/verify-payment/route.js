@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 
 // In a real implementation, you would use crypto to verify the signature
-// import crypto from 'crypto';
+import crypto from 'crypto';
 
 export async function POST(request) {
   try {
@@ -9,16 +9,16 @@ export async function POST(request) {
     const { razorpay_payment_id, razorpay_order_id, razorpay_signature, course } = body
 
     // In a real implementation, you would verify the signature
-    // const text = razorpay_order_id + "|" + razorpay_payment_id;
-    // const generated_signature = crypto
-    //   .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-    //   .update(text)
-    //   .digest("hex");
+    const text = razorpay_order_id + "|" + razorpay_payment_id;
+    const generated_signature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .update(text)
+      .digest("hex");
 
-    // const isAuthentic = generated_signature === razorpay_signature;
+    const isAuthentic = generated_signature === razorpay_signature;
 
     // For demonstration purposes, we'll assume the payment is valid
-    const isAuthentic = true
+    // const isAuthentic = true
 
     if (isAuthentic) {
       // Here you would typically:
