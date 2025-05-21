@@ -59,13 +59,13 @@ const footerData = [
   {
     title: 'Courses',
     links: [
-      { name: 'SEO', href: '/courses' },
-      { name: 'Social Media Marketing', href: '/courses' },
-      { name: 'PPC Advertising', href: '/courses' },
-      { name: 'Email Marketing', href: '/courses' },
-      { name: 'Content Marketing', href: '/courses' },
-      { name: 'Web Design', href: '/courses' },
-      { name: 'Our Students', href: '/courses/all-students' },
+      { name: 'Wordpress ', href: '/wordpress-courses' },
+      // { name: 'Social Media Marketing', href: '/courses' },
+      // { name: 'PPC Advertising', href: '/courses' },
+      // { name: 'Email Marketing', href: '/courses' },
+      // { name: 'Content Marketing', href: '/courses' },
+      // { name: 'Web Design', href: '/courses' },
+      // { name: 'Our Students', href: '/courses/all-students' },
     ],
   },
   {
