@@ -1,64 +1,81 @@
 export async function createPayment(paymentData) {
   try {
-    const clientId = "TEST-M23OB63X1HCOD_25052";
-    const clientSecret = "YTVhYTFjZktNOZmMi00ZTJiLWE5MzY1NzZjMTdhMTM4Zjcx";
-
-    console.log("Creating payment with PhonePe", {
-      clientId,
-      orderId: paymentData.orderId,
-      amount: paymentData.amount,
-      customerDetails: {
-        name: paymentData.customerName,
-        email: paymentData.customerEmail,
-        phone: paymentData.customerPhone,
+    const response = await fetch("/api/wordpress-courses/payments/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    });
+      body: JSON.stringify(paymentData),
+    })
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.message || "Payment initialization failed")
+    }
 
-    return {
-      success: true,
-      paymentUrl: `https://phonepe.com/pay/${paymentData.orderId}`,
-      message: "Payment link generated successfully",
-      transactionId: `TXN_${Date.now()}`,
-    };
+    return await response.json()
   } catch (error) {
-    console.error("Payment creation error:", error);
-    throw error;
+    console.error("Payment creation error:", error)
+    throw error
   }
 }
 
 export async function verifyPayment(transactionId) {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    const response = await fetch("/api/wordpress-courses/payments/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ transactionId }),
+    })
 
-    return {
-      success: true,
-      status: "COMPLETED",
-      message: "Payment verified successfully",
-    };
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.message || "Payment verification failed")
+    }
+
+    return await response.json()
   } catch (error) {
-    console.error("Payment verification error:", error);
-    throw error;
+    console.error("Payment verification error:", error)
+    throw error
+  }
+}
+
+export async function saveOrder(orderData) {
+  try {
+    const response = await fetch("/api/wordpress-courses/orders/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.message || "Order creation failed")
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error("Order creation error:", error)
+    throw error
   }
 }
 
 export async function getOrderDetails(orderId) {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const response = await fetch(`/api/wordpress-courses/orders/${orderId}`)
 
-    return {
-      orderId,
-      amount: 999,
-      status: "PAID",
-      customer: {
-        name: "Jane Doe",
-        email: "jane@example.com",
-        phone: "1234567890",
-      },
-    };
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.message || "Failed to fetch order details")
+    }
+
+    return await response.json()
   } catch (error) {
-    console.error("Error fetching order details:", error);
-    throw error;
+    console.error("Order fetch error:", error)
+    throw error
   }
 }
