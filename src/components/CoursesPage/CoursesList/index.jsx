@@ -22,6 +22,8 @@ const courses = [
     image: "/courses/Courses-Images/digital-marketing.webp",
     color: "#3b82f6",
     syllabus: "/syllabus/complete-digital-marketing.pdf",
+    description:
+      "Master the complete digital marketing ecosystem, from SEO to social media and paid advertising. Ideal for entrepreneurs and marketing professionals.",
   },
   {
     title: "Email Marketing",
@@ -30,6 +32,8 @@ const courses = [
     image: "/courses/Courses-Images/email-marketing.webp",
     color: "#ef4444",
     syllabus: "/syllabus/email-marketing.pdf",
+    description:
+      "Learn to craft compelling emails, build lists, and automate campaigns. Perfect for boosting engagement and conversions.",
   },
   {
     title: "Social Media Marketing",
@@ -38,6 +42,8 @@ const courses = [
     image: "/courses/Courses-Images/social-media-marketing.webp",
     color: "#3b5998",
     syllabus: "/syllabus/social-media-marketing.pdf",
+    description:
+      "Grow your brand on platforms like Facebook, Instagram, and LinkedIn. This course covers strategy, content, and analytics.",
   },
   {
     title: "Graphic Design",
@@ -46,6 +52,8 @@ const courses = [
     image: "/courses/Courses-Images/graphic-design.webp",
     color: "#eab308",
     syllabus: "/syllabus/graphic-design.pdf",
+    description:
+      "Unlock your creativity with hands-on training in Adobe tools and visual design principles. Great for aspiring designers.",
   },
   {
     title: "Video Editing",
@@ -54,6 +62,8 @@ const courses = [
     image: "/courses/Courses-Images/video-editing.webp",
     color: "#8b5cf6",
     syllabus: "/syllabus/video-editing.pdf",
+    description:
+      "Learn editing techniques, transitions, and effects using industry tools like Premiere Pro and DaVinci Resolve.",
   },
   {
     title: "Google Ads",
@@ -62,6 +72,8 @@ const courses = [
     image: "/courses/Courses-Images/google-ads.webp",
     color: "#34d399",
     syllabus: "/syllabus/google-ads.pdf",
+    description:
+      "Master paid search and display campaigns to increase leads and sales with measurable results using Google Ads.",
   },
   {
     title: "Meta Ads",
@@ -70,6 +82,8 @@ const courses = [
     image: "/courses/Courses-Images/meta-ads.webp",
     color: "#2563eb",
     syllabus: "/syllabus/meta-ads.pdf",
+    description:
+      "Learn how to run high-converting campaigns on Facebook and Instagram with Meta Business Suite.",
   },
   {
     title: "Content Marketing",
@@ -78,6 +92,8 @@ const courses = [
     image: "/courses/Courses-Images/content-marketing.webp",
     color: "#ec4899",
     syllabus: "/syllabus/website-designing.pdf",
+    description:
+      "Develop content strategies that attract, engage, and convert customers using blogs, videos, and social media.",
   },
   {
     title: "Python Programming",
@@ -86,6 +102,8 @@ const courses = [
     image: "/courses/Courses-Images/python-programming.webp",
     color: "#f59e0b",
     syllabus: "/syllabus/python.pdf",
+    description:
+      "Start your programming journey with Python. Covers basics to intermediate concepts with real-world applications.",
   },
   {
     title: "Advanced JavaScript",
@@ -94,6 +112,8 @@ const courses = [
     image: "/courses/Courses-Images/advance-javascript.webp",
     color: "#10b981",
     syllabus: "/syllabus/advanced-js.pdf",
+    description:
+      "Dive deep into modern JavaScript, including ES6+, asynchronous programming, and performance optimization.",
   },
   {
     title: "Frontend Dev (ReactJS, NextJS)",
@@ -102,6 +122,8 @@ const courses = [
     image: "/courses/Courses-Images/frontend-developement.webp",
     color: "#6366f1",
     syllabus: "/syllabus/frontend-dev.pdf",
+    description:
+      "Build fast, interactive UIs using ReactJS and NextJS. Learn components, routing, APIs, and deployment.",
   },
   {
     title: "Backend Dev (NodeJS)",
@@ -110,6 +132,8 @@ const courses = [
     image: "/courses/Courses-Images/backend-developement.webp",
     color: "#16a34a",
     syllabus: "/syllabus/backend-dev.pdf",
+    description:
+      "Learn backend development with NodeJS, Express, and MongoDB. Create APIs and handle data securely.",
   },
   {
     title: "Full Stack Dev (MERN)",
@@ -118,6 +142,8 @@ const courses = [
     image: "/courses/Courses-Images/full-stact-developer.webp",
     color: "#7c3aed",
     syllabus: "/syllabus/fullstack-mern.pdf",
+    description:
+      "Become a full-stack developer with MongoDB, Express, React, and NodeJS. Build complete web applications.",
   },
   {
     title: "Website with HTML/CSS/JS",
@@ -126,6 +152,8 @@ const courses = [
     image: "/courses/Courses-Images/html-css-javascript.webp",
     color: "#f43f5e",
     syllabus: "/syllabus/html-css-js.pdf",
+    description:
+      "Start from scratch and learn to build responsive websites using HTML, CSS, and JavaScript.",
   },
   {
     title: "Website using WordPress",
@@ -134,6 +162,8 @@ const courses = [
     image: "/courses/Courses-Images/wordpress.webp",
     color: "#0ea5e9",
     syllabus: "/syllabus/wordpress.pdf",
+    description:
+      "Create stunning websites without coding using WordPress. Ideal for bloggers and small businesses.",
   },
 ];
 
@@ -155,7 +185,6 @@ const CoursesList = () => {
               viewport={{ once: true }}
               className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden"
             >
-              {/* Card Image */}
               <div className="h-48 w-full">
                 <img
                   src={course.image}
@@ -164,7 +193,6 @@ const CoursesList = () => {
                 />
               </div>
 
-              {/* Card Content */}
               <div className="p-5 flex flex-col justify-between h-full">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
@@ -179,7 +207,6 @@ const CoursesList = () => {
                     </h3>
                   </div>
 
-                  {/* Download Icon */}
                   <a
                     href={course.syllabus}
                     download
@@ -190,11 +217,12 @@ const CoursesList = () => {
                   </a>
                 </div>
 
+                <p className="text-sm text-gray-600 mb-4">{course.description}</p>
+
                 <div className="mt-auto">
                   <p className="text-xl font-bold text-gray-700 mb-4 flex justify-between items-center">
-                    {course.price}{" "}
+                    {course.price}
                     <span>
-                      {" "}
                       <div className="flex items-center gap-2 text-xs text-slate-500">
                         <span>Powered by</span>
                         <Link href="/">
