@@ -45,7 +45,7 @@ export default function PaymentModal({ isOpen, onClose, course }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 bg-black/70 backdrop-blur-sm">
           <motion.div
             className="relative max-w-md w-full"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}

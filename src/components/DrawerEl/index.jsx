@@ -44,14 +44,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       hover: "#bbdefb",
       iconColor: "#1565c0",
     },
-    {
-      name: "Influencers",
-      path: "/influencers",
-      icon: <Users size={18} />,
-      bg: "#ede7f6",
-      hover: "#d1c4e9",
-      iconColor: "#6a1b9a",
-    },
+    // {
+    //   name: "Influencers",
+    //   path: "/influencers",
+    //   icon: <Users size={18} />,
+    //   bg: "#ede7f6",
+    //   hover: "#d1c4e9",
+    //   iconColor: "#6a1b9a",
+    // },
   ];
 
     // menuLinks = [
@@ -82,14 +82,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      {
-        name: "Influencers",
-        path: "/influencers",
-        icon: <Users size={18} />,
-        bg: "#ede7f6",
-        hover: "#d1c4e9",
-        iconColor: "#6a1b9a",
-      },
+      // {
+      //   name: "Influencers",
+      //   path: "/influencers",
+      //   icon: <Users size={18} />,
+      //   bg: "#ede7f6",
+      //   hover: "#d1c4e9",
+      //   iconColor: "#6a1b9a",
+      // },
     ];
   }
     // Webitya.com/News News
@@ -111,14 +111,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      {
-        name: "Influencers",
-        path: "/influencers",
-        icon: <Users size={18} />,
-        bg: "#ede7f6",
-        hover: "#d1c4e9",
-        iconColor: "#6a1b9a",
-      },
+      // {
+      //   name: "Influencers",
+      //   path: "/influencers",
+      //   icon: <Users size={18} />,
+      //   bg: "#ede7f6",
+      //   hover: "#d1c4e9",
+      //   iconColor: "#6a1b9a",
+      // },
     ];
   }
   // 🟨 Dynamic Yatra route logic
@@ -137,14 +137,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      {
-        name: "Influencers",
-        path: "/influencers",
-        icon: <Users size={18} />,
-        bg: "#ede7f6",
-        hover: "#d1c4e9",
-        iconColor: "#6a1b9a",
-      },
+      // {
+      //   name: "Influencers",
+      //   path: "/influencers",
+      //   icon: <Users size={18} />,
+      //   bg: "#ede7f6",
+      //   hover: "#d1c4e9",
+      //   iconColor: "#6a1b9a",
+      // },
     ];
   }
   // 🟨 Dynamic Latest Tech News logic
@@ -164,14 +164,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      {
-        name: "Influencers",
-        path: "/influencers",
-        icon: <Users size={18} />,
-        bg: "#ede7f6",
-        hover: "#d1c4e9",
-        iconColor: "#6a1b9a",
-      },
+      // {
+      //   name: "Influencers",
+      //   path: "/influencers",
+      //   icon: <Users size={18} />,
+      //   bg: "#ede7f6",
+      //   hover: "#d1c4e9",
+      //   iconColor: "#6a1b9a",
+      // },
     ];
   }
   // 🟩 Dynamic Cars route logic
@@ -190,14 +190,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      {
-        name: "Influencers",
-        path: "/influencers",
-        icon: <Users size={18} />,
-        bg: "#ede7f6",
-        hover: "#d1c4e9",
-        iconColor: "#6a1b9a",
-      },
+      // {
+      //   name: "Influencers",
+      //   path: "/influencers",
+      //   icon: <Users size={18} />,
+      //   bg: "#ede7f6",
+      //   hover: "#d1c4e9",
+      //   iconColor: "#6a1b9a",
+      // },
     ];
   }
 
