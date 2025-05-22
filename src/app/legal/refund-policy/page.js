@@ -6,10 +6,13 @@ export default function RefundPolicy() {
       <h1 className="text-4xl font-bold mb-6 text-center">Refund & Cancellation Policy</h1>
 
       <p className="mb-6 text-lg">
-        This cancellation policy outlines how you can cancel or seek a refund for a product or service that you have purchased through the Platform.
+      The refund and cancellation policy outlines how you can cancel or seek a refund for a service that you have purchased through the Platform. Under this policy:
+
+You can cancel the service within 1 day of booking.
+In case of any refunds approved by us, it will be credited within 7 business days to your original payment motioned
       </p>
 
-      <div className="space-y-5 text-base leading-7">
+      {/* <div className="space-y-5 text-base leading-7">
         <p className="flex items-start gap-2">
           <FaRegCheckCircle className="text-green-500 mt-1" />
           Cancellations will only be considered if the request is made <strong>within 2 days</strong> of placing the order. However, cancellation requests may not be entertained if the orders have been communicated to such sellers / merchants listed on the Platform and they have initiated the process of shipping them, or the product is out for delivery. In such an event, you may choose to reject the product at the doorstep.
@@ -43,7 +46,7 @@ export default function RefundPolicy() {
 
       <p className="mt-10 text-sm text-gray-500 text-center">
         For any further questions, feel free to reach us at <a href="mailto:support@webitya.com" className="text-blue-600 underline">support@webitya.com</a>.
-      </p>
+      </p> */}
     </div>
   );
 }
