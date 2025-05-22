@@ -38,8 +38,8 @@ const HomeAboutUs = () => {
               <p className="text-gray-700 dark:text-gray-400">Happy Clients</p>
             </div>
             <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-md w-40">
-              <h3 className="text-xl font-semibold text-blue-600">1M+</h3>
-              <p className="text-gray-700 dark:text-gray-400">Leads Generated</p>
+              <h3 className="text-xl font-semibold text-blue-600">100%</h3>
+              <p className="text-gray-700 dark:text-gray-400">Certified Clients</p>
             </div>
           </div>
 
