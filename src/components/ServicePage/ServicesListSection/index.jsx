@@ -47,9 +47,9 @@ const services = [
     image: "/services/servicesListImages/online-training.webp",
   },
   {
-    title: "Domain & Hosting",
+    title: "Domain",
     icon: <Language className="service-icon" />,
-    description: "One-stop solutions for domains and fast, secure hosting plans.",
+    description: "One-stop solutions for domains and fast",
     image: "/services/servicesListImages/domain-hosting.webp",
   },
   {
