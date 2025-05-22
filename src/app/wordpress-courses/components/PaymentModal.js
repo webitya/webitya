@@ -2,50 +2,98 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { FaTimes, FaWhatsapp, FaLock, FaCheck } from "react-icons/fa"
+import { FaTimes, FaWhatsapp, FaLock, FaCheck, FaCreditCard, FaRupeeSign } from "react-icons/fa"
 import { SiPhonepe } from "react-icons/si"
+import { toast } from "react-hot-toast"
+import { useRouter } from "next/navigation"
+import { createPayment } from "../lib/payment-service"
 
 export default function PaymentModal({ isOpen, onClose, course }) {
+  const router = useRouter()
   const [paymentMethod, setPaymentMethod] = useState("phonepe")
-  const [paymentStatus, setPaymentStatus] = useState("initial") // initial, processing, success, error
+  const [paymentStatus, setPaymentStatus] = useState("initial")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
-  const [step, setStep] = useState(1) // 1: info, 2: payment method
+  const [step, setStep] = useState(1)
+  const [orderId, setOrderId] = useState("")
+  const [error, setError] = useState("")
 
   const handleNextStep = (e) => {
     e.preventDefault()
     if (!email || !name || !phone) {
-      alert("Please fill in all required fields")
+      toast.error("Please fill in all required fields")
       return
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address")
+      return
+    }
+
+    const phoneRegex = /^\d{10}$/
+    if (!phoneRegex.test(phone)) {
+      toast.error("Please enter a valid 10-digit phone number")
+      return
+    }
+
     setStep(2)
   }
 
   const handlePayment = async (e) => {
     e.preventDefault()
-
+    setError("")
     setPaymentStatus("processing")
 
-    // Simulate payment processing
-    setTimeout(() => {
-      if (paymentMethod === "phonepe") {
-        // Redirect to PhonePe payment gateway
-        window.open("https://www.phonepe.com", "_blank")
-        onClose()
-      } else if (paymentMethod === "whatsapp") {
-        // Open WhatsApp with predefined message
-        const message = `I want to purchase the "${course.title}" course for ₹${course.price}. Please provide payment details.`
-        window.open(`https://wa.me/919693245941?text=${encodeURIComponent(message)}`, "_blank")
-        onClose()
+    try {
+      const generatedOrderId = `ORDER_${Date.now()}_${Math.floor(Math.random() * 1000)}`
+      setOrderId(generatedOrderId)
+
+      const paymentData = {
+        amount: course.price,
+        orderId: generatedOrderId,
+        customerName: name,
+        customerEmail: email,
+        customerPhone: phone,
+        courseId: course.id,
+        courseTitle: course.title,
+        paymentMethod: paymentMethod,
       }
-    }, 1500)
+
+      const response = await createPayment(paymentData)
+
+      if (response.success) {
+        if (paymentMethod === "phonepe") {
+          window.location.href = response.paymentUrl
+        } else if (paymentMethod === "whatsapp") {
+          const message = `I want to purchase the "${course.title}" course for ₹${course.price}. My order ID is ${generatedOrderId}. My name: ${name}, Email: ${email}, Phone: ${phone}`
+          window.open(`https://wa.me/919693245941?text=${encodeURIComponent(message)}`, "_blank")
+          setPaymentStatus("success")
+          setStep(3)
+        } else if (paymentMethod === "card") {
+          router.push(`/wordpress-courses/payment/card?orderId=${generatedOrderId}`)
+        }
+      } else {
+        throw new Error(response.message || "Payment initialization failed")
+      }
+    } catch (err) {
+      console.error("Payment error:", err)
+      setPaymentStatus("error")
+      setError(err.message || "Payment processing failed. Please try again.")
+      toast.error("Payment failed. Please try again.")
+    }
+  }
+
+  const handleCloseSuccess = () => {
+    onClose()
+    router.push(`/wordpress-courses/thank-you?orderId=${orderId}`)
   }
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 bg-black/70 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
           <motion.div
             className="relative max-w-md w-full"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -57,59 +105,63 @@ export default function PaymentModal({ isOpen, onClose, course }) {
             <div className="relative bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-white/50">
               <div className="flex justify-between items-center p-4 border-b border-gray-200/50">
                 <h3 className="text-xl font-semibold text-gray-900">
-                  {step === 1 ? "Your Information" : "Select Payment Method"}
+                  {step === 1 ? "Your Information" : step === 2 ? "Select Payment Method" : "Payment Successful"}
                 </h3>
-                <button
-                  onClick={onClose}
-                  className="text-gray-400 hover:text-gray-500 hover:bg-gray-100/50 p-2 rounded-full transition-colors duration-200 focus:outline-none"
-                >
-                  <FaTimes className="h-5 w-5" />
-                </button>
+                {step !== 3 && (
+                  <button
+                    onClick={onClose}
+                    className="text-gray-400 hover:text-gray-500 hover:bg-gray-100/50 p-2 rounded-full transition-colors duration-200 focus:outline-none"
+                  >
+                    <FaTimes className="h-5 w-5" />
+                  </button>
+                )}
               </div>
 
               <div className="p-6">
-                {/* Progress Steps */}
-                <div className="flex items-center justify-center mb-6">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      step >= 1 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
-                    }`}
-                  >
-                    1
+                {step !== 3 && (
+                  <div className="flex items-center justify-center mb-6">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        step >= 1 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
+                      }`}
+                    >
+                      1
+                    </div>
+                    <div
+                      className={`h-1 w-16 ${step >= 2 ? "bg-[#21759b]" : "bg-gray-200"} transition-colors duration-300`}
+                    ></div>
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        step >= 2 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
+                      }`}
+                    >
+                      2
+                    </div>
                   </div>
-                  <div
-                    className={`h-1 w-16 ${step >= 2 ? "bg-[#21759b]" : "bg-gray-200"} transition-colors duration-300`}
-                  ></div>
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      step >= 2 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
-                    }`}
-                  >
-                    2
-                  </div>
-                </div>
+                )}
 
-                {/* Order Summary - Always visible */}
-                <div className="mb-6">
-                  <div className="bg-[#21759b]/5 p-4 rounded-xl">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-700 font-medium">Course:</span>
-                      <span className="font-medium">{course.title}</span>
-                    </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-700 font-medium">Original Price:</span>
-                      <span className="font-medium">₹{course.price * 2}</span>
-                    </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-700 font-medium">Discount:</span>
-                      <span className="font-medium text-green-600">-₹{course.price}</span>
-                    </div>
-                    <div className="flex justify-between items-center pt-2 border-t border-gray-200/50">
-                      <span className="text-gray-900 font-semibold">Total:</span>
-                      <span className="font-bold text-xl text-[#21759b]">₹{course.price}</span>
+                {step !== 3 && (
+                  <div className="mb-6">
+                    <div className="bg-[#21759b]/5 p-4 rounded-xl">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-gray-700 font-medium">Course:</span>
+                        <span className="font-medium">{course.title}</span>
+                      </div>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-gray-700 font-medium">Original Price:</span>
+                        <span className="font-medium">₹{course.price * 2}</span>
+                      </div>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-gray-700 font-medium">Discount:</span>
+                        <span className="font-medium text-green-600">-₹{course.price}</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-2 border-t border-gray-200/50">
+                        <span className="text-gray-900 font-semibold">Total:</span>
+                        <span className="font-bold text-xl text-[#21759b]">₹{course.price}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 {step === 1 ? (
                   <form onSubmit={handleNextStep}>
@@ -154,7 +206,7 @@ export default function PaymentModal({ isOpen, onClose, course }) {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-1 focus:ring-[#21759b] focus:border-[#21759b] transition-colors duration-200"
-                          placeholder="Enter your phone number"
+                          placeholder="Enter your 10-digit phone number"
                           required
                         />
                       </div>
@@ -169,7 +221,7 @@ export default function PaymentModal({ isOpen, onClose, course }) {
                       </button>
                     </div>
                   </form>
-                ) : (
+                ) : step === 2 ? (
                   <form onSubmit={handlePayment}>
                     <div className="space-y-3">
                       <label className="relative flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors duration-200">
@@ -191,6 +243,25 @@ export default function PaymentModal({ isOpen, onClose, course }) {
                         {paymentMethod === "phonepe" && <FaCheck className="absolute right-3 text-green-500" />}
                       </label>
 
+                      {/* <label className="relative flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors duration-200">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="card"
+                          checked={paymentMethod === "card"}
+                          onChange={() => setPaymentMethod("card")}
+                          className="h-4 w-4 text-[#21759b] focus:ring-[#21759b]"
+                        />
+                        <div className="ml-3 flex items-center">
+                          <FaCreditCard className="text-blue-500 text-xl mr-2" />
+                          <div>
+                            <span className="font-medium">Credit/Debit Card</span>
+                            <p className="text-xs text-gray-500">All major cards accepted</p>
+                          </div>
+                        </div>
+                        {paymentMethod === "card" && <FaCheck className="absolute right-3 text-green-500" />}
+                      </label> */}
+
                       <label className="relative flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors duration-200">
                         <input
                           type="radio"
@@ -210,6 +281,8 @@ export default function PaymentModal({ isOpen, onClose, course }) {
                         {paymentMethod === "whatsapp" && <FaCheck className="absolute right-3 text-green-500" />}
                       </label>
                     </div>
+
+                    {error && <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>}
 
                     <div className="flex items-center mt-4 mb-6 text-xs text-gray-600">
                       <FaLock className="text-gray-400 mr-2" />
@@ -256,11 +329,55 @@ export default function PaymentModal({ isOpen, onClose, course }) {
                             Processing...
                           </>
                         ) : (
-                          "Pay Now"
+                          <>
+                            <FaRupeeSign className="mr-1" />
+                            Pay ₹{course.price}
+                          </>
                         )}
                       </button>
                     </div>
                   </form>
+                ) : (
+                  <div className="text-center">
+                    <div className="mb-6 flex justify-center">
+                      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                        <FaCheck className="text-green-500 text-3xl" />
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">Payment Successful!</h4>
+                    <p className="text-gray-600 mb-6">
+                      Thank you for purchasing {course.title}. Your order has been confirmed.
+                    </p>
+                    <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-600">Order ID:</span>
+                        <span className="font-medium">{orderId}</span>
+                      </div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-600">Amount Paid:</span>
+                        <span className="font-medium">₹{course.price}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Payment Method:</span>
+                        <span className="font-medium">
+                          {paymentMethod === "phonepe"
+                            ? "PhonePe"
+                            : paymentMethod === "card"
+                              ? "Credit/Debit Card"
+                              : "WhatsApp UPI"}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 mb-6">
+                      We've sent the course access details to your email address. You can start learning right away!
+                    </p>
+                    <button
+                      onClick={handleCloseSuccess}
+                      className="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#21759b] hover:bg-[#1d6586] transition-colors duration-200"
+                    >
+                      Start Learning
+                    </button>
+                  </div>
                 )}
               </div>
             </div>

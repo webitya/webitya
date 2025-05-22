@@ -4,16 +4,16 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { FaWordpress, FaArrowRight, FaPlay, FaShoppingCart, FaCheck } from "react-icons/fa"
 import { HiOutlineSparkles } from "react-icons/hi"
+import { Toaster } from "react-hot-toast"
 import CourseCard from "./components/CourseCard"
 import VideoModal from "./components/VideoModal"
-// import TestimonialCarousel from "./components/TestimonialCarousel"
+
 import TutorSection from "./components/TutorSection"
 import PaymentModal from "./components/PaymentModal"
 import { courses } from "./data/courses"
 import { testimonials } from "./data/testimonials"
 import { tutors } from "./data/tutors"
-import TestimonialSection from "./components/TestimonialSlider"
-import Footer from "@/components/FooterEl"
+import TestimonialCarousel from "./components/TestimonialSlider"
 
 export default function WordPressCourses() {
   const [selectedCourse, setSelectedCourse] = useState(null)
@@ -46,10 +46,11 @@ export default function WordPressCourses() {
   }
 
   return (
-     <>
-         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
+      <Toaster position="top-center" />
+
       {/* Sticky Header */}
-      {/* <div
+      <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrollY > 50 ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-transparent"
         }`}
@@ -78,10 +79,10 @@ export default function WordPressCourses() {
             </button>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Hero Section */}
-      <section className="py-18 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute right-0 top-0 w-1/2 h-1/2 bg-[#21759b]/5 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3"></div>
           <div className="absolute left-0 bottom-0 w-1/2 h-1/2 bg-[#21759b]/5 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
@@ -138,17 +139,17 @@ export default function WordPressCourses() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#21759b]/20 to-[#21759b]/10 rounded-2xl blur-lg"></div>
+                <div className="absolute -inset-1 bg-white/20 rounded-2xl blur-lg"></div>
                 <div className="relative bg-white/50 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-xl overflow-hidden">
                   <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-[#21759b]/10 rounded-full blur-xl"></div>
                   <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-[#21759b]/10 rounded-full blur-xl"></div>
-                  
+
                   <img
                     src="/wordpress-courses/images/hero-image.jpg"
                     alt="WordPress Course"
                     className="w-full h-auto rounded-lg shadow-md mb-6"
                   />
-                  
+
                   <div className="flex justify-between items-center mb-4">
                     <div>
                       <h3 className="text-xl font-bold text-gray-900">WordPress Mastery</h3>
@@ -158,7 +159,7 @@ export default function WordPressCourses() {
                       <span className="text-[#21759b] font-semibold">₹149 each</span>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     {["Lifetime Access", "Certificate Included", "Expert Support"].map((feature, index) => (
                       <div key={index} className="flex items-center">
@@ -175,7 +176,7 @@ export default function WordPressCourses() {
       </section>
 
       {/* Courses Section */}
-      <section id="courses" className="py-12 px-4 sm:px-6 lg:px-8 relative">
+      <section id="courses" className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50"></div>
         </div>
@@ -283,7 +284,7 @@ export default function WordPressCourses() {
             </p>
           </div>
 
-          <TestimonialSection testimonials={testimonials} />
+          <TestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
@@ -464,7 +465,5 @@ export default function WordPressCourses() {
         <PaymentModal isOpen={showPaymentModal} onClose={() => setShowPaymentModal(false)} course={selectedCourse} />
       )}
     </div>
-    <Footer/>
-     </>
   )
 }
