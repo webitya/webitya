@@ -222,7 +222,7 @@ const HomeHero = () => {
             <Box mt={3}>
               {/* Let’s Talk button linking to /contact */}
               <Link
-                href="https://wa.me/919693245941?text=Hello%20Webitya"
+                href="/contact-us"
                 passHref
               >
                 <Button

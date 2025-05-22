@@ -26,7 +26,7 @@ const testimonials = [
     name: "Pooja Sharma",
     role: "Freelance Makeup Artist",
     feedback:
-      "Thanks to Webitya's digital training, I now manage my own Instagram ads and generate leads every week!",
+      "Thanks to Webitya's digital training, I now manage my own Instagram every day for better search",
     image: "/testimonials/pooja.jpg",
     color: "#ec4899", // pink
   },
