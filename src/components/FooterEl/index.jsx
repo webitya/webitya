@@ -24,17 +24,17 @@ const footerData = [
   {
     title: 'Exclusive Services',
     links: [
-      { name: 'Zup Rides', href: '/zup-rides' },
-      { name: 'Tour & Travells ', href: '/tour&travells/char-dham-yatra' },
-      { name: 'News', href: '/news' },
-      { name: 'Latest Tech News', href: '/latest-tech-news' },
-      { name: 'Top Colleges INDIA', href: '/colleges' },
-      { name: 'Handi Sketch', href: '/handi-sketch' },
-      { name: 'Cars', href: '/cars' },
-       { name: 'Bikes', href: '/bikes' },
+      // { name: 'Zup Rides', href: '/zup-rides' },
+      // { name: 'Tour & Travells ', href: '/tour&travells/char-dham-yatra' },
+      // { name: 'News', href: '/news' },
+      // { name: 'Latest Tech News', href: '/latest-tech-news' },
+      // { name: 'Top Colleges INDIA', href: '/colleges' },
+      // { name: 'Handi Sketch', href: '/handi-sketch' },
+      // { name: 'Cars', href: '/cars' },
+      //  { name: 'Bikes', href: '/bikes' },
 
       { name: 'Email Marketing Software', href: '/email-marketing-software' },
-      { name: 'Essential Service Ranchi', href: '/essential-services-ranchi' },
+      // { name: 'Essential Service Ranchi', href: '/essential-services-ranchi' },
       // { name: 'Learn', href: '#' },
       // { name: 'Case Studies', href: '#' },
       // { name: 'Blog', href: '#' },
@@ -78,7 +78,7 @@ const footerData = [
               //  { name: 'Shipping Policy', href: '/legal/shipping-policy' },
       { name: 'Disclaimer', href: '/legal/disclaimer' },
       { name: 'FAQS', href: '/faqs' },
-        { name: 'Blogs', href: '/blogs' },
+        // { name: 'Blogs', href: '/blogs' },
       // { name: 'Book Influencer', href: '/influencers#collection' },
    
    
