@@ -16,7 +16,7 @@ export async function POST(request) {
     }
 
     // PhonePe API credentials
-    const merchantId = "SU2505231841350701637815"
+    const merchantId = "SM23OB63X1HCQD"
     const saltKey = "d4b5b5ee-fe38-43a7-afcb-77b5c06cad3f"
     const saltIndex = "1"
      const apiEndpoint = "https://api.phonepe.com/apis/hermes/pg/v1/pay"

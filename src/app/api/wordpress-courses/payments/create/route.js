@@ -25,8 +25,8 @@ export async function POST(request) {
     }
 
     // 🔐 PhonePe sandbox credentials (for testing only)
-    const merchantId = "PGTESTPAYUAT";
-    const saltKey = "b84690a2-327f-49a2-ae07-993efb1831ea";
+    const merchantId = "M23OB63X1HCQD";
+    const saltKey = "d4b5b5ee-fe38-43a7-afcb-77b5c06cad3f";
     const saltIndex = "1";
     const apiEndpoint = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://your-test-domain.com";
