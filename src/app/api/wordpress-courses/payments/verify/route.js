@@ -19,7 +19,7 @@ export async function POST(request) {
     const merchantId = "SU2505231841350701637815"
     const saltKey = "d4b5b5ee-fe38-43a7-afcb-77b5c06cad3f"
     const saltIndex = "1"
-    const apiEndpoint = "https://api.phonepe.com/apis/hermes/pg/v1/status"
+     const apiEndpoint = "https://api.phonepe.com/apis/hermes/pg/v1/pay"
 
     // Generate SHA256 hash
     const string = `/pg/v1/status/${merchantId}/${data.transactionId}${saltKey}`
