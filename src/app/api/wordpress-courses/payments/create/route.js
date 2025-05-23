@@ -10,21 +10,12 @@ export async function POST(request) {
       return NextResponse.json({ success: false, message: "Missing required payment information" }, { status: 400 })
     }
 
-    // PhonePe API credentials from environment variables
-    const merchantId = process.env.PHONEPE_MERCHANT_ID
-    const saltKey = process.env.PHONEPE_SALT_KEY
-    const saltIndex = process.env.PHONEPE_SALT_INDEX
-    const apiEndpoint = process.env.PHONEPE_API_ENDPOINT || "https://api.phonepe.com/apis/hermes/pg/v1/pay"
-
-    if (!merchantId || !saltKey || !saltIndex) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Payment gateway configuration missing",
-        },
-        { status: 500 },
-      )
-    }
+    // PhonePe API credentials - hardcoded for immediate deployment
+    const merchantId = "SU2505231841350701637815"
+    const saltKey = "d4b5b5ee-fe38-43a7-afcb-77b5c06cad3f"
+    const saltIndex = "1"
+    const apiEndpoint = "https://api.phonepe.com/apis/hermes/pg/v1/pay"
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://webitya.com"
 
     // Prepare payment request payload
     const amountInPaise = Math.round(data.amount * 100) // Convert to paise
@@ -34,14 +25,16 @@ export async function POST(request) {
       merchantTransactionId: data.orderId,
       merchantUserId: `USER_${Date.now()}`,
       amount: amountInPaise,
-      redirectUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/wordpress-courses/thank-you?orderId=${data.orderId}`,
+      redirectUrl: `${baseUrl}/wordpress-courses/thank-you?orderId=${data.orderId}`,
       redirectMode: "REDIRECT",
-      callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/wordpress-courses/payments/webhook`,
+      callbackUrl: `${baseUrl}/api/wordpress-courses/payments/webhook`,
       mobileNumber: data.customerPhone,
       paymentInstrument: {
         type: "PAY_PAGE",
       },
     }
+
+    console.log("Payment payload:", payload)
 
     // Generate base64 encoded payload
     const base64Payload = Buffer.from(JSON.stringify(payload)).toString("base64")
@@ -53,44 +46,68 @@ export async function POST(request) {
     // Create X-VERIFY header
     const xVerify = `${sha256Hash}###${saltIndex}`
 
-    // Make API call to PhonePe
-    const response = await fetch(apiEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-VERIFY": xVerify,
-      },
-      body: JSON.stringify({
-        request: base64Payload,
-      }),
-    })
+    try {
+      console.log("Making PhonePe API request")
 
-    const responseData = await response.json()
-
-    if (responseData.success) {
-      // Save order to database
-      await saveOrderToDatabase({
-        orderId: data.orderId,
-        amount: data.amount,
-        customerName: data.customerName,
-        customerEmail: data.customerEmail,
-        customerPhone: data.customerPhone,
-        courseId: data.courseId,
-        courseTitle: data.courseTitle,
-        paymentMethod: data.paymentMethod,
-        status: "PENDING",
-        transactionId: responseData.data?.transactionId || null,
-        createdAt: new Date().toISOString(),
+      // Make API call to PhonePe
+      const response = await fetch(apiEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-VERIFY": xVerify,
+        },
+        body: JSON.stringify({
+          request: base64Payload,
+        }),
       })
 
-      return NextResponse.json({
-        success: true,
-        paymentUrl: responseData.data.instrumentResponse.redirectInfo.url,
-        message: "Payment link generated successfully",
-        transactionId: responseData.data.transactionId,
-      })
-    } else {
-      throw new Error(responseData.message || "Payment initialization failed")
+      console.log("PhonePe API response status:", response.status)
+
+      const responseData = await response.json()
+      console.log("PhonePe API response:", responseData)
+
+      if (responseData.success) {
+        // Save order to database (implement this based on your database)
+        console.log("Order created:", {
+          orderId: data.orderId,
+          amount: data.amount,
+          customerName: data.customerName,
+          customerEmail: data.customerEmail,
+          customerPhone: data.customerPhone,
+          courseId: data.courseId,
+          courseTitle: data.courseTitle,
+          status: "PENDING",
+          transactionId: responseData.data?.transactionId || null,
+          createdAt: new Date().toISOString(),
+        })
+
+        return NextResponse.json({
+          success: true,
+          paymentUrl: responseData.data.instrumentResponse.redirectInfo.url,
+          message: "Payment link generated successfully",
+          transactionId: responseData.data.transactionId,
+        })
+      } else {
+        console.error("PhonePe API error response:", responseData)
+        throw new Error(responseData.message || "Payment initialization failed")
+      }
+    } catch (apiError) {
+      console.error("PhonePe API error:", apiError)
+
+      // For testing/development, return a mock success response if in development mode
+      if (process.env.NODE_ENV === "development") {
+        console.log("Using mock payment URL for development")
+        const mockPaymentUrl = `https://pay.phonepe.com/pay/mock-payment?orderId=${data.orderId}&amount=${data.amount}`
+
+        return NextResponse.json({
+          success: true,
+          paymentUrl: mockPaymentUrl,
+          message: "Mock payment link generated for development",
+          transactionId: `TXN_${Date.now()}`,
+        })
+      }
+
+      throw apiError
     }
   } catch (error) {
     console.error("Payment API error:", error)
@@ -104,18 +121,4 @@ export async function POST(request) {
       { status: 500 },
     )
   }
-}
-
-async function saveOrderToDatabase(orderData) {
-  // In a real implementation, this would save the order to your database
-  // For example, using Prisma, MongoDB, or another database client
-
-  // Example with Prisma:
-  // const order = await prisma.order.create({
-  //   data: orderData
-  // });
-
-  // For now, we'll just log the order data
-  console.log("Order saved:", orderData)
-  return true
 }

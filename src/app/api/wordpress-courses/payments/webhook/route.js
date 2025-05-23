@@ -12,18 +12,8 @@ export async function POST(request) {
       return NextResponse.json({ success: false, message: "Missing X-VERIFY header" }, { status: 400 })
     }
 
-    // PhonePe API credentials from environment variables
-    const saltKey = process.env.PHONEPE_SALT_KEY
-
-    if (!saltKey) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Payment gateway configuration missing",
-        },
-        { status: 500 },
-      )
-    }
+    // PhonePe API credentials
+    const saltKey = "d4b5b5ee-fe38-43a7-afcb-77b5c06cad3f"
 
     // Verify the signature
     const payload = JSON.stringify(data)
@@ -37,16 +27,25 @@ export async function POST(request) {
     // Process different webhook event types
     if (data.event === "PAYMENT_SUCCESS") {
       // Handle successful payment
-      await updateOrderStatus(data.merchantTransactionId, "COMPLETED", data)
+      console.log("Payment successful:", {
+        merchantTransactionId: data.merchantTransactionId,
+        transactionId: data.transactionId,
+        amount: data.amount / 100, // Convert paise to rupees
+      })
 
+      // Update order status in your database
       // Grant course access
-      await grantCourseAccess(data.merchantTransactionId)
-
       // Send confirmation email
-      await sendConfirmationEmail(data.merchantTransactionId)
     } else if (data.event === "PAYMENT_FAILED") {
       // Handle failed payment
-      await updateOrderStatus(data.merchantTransactionId, "FAILED", data)
+      console.log("Payment failed:", {
+        merchantTransactionId: data.merchantTransactionId,
+        transactionId: data.transactionId,
+        errorCode: data.errorCode,
+        errorMessage: data.errorMessage,
+      })
+
+      // Update order status in your database
     }
 
     return NextResponse.json({
@@ -65,66 +64,4 @@ export async function POST(request) {
       { status: 500 },
     )
   }
-}
-
-async function updateOrderStatus(orderId, status, data) {
-  // In a real implementation, this would update the order status in your database
-  // For example, using Prisma, MongoDB, or another database client
-
-  // Example with Prisma:
-  // const order = await prisma.order.update({
-  //   where: { orderId },
-  //   data: {
-  //     status,
-  //     transactionId: data.transactionId,
-  //     paymentDetails: data
-  //   }
-  // });
-
-  // For now, we'll just log the status update
-  console.log(`Order status updated for order ${orderId}: ${status}`)
-  return true
-}
-
-async function grantCourseAccess(orderId) {
-  // In a real implementation, this would grant access to the course
-  // For example, creating a user enrollment record in your database
-
-  // Example with Prisma:
-  // const order = await prisma.order.findUnique({
-  //   where: { orderId }
-  // });
-  //
-  // await prisma.enrollment.create({
-  //   data: {
-  //     userId: order.userId,
-  //     courseId: order.courseId,
-  //     enrolledAt: new Date(),
-  //     status: 'ACTIVE'
-  //   }
-  // });
-
-  console.log(`Course access granted for order ${orderId}`)
-  return true
-}
-
-async function sendConfirmationEmail(orderId) {
-  // In a real implementation, this would send a confirmation email
-  // For example, using a service like SendGrid, Mailgun, etc.
-
-  // Example with SendGrid:
-  // const order = await prisma.order.findUnique({
-  //   where: { orderId },
-  //   include: { course: true }
-  // });
-  //
-  // await sendgrid.send({
-  //   to: order.customerEmail,
-  //   from: 'support@webitya.com',
-  //   subject: `Your access to ${order.course.title} is ready!`,
-  //   html: `<p>Thank you for your purchase! Here's how to access your course...</p>`
-  // });
-
-  console.log(`Confirmation email sent for order ${orderId}`)
-  return true
 }

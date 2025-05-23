@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { FaTimes, FaWhatsapp, FaLock, FaCheck, FaCreditCard, FaRupeeSign } from "react-icons/fa"
+import { FaTimes, FaLock, FaRupeeSign } from "react-icons/fa"
 import { SiPhonepe } from "react-icons/si"
 import { toast } from "react-hot-toast"
 import { useRouter } from "next/navigation"
@@ -10,7 +10,6 @@ import { createPayment } from "../lib/payment-service"
 
 export default function PaymentModal({ isOpen, onClose, course }) {
   const router = useRouter()
-  const [paymentMethod, setPaymentMethod] = useState("phonepe")
   const [paymentStatus, setPaymentStatus] = useState("initial")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
@@ -58,22 +57,16 @@ export default function PaymentModal({ isOpen, onClose, course }) {
         customerPhone: phone,
         courseId: course.id,
         courseTitle: course.title,
-        paymentMethod: paymentMethod,
       }
 
+      console.log("Initiating payment with data:", paymentData)
+
       const response = await createPayment(paymentData)
+      console.log("Payment creation response:", response)
 
       if (response.success) {
-        if (paymentMethod === "phonepe") {
-          window.location.href = response.paymentUrl
-        } else if (paymentMethod === "whatsapp") {
-          const message = `I want to purchase the "${course.title}" course for ₹${course.price}. My order ID is ${generatedOrderId}. My name: ${name}, Email: ${email}, Phone: ${phone}`
-          window.open(`https://wa.me/919693245941?text=${encodeURIComponent(message)}`, "_blank")
-          setPaymentStatus("success")
-          setStep(3)
-        } else if (paymentMethod === "card") {
-          router.push(`/wordpress-courses/payment/card?orderId=${generatedOrderId}`)
-        }
+        // Redirect to PhonePe payment page
+        window.location.href = response.paymentUrl
       } else {
         throw new Error(response.message || "Payment initialization failed")
       }
@@ -83,11 +76,6 @@ export default function PaymentModal({ isOpen, onClose, course }) {
       setError(err.message || "Payment processing failed. Please try again.")
       toast.error("Payment failed. Please try again.")
     }
-  }
-
-  const handleCloseSuccess = () => {
-    onClose()
-    router.push(`/wordpress-courses/thank-you?orderId=${orderId}`)
   }
 
   return (
@@ -105,63 +93,59 @@ export default function PaymentModal({ isOpen, onClose, course }) {
             <div className="relative bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-white/50">
               <div className="flex justify-between items-center p-4 border-b border-gray-200/50">
                 <h3 className="text-xl font-semibold text-gray-900">
-                  {step === 1 ? "Your Information" : step === 2 ? "Select Payment Method" : "Payment Successful"}
+                  {step === 1 ? "Your Information" : "Confirm Payment"}
                 </h3>
-                {step !== 3 && (
-                  <button
-                    onClick={onClose}
-                    className="text-gray-400 hover:text-gray-500 hover:bg-gray-100/50 p-2 rounded-full transition-colors duration-200 focus:outline-none"
-                  >
-                    <FaTimes className="h-5 w-5" />
-                  </button>
-                )}
+                <button
+                  onClick={onClose}
+                  className="text-gray-400 hover:text-gray-500 hover:bg-gray-100/50 p-2 rounded-full transition-colors duration-200 focus:outline-none"
+                >
+                  <FaTimes className="h-5 w-5" />
+                </button>
               </div>
 
               <div className="p-6">
-                {step !== 3 && (
-                  <div className="flex items-center justify-center mb-6">
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        step >= 1 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
-                      }`}
-                    >
-                      1
-                    </div>
-                    <div
-                      className={`h-1 w-16 ${step >= 2 ? "bg-[#21759b]" : "bg-gray-200"} transition-colors duration-300`}
-                    ></div>
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        step >= 2 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
-                      }`}
-                    >
-                      2
-                    </div>
+                {/* Progress Steps */}
+                <div className="flex items-center justify-center mb-6">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      step >= 1 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
+                    }`}
+                  >
+                    1
                   </div>
-                )}
+                  <div
+                    className={`h-1 w-16 ${step >= 2 ? "bg-[#21759b]" : "bg-gray-200"} transition-colors duration-300`}
+                  ></div>
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      step >= 2 ? "bg-[#21759b] text-white" : "bg-gray-200 text-gray-500"
+                    }`}
+                  >
+                    2
+                  </div>
+                </div>
 
-                {step !== 3 && (
-                  <div className="mb-6">
-                    <div className="bg-[#21759b]/5 p-4 rounded-xl">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-gray-700 font-medium">Course:</span>
-                        <span className="font-medium">{course.title}</span>
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-gray-700 font-medium">Original Price:</span>
-                        <span className="font-medium">₹{course.price * 2}</span>
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-gray-700 font-medium">Discount:</span>
-                        <span className="font-medium text-green-600">-₹{course.price}</span>
-                      </div>
-                      <div className="flex justify-between items-center pt-2 border-t border-gray-200/50">
-                        <span className="text-gray-900 font-semibold">Total:</span>
-                        <span className="font-bold text-xl text-[#21759b]">₹{course.price}</span>
-                      </div>
+                {/* Order Summary */}
+                <div className="mb-6">
+                  <div className="bg-[#21759b]/5 p-4 rounded-xl">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-700 font-medium">Course:</span>
+                      <span className="font-medium">{course.title}</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-700 font-medium">Original Price:</span>
+                      <span className="font-medium">₹{course.price * 2}</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-700 font-medium">Discount:</span>
+                      <span className="font-medium text-green-600">-₹{course.price}</span>
+                    </div>
+                    <div className="flex justify-between items-center pt-2 border-t border-gray-200/50">
+                      <span className="text-gray-900 font-semibold">Total:</span>
+                      <span className="font-bold text-xl text-[#21759b]">₹{course.price}</span>
                     </div>
                   </div>
-                )}
+                </div>
 
                 {step === 1 ? (
                   <form onSubmit={handleNextStep}>
@@ -221,68 +205,34 @@ export default function PaymentModal({ isOpen, onClose, course }) {
                       </button>
                     </div>
                   </form>
-                ) : step === 2 ? (
+                ) : (
                   <form onSubmit={handlePayment}>
-                    <div className="space-y-3">
-                      <label className="relative flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors duration-200">
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="phonepe"
-                          checked={paymentMethod === "phonepe"}
-                          onChange={() => setPaymentMethod("phonepe")}
-                          className="h-4 w-4 text-[#21759b] focus:ring-[#21759b]"
-                        />
-                        <div className="ml-3 flex items-center">
-                          <SiPhonepe className="text-purple-600 text-xl mr-2" />
-                          <div>
-                            <span className="font-medium">PhonePe</span>
-                            <p className="text-xs text-gray-500">Fast and secure payment</p>
-                          </div>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200 mb-6">
+                      <div className="flex items-center">
+                        <SiPhonepe className="text-purple-600 text-3xl mr-4" />
+                        <div>
+                          <h4 className="font-medium text-gray-900">Pay with PhonePe</h4>
+                          <p className="text-sm text-gray-600">Fast, secure payment via PhonePe</p>
                         </div>
-                        {paymentMethod === "phonepe" && <FaCheck className="absolute right-3 text-green-500" />}
-                      </label>
-
-                      {/* <label className="relative flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors duration-200">
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="card"
-                          checked={paymentMethod === "card"}
-                          onChange={() => setPaymentMethod("card")}
-                          className="h-4 w-4 text-[#21759b] focus:ring-[#21759b]"
-                        />
-                        <div className="ml-3 flex items-center">
-                          <FaCreditCard className="text-blue-500 text-xl mr-2" />
-                          <div>
-                            <span className="font-medium">Credit/Debit Card</span>
-                            <p className="text-xs text-gray-500">All major cards accepted</p>
-                          </div>
-                        </div>
-                        {paymentMethod === "card" && <FaCheck className="absolute right-3 text-green-500" />}
-                      </label> */}
-
-                      <label className="relative flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors duration-200">
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="whatsapp"
-                          checked={paymentMethod === "whatsapp"}
-                          onChange={() => setPaymentMethod("whatsapp")}
-                          className="h-4 w-4 text-[#21759b] focus:ring-[#21759b]"
-                        />
-                        <div className="ml-3 flex items-center">
-                          <FaWhatsapp className="text-green-500 text-xl mr-2" />
-                          <div>
-                            <span className="font-medium">WhatsApp UPI</span>
-                            <p className="text-xs text-gray-500">Pay directly via WhatsApp</p>
-                          </div>
-                        </div>
-                        {paymentMethod === "whatsapp" && <FaCheck className="absolute right-3 text-green-500" />}
-                      </label>
+                      </div>
                     </div>
 
-                    {error && <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>}
+                    <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-600">Name:</span>
+                        <span className="font-medium">{name}</span>
+                      </div>
+                      <div className="flex justify-between mb-2">
+                        <span className="text-gray-600">Email:</span>
+                        <span className="font-medium">{email}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Phone:</span>
+                        <span className="font-medium">{phone}</span>
+                      </div>
+                    </div>
+
+                    {error && <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm mb-4">{error}</div>}
 
                     <div className="flex items-center mt-4 mb-6 text-xs text-gray-600">
                       <FaLock className="text-gray-400 mr-2" />
@@ -337,47 +287,6 @@ export default function PaymentModal({ isOpen, onClose, course }) {
                       </button>
                     </div>
                   </form>
-                ) : (
-                  <div className="text-center">
-                    <div className="mb-6 flex justify-center">
-                      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
-                        <FaCheck className="text-green-500 text-3xl" />
-                      </div>
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">Payment Successful!</h4>
-                    <p className="text-gray-600 mb-6">
-                      Thank you for purchasing {course.title}. Your order has been confirmed.
-                    </p>
-                    <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-600">Order ID:</span>
-                        <span className="font-medium">{orderId}</span>
-                      </div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-600">Amount Paid:</span>
-                        <span className="font-medium">₹{course.price}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Payment Method:</span>
-                        <span className="font-medium">
-                          {paymentMethod === "phonepe"
-                            ? "PhonePe"
-                            : paymentMethod === "card"
-                              ? "Credit/Debit Card"
-                              : "WhatsApp UPI"}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 mb-6">
-                      We've sent the course access details to your email address. You can start learning right away!
-                    </p>
-                    <button
-                      onClick={handleCloseSuccess}
-                      className="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#21759b] hover:bg-[#1d6586] transition-colors duration-200"
-                    >
-                      Start Learning
-                    </button>
-                  </div>
                 )}
               </div>
             </div>

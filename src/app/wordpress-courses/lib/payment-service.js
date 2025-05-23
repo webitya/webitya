@@ -1,5 +1,7 @@
 export async function createPayment(paymentData) {
   try {
+    console.log("Creating payment with data:", paymentData)
+
     const response = await fetch("/api/wordpress-courses/payments/create", {
       method: "POST",
       headers: {
@@ -8,12 +10,16 @@ export async function createPayment(paymentData) {
       body: JSON.stringify(paymentData),
     })
 
+    console.log("Payment API response status:", response.status)
+
+    const responseData = await response.json()
+    console.log("Payment API response data:", responseData)
+
     if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.message || "Payment initialization failed")
+      throw new Error(responseData.message || "Payment initialization failed")
     }
 
-    return await response.json()
+    return responseData
   } catch (error) {
     console.error("Payment creation error:", error)
     throw error
@@ -38,28 +44,6 @@ export async function verifyPayment(transactionId) {
     return await response.json()
   } catch (error) {
     console.error("Payment verification error:", error)
-    throw error
-  }
-}
-
-export async function saveOrder(orderData) {
-  try {
-    const response = await fetch("/api/wordpress-courses/orders/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(orderData),
-    })
-
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.message || "Order creation failed")
-    }
-
-    return await response.json()
-  } catch (error) {
-    console.error("Order creation error:", error)
     throw error
   }
 }

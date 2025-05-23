@@ -8,20 +8,8 @@ export async function GET(request, { params }) {
       return NextResponse.json({ success: false, message: "Order ID is required" }, { status: 400 })
     }
 
-    // In a real implementation, this would fetch the order from your database
-    // For example, using Prisma, MongoDB, or another database client
-
-    // Example with Prisma:
-    // const order = await prisma.order.findUnique({
-    //   where: { orderId },
-    //   include: { course: true }
-    // });
-    //
-    // if (!order) {
-    //   return NextResponse.json({ success: false, message: "Order not found" }, { status: 404 });
-    // }
-
-    // For now, we'll return mock data based on the order ID
+    // In a real implementation, fetch the order from your database
+    // For now, return mock data based on the order ID
     const order = {
       orderId,
       courseTitle: "WordPress Course",
