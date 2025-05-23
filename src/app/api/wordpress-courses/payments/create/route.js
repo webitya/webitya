@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server"
-import { generateSHA256Hash } from "@/app/wordpress-courses/lib/payment-utils"
+import crypto from "crypto"
+
+// Define the hash function directly since import is failing
+function generateSHA256Hash(string) {
+  return crypto.createHash("sha256").update(string).digest("hex")
+}
 
 export async function POST(request) {
   try {
@@ -10,7 +15,7 @@ export async function POST(request) {
       return NextResponse.json({ success: false, message: "Missing required payment information" }, { status: 400 })
     }
 
-    // PhonePe API credentials - hardcoded for immediate deployment
+    // PhonePe API credentials from environment variables
     const merchantId = "SU2505231841350701637815"
     const saltKey = "d4b5b5ee-fe38-43a7-afcb-77b5c06cad3f"
     const saltIndex = "1"

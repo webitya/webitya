@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server"
-import { generateSHA256Hash } from "@/app/wordpress-courses/lib/payment-utils"
+import crypto from "crypto"
+
+// Define the hash function directly since import is failing
+function generateSHA256Hash(string) {
+  return crypto.createHash("sha256").update(string).digest("hex")
+}
 
 export async function POST(request) {
   try {
