@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server"
 import crypto from "crypto"
 
-// Define the hash function directly since import is failing
+// Optional: force Node.js runtime in App Router
+export const runtime = "nodejs"
+
+// SHA256 hash generator
 function generateSHA256Hash(string) {
   return crypto.createHash("sha256").update(string).digest("hex")
 }
@@ -10,20 +13,19 @@ export async function POST(request) {
   try {
     const data = await request.json()
 
-    // Validate required fields
+    // Basic validation
     if (!data.amount || !data.orderId || !data.customerName || !data.customerEmail || !data.customerPhone) {
       return NextResponse.json({ success: false, message: "Missing required payment information" }, { status: 400 })
     }
 
-    // PhonePe API credentials from environment variables
+    // 🛑 Hardcoded credentials (move these to .env in production)
     const merchantId = "SU2505231841350701637815"
     const saltKey = "d4b5b5ee-fe38-43a7-afcb-77b5c06cad3f"
     const saltIndex = "1"
     const apiEndpoint = "https://api.phonepe.com/apis/hermes/pg/v1/pay"
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://webitya.com"
+    const baseUrl = "https://webitya.com" // Replace with your base domain
 
-    // Prepare payment request payload
-    const amountInPaise = Math.round(data.amount * 100) // Convert to paise
+    const amountInPaise = Math.round(data.amount * 100)
 
     const payload = {
       merchantId: merchantId,
@@ -39,83 +41,64 @@ export async function POST(request) {
       },
     }
 
-    console.log("Payment payload:", payload)
+    console.log("📦 Payment payload:", payload)
 
-    // Generate base64 encoded payload
     const base64Payload = Buffer.from(JSON.stringify(payload)).toString("base64")
-
-    // Generate SHA256 hash
-    const string = `${base64Payload}/pg/v1/pay${saltKey}`
-    const sha256Hash = generateSHA256Hash(string)
-
-    // Create X-VERIFY header
+    const stringToHash = `${base64Payload}/pg/v1/pay${saltKey}`
+    const sha256Hash = generateSHA256Hash(stringToHash)
     const xVerify = `${sha256Hash}###${saltIndex}`
 
-    try {
-      console.log("Making PhonePe API request")
+    const response = await fetch(apiEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-VERIFY": xVerify,
+      },
+      body: JSON.stringify({
+        request: base64Payload,
+      }),
+    })
 
-      // Make API call to PhonePe
-      const response = await fetch(apiEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-VERIFY": xVerify,
-        },
-        body: JSON.stringify({
-          request: base64Payload,
-        }),
+    console.log("📬 PhonePe API status:", response.status)
+    const responseData = await response.json()
+    console.log("📬 PhonePe API response:", responseData)
+
+    if (responseData.success) {
+      console.log("✅ Order initiated:", {
+        orderId: data.orderId,
+        amount: data.amount,
+        customerName: data.customerName,
+        customerEmail: data.customerEmail,
+        customerPhone: data.customerPhone,
+        courseId: data.courseId,
+        courseTitle: data.courseTitle,
+        status: "PENDING",
+        transactionId: responseData.data?.transactionId || null,
+        createdAt: new Date().toISOString(),
       })
 
-      console.log("PhonePe API response status:", response.status)
-
-      const responseData = await response.json()
-      console.log("PhonePe API response:", responseData)
-
-      if (responseData.success) {
-        // Save order to database (implement this based on your database)
-        console.log("Order created:", {
-          orderId: data.orderId,
-          amount: data.amount,
-          customerName: data.customerName,
-          customerEmail: data.customerEmail,
-          customerPhone: data.customerPhone,
-          courseId: data.courseId,
-          courseTitle: data.courseTitle,
-          status: "PENDING",
-          transactionId: responseData.data?.transactionId || null,
-          createdAt: new Date().toISOString(),
-        })
-
-        return NextResponse.json({
-          success: true,
-          paymentUrl: responseData.data.instrumentResponse.redirectInfo.url,
-          message: "Payment link generated successfully",
-          transactionId: responseData.data.transactionId,
-        })
-      } else {
-        console.error("PhonePe API error response:", responseData)
-        throw new Error(responseData.message || "Payment initialization failed")
-      }
-    } catch (apiError) {
-      console.error("PhonePe API error:", apiError)
-
-      // For testing/development, return a mock success response if in development mode
-      if (process.env.NODE_ENV === "development") {
-        console.log("Using mock payment URL for development")
-        const mockPaymentUrl = `https://pay.phonepe.com/pay/mock-payment?orderId=${data.orderId}&amount=${data.amount}`
-
-        return NextResponse.json({
-          success: true,
-          paymentUrl: mockPaymentUrl,
-          message: "Mock payment link generated for development",
-          transactionId: `TXN_${Date.now()}`,
-        })
-      }
-
-      throw apiError
+      return NextResponse.json({
+        success: true,
+        paymentUrl: responseData.data.instrumentResponse.redirectInfo.url,
+        message: "Payment link generated successfully",
+        transactionId: responseData.data.transactionId,
+      })
+    } else {
+      console.error("❌ PhonePe API failure:", responseData)
+      throw new Error(responseData.message || "Payment initialization failed")
     }
   } catch (error) {
-    console.error("Payment API error:", error)
+    console.error("❌ Payment API Error:", error)
+
+    if (process.env.NODE_ENV === "development") {
+      const mockPaymentUrl = `https://pay.phonepe.com/pay/mock-payment?orderId=${Date.now()}&amount=${Math.random() * 1000}`
+      return NextResponse.json({
+        success: true,
+        paymentUrl: mockPaymentUrl,
+        message: "Mock payment link (development mode)",
+        transactionId: `TXN_${Date.now()}`,
+      })
+    }
 
     return NextResponse.json(
       {
