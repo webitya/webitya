@@ -23,7 +23,7 @@ const courses = [
     color: "#3b82f6",
     syllabus: "/syllabus/complete-digital-marketing.pdf",
     description:
-      "Master the complete digital marketing ecosystem, from SEO to social media and paid advertising. Ideal for entrepreneurs and marketing professionals.",
+      "Master the complete digital marketing ecosystem, from SEO to social media and paid advertising. Ideal for entrepreneurs and marketing professionals. Learn to create data-driven campaigns and analyze user behavior. Get hands-on with real tools like Google Analytics and Ads Manager.",
   },
   {
     title: "Email Marketing",
@@ -33,7 +33,7 @@ const courses = [
     color: "#ef4444",
     syllabus: "/syllabus/email-marketing.pdf",
     description:
-      "Learn to craft compelling emails, build lists, and automate campaigns. Perfect for boosting engagement and conversions.",
+      "Learn to craft compelling emails, build lists, and automate campaigns. Perfect for boosting engagement and conversions. Includes tools like Mailchimp and EmailJS integration. Understand A/B testing and open/click rate optimization.",
   },
   {
     title: "Social Media Marketing",
@@ -43,7 +43,7 @@ const courses = [
     color: "#3b5998",
     syllabus: "/syllabus/social-media-marketing.pdf",
     description:
-      "Grow your brand on platforms like Facebook, Instagram, and LinkedIn. This course covers strategy, content, and analytics.",
+      "Grow your brand on platforms like Facebook, Instagram, and LinkedIn. This course covers strategy, content, and analytics. Create and schedule posts using Meta Business Suite. Learn influencer marketing and campaign reporting.",
   },
   {
     title: "Graphic Design",
@@ -53,7 +53,7 @@ const courses = [
     color: "#eab308",
     syllabus: "/syllabus/graphic-design.pdf",
     description:
-      "Unlock your creativity with hands-on training in Adobe tools and visual design principles. Great for aspiring designers.",
+      "Unlock your creativity with hands-on training in Adobe tools and visual design principles. Great for aspiring designers. Learn Canva, Photoshop, and Illustrator. Understand branding, typography, and color psychology.",
   },
   {
     title: "Video Editing",
@@ -63,7 +63,7 @@ const courses = [
     color: "#8b5cf6",
     syllabus: "/syllabus/video-editing.pdf",
     description:
-      "Learn editing techniques, transitions, and effects using industry tools like Premiere Pro and DaVinci Resolve.",
+      "Learn editing techniques, transitions, and effects using industry tools like Premiere Pro and DaVinci Resolve. Understand timelines, color grading, and audio syncing. Create reels, shorts, and cinematic edits.",
   },
   {
     title: "Google Ads",
@@ -73,7 +73,7 @@ const courses = [
     color: "#34d399",
     syllabus: "/syllabus/google-ads.pdf",
     description:
-      "Master paid search and display campaigns to increase leads and sales with measurable results using Google Ads.",
+      "Master paid search and display campaigns to increase leads and sales with measurable results using Google Ads. Build campaigns from scratch and track conversions. Includes shopping ads, extensions, and retargeting.",
   },
   {
     title: "Meta Ads",
@@ -83,7 +83,7 @@ const courses = [
     color: "#2563eb",
     syllabus: "/syllabus/meta-ads.pdf",
     description:
-      "Learn how to run high-converting campaigns on Facebook and Instagram with Meta Business Suite.",
+      "Learn how to run high-converting campaigns on Facebook and Instagram with Meta Business Suite. Understand pixel setup, event tracking, and audience segmentation. Monitor campaign performance and scale effectively.",
   },
   {
     title: "Content Marketing",
@@ -93,7 +93,7 @@ const courses = [
     color: "#ec4899",
     syllabus: "/syllabus/website-designing.pdf",
     description:
-      "Develop content strategies that attract, engage, and convert customers using blogs, videos, and social media.",
+      "Develop content strategies that attract, engage, and convert customers using blogs, videos, and social media. Learn content calendars, SEO writing, and repurposing techniques. Analyze content performance with metrics and KPIs.",
   },
   {
     title: "Python Programming",
@@ -103,7 +103,7 @@ const courses = [
     color: "#f59e0b",
     syllabus: "/syllabus/python.pdf",
     description:
-      "Start your programming journey with Python. Covers basics to intermediate concepts with real-world applications.",
+      "Start your programming journey with Python. Covers basics to intermediate concepts with real-world applications. Build projects like calculators, web scrapers, and automation scripts. Learn libraries like Pandas, Flask, and Tkinter.",
   },
   {
     title: "Advanced JavaScript",
@@ -113,7 +113,7 @@ const courses = [
     color: "#10b981",
     syllabus: "/syllabus/advanced-js.pdf",
     description:
-      "Dive deep into modern JavaScript, including ES6+, asynchronous programming, and performance optimization.",
+      "Dive deep into modern JavaScript, including ES6+, asynchronous programming, and performance optimization. Learn DOM manipulation, closures, and fetch API. Build dynamic apps and debug like a pro.",
   },
   {
     title: "Frontend Dev (ReactJS, NextJS)",
@@ -123,7 +123,7 @@ const courses = [
     color: "#6366f1",
     syllabus: "/syllabus/frontend-dev.pdf",
     description:
-      "Build fast, interactive UIs using ReactJS and NextJS. Learn components, routing, APIs, and deployment.",
+      "Build fast, interactive UIs using ReactJS and NextJS. Learn components, routing, APIs, and deployment. Explore Tailwind CSS, Material UI, and SSR. Create scalable web apps with modern architecture.",
   },
   {
     title: "Backend Dev (NodeJS)",
@@ -133,7 +133,7 @@ const courses = [
     color: "#16a34a",
     syllabus: "/syllabus/backend-dev.pdf",
     description:
-      "Learn backend development with NodeJS, Express, and MongoDB. Create APIs and handle data securely.",
+      "Learn backend development with NodeJS, Express, and MongoDB. Create APIs and handle data securely. Learn authentication, middleware, and RESTful principles. Build real-time features with WebSockets.",
   },
   {
     title: "Full Stack Dev (MERN)",
@@ -143,7 +143,7 @@ const courses = [
     color: "#7c3aed",
     syllabus: "/syllabus/fullstack-mern.pdf",
     description:
-      "Become a full-stack developer with MongoDB, Express, React, and NodeJS. Build complete web applications.",
+      "Become a full-stack developer with MongoDB, Express, React, and NodeJS. Build complete web applications. Learn Git, deployment, and version control. Develop scalable and secure full-stack projects.",
   },
   {
     title: "Website with HTML/CSS/JS",
@@ -153,7 +153,7 @@ const courses = [
     color: "#f43f5e",
     syllabus: "/syllabus/html-css-js.pdf",
     description:
-      "Start from scratch and learn to build responsive websites using HTML, CSS, and JavaScript.",
+      "Start from scratch and learn to build responsive websites using HTML, CSS, and JavaScript. Understand the fundamentals of layout, styling, and interactivity. Build forms, animations, and single-page apps.",
   },
   {
     title: "Website using WordPress",
@@ -163,9 +163,10 @@ const courses = [
     color: "#0ea5e9",
     syllabus: "/syllabus/wordpress.pdf",
     description:
-      "Create stunning websites without coding using WordPress. Ideal for bloggers and small businesses.",
+      "Create stunning websites without coding using WordPress. Ideal for bloggers and small businesses. Learn themes, plugins, and page builders. Get your site online with hosting and SEO optimization.",
   },
 ];
+
 
 const CoursesList = () => {
   return (
