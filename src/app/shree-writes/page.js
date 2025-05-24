@@ -21,7 +21,7 @@ export default function ShreeWritesPage() {
     { id: "articles", label: "Articles", icon: FaBookOpen, color: "from-rose-300 to-pink-300" },
     { id: "poetry", label: "Poetry", icon: FaFeatherAlt, color: "from-lavender-300 to-purple-300" },
     { id: "quotes", label: "Quotes", icon: FaQuoteLeft, color: "from-sage-300 to-emerald-300" },
-    { id: "gallery", label: "Gallery", icon: FaImage, color: "from-peach-300 to-coral-300" },
+    { id: "gallery", label: "Gallery", icon: FaImage, color: "from-red-200 to-red-400" },
   ]
 
   const containerVariants = {
@@ -180,37 +180,39 @@ export default function ShreeWritesPage() {
       </motion.section>
 
       {/* Navigation Tabs */}
-      <motion.div
-        className="flex justify-center px-4 mb-16 relative z-10"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-      >
-        <div className="bg-white/60 backdrop-blur-md rounded-full p-3 shadow-2xl border border-white/30 shadow-rose-100/50">
-          <div className="flex space-x-3">
-            {tabs.map((tab) => {
-              const Icon = tab.icon
-              return (
-                <motion.button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-3 px-8 py-4 rounded-full transition-all duration-500 ${
-                    activeTab === tab.id
-                      ? `bg-gradient-to-r ${tab.color} text-white shadow-xl shadow-rose-200/50`
-                      : "text-slate-600 hover:text-slate-800 hover:bg-white/50"
-                  }`}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <Icon size={18} />
-                  <span className="font-medium tracking-wide">{tab.label}</span>
-                </motion.button>
-              )
-            })}
-          </div>
-        </div>
-      </motion.div>
+<motion.div
+  className="flex justify-center px-4 mb-16 relative z-10"
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.5, duration: 0.8 }}
+>
+  <div className="bg-white/70 backdrop-blur-md rounded-full p-2 sm:p-3 shadow-2xl border border-white/40 shadow-rose-100/50 w-full max-w-screen-lg">
+    <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+      {tabs.map((tab) => {
+        const Icon = tab.icon;
+        return (
+          <motion.button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-500 text-sm sm:text-base font-semibold ${
+              activeTab === tab.id
+                ? `bg-gradient-to-r ${tab.color} text-white shadow-xl shadow-rose-200/50`
+                : "text-slate-700 hover:text-slate-900 hover:bg-white/70"
+            }`}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <Icon size={18} />
+            <span className="tracking-wide drop-shadow-sm">{tab.label}</span>
+          </motion.button>
+        );
+      })}
+    </div>
+  </div>
+</motion.div>
+
+
 
       {/* Content Sections */}
       <div className="max-w-7xl mx-auto px-4 pb-24 relative z-10">
