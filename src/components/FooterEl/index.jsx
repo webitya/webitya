@@ -61,7 +61,7 @@ const footerData = [
     links: [
       { name: 'Wordpress ', href: '/wordpress-courses' },
       { name: 'Social Media Marketing', href: '/courses' },
-      // { name: 'PPC Advertising', href: '/courses' },
+      { name: 'Online Learning', href: '/online-learning' },
       // { name: 'Email Marketing', href: '/courses' },
       // { name: 'Content Marketing', href: '/courses' },
       // { name: 'Web Design', href: '/courses' },
