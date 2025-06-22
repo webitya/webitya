@@ -24,24 +24,11 @@ const footerData = [
   {
     title: 'Exclusive Services',
     links: [
-      { name: 'Zup Rides', href: '/zup-rides' },
-      { name: 'Tour & Travells ', href: '/tour&travells/char-dham-yatra' },
-      { name: 'News', href: '/news' },
-      { name: 'Latest Tech News', href: '/latest-tech-news' },
-      { name: 'Top Colleges INDIA', href: '/colleges' },
-      { name: 'Handi Sketch', href: '/handi-sketch' },
-      { name: 'Cars', href: '/cars' },
-       { name: 'Bikes', href: '/bikes' },
+    
 
-      { name: 'Email Marketing Software', href: '/email-marketing-software' },
-      { name: 'Essential Service Ranchi', href: '/essential-services-ranchi' },
-      // { name: 'Learn', href: '#' },
+
       // { name: 'Case Studies', href: '#' },
-      // { name: 'Blog', href: '#' },
-      // { name: 'FAQS', href: '/faqs' },
-      // { name: 'Team', href: '#' },
-      // { name: 'SEO Analytics', href: '#' },
-      // { name: 'Events', href: '#' },
+    
     ],
   },
   {
@@ -59,13 +46,9 @@ const footerData = [
   {
     title: 'Courses',
     links: [
-      { name: 'Wordpress ', href: '/wordpress-courses' },
+  
       { name: 'Social Media Marketing', href: '/courses' },
-      { name: 'Online Learning', href: '/online-learning' },
-      // { name: 'Email Marketing', href: '/courses' },
-      // { name: 'Content Marketing', href: '/courses' },
-      // { name: 'Web Design', href: '/courses' },
-      { name: 'Our Students', href: '/courses/all-students' },
+        { name: 'Our Students', href: '/courses/all-students' },
     ],
   },
   {
