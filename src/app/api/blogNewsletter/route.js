@@ -2,12 +2,10 @@ import nodemailer from "nodemailer"
 
 // Create transporter
 const transporter = nodemailer.createTransporter({
-  host: process.env.SMTP_HOST || "smtp.gmail.com",
-  port: process.env.SMTP_PORT || 587,
-  secure: false, // true for 465, false for other ports
+  service: "gmail",
   auth: {
-    user: process.env.SMTP_USER, // Your email
-    pass: process.env.SMTP_PASS, // Your email password or app password
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 })
 
@@ -29,15 +27,9 @@ export async function POST(request) {
       return Response.json({ error: "Please provide a valid email address" }, { status: 400 })
     }
 
-    // Check if email already exists (you can implement database check here)
-    // For now, we'll just proceed with the subscription
-
     // Send welcome email to subscriber
     const welcomeMailOptions = {
-      from: {
-        name: "Webitya Blog",
-        address: process.env.SMTP_USER,
-      },
+      from: process.env.EMAIL_USER,
       to: email,
       subject: "Welcome to Webitya Blog Newsletter! 🚀",
       html: `
@@ -74,6 +66,10 @@ export async function POST(request) {
           <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; text-align: center; color: #718096; font-size: 14px;">
             <p>You're receiving this email because you subscribed to Webitya Blog newsletter.</p>
             <p>If you no longer wish to receive these emails, you can <a href="#" style="color: #667eea;">unsubscribe here</a>.</p>
+            <p style="margin-top: 20px;">
+              <strong>Webitya</strong><br>
+              Your trusted source for tech insights
+            </p>
           </div>
         </body>
         </html>
@@ -82,25 +78,25 @@ export async function POST(request) {
 
     // Send notification email to admin
     const adminMailOptions = {
-      from: {
-        name: "Webitya Blog",
-        address: process.env.SMTP_USER,
-      },
-      to: process.env.ADMIN_EMAIL || process.env.SMTP_USER,
-      subject: "New Newsletter Subscription",
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // Send to same email as admin notification
+      subject: "New Newsletter Subscription - Webitya Blog",
       html: `
-        <h2>New Newsletter Subscription</h2>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
-        <p><strong>IP:</strong> ${request.headers.get("x-forwarded-for") || "Unknown"}</p>
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #1a202c; border-bottom: 2px solid #667eea; padding-bottom: 10px;">New Newsletter Subscription</h2>
+          <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+            <p><strong>IP:</strong> ${request.headers.get("x-forwarded-for") || "Unknown"}</p>
+            <p><strong>User Agent:</strong> ${request.headers.get("user-agent") || "Unknown"}</p>
+          </div>
+          <p style="color: #4a5568;">A new user has subscribed to the Webitya Blog newsletter.</p>
+        </div>
       `,
     }
 
     // Send both emails
     await Promise.all([transporter.sendMail(welcomeMailOptions), transporter.sendMail(adminMailOptions)])
-
-    // Here you would typically save the email to your database
-    // Example: await saveSubscriberToDatabase(email)
 
     return Response.json(
       {
