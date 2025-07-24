@@ -61,7 +61,7 @@ const footerData = [
               //  { name: 'Shipping Policy', href: '/legal/shipping-policy' },
       { name: 'Disclaimer', href: '/legal/disclaimer' },
       { name: 'FAQS', href: '/faqs' },
-        { name: 'Blogs', href: '/blogs' },
+        { name: 'Blog', href: '/blog' },
       { name: 'Book Influencer', href: '/influencers#collection' },
    
    
