@@ -1,22 +1,20 @@
 import nodemailer from "nodemailer"
 
-// Create transporter
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-})
-
-// Verify transporter configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.log("SMTP configuration error:", error)
-  } else {
-    console.log("SMTP server is ready to take our messages")
+// Create transporter with better error handling
+const createTransporter = () => {
+  try {
+    return nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    })
+  } catch (error) {
+    console.log("Transporter creation error:", error)
+    return null
   }
-})
+}
 
 export async function POST(request) {
   try {
@@ -25,6 +23,17 @@ export async function POST(request) {
     // Validate email
     if (!email || !email.includes("@")) {
       return Response.json({ error: "Please provide a valid email address" }, { status: 400 })
+    }
+
+    // Check if environment variables are available
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error("Missing email credentials")
+      return Response.json({ error: "Email service temporarily unavailable" }, { status: 500 })
+    }
+
+    const transporter = createTransporter()
+    if (!transporter) {
+      return Response.json({ error: "Email service configuration error" }, { status: 500 })
     }
 
     // Send welcome email to subscriber
@@ -79,7 +88,7 @@ export async function POST(request) {
     // Send notification email to admin
     const adminMailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Send to same email as admin notification
+      to: process.env.EMAIL_USER,
       subject: "New Newsletter Subscription - Webitya Blog",
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
