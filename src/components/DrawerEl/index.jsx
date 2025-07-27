@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { X, BookOpen, Users } from "lucide-react";
+import { X, BookOpen, Users, BookOpenIcon, BookMarked } from "lucide-react";
 import { School as SchoolIcon } from "@mui/icons-material";
 import {
   Box,
@@ -18,7 +18,7 @@ import {
 const DrawerEl = ({ isOpen, toggleMenu }) => {
   const pathname = usePathname();
 
-  // Default navLinks and highlightLinks
+
   let navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -28,6 +28,14 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
   ];
 
   let highlightLinks = [
+ {
+  name: "Blogs",
+  path: "/blog",
+  icon: <BookMarked size={16} />, // lucide-react icon, soft and modern
+  bg: "#e3f2fd",
+      hover: "#bbdefb",          // soft hover shade
+  iconColor: "#1976d2",       // muted indigo blue (less aggressive than #1565c0)
+ },
     {
       name: "Courses",
       path: "/courses",
@@ -44,27 +52,11 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
       hover: "#bbdefb",
       iconColor: "#1565c0",
     },
-    // {
-    //   name: "Influencers",
-    //   path: "/influencers",
-    //   icon: <Users size={18} />,
-    //   bg: "#ede7f6",
-    //   hover: "#d1c4e9",
-    //   iconColor: "#6a1b9a",
-    // },
+ 
   ];
 
-    // menuLinks = [
-    //   { name: "Home", path: "/zup-rides" },
-    //   { name: "About", path: "/zup-rides/about" },
-    //   { name: "Vehicles", path: "/zup-rides/vehicles" },
-    //   { name: "Blogs", path: "/zup-rides/blogs" },
-    //   { name: "Booking", path: "/zup-rides/booking" },
-    //   { name: "Contact Us", path: "/zup-rides/contact" },
-    // ];
 
 
-  // Zup Rides
     if ((pathname.includes("/zup-rides"))) {
     navLinks = [
       { name: "Home", path: `/zup-rides` },
@@ -82,14 +74,6 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      // {
-      //   name: "Influencers",
-      //   path: "/influencers",
-      //   icon: <Users size={18} />,
-      //   bg: "#ede7f6",
-      //   hover: "#d1c4e9",
-      //   iconColor: "#6a1b9a",
-      // },
     ];
   }
     // Webitya.com/News News
@@ -111,14 +95,6 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      // {
-      //   name: "Influencers",
-      //   path: "/influencers",
-      //   icon: <Users size={18} />,
-      //   bg: "#ede7f6",
-      //   hover: "#d1c4e9",
-      //   iconColor: "#6a1b9a",
-      // },
     ];
   }
   // 🟨 Dynamic Yatra route logic
@@ -137,14 +113,6 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      // {
-      //   name: "Influencers",
-      //   path: "/influencers",
-      //   icon: <Users size={18} />,
-      //   bg: "#ede7f6",
-      //   hover: "#d1c4e9",
-      //   iconColor: "#6a1b9a",
-      // },
     ];
   }
   // 🟨 Dynamic Latest Tech News logic
@@ -164,14 +132,6 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      // {
-      //   name: "Influencers",
-      //   path: "/influencers",
-      //   icon: <Users size={18} />,
-      //   bg: "#ede7f6",
-      //   hover: "#d1c4e9",
-      //   iconColor: "#6a1b9a",
-      // },
     ];
   }
   // 🟩 Dynamic Cars route logic
@@ -190,14 +150,6 @@ const DrawerEl = ({ isOpen, toggleMenu }) => {
         hover: "#bbdefb",
         iconColor: "#1976d2",
       },
-      // {
-      //   name: "Influencers",
-      //   path: "/influencers",
-      //   icon: <Users size={18} />,
-      //   bg: "#ede7f6",
-      //   hover: "#d1c4e9",
-      //   iconColor: "#6a1b9a",
-      // },
     ];
   }
 
