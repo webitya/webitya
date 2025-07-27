@@ -34,7 +34,7 @@ export const aiArticles = [
     author: "Aditya Kumar",
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Specializing in AI applications and digital growth strategies.",
-    authorImage: "/placeholder.svg?height=100&width=100",
+    authorImage: "/webityaProfile.webp?height=100&width=100",
     publishDate: "2025-06-20", // Updated date
     updatedDate: "2025-06-20", // Updated date
     readTime: "10 min read",
@@ -107,7 +107,7 @@ export const aiArticles = [
     author: "Aditya Kumar", // Changed author
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Specializing in machine learning and data science.", // Updated bio
-    authorImage: "/placeholder.svg?height=100&width=100", // Updated image
+    authorImage: "/webityaProfile.webp?height=100&width=100", // Updated image
     publishDate: "2025-06-20", // Updated date
     updatedDate: "2025-06-20", // Updated date
     readTime: "12 min read",
@@ -168,7 +168,7 @@ export const aiArticles = [
     author: "Aditya Kumar", // Changed author
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Specializing in NLP and AI language models.", // Updated bio
-    authorImage: "/placeholder.svg?height=100&width=100", // Updated image
+    authorImage: "/webityaProfile.webp?height=100&width=100", // Updated image
     publishDate: "2025-06-20", // Updated date
     updatedDate: "2025-06-20", // Updated date
     readTime: "10 min read",
@@ -229,7 +229,7 @@ export const aiArticles = [
     author: "Aditya Kumar",
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Focused on AI's transformative role in healthcare.",
-    authorImage: "/placeholder.svg?height=100&width=100",
+    authorImage: "/webityaProfile.webp?height=100&width=100",
     publishDate: "2025-06-20",
     updatedDate: "2025-06-20",
     readTime: "11 min read",
@@ -289,7 +289,7 @@ export const aiArticles = [
     author: "Aditya Kumar",
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Advocate for ethical AI and responsible technology.",
-    authorImage: "/placeholder.svg?height=100&width=100",
+    authorImage: "/webityaProfile.webp?height=100&width=100",
     publishDate: "2025-06-20",
     updatedDate: "2025-06-20",
     readTime: "9 min read",
@@ -350,7 +350,7 @@ export const aiArticles = [
     author: "Aditya Kumar",
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Passionate about AI's role in transforming education.",
-    authorImage: "/placeholder.svg?height=100&width=100",
+    authorImage: "/webityaProfile.webp?height=100&width=100",
     publishDate: "2025-06-20",
     updatedDate: "2025-06-20",
     readTime: "10 min read",
@@ -412,7 +412,7 @@ export const aiArticles = [
     author: "Aditya Kumar",
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Explores the synergy between AI and human creativity.",
-    authorImage: "/placeholder.svg?height=100&width=100",
+    authorImage: "/webityaProfile.webp?height=100&width=100",
     publishDate: "2025-06-20",
     updatedDate: "2025-06-20",
     readTime: "12 min read",

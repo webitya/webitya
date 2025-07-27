@@ -33,7 +33,7 @@ export const reactjsArticles = [
     author: "Aditya Kumar",
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Specializing in modern React development and UI/UX.",
-    authorImage: "/placeholder.svg?height=100&width=100",
+    authorImage: "/webityaProfile.webp?height=100&width=100",
     publishDate: "2025-06-20",
     updatedDate: "2025-06-20",
     readTime: "11 min read",

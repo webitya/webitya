@@ -89,7 +89,7 @@ export const pythonArticles = [
     author: "Aditya Kumar",
     authorBio:
       "Data Scientist, Full Stack Developer and Skill India Certified Digital marketing Trainer. Senior Python developer and core contributor to the Python ecosystem.",
-    authorImage: "/placeholder.svg?height=100&width=100",
+    authorImage: "/webityaProfile.webp?height=100&width=100",
     publishDate: "2025-06-20",
     updatedDate: "2025-06-20",
     readTime: "6 min read",
