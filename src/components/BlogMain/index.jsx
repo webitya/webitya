@@ -35,9 +35,7 @@ export default function BlogMain({ initialArticles, categories }) {
 
     setArticles(filteredArticles)
     setCurrentPage(1) // Reset to first page on search/filter change
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" }) // Scroll to top smoothly on search/filter change
-    }, 0)
+    // Removed: setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }) }, 0);
   }, [searchQuery, selectedCategory, initialArticles]) // Add initialArticles to dependencies
 
   // Effect to handle pagination when articles change
@@ -114,9 +112,10 @@ export default function BlogMain({ initialArticles, categories }) {
         </div>
 
         {/* Filter Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4">
+          {" "}
           {/* Reduced padding for spacing */}
-          <div className="mb-0">
+          <div className="mb-2">
             {" "}
             {/* Reduced mb from mb-8 to mb-2 */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
@@ -143,8 +142,8 @@ export default function BlogMain({ initialArticles, categories }) {
             </div>
             {/* Category Filter */}
             {isFilterOpen && (
-              <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-0 shadow-sm">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">Categories</h3>
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 mb-8 shadow-sm">
+                <h3 className="text-sm font-semibold text-gray-900 mb-4">Categories</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                   {categories.map((category) => (
                     <button
