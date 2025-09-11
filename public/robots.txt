@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /wp-admin/  # If your old WordPress links still exist
+Disallow: /wp-login.php  # To block unnecessary WordPress login pages
+Disallow: /product-tag/promo
+Disallow: /post-with-images-inside
+Disallow: /product-category/marketing
+Disallow: /disclaimer
+Disallow: /template-desgin-in-email-marketing-page
+Disallow: /blog-grid
+Disallow: /product-tag/business
+Disallow: /form/seo-analysis-form
+Disallow: /_next/static/media/569ce4b8f30dc480-s.p.woff2
+Disallow: /?page_id=2046
+Disallow: /post-with-images-inside
+Disallow: /post-sitemap.xml
+Disallow: /sitemap_index.xml
+
+Sitemap: https://webitya.com/sitemap.xml

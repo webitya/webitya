@@ -1,0 +1,40 @@
+.call-to-action-section {
+    background: linear-gradient(135deg, #0d1117, #1f2937, #2c3e50); /* Deep navy to steel gray */
+    position: relative;
+    overflow: hidden;
+    color: #f3f4f6; /* Soft neutral text */
+    padding: 4rem 2rem;
+  }
+  
+  .cta-overlay::before,
+  .cta-overlay::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.18;
+    z-index: 1;
+    animation: floatSlow 12s ease-in-out infinite;
+  }
+  
+  .cta-overlay::before {
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, #94a3b8, #64748b); /* Slate lighting */
+    top: -40px;
+    left: -100px;
+  }
+  
+  .cta-overlay::after {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, #3b82f6, #1d4ed8); /* Subtle blue accent */
+    bottom: -60px;
+    right: -90px;
+  }
+  
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  

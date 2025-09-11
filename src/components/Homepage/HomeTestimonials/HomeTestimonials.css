@@ -1,0 +1,63 @@
+.testimonial-bg {
+    position: relative;
+  }
+  
+  .floating-shapes::before,
+  .floating-shapes::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: float 10s infinite ease-in-out;
+  }
+  
+  .floating-shapes::before {
+    width: 150px;
+    height: 150px;
+    background: #84fab0;
+    top: 10%;
+    left: -50px;
+  }
+  
+  .floating-shapes::after {
+    width: 120px;
+    height: 120px;
+    background: #8fd3f4;
+    bottom: 10%;
+    right: -40px;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+  }
+  
+  .glass-box {
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  /* ✨ glowing border effect */
+  .borderGlow {
+    position: relative;
+    z-index: 1;
+    border: 2px solid transparent;
+    animation: glow 6s linear infinite;
+  }
+  
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    }
+    100% {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    }
+  }
+  
