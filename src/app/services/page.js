@@ -155,7 +155,7 @@ export default function ServicesPage() {
         <ServicesNavigation navLinks={navLinks} />
 
         <main className="w-full">
-          <section id="hero" className="scroll-mt-20">
+          <section id="hero" className="scroll-mt-20 mt-13">
             <ServicesHeroSection />
           </section>
           <section id="list" className="scroll-mt-20">
