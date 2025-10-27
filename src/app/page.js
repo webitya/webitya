@@ -89,7 +89,7 @@ export default function Home() {
             logo: "https://webitya.com/logo.png",
             contactPoint: {
               "@type": "ContactPoint",
-              telephone: "+91-8709392484",
+              telephone: "+91-7368899030",
               contactType: "customer service",
               email: "contact@webitya.com",
             },
@@ -124,7 +124,7 @@ export default function Home() {
                 name: "How can I contact Webitya?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "You can contact Webitya via email at contact@webitya.com or call +91 8709392484. We're available to discuss your digital marketing needs.",
+                  text: "You can contact Webitya via email at contact@webitya.com or call +91 7368899030. We're available to discuss your digital marketing needs.",
                 },
               },
             ],

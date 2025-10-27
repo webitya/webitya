@@ -55,7 +55,7 @@ export default function ContactUs() {
   return (
     <>
       <ContactHero />
-      <ContactMapSection />
+      {/* <ContactMapSection /> */}
       <Footer/>
 
       <Script
