@@ -43,93 +43,104 @@ export default function ContactHero() {
   };
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-16 mt-13">
-      {/* Header */}
+    <main className="max-w-6xl mx-auto px-4 py-12 mt-13">
+      {/* Heading */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-slate-900 mb-2 tracking-tight">
+        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500">
           Let’s Connect
         </h1>
-        <p className="text-gray-600 max-w-xl mx-auto">
-          Have questions or want to collaborate? Fill out the form and we’ll get in touch soon.
+        <p className="text-gray-600 max-w-xl mx-auto mt-3 text-[15px] leading-relaxed">
+          Have questions or a project in mind? Fill out the form, and our team
+          will get in touch with you shortly.
         </p>
       </div>
 
-      {/* Main Grid */}
+      {/* Layout */}
       <div className="grid lg:grid-cols-2 gap-8 items-start">
-        {/* Left Side */}
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
-          <h2 className="text-xl font-semibold text-slate-800 mb-6">
+        {/* Contact Info */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 p-8 h-full">
+          <h2 className="text-2xl font-semibold text-slate-800 mb-8">
             Contact Information
           </h2>
 
-          {/* Email */}
-          <div className="flex items-start gap-3 mb-5">
-            <Mail className="text-indigo-600 mt-1" size={20} />
-            <div>
-              <p className="text-sm font-semibold text-slate-700">Email</p>
-              <a
-                href="mailto:webitya@gmail.com"
-                className="text-indigo-600 text-sm hover:underline"
-              >
-                webitya@gmail.com
-              </a>
+          <div className="space-y-6">
+            <div className="flex items-start gap-3">
+              <Mail className="text-blue-600 mt-1" />
+              <div>
+                <p className="text-sm font-semibold text-gray-800">Email</p>
+                <a
+                  href="mailto:webitya@gmail.com"
+                  className="text-blue-700 text-sm hover:underline"
+                >
+                  webitya@gmail.com
+                </a>
+              </div>
             </div>
-          </div>
 
-          {/* Phone */}
-          <div className="flex items-start gap-3 mb-5">
-            <Phone className="text-indigo-600 mt-1" size={20} />
-            <div>
-              <p className="text-sm font-semibold text-slate-700">Phone</p>
-              <div className="flex flex-col text-sm text-indigo-600">
-                <a href="tel:+917970409108" className="hover:underline">
+            <div className="flex items-start gap-3">
+              <Phone className="text-blue-600 mt-1" />
+              <div>
+                <p className="text-sm font-semibold text-gray-800">Phone</p>
+                <a
+                  href="tel:+917970409108"
+                  className="text-blue-700 text-sm hover:underline"
+                >
                   +91 7970409108
                 </a>
-                <a href="tel:+917368899030" className="hover:underline">
+              </div>
+            </div>
+             <div className="flex items-start gap-3">
+              <Phone className="text-blue-600 mt-1" />
+              <div>
+                <p className="text-sm font-semibold text-gray-800">Phone</p>
+                <a
+                  href="tel:+917368899030"
+                  className="text-blue-700 text-sm hover:underline"
+                >
                   +91 7368899030
                 </a>
               </div>
             </div>
-          </div>
 
-          {/* Address */}
-          <div className="flex items-start gap-3">
-            <MapPin className="text-indigo-600 mt-1" size={20} />
-            <div>
-              <p className="text-sm font-semibold text-slate-700">Address</p>
-              <p className="text-sm text-gray-600">
-                Ganga Nagar, Harmu, Ranchi, Near Naman Vidya School
-              </p>
+            <div className="flex items-start gap-3">
+              <MapPin className="text-blue-600 mt-1" />
+              <div>
+                <p className="text-sm font-semibold text-gray-800">Address</p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  Ganga Nagar, Harmu, Ranchi,<br /> Near Naman Vidya School
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Right Side - Form */}
+        {/* Contact Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8 space-y-4"
+          className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 p-8 space-y-5"
         >
-          <h2 className="text-xl font-semibold text-slate-800 mb-2">
+          <h2 className="text-2xl font-semibold text-slate-800 mb-2">
             Send Us a Message
           </h2>
 
-          <input
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
-            required
-          />
-
-          <input
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
-            required
-          />
+          <div className="grid md:grid-cols-2 gap-4">
+            <input
+              name="name"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              required
+            />
+            <input
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+              required
+            />
+          </div>
 
           <input
             name="email"
@@ -137,7 +148,7 @@ export default function ContactHero() {
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
+            className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
             required
           />
 
@@ -147,15 +158,14 @@ export default function ContactHero() {
             rows="4"
             value={formData.requirement}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition"
+            className="w-full p-3 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
             required
           ></textarea>
 
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-3 rounded-md text-sm font-medium text-white transition 
-              ${isLoading ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700"}`}
+            className="w-full py-3 rounded-md font-semibold text-white text-sm bg-gradient-to-r from-blue-700 via-indigo-600 to-cyan-500 hover:from-indigo-700 hover:to-blue-700 transition-all cursor-pointer shadow-md"
           >
             {isLoading ? "Sending..." : "Send Message"}
           </button>
@@ -164,17 +174,17 @@ export default function ContactHero() {
 
       {/* Success Modal */}
       {modalVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-white rounded-lg p-6 shadow-xl text-center max-w-sm mx-auto">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
+          <div className="bg-white rounded-xl p-6 shadow-2xl text-center max-w-sm mx-auto border border-gray-100">
             <h3 className="text-lg font-semibold text-green-600">
               Thank You!
             </h3>
             <p className="text-gray-700 mt-2 text-sm">
-              We’ve received your message and will get back to you shortly.
+              We’ve received your message and will get back to you soon.
             </p>
             <button
               onClick={() => setModalVisible(false)}
-              className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+              className="mt-4 px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition font-medium"
             >
               Close
             </button>
