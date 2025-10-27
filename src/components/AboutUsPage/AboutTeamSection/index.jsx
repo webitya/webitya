@@ -64,7 +64,7 @@ const TeamSection = () => {
         digital experts driving transformation.
       </Typography>
 
-      <Grid container spacing={4} mt={6} justifyContent="center">
+      <Grid container spacing={2} mt={6} justifyContent="center">
         {teamMembers.map((member, index) => (
           <Grid
             item
@@ -101,7 +101,7 @@ const TeamSection = () => {
                   boxShadow: 2,
                 }}
               />
-              <CardContent sx={{ maxWidth: 250 }}>
+              <CardContent sx={{ maxWidth: 312 }}>
                 <Typography variant="h6" fontWeight={600}>
                   {member.name}
                 </Typography>
