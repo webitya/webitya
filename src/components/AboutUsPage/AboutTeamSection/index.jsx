@@ -52,9 +52,7 @@ const MotionCard = motion(Card);
 const TeamSection = () => {
   return (
     <Box
-      component="section"
-      py={10}
-      px={{ xs: 3, md: 10 }}
+ 
       textAlign="center"
       bgcolor="#f9fafb"
     >
