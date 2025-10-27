@@ -239,7 +239,7 @@ const CoursesList = () => {
                     </span>
                   </p>
                   {/* <a
-                    href="https://wa.me/919693245941?text=Hi%20I'm%20interested%20in%20your%20courses!"
+                    href="https://wa.me/917970409108?text=Hi%20I'm%20interested%20in%20your%20courses!"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block w-full text-center py-2 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"

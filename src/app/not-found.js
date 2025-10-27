@@ -42,10 +42,10 @@ export default function NotFound() {
             For any queries, feel free to contact us:
           </p>
           <a
-            href="tel:+919693245941"
+            href="tel:+917970409108"
             className="text-lg font-medium text-white underline hover:text-blue-400 transition"
           >
-            +91 9693245941
+            +91 7970409108
           </a>
         </motion.div>
 

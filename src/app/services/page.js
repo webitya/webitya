@@ -91,7 +91,7 @@ export default function ServicesPage() {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-9693245941",
+      telephone: "+91-7970409108",
       contactType: "customer service",
     },
     sameAs: [

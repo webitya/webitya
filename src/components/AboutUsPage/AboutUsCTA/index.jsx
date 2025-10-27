@@ -32,7 +32,7 @@ const AboutUsCTA = () => {
           whileTap={{ scale: 0.97 }}
         >
           <a
-            href="https://wa.me/919693245941?text=Hello%20Webitya"
+            href="https://wa.me/917970409108?text=Hello%20Webitya"
             className="inline-block bg-[#3587D7] hover:bg-[#3587D7] text-white font-semibold px-8 py-3 rounded-full shadow-md transition"
           >
             Get Started on WhatsApp

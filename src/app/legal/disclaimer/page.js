@@ -96,7 +96,7 @@ export default function Disclaimer() {
             </Typography>
             <ul className="list-none ml-0 mt-2 text-gray-900">
               <li><strong>Email:</strong> webitya@gmail.com</li>
-              <li><strong>Phone:</strong> +91-9693245941</li>
+              <li><strong>Phone:</strong> +91-7970409108</li>
               <li><strong>Address:</strong> Webitya Web Services, Ganga Nagar Harmu Ranchi, Jharkhand 834002</li>
             </ul>
           </section>

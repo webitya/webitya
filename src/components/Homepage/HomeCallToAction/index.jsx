@@ -46,7 +46,7 @@ const HomeCallToAction = () => {
     boxShadow: 2,
     "&:hover": { backgroundColor: "#f4f4f4" },
   }}
-  href="https://wa.me/919693245941?text=Hello%20Webitya"
+  href="https://wa.me/917970409108?text=Hello%20Webitya"
   target="_blank"
   rel="noopener noreferrer"
 >

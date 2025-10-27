@@ -89,7 +89,7 @@ export default function RootLayout({ children }) {
 >
   <IconButton
     component="a"
-    href="https://wa.me/919693245941?text=Hello%20Webitya"
+    href="https://wa.me/917970409108?text=Hello%20Webitya"
     target="_blank"
     rel="noopener noreferrer"
     sx={{
@@ -109,7 +109,7 @@ export default function RootLayout({ children }) {
 
   <IconButton
     component="a"
-    href="tel:9693245941"
+    href="tel:7970409108"
     sx={{
       backgroundColor: "black",
       color: "white",

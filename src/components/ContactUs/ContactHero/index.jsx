@@ -84,10 +84,10 @@ export default function ContactHero() {
               <div>
                 <p className="text-sm font-semibold">Phone</p>
                 <a
-                  href="tel:+919693245941"
+                  href="tel:+917970409108"
                   className="text-blue-600 text-sm hover:underline"
                 >
-                  +91 9693245941
+                  +91 7970409108
                 </a>
               </div>
             </div>

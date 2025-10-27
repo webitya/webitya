@@ -44,7 +44,7 @@ const ServicesCTA = () => {
           </Typography>
 
           <Box display="flex" justifyContent="center">
-            <Link href="https://wa.me/919693245941?text=Hello%20Webitya" passHref>
+            <Link href="https://wa.me/917970409108?text=Hello%20Webitya" passHref>
               <Button
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}

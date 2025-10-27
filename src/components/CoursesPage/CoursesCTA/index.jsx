@@ -20,7 +20,7 @@ const CourseCTA = () => {
         </p>
 
         {/* CTA Button */}
-        <Link href="https://wa.me/919693245941?text=Hi%20I'm%20interested%20in%20your%20courses!">
+        <Link href="https://wa.me/917970409108?text=Hi%20I'm%20interested%20in%20your%20courses!">
           <button className="flex items-center gap-2 mx-auto bg-yellow-400 text-gray-900 hover:bg-yellow-300 font-semibold px-6 py-3 rounded-full text-sm transition">
             Enroll Now
             <ArrowForwardIosIcon fontSize="small" />

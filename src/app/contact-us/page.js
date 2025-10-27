@@ -1,7 +1,7 @@
 export const metadata = {
   title: "Contact Us - Webitya | Get in Touch with Digital Marketing Experts",
   description:
-    "Contact Webitya for professional digital marketing services. Located in Ranchi, Jharkhand. Call +91 9693245941 or email webitya@gmail.com for web development, SEO, and digital solutions.",
+    "Contact Webitya for professional digital marketing services. Located in Ranchi, Jharkhand. Call +91 7970409108 or email webitya@gmail.com for web development, SEO, and digital solutions.",
   keywords:
     "contact webitya, digital marketing ranchi, web development jharkhand, SEO services contact, webitya contact details, digital agency ranchi",
   authors: [{ name: "Webitya" }],
@@ -35,7 +35,7 @@ export const metadata = {
     canonical: "https://webitya.com/contact",
   },
   other: {
-    "contact:phone_number": "+91 9693245941",
+    "contact:phone_number": "+91 7970409108",
     "contact:email": "webitya@gmail.com",
     "contact:region": "Ranchi, Jharkhand, India",
     "business:contact_data:street_address": "Ranchi",
@@ -72,7 +72,7 @@ export default function ContactUs() {
               url: "https://webitya.com",
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+91-9693245941",
+                telephone: "+91-7970409108",
                 email: "webitya@gmail.com",
                 contactType: "customer service",
                 availableLanguage: ["English", "Hindi"],
