@@ -20,7 +20,7 @@ const teamMembers = [
     role: "Co-Founder & Chief Visionary Officer",
     description:
       "A forward-thinking entrepreneur shaping the future of Webitya. With deep expertise in strategy, digital innovation, and team leadership, Rajnish drives the company’s vision — helping brands unlock growth through smart technology and marketing solutions.",
-    image: "/RajnishKumar.webp",
+    image: "/RajnishKumarCoFounder.webp",
     linkedin: "https://www.linkedin.com/in/",
     facebook: "https://www.facebook.com/webitya.in",
     instagram: "https://www.instagram.com/webitya.in",
