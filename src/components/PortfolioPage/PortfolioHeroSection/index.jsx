@@ -49,7 +49,7 @@ const PortfolioHeroSection = () => {
     <section
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full md:h-[55vh] h-[220px] flex items-center justify-center overflow-hidden transition-all duration-100 ease-in-out"
+      className="relative mt-13 w-full md:h-[55vh] h-[220px] flex items-center justify-center overflow-hidden transition-all duration-100 ease-in-out"
     >
       {/* Arrow Buttons */}
       <IconButton

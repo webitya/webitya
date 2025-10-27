@@ -319,7 +319,7 @@ export default function PayOnline() {
         </div>
       )}
 
-      <div className="min-h-screen bg-white py-4 px-3">
+      <div className="min-h-screen bg-white py-4 px-3 mt-13">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900 mb-1">Pay Online</h1>

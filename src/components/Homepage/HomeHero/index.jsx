@@ -1,9 +1,8 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import emailjs from "@emailjs/browser";
-import Link from "next/link";
-import "./HomeHero.css";
+import { useState } from "react"
+import Link from "next/link"
+import "./HomeHero.css"
 import {
   TextField,
   Button,
@@ -15,9 +14,10 @@ import {
   DialogContent,
   DialogActions,
   Slide,
-} from "@mui/material";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
+  CircularProgress,
+} from "@mui/material"
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch"
+import MailOutlineIcon from "@mui/icons-material/MailOutline"
 
 const logos = [
   { src: "/logos/logo1.svg", alt: "Logo 1" },
@@ -25,48 +25,62 @@ const logos = [
   { src: "/logos/logo3.svg", alt: "Logo 3" },
   { src: "/logos/logo4.svg", alt: "Logo 4" },
   { src: "/logos/logo5.svg", alt: "Logo 5" },
-];
+]
 
 const HomeHero = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     description: "",
-  });
+  })
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    setIsLoading(true)
+    setErrorMessage("")
+
     try {
-      await emailjs.send(
-        "service_webitya",
-        "template_y9g4vob",
-        formData,
-        "Iw_1wMHg3mqNItEUH"
-      );
-      setFormData({ name: "", email: "", description: "" });
-      setOpenModal(true);
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send email")
+      }
+
+      // Clear form and show success modal
+      setFormData({ name: "", email: "", description: "" })
+      setOpenModal(true)
     } catch (error) {
-      console.error("Failed to send:", error);
-      setOpenModal(true);
+      console.error("Failed to send:", error)
+      setErrorMessage(error.message || "Failed to send message. Please try again.")
+      setOpenModal(true)
+    } finally {
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <>
       {/* Animated Background */}
-      <div
-        className="relative min-h-screen overflow-hidden bg-gradient-to-r from-white via-neutral-100 to-white
- text-black"
-      >
+      <div className="relative min-h-screen overflow-hidden bg-gradient-to-r from-white via-neutral-100 to-white text-black">
         <div className="bubble-wrapper pointer-events-none">
           {/* Bubbles */}
           {[...Array(20)].map((_, i) => (
@@ -110,6 +124,7 @@ const HomeHero = () => {
               }}
             />
           ))}
+
           {/* Hexagons */}
           {[...Array(30)].map((_, i) => (
             <div
@@ -124,6 +139,7 @@ const HomeHero = () => {
               }}
             />
           ))}
+
           {/* Stars */}
           {[...Array(20)].map((_, i) => (
             <div
@@ -156,13 +172,12 @@ const HomeHero = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-4 md:px-10 py-10 min-h-screen">
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between px-4 md:px-10 min-h-screen py-20">
           {/* Left: Text */}
           <div className="md:w-2/3 text-center md:text-left space-y-4">
             <Box display="flex" alignItems="center" gap={1}>
               <Typography variant="h3" fontWeight="bold" gutterBottom>
-                Webitya Web Services{" "}
-                <RocketLaunchIcon color="primary" fontSize="large" />
+                Webitya Web Services <RocketLaunchIcon color="primary" fontSize="large" />
               </Typography>
             </Box>
 
@@ -180,11 +195,8 @@ const HomeHero = () => {
 
             <Typography variant="body1" color="textSecondary">
               Boost your digital presence with{" "}
-              <strong className="text-black">
-                result-driven marketing strategies
-              </strong>{" "}
-              and bespoke web development. We help startups and businesses
-              thrive online.
+              <strong className="text-black">result-driven marketing strategies</strong> and bespoke web development. We
+              help startups and businesses thrive online.
             </Typography>
 
             {/* Logos */}
@@ -220,11 +232,7 @@ const HomeHero = () => {
 
             {/* CTA */}
             <Box mt={3}>
-              {/* Let’s Talk button linking to /contact */}
-              <Link
-                href="/contact-us"
-                passHref
-              >
+              <Link href="/contact-us" passHref>
                 <Button
                   component="a"
                   variant="contained"
@@ -235,11 +243,10 @@ const HomeHero = () => {
                     "&:hover": { backgroundColor: "#222" },
                   }}
                 >
-                  Let’s Talk
+                  Let's Talk
                 </Button>
               </Link>
 
-              {/* Explore Services button linking to /services */}
               <Link href="/services" passHref>
                 <Button component="a" variant="outlined" size="large">
                   Explore Services
@@ -266,6 +273,7 @@ const HomeHero = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={isLoading}
                 />
                 <TextField
                   name="email"
@@ -277,6 +285,7 @@ const HomeHero = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={isLoading}
                 />
                 <TextField
                   name="description"
@@ -289,18 +298,28 @@ const HomeHero = () => {
                   value={formData.description}
                   onChange={handleChange}
                   required
+                  disabled={isLoading}
                 />
                 <Button
                   type="submit"
                   variant="contained"
                   fullWidth
+                  disabled={isLoading}
                   sx={{
                     mt: 2,
                     backgroundColor: "#000",
                     "&:hover": { backgroundColor: "#222" },
+                    "&:disabled": { backgroundColor: "#666" },
                   }}
                 >
-                  Submit Now
+                  {isLoading ? (
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <CircularProgress size={20} sx={{ color: "white" }} />
+                      <span>Sending</span>
+                    </Box>
+                  ) : (
+                    "Submit Now"
+                  )}
                 </Button>
               </form>
             </Paper>
@@ -319,11 +338,11 @@ const HomeHero = () => {
         }}
       >
         <DialogTitle className="text-xl font-bold text-center text-gray-800">
-          Thank You!
+          {errorMessage ? "Error" : "Thank You!"}
         </DialogTitle>
         <DialogContent>
           <Typography className="text-center text-base text-gray-600 mb-2">
-            Your message has been sent. We'll reach out shortly.
+            {errorMessage ? errorMessage : "Your message has been sent. We'll reach out shortly."}
           </Typography>
         </DialogContent>
         <DialogActions className="flex justify-center">
@@ -338,7 +357,7 @@ const HomeHero = () => {
         </DialogActions>
       </Dialog>
     </>
-  );
-};
+  )
+}
 
-export default HomeHero;
+export default HomeHero

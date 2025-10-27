@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
         <Box
   component="main"
   sx={{
-    mt: { xs: 7, sm: 5, md: 3, lg: 7, xl: 16 }, // Example: decreasing top margin as screen gets bigger
+    mt: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Example: decreasing top margin as screen gets bigger
     mb: { xs: 4, sm: 3, md: 2, lg: 1, xl: 7 }, // Example: optional bottom margin
     px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Example: increasing padding horizontally
   }}

@@ -43,7 +43,7 @@ const CoursesCarousel = () => {
     <section
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full h-[220px] md:h-[60vh] flex items-center justify-center bg-gradient-to-br from-[#f0f9ff] to-[#e0f2fe] overflow-hidden  shadow-md"
+      className="relative mt-13 w-full h-[220px] md:h-[60vh] flex items-center justify-center bg-gradient-to-br from-[#f0f9ff] to-[#e0f2fe] overflow-hidden  shadow-md"
     >
       {/* Arrows */}
       <IconButton
