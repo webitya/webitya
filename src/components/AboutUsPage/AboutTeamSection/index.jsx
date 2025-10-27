@@ -16,37 +16,35 @@ import { motion } from "framer-motion";
 
 const teamMembers = [
   {
-    name: "Aditya Kumar",
-    role: "Founder",
+    name: "Rajnish Kumar",
+    role: "Co-Founder & Chief Visionary Officer",
     description:
-      "Visionary leader and founder of Webitya, passionate about driving innovation in digital marketing and web solutions.",
-    image: "/teams/aditya1.jpg",
-    linkedin: "https://www.linkedin.com/in/aditya-webitya",
+      "A forward-thinking entrepreneur shaping the future of Webitya. With deep expertise in strategy, digital innovation, and team leadership, Rajnish drives the company’s vision — helping brands unlock growth through smart technology and marketing solutions.",
+    image: "/RajnishKumar.webp",
+    linkedin: "https://www.linkedin.com/in/",
     facebook: "https://www.facebook.com/webitya.in",
     instagram: "https://www.instagram.com/webitya.in",
   },
   {
-    name: "Raj Jaiswal",
-    role: "CEO",
+    name: "Piyush Goel",
+    role: "Operations & Strategy Manager",
     description:
-      "Leads company strategy and business growth with sharp market insight and leadership excellence.",
-    image: "/team.webp",
+      "The powerhouse behind execution and efficiency. Piyush ensures every project runs seamlessly — from client acquisition to campaign success. Known for his analytical mindset and business acumen, he builds bridges between vision and measurable results.",
+    image: "/PiyushGoel.webp",
     linkedin: "#",
     facebook: "#",
     instagram: "#",
   },
   {
-    name: "Ananya Mall",
-    role: "Brand Ambassador",
+    name: "Raj Shekhar",
+    role: "Brand Ambassador & Creative Partner",
     description:
-      "Drives brand engagement, promotions and represents Webitya across marketing campaigns with charm and creativity.",
-    image: "/teams/ananya.jpg",
+      "A dynamic storyteller and the creative voice of Webitya. Raj transforms ideas into engaging brand stories, building authentic connections through innovative campaigns, digital events, and social storytelling that inspire audiences everywhere.",
+    image: "/RajShekhar.webp",
     linkedin: "#",
     facebook: "#",
     instagram: "#",
   },
- 
-
 ];
 
 const MotionCard = motion(Card);
@@ -63,22 +61,12 @@ const TeamSection = () => {
       <Typography variant="h4" fontWeight="bold" color="text.primary">
         Meet Our Team
       </Typography>
-      <Typography
-        variant="subtitle1"
-        color="text.secondary"
-        mt={2}
-        mx="auto"
-      >
+      <Typography variant="subtitle1" color="text.secondary" mt={2} mx="auto">
         The powerhouse team of Webitya Web Services — innovators, creatives, and
         digital experts driving transformation.
       </Typography>
 
-      <Grid
-        container
-        spacing={4}
-        mt={6}
-        justifyContent="center" // center the row
-      >
+      <Grid container spacing={4} mt={6} justifyContent="center">
         {teamMembers.map((member, index) => (
           <Grid
             item
