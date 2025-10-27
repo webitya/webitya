@@ -59,7 +59,7 @@ export default function BlogMain({ initialArticles, categories }) {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 mt-13">
         <MinimalDrawer />
 
         {/* Compact Hero Section */}
