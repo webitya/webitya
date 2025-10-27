@@ -286,7 +286,7 @@ export default function ScheduleMeeting() {
         </div>
       )}
 
-      <div className="min-h-screen bg-white py-6 px-4">
+      <div className="min-h-screen bg-white py-6 px-4 mt-13">
         <div className="max-w-xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold text-black mb-2">Schedule a Meeting</h1>
