@@ -1,6 +1,6 @@
 const AboutHeroSection = () => {
   return (
-    <section className="bg-white px-3 md:px-10 md:py-24 py-5 flex flex-col md:flex-row items-center gap-10">
+    <section className="bg-white px-3 md:px-10 md:py-24 mt-13 py-5 flex flex-col md:flex-row items-center gap-10">
       {/* Left: Text Content */}
       <div className="md:w-1/2">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-snug">
