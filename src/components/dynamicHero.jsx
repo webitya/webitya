@@ -22,7 +22,7 @@ export default function DynamicHero({ keyword }) {
               <span className="text-blue-600 font-semibold text-xs tracking-wide">TRUSTED BY 500+ BUSINESSES</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight tracking-tight">
               {keyword.title.split(" | ")[0]}
             </h1>
 
