@@ -9,6 +9,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script"; // Import Next.js Script component
+import SitemapInlineDynamic from "@/components/FooterSitemap/SitemapInlineDynamic";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +70,7 @@ export default function RootLayout({ children }) {
   
 >
   {children}
+  {/* <SitemapInlineDynamic/> */}
 </Box>
  {/* Vercel Analytics Component */}
  <Analytics />

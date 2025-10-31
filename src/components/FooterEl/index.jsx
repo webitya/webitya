@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Github, Twitter, Linkedin, Youtube, Instagram, Mail, Send, CheckCircle, XCircle } from "lucide-react" // Removed Users icon
 import { allArticles } from "../data/blogData" // Import allArticles
+import SitemapInlineDynamic from "../FooterSitemap/SitemapInlineDynamic"
 
 const footerData = [
   {
@@ -110,7 +111,10 @@ const Footer = () => {
   }
 
   return (
+ <>
+ <SitemapInlineDynamic/>
     <footer className="bg-gray-900 text-gray-300 py-8 px-4 sm:px-6 lg:px-8">
+      
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
         {/* Column 1: Logo + Description + Newsletter */}
         <div className="col-span-1 sm:col-span-2 md:col-span-1 flex flex-col">
@@ -264,6 +268,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+ </>
   )
 }
 
