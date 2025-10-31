@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
   component="main"
   sx={{
     mt: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Example: decreasing top margin as screen gets bigger
-    mb: { xs: 4, sm: 3, md: 2, lg: 1, xl: 7 }, // Example: optional bottom margin
+    mb: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Example: optional bottom margin
     px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Example: increasing padding horizontally
   }}
   

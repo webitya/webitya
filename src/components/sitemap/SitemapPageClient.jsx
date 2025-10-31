@@ -266,3 +266,4 @@ function GroupedSection({ title, icon, groups }) {
     </motion.div>
   );
 }
+

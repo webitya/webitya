@@ -42,7 +42,7 @@ export default function SitemapInlineDynamic({
   });
 
   return (
-    <div className="w-full flex flex-wrap items-center text-sm leading-relaxed mt-6 bg-[#0B1220] text-white px-4 py-6">
+    <div className="w-full flex flex-wrap items-center text-sm leading-relaxed bg-[#0B1220] text-white px-4 py-6">
       {combined.map((item, i) => (
         <span key={i} className="flex items-center">
           <Link
